@@ -74,7 +74,7 @@ W celu uzyskania danych dostępowych niezbędnych do poprawnego korzystania z AP
 
 W przypadku niepoprawnego wykorzystania kluczy dostępowych serwer zwraca następujące błędy:
 
-**STATUS 401 Unathorized**
+**STATUS 401 Unauthorized**
 
 ```json
 {
@@ -126,22 +126,23 @@ a) individual:
 
 | Parametr                   | Wymagane | Opis                                                                                            |
 | -------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| **firstName**              | NIE      | Imie podmiotu                                                                                   |
-| **lastName**               | NIE      | Nazwisko podmiotu                                                                               |
+| **firstName**              | TAK      | Imie podmiotu                                                                                   |
+| **lastName**               | TAK      | Nazwisko podmiotu                                                                               |
 | **personalIdentityNumber** | TAK      | Numer PESEL podmiotu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier) |
-| **personalIdentifier**     | NIE      | Numer identifykacyjny podmiotu (wymagany jeśli nie ma numeru pesel)                             |
+| **personalIdentifier**     | NIE      | Numer identyfikacyjny podmiotu (wymagany jeśli nie ma numeru pesel)                             |
 | **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                                             |
 | **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                                             |
 | **citizenship**            | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                                        |
 | **birthCity**              | NIE      | Miasto urodzenia                                                                                |
 | **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                  |
 | **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                   |
-| **documentExpirationDate** | NIE      | Termin ważnosci dokumentu                                                                       |
+| **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
 | **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
 | **references**             | NIE      | Referencje własne                                                                               |
-| **politicallyExposed**     | NIE      | Informacja czy podmiot jest eksponowany politycznie (bool)                                      |
-| **politicallyExposedFamily**     | NIE      | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie (bool)                 |
-| **politicallyExposedCoworker**     | NIE      | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
+| **createdByName**          | NIE      | Osoba wprowadzająca wpis                                                                        |
+| **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
+| **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
+| **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
 
 b) sole_proprietorship - wszystkie powyższe oraz:
 
@@ -152,7 +153,7 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)             |
 | **references**                     | NIE      | Referencje własne                                                   |
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
-| **companyName**                    | NIE      | Nazwa prowadzonej działalności                                      |
+| **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
 | **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
 
@@ -181,55 +182,55 @@ c) company:
 | **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
-| **boardMembers**                   | NIE      | Tablica obiektów z danymi członków zarządu                                   |
+| **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów zarządu                             |
 
 Struktura obiektu beneficjenta:
 
-| Parametr                     | Wymagane | Opis                                                                    |
-| ---------------------------- | -------- | ----------------------------------------------------------------------- |
-| **firstName**                | NIE      | Imię beneficjenta                                                       |
-| **lastName**                 | NIE      | Nazwisko beneficjenta                                                   |
-| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru pesel wymagany jest  |
-| parametr personalIdentifier) |
-| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)          |
-| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)           |
-| **documentExpirationDate**   | NIE      | Termin ważnosci dokumentu                                               |
-| **personalIdentifier**       | NIE      | Numer identifykacyjny beneficjenta (wymagany jeśli nie ma numeru pesel) |
-| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                     |
-| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                     |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                |
-| **birthCity**                | NIE      | Miasto urodzenia                                                        |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                    |
-| **references**               | NIE      | Referencje własne                                                       |
-| **politicallyExposed**       | NIE      | Informacja czy beneficjent jest eksponowany politycznie (bool)          |
-| **politicallyExposedFamily**     | NIE      | Informacja czy beneficjent jest rodziną osoby eksponowanej politycznie (bool)                 |
-| **politicallyExposedCoworker**     | NIE      | Informacja czy beneficjent jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
-| **ownedSharesAmount**              | TAK      | Liczba posiadanych udziałów                                          |
-| **ownedSharesUnit**              | TAK      | Jednostka posiadanych udziałów ('%' lub 'PLN')                                 |
-| **description**              | NIE      | Opis beneficjenta                                                       |
+| Parametr                     | Wymagane | Opis                                                                       |
+| ---------------------------- | -------- | -------------------------------------------------------------------------  |
+| **directRights**             | NIE      | Bezpośrednie uprawnienia                                                   |
+| **ownedSharesAmount**        | NIE      | Liczba posiadanych udziałów                                                |
+| **ownedSharesUnit**          | NIE      | Jednostka posiadanych udziałów ('%' lub 'PLN')                             |
+| **directRightsPrivilegeType**           | NIE      | Rodzaj uprzywilejowania                                         |
+| **directRightsPrivilegeDescription**    | NIE      | Opis uprzywilejowania                                           |
+| **indirectRights**           | NIE      | Pośrednie uprawnienia                                                      |
+| **otherRights**              | NIE      | Inne uprawnienia                                                           |
+| **otherRightsDescription**   | NIE      | Opis uprawnień                                                             |
+| **additionalInformation**    | TAK      | Dodatkowe informacje, nie są wymagane, o ile przynajmniej jeden z parametrów (directRights, ownedSharesAmount, ownedSharesUnit, directRightsPrivilegeType, indirectRights, otherRights, otherRightsDescription) posiada wartość |
+| **firstName**                | TAK      | Imię beneficjenta                                                          |
+| **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
+| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru pesel wymagany jest parametr birthDate) |
+| **documentType**             | NIE      | Rodzaj dokumentu                                                           |
+| **documentNumber**           | NIE      | Numer dokumentu                                                            |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)              |
+| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
+| **birthCity**                | NIE      | Miasto urodzenia                                                           |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
+| **birthCountry**             | NIE      | Kraj urodzenia                                                             |
+| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
 
-Struktura obiektu członka zarządu:
+Struktura obiektu reprezentanta zarządu:
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **firstName**                | NIE      | Imię członka zarządu                                                       |
-| **lastName**                 | NIE      | Nazwisko członka zarządu                                                   |
-| **personalIdentityNumber**   | TAK      | Numer PESEL członka zarządu (w przypadku braku numeru pesel wymagany jest  |
+| **firstName**                | TAK      | Imię reprezentanta zarządu                                                       |
+| **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                                   |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest  |
 | parametr personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)             |
 | **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)              |
-| **documentExpirationDate**   | NIE      | Termin ważnosci dokumentu                                                  |
-| **personalIdentifier**       | NIE      | Numer identifykacyjny członka zarządu (wymagany jeśli nie ma numeru pesel) |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
+| **personalIdentifier**       | NIE      | Numer identyfikacyjny reprezentanta zarządu (wymagany jeśli nie ma numeru pesel) |
 | **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
 | **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                        |
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
 | **birthCity**                | NIE      | Miasto urodzenia                                                           |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
-| **politicallyExposed**       | NIE      | Informacja czy członek zarządu jest eksponowany politycznie (bool)             |
-| **politicallyExposedFamily**     | NIE      | Informacja czy członek zarządu jest rodziną osoby eksponowanej politycznie (bool)                 |
-| **politicallyExposedCoworker**     | NIE      | Informacja czy członek zarządu jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
-| **description**              | NIE      | Opis członka zarządu                                                       |
+| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **description**              | NIE      | Opis reprezentanta zarządu                                                       |
 
 Do każdego z typów podmiotu można dodać dane kontaktowe.
 
@@ -267,6 +268,7 @@ a) kontakt:
 ```json
 {
   "birthCity": "Warszawa",
+  "birthDate": "2000-01-12",
   "birthCountry": "PL",
   "citizenship": "PL",
   "createdByName": "Wojtek",
@@ -276,7 +278,9 @@ a) kontakt:
   "firstName": "Jan",
   "lastName": "Kowalski",
   "personalIdentityNumber": "09271573233",
-  "politicallyExposed": false,
+  "politicallyExposed": "no",
+  "politicallyExposedCoworker":"no",
+  "politicallyExposedFamily":"yes",
   "references": "qwerty",
   "status": "active",
   "type": "individual",
@@ -331,7 +335,9 @@ a) kontakt:
       "pkdName": "Uprawa tytoniu"
     }
   ],
-  "politicallyExposed": false,
+  "politicallyExposed": "no",
+  "politicallyExposedCoworker": "no",
+  "politicallyExposedFamily": "yes",
   "references": "qwerty",
   "status": "active",
   "taxIdNumber": "3765151981",
@@ -417,62 +423,63 @@ a) kontakt:
   ],
   "beneficiaries": [
     {
+      "birthCountry": "PL",
+      "directRights": "ABB",
+      "birthCity": "Warszawa",
+      "citizenship": "PL",
+      "documentNumber": "aze123123",
+      "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
-      "personalIdentityNumber": "64091098920",
-      "documentType": "id_card",
-      "documentNumber": "aze123123",
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": false,
-      "withoutExpirationDate": false,
       "ownedSharesAmount": "45",
       "ownedSharesUnit": "%",
-      "description": ""
+      "personalIdentityNumber": "64091098920",
+      "politicallyExposed": "no",
+      "withoutExpirationDate": false,
     },
     {
-      "firstName": "Adam",
-      "lastName": "Nowak",
+      "birthCountry": "DE",
+      "directRights": "3M",
+      "birthCity": "Germany",
+      "birthDate": "2002-10-01",
+      "citizenship": "DE",
+      "documentNumber": "aze423",
       "documentType": "id_card",
-      "documentNumber": "aze123123",
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": false,
-      "withoutExpirationDate": false,
-      "birthDate": "2001-01-01",
-      "ownedSharesAmount": "50",
+      "firstName": "Hans",
+      "lastName": "Podolski",
+      "ownedSharesAmount": "15",
       "ownedSharesUnit": "%",
-      "description": ""
-    }
+      "politicallyExposed": "no",
+      "withoutExpirationDate": false,
+    },
   ],
   "boardMembers": [
     {
+      "birthCity": "Warszawa",
+      "birthDate": "2001-01-01",
+      "birthCountry": "PL",
+      "citizenship": "PL",
+      "description": "Prezes",
+      "documentNumber": "aze123123",
+      "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "31111161119",
-      "documentType": "id_card",
-      "documentNumber": "aze123123",
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": false,
+      "politicallyExposed": "no",
       "withoutExpirationDate": false,
-      "description": "Prezes"
     },
     {
+      "birthCity": "Warszawa",
+      "birthDate": "2001-01-01",
+      "birthCountry": "PL",
+      "citizenship": "PL",
+      "description": "Wiceprezes",
+      "documentNumber": "aze129923",
+      "documentType": "id_card",
       "firstName": "Adam",
       "lastName": "Nowak",
-      "documentType": "id_card",
-      "documentNumber": "aze123123",
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": false,
+      "politicallyExposed": "yes",
       "withoutExpirationDate": false,
-      "birthDate": "2001-01-01",
-      "description": "Wiceprezes"
     }
   ]
 }
@@ -484,7 +491,7 @@ a) kontakt:
 ```json
 {
     "data": {
-        "code": "93sc6hgq4jvk",
+        "code": "f8exkqju5ym1",
         "type": "company",
         "status": "active",
         "riskStatus": null,
@@ -493,7 +500,7 @@ a) kontakt:
         "createdByName": null,
         "references": "qwerty",
         "entity": {
-            "code": "z7tbqvf6ed4g",
+            "code": "wekfz5vjb9ur",
             "companyName": "FiberPay",
             "tradeName": "FiberPay",
             "taxIdNumber": "7010634566",
@@ -503,25 +510,25 @@ a) kontakt:
             "industry": null,
             "servicesDescription": null,
             "website": "fiberpay.pl",
-            "createdAt": "2023-06-12T15:12:02.000000Z",
+            "createdAt": "2023-08-23T14:55:17.000000Z",
             "registrationCountry": null,
             "companyIdentifier": null,
             "pkdCodes": [
                 {
-                    "code": "ym78kp3asq9f",
+                    "code": "pqchmtau2bek",
                     "pkdCode": "58.29.Z",
                     "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
                     "mainPkd": false
                 },
                 {
-                    "code": "1tqhkfn2erd5",
+                    "code": "pd4kf8jeu21c",
                     "pkdCode": "62.01.Z",
                     "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
                     "mainPkd": false
                 }
             ],
             "mainPkd": {
-                "code": "pwn9e5hfm1jc",
+                "code": "smrgtc1y4vu7",
                 "pkdCode": "64.99.Z",
                 "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
                 "mainPkd": true
@@ -529,7 +536,7 @@ a) kontakt:
         },
         "addresses": [
             {
-                "code": "jznt4rpyqskc",
+                "code": "5pwanrjzhkcg",
                 "type": "business_address",
                 "country": "PL",
                 "city": "Warszawa",
@@ -537,17 +544,17 @@ a) kontakt:
                 "houseNumber": "4",
                 "flatNumber": "106",
                 "postalCode": "00-131",
-                "createdAt": "2023-06-12T15:12:02.000000Z"
+                "createdAt": "2023-08-23T14:55:17.000000Z"
             }
         ],
         "contacts": [
             {
-                "code": "ycx4qjhn9pg5",
+                "code": "hnekaz3cs8yp",
                 "type": "company",
                 "emailAdress": "info@fiberpay.pl",
                 "phoneCountry": "48",
                 "phoneNumber": "123123123",
-                "createdAt": "2023-06-12T15:12:02.000000Z"
+                "createdAt": "2023-08-23T14:55:17.000000Z"
             }
         ],
         "creationIp": null,
@@ -704,25 +711,32 @@ Usunięcie podmiotu wskazanego kodem identyfikującym.
 
 Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania:
 
-| Parametr        | Wymagane | Opis                                                          |
-| --------------- | -------- | ------------------------------------------------------------- |
-| **ownedSharesAmount**              | TAK      | Liczba posiadanych udziałów                                          |
-| **ownedSharesUnit**              | TAK      | Jednostka posiadanych udziałów ('%' lub 'PLN')                                 |
-| **personalIdentityNumber** | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier)                       |
-| **documentType**| TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)|
-| **documentNumber**| TAK    | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                                         |
-| **description** | NIE      | Opis benficjenta                                              |
-| **firstName**   | NIE      | Imię benficjenta                                              |
-| **lastName**    | NIE      | Nazwisko beneficjenta                                         |
-| **documentExpirationDate** | NIE      | Termin ważnosci dokumentu                          |
-| **citizenship**            | NIE      | Obywatelstwo (kod kraju standardzie ISO)           |
-| **birthCity**              | NIE      | Miasto urodzenia                                   |
-| **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)|
-| **birthCountry**           | NIE      | Kraj urodzenia                                     |
-| **politicallyExposed**     | NIE      | Informacja czy beneficjent jest eksponowany politycznie (bool)                       |
-| **politicallyExposedFamily**     | NIE      | Informacja czy beneficjent jest rodziną osoby eksponowanej politycznie (bool)                 |
-| **politicallyExposedCoworker**     | NIE      | Informacja czy beneficjent jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
-| **withoutExpirationDate**  | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)   |
+| Parametr                     | Wymagane | Opis                                                                       |
+| ---------------------------- | -------- | -------------------------------------------------------------------------  |
+
+| **directRights**             | NIE      | Bezpośrednie uprawnienia                                                   |
+| **ownedSharesAmount**        | NIE      | Liczba posiadanych udziałów                                                |
+| **ownedSharesUnit**          | NIE      | Jednostka posiadanych udziałów ('%' lub 'PLN')                             |
+| **directRightsPrivilegeType**           | NIE      | Rodzaj uprzywilejowania                                         |
+| **directRightsPrivilegeDescription**    | NIE      | Opis uprzywilejowania                                           |
+| **indirectRights**           | NIE      | Pośrednie uprawnienia                                                      |
+| **otherRights**              | NIE      | Inne uprawnienia                                                           |
+| **otherRightsDescription**   | NIE      | Opis uprawnień                                                             |
+| **additionalInformation**    | TAK      | Dodatkowe informacje, nie są wymagane, o ile przynajmniej jeden z parametrów (directRights, ownedSharesAmount, ownedSharesUnit, directRightsPrivilegeType, indirectRights, otherRights, otherRightsDescription) posiada wartość |
+| **firstName**                | TAK      | Imię beneficjenta                                                          |
+| **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
+| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru pesel wymagany jest parametr birthDate) |
+| **documentType**             | NIE      | Rodzaj dokumentu                                                           |
+| **documentNumber**           | NIE      | Numer dokumentu                                                            |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)              |
+| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
+| **birthCity**                | NIE      | Miasto urodzenia                                                           |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
+| **birthCountry**             | NIE      | Kraj urodzenia                                                             |
+| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
+
 #### Przykładowe dane do dodania beneficjenta rzeczywistego:
 
 ```json
@@ -853,27 +867,27 @@ Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
 ### POST /parties/{code}/boardmembers
 
-Dodanie członka zarządu do podmiotu typu osoba prawna (company). Parametry żądania:
+Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametry żądania:
 
 | Parametr        | Wymagane | Opis                                                          |
 | --------------- | -------- | ------------------------------------------------------------- |
-| **personalIdentityNumber** | TAK      | Numer PESEL członka zarządu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier)                       |
+| **personalIdentityNumber** | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier)                       |
 | **documentType**| TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)|
 | **documentNumber**| TAK    | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                                         |
-| **description** | NIE      | Opis benficjenta                                              |
-| **firstName**   | NIE      | Imię benficjenta                                              |
-| **lastName**    | NIE      | Nazwisko członka zarządu                                         |
-| **documentExpirationDate** | NIE      | Termin ważnosci dokumentu                          |
+| **description** | NIE      | Opis reprezentanta                                            |
+| **firstName**   | NIE      | Imię reprezentanta                                              |
+| **lastName**    | NIE      | Nazwisko reprezentanta zarządu                                         |
+| **documentExpirationDate** | NIE      | Termin ważności dokumentu                          |
 | **citizenship**            | NIE      | Obywatelstwo (kod kraju standardzie ISO)           |
 | **birthCity**              | NIE      | Miasto urodzenia                                   |
 | **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)|
 | **birthCountry**           | NIE      | Kraj urodzenia                                     |
-| **politicallyExposed**     | NIE      | Informacja czy członek zarządu jest eksponowany politycznie (bool)                       |
-| **politicallyExposedFamily**     | NIE      | Informacja czy członek zarządu jest rodziną osoby eksponowanej politycznie (bool)                 |
-| **politicallyExposedCoworker**     | NIE      | Informacja czy członek zarządu jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
-| **withoutExpirationDate**  | NIE      | Informacja czy dokument członka zarządu jest bezterminowy (bool)   |
+| **politicallyExposed**     | NIE      | Informacja czy reprezentant zarządu jest eksponowany politycznie (bool)                       |
+| **politicallyExposedFamily**     | NIE      | Informacja czy reprezentant zarządu jest rodziną osoby eksponowanej politycznie (bool)                 |
+| **politicallyExposedCoworker**     | NIE      | Informacja czy reprezentant zarządu jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
+| **withoutExpirationDate**  | NIE      | Informacja czy dokument reprezentanta zarządu jest bezterminowy (bool)   |
 
-#### Przykładowe dane do dodania członka zarządu:
+#### Przykładowe dane do dodania reprezentanta zarządu:
 
 ```json
 {
@@ -990,11 +1004,11 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
   ]
 }
 ```
-W przypadku gdy podmiot nie posiada dodanych członków zarządu zwracana tablica jest pusta
+W przypadku gdy podmiot nie posiada dodanych reprezentantów zarządu zwracana tablica jest pusta
 
 ### DELETE /boardmembers/{code}
 
-Usunięcie członka zarządu wskazanego kodem identyfikującym.
+Usunięcie reprezentanta zarządu wskazanego kodem identyfikującym.
 
 ## POST /transactions
 
