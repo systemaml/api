@@ -230,7 +230,7 @@ Struktura obiektu reprezentanta zarządu:
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
-| **description**              | NIE      | Opis reprezentanta zarządu                                                       |
+| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
 
 Do każdego z typów podmiotu można dodać dane kontaktowe.
 
@@ -959,35 +959,42 @@ Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
 Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametry żądania:
 
-| Parametr        | Wymagane | Opis                                                          |
-| --------------- | -------- | ------------------------------------------------------------- |
-| **personalIdentityNumber** | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier)                       |
-| **documentType**| TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)|
-| **documentNumber**| TAK    | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                                         |
-| **description** | NIE      | Opis reprezentanta                                            |
-| **firstName**   | NIE      | Imię reprezentanta                                              |
-| **lastName**    | NIE      | Nazwisko reprezentanta zarządu                                         |
-| **documentExpirationDate** | NIE      | Termin ważności dokumentu                          |
-| **citizenship**            | NIE      | Obywatelstwo (kod kraju standardzie ISO)           |
-| **birthCity**              | NIE      | Miasto urodzenia                                   |
-| **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)|
-| **birthCountry**           | NIE      | Kraj urodzenia                                     |
-| **politicallyExposed**     | NIE      | Informacja czy reprezentant zarządu jest eksponowany politycznie (bool)                       |
-| **politicallyExposedFamily**     | NIE      | Informacja czy reprezentant zarządu jest rodziną osoby eksponowanej politycznie (bool)                 |
-| **politicallyExposedCoworker**     | NIE      | Informacja czy reprezentant zarządu jest bliskim współpracownikiem osoby eksponowanej politycznie (bool)|
-| **withoutExpirationDate**  | NIE      | Informacja czy dokument reprezentanta zarządu jest bezterminowy (bool)   |
+
+| Parametr                     | Wymagane | Opis                                                                       |
+| ---------------------------- | -------- | -------------------------------------------------------------------------- |
+| **firstName**                | TAK      | Imię reprezentanta zarządu                                                       |
+| **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                                   |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest  |
+| parametr personalIdentifier) |
+| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)             |
+| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)              |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
+| **personalIdentifier**       | NIE      | Numer identyfikacyjny reprezentanta zarządu (wymagany jeśli nie ma numeru pesel) |
+| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
+| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                        |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
+| **birthCity**                | NIE      | Miasto urodzenia                                                           |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
+| **references**               | NIE      | Referencje własne                                                          |
+| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
 
 #### Przykładowe dane do dodania reprezentanta zarządu:
 
 ```json
 {
-  "birthCountry":  "AF",
-  "citizenship": "AQ",
-  "documentNumber": "ABC123",
-  "documentType": "Dowód osobisty",
+  "birthCity": "Warszawa",
+  "birthDate": "2002-01-01",
+  "birthCountry": "PL",
+  "citizenship": "PL",
+  "description": "Prezes",
+  "documentNumber": "aze1f123",
+  "documentType": "id_card",
   "firstName": "Jan",
-  "lastName":  "Kowalski",
-  "personalIdentityNumber": "65122666817",
+  "lastName": "Nowak",
+  "personalIdentityNumber": "97120824889",
+  "politicallyExposed": "yes",
+  "withoutExpirationDate": false,
 }
 ```
 
@@ -998,43 +1005,67 @@ Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametr
 ```json
 {
   "data": {
-    "code": "8b6kmdapy1nt",
-    "boardmember": {
+    "code": "qhur4n17awyp",
+    "description": "Prezes",
+    "boardMember": {
       "individualEntity": {
-        "code": "8pzqmn1g3r4k",
+        "code": "x2cga8e7zyth",
         "firstName": "Jan",
-        "lastName": "Kowalski",
-        "personalIdentityNumber": "01234567890",
+        "lastName": "Nowak",
+        "personalIdentityNumber": "97120824889",
         "documentType": "id_card",
-        "documentNumber": "aze123456",
-        "documentExpirationDate": "2022-10-15",
+        "documentNumber": "aze1f123",
+        "documentExpirationDate": null,
+        "withoutExpirationDate": false,
         "citizenship": "PL",
         "birthCity": "Warszawa",
         "birthCountry": "PL",
-        "politicallyExposed": false,
-        "createdAt": "2022-06-06T09:15:08.000000Z",
-        "personalIdentifier": null
+        "politicallyExposed": "yes",
+        "politicallyExposedCoworker": "not_defined",
+        "politicallyExposedFamily": "not_defined",
+        "createdAt": "2023-08-24T16:22:52.000000Z",
+        "birthDate": null
       }
     },
     "company": {
       "legalEntity": {
-        "code": "2v8rjpf63a9g",
+        "code": "cga7z8hf3j6r",
         "companyName": "FiberPay",
         "tradeName": "FiberPay",
-        "taxIdNumber": "3210213293",
-        "nationalBusinessRegistryNumber": "123456789",
-        "nationalCourtRegistryNumber": "1234567890",
-        "businessActivityForm": "limited_liability_company",
-        "industry": "soccer",
-        "servicesDescription": "Usługi programistyczne",
-        "website": "www.fiberpay.pl",
-        "createdAt": "2022-06-01T15:04:38.000000Z",
+        "taxIdNumber": "7010634566",
+        "nationalBusinessRegistryNumber": "147302566",
+        "nationalCourtRegistryNumber": "0000512707",
+        "businessActivityForm": "stock_company",
+        "industry": null,
+        "servicesDescription": null,
+        "website": "fiberpay.pl",
+        "createdAt": "2023-08-24T15:48:19.000000Z",
         "registrationCountry": null,
-        "companyIdentifier": null
+        "companyIdentifier": null,
+        "pkdCodes": [
+          {
+            "code": "gf218nj4y5rs",
+            "pkdCode": "58.29.Z",
+            "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
+            "mainPkd": false
+          },
+          {
+            "code": "qn6vrazgymbp",
+            "pkdCode": "62.01.Z",
+            "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
+            "mainPkd": false
+          }
+        ],
+        "mainPkd": {
+          "code": "mfxw2yqt7zed",
+          "pkdCode": "64.99.Z",
+          "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
+          "mainPkd": true
+        }
       },
       "addresses": [
         {
-          "code": "xen4vgz63c8w",
+          "code": "9fn2jukbtv7q",
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
@@ -1042,17 +1073,17 @@ Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametr
           "houseNumber": "4",
           "flatNumber": "106",
           "postalCode": "00-131",
-          "createdAt": "2022-06-01T15:04:38.000000Z"
+          "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ],
       "contacts": [
         {
-          "code": "5hcu2j7z3wxg",
+          "code": "5b1gk4jpe9fn",
           "type": "company",
-          "email": "fiberpay@fiberpay.pl",
+          "emailAdress": "info@fiberpay.pl",
           "phoneCountry": "48",
           "phoneNumber": "123123123",
-          "createdAt": "2022-06-01T15:04:38.000000Z"
+          "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ]
     }
@@ -1072,22 +1103,24 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 {
   "data": [
     {
-      "code": "t8svea4gnpu7",
-      "description": null,
+      "code": "qhur4n17awyp",
+      "description": "Prezes",
       "individualEntity": {
-        "code": "5vghqraxtucn",
+        "code": "x2cga8e7zyth",
         "firstName": "Jan",
-        "lastName": "Kowalski",
-        "personalIdentityNumber": "84022598949",
-        "documentType": "Paszport",
-        "documentNumber": "aze123123",
+        "lastName": "Nowak",
+        "personalIdentityNumber": "97120824889",
+        "documentType": "id_card",
+        "documentNumber": "aze1f123",
         "documentExpirationDate": null,
         "withoutExpirationDate": false,
-        "citizenship": null,
-        "birthCity": null,
-        "birthCountry": null,
-        "politicallyExposed": false,
-        "createdAt": "2023-04-24T09:20:06.000000Z",
+        "citizenship": "PL",
+        "birthCity": "Warszawa",
+        "birthCountry": "PL",
+        "politicallyExposed": "yes",
+        "politicallyExposedCoworker": "not_defined",
+        "politicallyExposedFamily": "not_defined",
+        "createdAt": "2023-08-24T16:22:52.000000Z",
         "birthDate": null
       }
     }
