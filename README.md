@@ -490,76 +490,76 @@ a) kontakt:
 
 ```json
 {
-    "data": {
-        "code": "f8exkqju5ym1",
-        "type": "company",
-        "status": "active",
-        "riskStatus": null,
-        "riskExplanation": "",
-        "riskStatusChangedBy": "",
-        "createdByName": null,
-        "references": "qwerty",
-        "entity": {
-            "code": "wekfz5vjb9ur",
-            "companyName": "FiberPay",
-            "tradeName": "FiberPay",
-            "taxIdNumber": "7010634566",
-            "nationalBusinessRegistryNumber": "147302566",
-            "nationalCourtRegistryNumber": "0000512707",
-            "businessActivityForm": "stock_company",
-            "industry": null,
-            "servicesDescription": null,
-            "website": "fiberpay.pl",
-            "createdAt": "2023-08-23T14:55:17.000000Z",
-            "registrationCountry": null,
-            "companyIdentifier": null,
-            "pkdCodes": [
-                {
-                    "code": "pqchmtau2bek",
-                    "pkdCode": "58.29.Z",
-                    "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
-                    "mainPkd": false
-                },
-                {
-                    "code": "pd4kf8jeu21c",
-                    "pkdCode": "62.01.Z",
-                    "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
-                    "mainPkd": false
-                }
-            ],
-            "mainPkd": {
-                "code": "smrgtc1y4vu7",
-                "pkdCode": "64.99.Z",
-                "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
-                "mainPkd": true
-            }
+  "data": {
+    "code": "9hf2b4ku3xas",
+    "type": "company",
+    "status": "active",
+    "riskStatus": null,
+    "riskExplanation": "",
+    "riskStatusChangedBy": "",
+    "createdByName": null,
+    "references": "qwerty",
+    "entity": {
+      "code": "jz3h1qsk8fec",
+      "companyName": "FiberPay",
+      "tradeName": "FiberPay",
+      "taxIdNumber": "7010634566",
+      "nationalBusinessRegistryNumber": "147302566",
+      "nationalCourtRegistryNumber": "0000512707",
+      "businessActivityForm": "stock_company",
+      "industry": null,
+      "servicesDescription": null,
+      "website": "fiberpay.pl",
+      "createdAt": "2023-08-24T15:20:53.000000Z",
+      "registrationCountry": null,
+      "companyIdentifier": null,
+      "pkdCodes": [
+        {
+          "code": "3wryth5c7skm",
+          "pkdCode": "58.29.Z",
+          "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
+          "mainPkd": false
         },
-        "addresses": [
-            {
-                "code": "5pwanrjzhkcg",
-                "type": "business_address",
-                "country": "PL",
-                "city": "Warszawa",
-                "street": "Grzybowska",
-                "houseNumber": "4",
-                "flatNumber": "106",
-                "postalCode": "00-131",
-                "createdAt": "2023-08-23T14:55:17.000000Z"
-            }
-        ],
-        "contacts": [
-            {
-                "code": "hnekaz3cs8yp",
-                "type": "company",
-                "emailAdress": "info@fiberpay.pl",
-                "phoneCountry": "48",
-                "phoneNumber": "123123123",
-                "createdAt": "2023-08-23T14:55:17.000000Z"
-            }
-        ],
-        "creationIp": null,
-        "creationUserAgent": null
-    }
+        {
+          "code": "48edbr2ms5n3",
+          "pkdCode": "62.01.Z",
+          "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
+          "mainPkd": false
+        }
+      ],
+      "mainPkd": {
+        "code": "4y9dxeb7ac13",
+        "pkdCode": "64.99.Z",
+        "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
+        "mainPkd": true
+      }
+    },
+    "addresses": [
+      {
+        "code": "t1jk8axrnuh5",
+        "type": "business_address",
+        "country": "PL",
+        "city": "Warszawa",
+        "street": "Grzybowska",
+        "houseNumber": "4",
+        "flatNumber": "106",
+        "postalCode": "00-131",
+        "createdAt": "2023-08-24T15:20:53.000000Z"
+      }
+    ],
+    "contacts": [
+      {
+        "code": "7ksdjyacbgp9",
+        "type": "company",
+        "emailAdress": "info@fiberpay.pl",
+        "phoneCountry": "48",
+        "phoneNumber": "123123123",
+        "createdAt": "2023-08-24T15:20:53.000000Z"
+      }
+    ],
+    "creationIp": null,
+    "creationUserAgent": null
+  }
 }
 ```
 
@@ -575,31 +575,37 @@ Zwraca podmioty utworzone przez użytkownika.
 {
   "data": [
     {
-      "code": "v7udgqy1rh8e",
-      "type": "individual",
-      "firstName": "Jan",
-      "lastName": "Kowalski",
-      "companyName": null,
-      "personalIdentityNumber": "01234567890",
-      "taxIdNumber": null
-    },
-    {
-      "code": "3g9mkv5nz48w",
-      "type": "sole_proprietorship",
-      "firstName": "Jan",
-      "lastName": "Kowalski",
-      "companyName": "FiberPay",
-      "personalIdentityNumber": "01234567890",
-      "taxIdNumber": "7010634566"
-    },
-    {
-      "code": "a1bwfup8rmx5",
+      "code": "9hf2b4ku3xas",
+      "status": "active",
       "type": "company",
+      "fullName": "FiberPay",
       "firstName": null,
       "lastName": null,
       "companyName": "FiberPay",
       "personalIdentityNumber": null,
-      "taxIdNumber": "7010634560"
+      "taxIdNumber": "7010634566"
+    },
+    {
+      "code": "cht8z7r24pq5",
+      "status": "active",
+      "type": "sole_proprietorship",
+      "fullName": "Usługi programistyczne | Jan Kowalski",
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "companyName": "Usługi programistyczne",
+      "personalIdentityNumber": "99120234518",
+      "taxIdNumber": "3765151981"
+    },
+    {
+      "code": "79w46ncruvjg",
+      "status": "active",
+      "type": "individual",
+      "fullName": "Jan Kowalski",
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "companyName": null,
+      "personalIdentityNumber": "09271573233",
+      "taxIdNumber": null
     }
   ]
 }
