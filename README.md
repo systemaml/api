@@ -611,7 +611,16 @@ Zwraca podmioty utworzone przez użytkownika.
 }
 ```
 
-W przypadku gdy użytkownik nie posiada utworzonych podmiotów, serwer zwraca pustą tablicę.
+W przypadku gdy użytkownik nie posiada utworzonych podmiotów, serwer zwraca obiekt:
+
+- **STATUS 200 OK**
+
+```json
+{
+  "status": "ERROR",
+  "error": "No parties found"
+}
+```
 
 ### GET /parties/{code}
 
