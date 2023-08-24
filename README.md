@@ -756,7 +756,6 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------  |
-
 | **directRights**             | NIE      | Bezpośrednie uprawnienia                                                   |
 | **ownedSharesAmount**        | NIE      | Liczba posiadanych udziałów                                                |
 | **ownedSharesUnit**          | NIE      | Jednostka posiadanych udziałów ('%' lub 'PLN')                             |
@@ -784,16 +783,27 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 
 ```json
 {
-  "description": "Pierwszy beneficjent",
-  "birthCountry":  "AF",
-  "citizenship": "AQ",
+  "birthCountry": "FR",
+  "directRights": "Ford",
+  "birthCity": "Paryż",
+  "citizenship": "PL",
   "documentNumber": "ABC123",
   "documentType": "Dowód osobisty",
   "firstName": "Jan",
-  "lastName":  "Kowalski",
-  "ownedSharesAmount": "2",
+  "lastName": "Bożek",
+  "ownedSharesAmount": "5",
   "ownedSharesUnit": "%",
   "personalIdentityNumber": "65122666817",
+  "politicallyExposed": "no",
+  "withoutExpirationDate": false,
+  "accommodationAddress": {
+    "country": "PL",
+    "city": "Krakow",
+    "street": "Kazimierza",
+    "houseNumber": "41",
+    "flatNumber": "10",
+    "postalCode": "20-131"
+  }
 }
 ```
 
@@ -804,44 +814,69 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 ```json
 {
   "data": {
-    "code": "8b6kmdapy1nt",
-    "ownedShares": 10,
+    "code": "wn6hmp7e2x98",
+    "ownedSharesAmount": "5.00",
+    "ownedSharesUnit": "%",
+    "description": null,
     "beneficiary": {
       "individualEntity": {
-        "code": "8pzqmn1g3r4k",
+        "code": "yrfp7ug51vwn",
         "firstName": "Jan",
-        "lastName": "Kowalski",
-        "personalIdentityNumber": "01234567890",
-        "documentType": "id_card",
-        "documentNumber": "aze123456",
-        "documentExpirationDate": "2022-10-15",
+        "lastName": "Bożek",
+        "personalIdentityNumber": "65122666817",
+        "documentType": "Dowód osobisty",
+        "documentNumber": "ABC123",
+        "documentExpirationDate": null,
+        "withoutExpirationDate": false,
         "citizenship": "PL",
-        "birthCity": "Warszawa",
-        "birthCountry": "PL",
-        "politicallyExposed": false,
-        "createdAt": "2022-06-06T09:15:08.000000Z",
-        "personalIdentifier": null
+        "birthCity": "Paryż",
+        "birthCountry": "FR",
+        "politicallyExposed": "no",
+        "politicallyExposedCoworker": "not_defined",
+        "politicallyExposedFamily": "not_defined",
+        "createdAt": "2023-08-24T15:51:27.000000Z",
+        "birthDate": null
       }
     },
     "company": {
       "legalEntity": {
-        "code": "2v8rjpf63a9g",
+        "code": "cga7z8hf3j6r",
         "companyName": "FiberPay",
         "tradeName": "FiberPay",
-        "taxIdNumber": "3210213293",
-        "nationalBusinessRegistryNumber": "123456789",
-        "nationalCourtRegistryNumber": "1234567890",
-        "businessActivityForm": "limited_liability_company",
-        "industry": "soccer",
-        "servicesDescription": "Usługi programistyczne",
-        "website": "www.fiberpay.pl",
-        "createdAt": "2022-06-01T15:04:38.000000Z",
+        "taxIdNumber": "7010634566",
+        "nationalBusinessRegistryNumber": "147302566",
+        "nationalCourtRegistryNumber": "0000512707",
+        "businessActivityForm": "stock_company",
+        "industry": null,
+        "servicesDescription": null,
+        "website": "fiberpay.pl",
+        "createdAt": "2023-08-24T15:48:19.000000Z",
         "registrationCountry": null,
-        "companyIdentifier": null
+        "companyIdentifier": null,
+        "pkdCodes": [
+          {
+            "code": "gf218nj4y5rs",
+            "pkdCode": "58.29.Z",
+            "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
+            "mainPkd": false
+          },
+          {
+            "code": "qn6vrazgymbp",
+            "pkdCode": "62.01.Z",
+            "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
+            "mainPkd": false
+          }
+        ],
+        "mainPkd": {
+          "code": "mfxw2yqt7zed",
+          "pkdCode": "64.99.Z",
+          "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
+          "mainPkd": true
+        }
       },
       "addresses": [
         {
-          "code": "xen4vgz63c8w",
+          "code": "9fn2jukbtv7q",
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
@@ -849,17 +884,17 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
           "houseNumber": "4",
           "flatNumber": "106",
           "postalCode": "00-131",
-          "createdAt": "2022-06-01T15:04:38.000000Z"
+          "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ],
       "contacts": [
         {
-          "code": "5hcu2j7z3wxg",
+          "code": "5b1gk4jpe9fn",
           "type": "company",
-          "email": "fiberpay@fiberpay.pl",
+          "emailAdress": "info@fiberpay.pl",
           "phoneCountry": "48",
           "phoneNumber": "123123123",
-          "createdAt": "2022-06-01T15:04:38.000000Z"
+          "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ]
     }
