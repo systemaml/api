@@ -914,23 +914,35 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 {
   "data": [
     {
-      "code": "8b6kmdapy1nt",
-      "ownedShares": "10",
+      "code": "vpen5qj8rbkx",
+      "ownedSharesAmount": "45.00",
+      "ownedSharesUnit": "%",
+      "additionalInformation": null,
+      "directRights": "ABB",
+      "directRightsPrivilegeType": null,
+      "directRightsPrivilegeDescription": null,
+      "indirectRights": null,
+      "otherRights": null,
+      "otherRightsDescription": null,
       "individualEntity": {
-        "code": "8pzqmn1g3r4k",
+        "code": "r2v3baphk649",
         "firstName": "Jan",
         "lastName": "Kowalski",
-        "personalIdentityNumber": "01234567890",
+        "personalIdentityNumber": "64091098920",
         "documentType": "id_card",
-        "documentNumber": "aze123456",
-        "documentExpirationDate": "2022-10-15",
+        "documentNumber": "aze123123",
+        "documentExpirationDate": null,
+        "withoutExpirationDate": false,
         "citizenship": "PL",
         "birthCity": "Warszawa",
         "birthCountry": "PL",
-        "politicallyExposed": false,
-        "createdAt": "2022-06-06T09:15:08.000000Z",
-        "personalIdentifier": null
-      }
+        "politicallyExposed": "no",
+        "politicallyExposedCoworker": "not_defined",
+        "politicallyExposedFamily": "not_defined",
+        "createdAt": "2023-08-24T15:48:19.000000Z",
+        "birthDate": null
+      },
+      "accommodationAddress": null
     }
   ]
 }
