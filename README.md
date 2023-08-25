@@ -1326,8 +1326,11 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 | ---------------- | -------- | ------------------------------------------------------------- |
 | **description**  | TAK      | Opis zdarzenia                                                |
 | **significance** | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
-| **partyCode**    | NIE      | Kod powiązanego podmiotu                                      |
+| **partyName**    | NIE      | Nazwa powiązanego podmiotu                                    |
 | **transactionCode**| NIE      | Kod powiązanej transakcji                                   |
+| **type**         | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
+| **occursAt**     | NIE      | Data wystąpienia zdarzenia                                    |
+| **createdByName**  | NIE      | Osoba tworząca zdarzenie                                    |
 
 #### Przykładowe dane do utworzenia zdarzenia:
 
@@ -1335,7 +1338,6 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 {
   "description": "zdarzenie testowe",
   "significance": "urgent",
-  "partyCode": null
 }
 ```
 
@@ -1346,12 +1348,14 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "rbdm8nh6gpc1",
-    "partyCode": null,
+    "code": "t4euaxm1p29b",
+    "partyName": null,
+    "transactionCode": null,
     "description": "zdarzenie testowe",
     "type": "user",
-    "significance": "info",
-    "createdAt": "2022-03-15T13:05:44.000000Z",
+    "significance": "urgent",
+    "occursAt": "2023-08-24T16:43:33.773760Z",
+    "createdByName": null,
     "hasComments": false
   }
 }
@@ -1368,24 +1372,28 @@ Zwraca zdarzenia przypisane do użytkownika.
 ```json
 {
   "data": [
-    {
-      "code": "rbdm8nh6gpc1",
-      "partyCode": null,
-      "description": "zdarzenie testowe",
+     {
+      "code": "ame15yfgvhzk",
+      "partyName": "FiberPay",
+      "transactionCode": null,
+      "description": "89b88",
       "type": "user",
-      "significance": "urgent",
-      "createdAt": "2022-03-15T13:05:44.000000Z",
+      "significance": "warning",
+      "occursAt": "2023-08-03 18:42:40",
+      "createdByName": null,
       "hasComments": false
     },
     {
-      "code": "4vhtcg7ry85m",
-      "partyCode": null,
-      "description": "Rule assigned",
-      "type": "system",
-      "significance": "info",
-      "createdAt": "2022-03-09T11:05:28.000000Z",
-      "hasComments": true
-    }
+      "code": "t4euaxm1p29b",
+      "partyName": null,
+      "transactionCode": null,
+      "description": "zdarzenie testowe",
+      "type": "user",
+      "significance": "urgent",
+      "occursAt": "2023-08-24 18:43:33",
+      "createdByName": null,
+      "hasComments": false
+    },
   ]
 }
 ```
@@ -1394,7 +1402,7 @@ Jeśli użytkownik nie posiada żadnych zdarzeń zwracany jest adekwatny komunik
 
 ### GET /events/{code}
 
-Zwraca zdarzenie o podanym identyfikatorze wraz z powiązanymi z nim komentarzami.
+Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
 #### Przykładowa odpowiedź serwera:
 
@@ -1403,24 +1411,20 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z powiązanymi z nim komentarzam
 ```json
 {
   "data": {
-    "code": "2f4pxnwqvtzg",
-    "partyCode": "eh46xfadk8n3",
-    "description": "Party account created",
-    "type": "create",
-    "significance": "info",
-    "createdAt": "2022-03-15T12:47:02.000000Z",
-    "comments": [
-      {
-        "code": "j38fbv25qw4a",
-        "content": "testowy komentarz",
-        "created": "2022-03-15T15:41:20.000000Z"
-      }
-    ]
+    "code": "ame15yfgvhzk",
+    "partyCode": "7u2nbzjx83dg",
+    "transactionCode": null,
+    "description": "89b88",
+    "type": "user",
+    "significance": "warning",
+    "occursAt": "2023-08-03 18:42:40",
+    "createdByName": null,
+    "commentsAmount": 2
   }
 }
 ```
 
-Jeśli zdarzenie nie posiada przypisanych komentarzy tablica zwracana przy kluczu "comments" jest pusta.
+Jeśli zdarzenie nie posiada przypisanych komentarzy zmienna zwracana przy kluczu "commentsAmount" równa się 0
 
 ### DELETE /events/{code}
 
