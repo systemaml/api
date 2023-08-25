@@ -34,14 +34,15 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.19. [GET /events/{code}](#get-eventscode)
   - 2.20. [DELETE /events/{code}](#delete-eventscode)
   - 2.21. [POST /comments](#post-comments)
-  - 2.22. [DELETE /comments/{code}](#delete-commentscode)
-  - 2.23. [GET /alerts](#get-alerts)
-  - 2.24. [GET /alerts/{code}](#get-alertscode)
-  - 2.25. [DELETE /alerts/{code}]($delete-alertscode)
-  - 2.26. [POST /tasks](#post-tasks)
-  - 2.27. [GET /tasks](#get-tasks)
-  - 2.28. [GET /tasks/{code}](#get-taskscode)
-  - 2.29. [DELETE /tasks/{code}](#delete-taskscode)
+  - 2.22. [GET /events/{code}/comments](#get-eventscodecomments)
+  - 2.23. [DELETE /comments/{code}](#delete-commentscode)
+  - 2.24. [GET /alerts](#get-alerts)
+  - 2.25. [GET /alerts/{code}](#get-alertscode)
+  - 2.26. [DELETE /alerts/{code}]($delete-alertscode)
+  - 2.27. [POST /tasks](#post-tasks)
+  - 2.28. [GET /tasks](#get-tasks)
+  - 2.29. [GET /tasks/{code}](#get-taskscode)
+  - 2.30. [DELETE /tasks/{code}](#delete-taskscode)
 #
 
 ###
@@ -217,8 +218,7 @@ Struktura obiektu reprezentanta zarządu:
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
 | **firstName**                | TAK      | Imię reprezentanta zarządu                                                       |
 | **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                                   |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest  |
-| parametr personalIdentifier) |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest parametr (personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)             |
 | **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)              |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
@@ -962,10 +962,9 @@ Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametr
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **firstName**                | TAK      | Imię reprezentanta zarządu                                                       |
-| **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                                   |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest  |
-| parametr personalIdentifier) |
+| **firstName**                | TAK      | Imię reprezentanta zarządu                                                 |
+| **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                             |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)             |
 | **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)              |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
@@ -1432,7 +1431,7 @@ Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
 ### POST /comments
 
-Tworzenie nowego zdarzenia w systemie. Parametry żądania:
+Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
 | ------------- | -------- | -------------------------------------------------------------- |
@@ -1463,9 +1462,15 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
   }
 }
 ```
+
+### GET /events/{code}/comments
+
+Zwraca komentarze przypisane do zdarzenia.
+
 ### DELETE /comments/{code}
 
 Usunięcie komentarza wskazanego kodem identyfikującym.
+
 ### GET /alerts
 
 Pobranie alertów powiązanych z danym użytkownikiem.
