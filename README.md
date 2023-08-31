@@ -127,23 +127,22 @@ a) individual:
 
 | Parametr                   | Wymagane | Opis                                                                                            |
 | -------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| **firstName**              | TAK      | Imie podmiotu                                                                                   |
+| **firstName**              | TAK      | Imię podmiotu                                                                                   |
 | **lastName**               | TAK      | Nazwisko podmiotu                                                                               |
-| **personalIdentityNumber** | TAK      | Numer PESEL podmiotu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier) |
-| **personalIdentifier**     | NIE      | Numer identyfikacyjny podmiotu (wymagany jeśli nie ma numeru pesel)                             |
-| **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                                             |
-| **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                                             |
-| **citizenship**            | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                                        |
-| **birthCity**              | NIE      | Miasto urodzenia                                                                                |
-| **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                  |
-| **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)                                   |
+| **personalIdentityNumber** | TAK      | Numer PESEL podmiotu (w przypadku braku numeru PESEL wymagany jest parametr birthDate oraz birthCountry) |
+| **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                                             |
+| **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                                             |
+| **references**             | NIE      | Referencje własne                                                                               |
+| **citizenship**            | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                                      |
+| **birthCity**              | NIE      | Miejsce urodzenia                                                                           |
+| **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
+| **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                   |
 | **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
 | **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
-| **references**             | NIE      | Referencje własne                                                                               |
-| **createdByName**          | NIE      | Osoba wprowadzająca wpis                                                                        |
 | **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
 | **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
 | **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
+| **createdByName**          | NIE      | Osoba wprowadzająca wpis                                                                        |
 
 b) sole_proprietorship - wszystkie powyższe oraz:
 
@@ -152,10 +151,9 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | **taxIdNumber**                    | TAK      | NIP prowadzonej działalności                                        |
 | **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (wymagany jeśli nie ma numeru NIP)        |
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)             |
-| **references**                     | NIE      | Referencje własne                                                   |
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
-| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
+| **mainPkd**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
 
 Struktura obiektu z kodem PKD:
@@ -170,17 +168,16 @@ c) company:
 | Parametr                           | Wymagane | Opis                                                                         |
 | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |
 | **taxIdNumber**                    | TAK      | Numer NIP                                                                    |
-| **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
 | **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (podawany jeśli nie ma numeru NIP)                 |
-| **companyName**                    | NIE      | Nazwa firmy                                                                  |
+| **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
+| **companyName**                    | NIE      | Nazwa działalności                                                           |
 | **tradeName**                      | NIE      | Nazwa handlowa firmy                                                         |
-| **references**                     | NIE      | Referencje własne                                                            |
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
 | **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (Nie jest wymagane jeśli nie ma numeru NIP). |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
-| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
+| **mainPkd**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów zarządu                             |
@@ -200,14 +197,14 @@ Struktura obiektu beneficjenta:
 | **additionalInformation**    | TAK      | Dodatkowe informacje, nie są wymagane, o ile przynajmniej jeden z parametrów (directRights, ownedSharesAmount, ownedSharesUnit, directRightsPrivilegeType, indirectRights, otherRights, otherRightsDescription) posiada wartość |
 | **firstName**                | TAK      | Imię beneficjenta                                                          |
 | **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
-| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru pesel wymagany jest parametr birthDate) |
+| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru PESEL wymagany jest parametr birthDate) |
 | **documentType**             | NIE      | Rodzaj dokumentu                                                           |
 | **documentNumber**           | NIE      | Numer dokumentu                                                            |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)              |
-| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
-| **birthCity**                | NIE      | Miasto urodzenia                                                           |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
+| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
+| **birthCity**                | NIE      | Miejsce urodzenia                                                      |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                   |
 | **birthCountry**             | NIE      | Kraj urodzenia                                                             |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
 | **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
@@ -216,21 +213,21 @@ Struktura obiektu reprezentanta zarządu:
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
+| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
 | **firstName**                | TAK      | Imię reprezentanta zarządu                                                       |
 | **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                                   |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest parametr (personalIdentifier) |
-| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)             |
-| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)              |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
+| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
+| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)              |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
-| **personalIdentifier**       | NIE      | Numer identyfikacyjny reprezentanta zarządu (wymagany jeśli nie ma numeru pesel) |
-| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
-| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                        |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
-| **birthCity**                | NIE      | Miasto urodzenia                                                           |
+| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta zarządu (wymagany jeśli nie ma numeru PESEL) |
+| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
+| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                   |
+| **birthCity**                | NIE      | Miejsce urodzenia                                                           |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
-| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
 
 Do każdego z typów podmiotu można dodać dane kontaktowe.
 
@@ -249,7 +246,7 @@ a) adres:
 | Parametr        | Wymagane | Opis                              |
 | --------------- | -------- | --------------------------------- |
 | **country**     | NIE      | Nazwa kraju (kod standardzie ISO) |
-| **city**        | NIE      | Miasto                            |
+| **city**        | NIE      | Miasto                       |
 | **street**      | NIE      | Ulica                             |
 | **houseNumber** | NIE      | Numer domu                        |
 | **flatNumber**  | NIE      | Numer mieszkania                  |
@@ -767,14 +764,14 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 | **additionalInformation**    | TAK      | Dodatkowe informacje, nie są wymagane, o ile przynajmniej jeden z parametrów (directRights, ownedSharesAmount, ownedSharesUnit, directRightsPrivilegeType, indirectRights, otherRights, otherRightsDescription) posiada wartość |
 | **firstName**                | TAK      | Imię beneficjenta                                                          |
 | **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
-| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru pesel wymagany jest parametr birthDate) |
+| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru PESEL wymagany jest parametr birthDate) |
 | **documentType**             | NIE      | Rodzaj dokumentu                                                           |
 | **documentNumber**           | NIE      | Numer dokumentu                                                            |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)              |
-| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
-| **birthCity**                | NIE      | Miasto urodzenia                                                           |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
+| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
+| **birthCity**                | NIE      | Miejsce urodzenia                                                      |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
 | **birthCountry**             | NIE      | Kraj urodzenia                                                             |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
 | **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
@@ -962,21 +959,21 @@ Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametr
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
+| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
 | **firstName**                | TAK      | Imię reprezentanta zarządu                                                 |
 | **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                             |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru pesel wymagany jest parametr personalIdentifier) |
-| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru pesel)             |
-| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru pesel)              |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
+| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
+| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)              |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
-| **personalIdentifier**       | NIE      | Numer identyfikacyjny reprezentanta zarządu (wymagany jeśli nie ma numeru pesel) |
-| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru pesel)                        |
-| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru pesel)                        |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju standardzie ISO)                                   |
-| **birthCity**                | NIE      | Miasto urodzenia                                                           |
+| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta zarządu (wymagany jeśli nie ma numeru PESEL) |
+| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
+| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
+| **birthCity**                | NIE      | Miejsce urodzenia                                                      |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
-| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
 
 #### Przykładowe dane do dodania reprezentanta zarządu:
 
@@ -1160,11 +1157,11 @@ Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać p
 
 | Parametr                | Wymagane | Opis                                                      |
 | ----------------------- | -------- | --------------------------------------------------------- |
-| **senderFirstName**     | NIE      | Imie nadawcy (wymagany jeśli nie jest podany kod nadawcy)          |
+| **senderFirstName**     | NIE      | Imię nadawcy (wymagany jeśli nie jest podany kod nadawcy)          |
 | **senderLastName**      | NIE      | Nazwisko nadawcy (wymagany jeśli nie jest podany kod nadawcy)      |
 | **senderCompanyName**   | NIE      | Nazwa firmy nadawcy (wymagany jeśli nie jest podany kod nadawcy)   |
 | **senderCode**          | TAK      | Kod podmiotu nadawcy                                      |
-| **receiverFirstName**   | NIE      | Imie odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)        |
+| **receiverFirstName**   | NIE      | Imię odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)        |
 | **receiverLastName**    | NIE      | Nazwisko odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)    |
 | **receiverCompanyName** | NIE      | Nazwa firmy odbiorcy (wymagany jeśli nie jest podany kod odbiorcy) |
 | **receiverCode**        | TAK      | Kod podmiotu odbiorcy                                     |
