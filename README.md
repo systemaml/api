@@ -180,7 +180,7 @@ c) company:
 | **mainPkd**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
-| **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów zarządu                             |
+| **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
 
 Struktura obiektu beneficjenta:
 
@@ -209,22 +209,22 @@ Struktura obiektu beneficjenta:
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
 | **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
 
-Struktura obiektu reprezentanta zarządu:
+Struktura obiektu reprezentanta:
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
-| **firstName**                | TAK      | Imię reprezentanta zarządu                                                       |
-| **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                                   |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
+| **description**              | NIE      | Opis reprezentanta                                                         |
+| **firstName**                | TAK      | Imię reprezentanta                                                         |
+| **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
 | **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)              |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
-| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta zarządu (wymagany jeśli nie ma numeru PESEL) |
+| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta (wymagany jeśli nie ma numeru PESEL)    |
 | **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
 | **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                   |
-| **birthCity**                | NIE      | Miejsce urodzenia                                                           |
+| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
+| **birthCity**                | NIE      | Miejsce urodzenia                                                          |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
@@ -954,19 +954,19 @@ Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
 ### POST /parties/{code}/boardmembers
 
-Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametry żądania:
+Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądania:
 
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **description**              | NIE      | Opis reprezentanta zarządu                                                 |
-| **firstName**                | TAK      | Imię reprezentanta zarządu                                                 |
-| **lastName**                 | TAK      | Nazwisko reprezentanta zarządu                                             |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta zarządu (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
+| **description**              | NIE      | Opis reprezentanta                                                         |
+| **firstName**                | TAK      | Imię reprezentanta                                                         |
+| **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
+| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta  (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
 | **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)              |
 | **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
-| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta zarządu (wymagany jeśli nie ma numeru PESEL) |
+| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta  (wymagany jeśli nie ma numeru PESEL) |
 | **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
 | **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
@@ -975,7 +975,7 @@ Dodanie reprezentanta zarządu do podmiotu typu osoba prawna (company). Parametr
 | **references**               | NIE      | Referencje własne                                                          |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
 
-#### Przykładowe dane do dodania reprezentanta zarządu:
+#### Przykładowe dane do dodania reprezentanta:
 
 ```json
 {
@@ -1123,11 +1123,11 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
   ]
 }
 ```
-W przypadku gdy podmiot nie posiada dodanych reprezentantów zarządu zwracana tablica jest pusta
+W przypadku gdy podmiot nie posiada dodanych reprezentantów zwracana tablica jest pusta
 
 ### DELETE /boardmembers/{code}
 
-Usunięcie reprezentanta zarządu wskazanego kodem identyfikującym.
+Usunięcie reprezentanta wskazanego kodem identyfikującym.
 
 ## POST /transactions
 
