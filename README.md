@@ -170,11 +170,12 @@ c) company:
 | **taxIdNumber**                    | TAK      | Numer NIP                                                                    |
 | **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (podawany jeśli nie ma numeru NIP)                 |
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
+| **references**                     | NIE      | Referencje własne                                                            |
 | **companyName**                    | NIE      | Nazwa działalności                                                           |
-| **tradeName**                      | NIE      | Nazwa handlowa firmy                                                         |
+| **tradeName**                      | NIE      | Nazwa handlowa                                                               |
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
-| **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (Nie jest wymagane jeśli nie ma numeru NIP). |
+| **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
 | **mainPkd**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
