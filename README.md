@@ -1435,7 +1435,7 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 | ------------- | -------- | -------------------------------------------------------------- |
 | **content**   | TAK      | Treść komentarza                                               |
 | **eventCode** | TAK      | Identyfikator zdarzenia do którego będzie przypisany komentarz |
-| **occursAt**  | NIE      | Data wystąpienia zdarzenia                                    |
+| **occurredAt**| NIE      | Data wystąpienia zdarzenia                                     |
 
 #### Przykładowe dane do utworzenia komentarza:
 
@@ -1527,9 +1527,9 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 | ------------------- | -------- | ------------------------------------------------ |
 | **content**         | TAK      | Treść zadania                                    |
 | **expirationDate**  | NIE      | Data przed którą zadanie powinno zostać wykonane |
-| **alertCode**       | NIE      | Kod alertu który będzie powiązany z zadaniem     |
 | **partyCode**       | NIE      | Kod podmiotu który będzie powiązany z zadaniem   |
 | **transactionCode** | NIE      | Kod transakcji która będzie powiązana z zadaniem |
+| **alertCode**       | NIE      | Kod alertu który będzie powiązany z zadaniem     |
 
 #### Przykładowe dane do utworzenia zadania:
 
