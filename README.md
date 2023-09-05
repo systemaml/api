@@ -1323,7 +1323,7 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 | ---------------- | -------- | ------------------------------------------------------------- |
 | **description**  | TAK      | Opis zdarzenia                                                |
 | **significance** | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
-| **partyName**    | NIE      | Nazwa powiązanego podmiotu                                    |
+| **partyCode**    | NIE      | Nazwa powiązanego podmiotu                                    |
 | **transactionCode**| NIE      | Kod powiązanej transakcji                                   |
 | **type**         | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
 | **occursAt**     | NIE      | Data wystąpienia zdarzenia                                    |
@@ -1346,7 +1346,7 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 {
   "data": {
     "code": "t4euaxm1p29b",
-    "partyName": null,
+    "partyCode": null,
     "transactionCode": null,
     "description": "zdarzenie testowe",
     "type": "user",
