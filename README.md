@@ -1435,15 +1435,17 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 | ------------- | -------- | -------------------------------------------------------------- |
 | **content**   | TAK      | Treść komentarza                                               |
 | **eventCode** | TAK      | Identyfikator zdarzenia do którego będzie przypisany komentarz |
-| **occurredAt**| NIE      | Data wystąpienia zdarzenia                                     |
+| **occursAt**| TAK      | Data wystąpienia zdarzenia                                     |
 
 #### Przykładowe dane do utworzenia komentarza:
 
 ```json
 {
   "content": "testowy komentarz",
-  "eventCode": "6jxh93gpasv2"
-}
+  "eventCode": "gcw1rhn39ufz",
+  "occursAt": "2025-08-03 18:42:40",
+ }
+
 ```
 
 #### Przykładowa odpowiedź serwera:
@@ -1453,10 +1455,10 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "nxvmebcgjhwk",
+    "code": "17zw82gyk3ma",
     "content": "testowy komentarz",
-    "created": "2023-08-25T08:57:24.000000Z",
-    "occurredAt": "2023-08-25T08:57:24.000000Z"
+    "created": "2023-09-05T15:44:43.000000Z",
+    "occursAt": "2025-08-03T16:42:40.000000Z"
   }
 }
 ```
