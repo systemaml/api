@@ -1326,7 +1326,7 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 | **partyCode**    | NIE      | Nazwa powiązanego podmiotu                                    |
 | **transactionCode**| NIE      | Kod powiązanej transakcji                                   |
 | **type**         | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
-| **occursAt**     | NIE      | Data wystąpienia zdarzenia                                    |
+| **occursAt**     | TAK      | Data wystąpienia zdarzenia                                    |
 | **createdByName**  | NIE      | Osoba tworząca zdarzenie                                    |
 
 #### Przykładowe dane do utworzenia zdarzenia:
@@ -1335,6 +1335,7 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 {
   "description": "zdarzenie testowe",
   "significance": "urgent",
+  "occursAt": "2025-08-03 18:42:40",
 }
 ```
 
@@ -1345,13 +1346,13 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "t4euaxm1p29b",
-    "partyCode": null,
+    "code": "6nb9ercma8wd",
+    "partyName": null,
     "transactionCode": null,
     "description": "zdarzenie testowe",
     "type": "user",
     "significance": "urgent",
-    "occursAt": "2023-08-24T16:43:33.773760Z",
+    "occursAt": "2025-08-03T16:42:40.000000Z",
     "createdByName": null,
     "hasComments": false
   }
