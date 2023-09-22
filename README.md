@@ -153,7 +153,8 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)             |
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
-| **mainPkd**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
+| **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                        |
+| **mainPkdCode**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
 
 Struktura obiektu z kodem PKD:
@@ -172,16 +173,18 @@ c) company:
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
 | **references**                     | NIE      | Referencje własne                                                            |
 | **companyName**                    | NIE      | Nazwa działalności                                                           |
-| **tradeName**                      | NIE      | Nazwa handlowa                                                               |
+| **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                                 |
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
 | **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
-| **mainPkd**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
+| **mainPkdCode**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)      |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
+| **createdByName**                  | NIE      | Osoba wprowadzająca wpis                                                     |
+
 
 Struktura obiektu beneficjenta:
 
@@ -247,7 +250,7 @@ a) adres:
 | Parametr        | Wymagane | Opis                              |
 | --------------- | -------- | --------------------------------- |
 | **country**     | NIE      | Nazwa kraju (kod standardzie ISO) |
-| **city**        | NIE      | Miasto                       |
+| **city**        | NIE      | Miasto                            |
 | **street**      | NIE      | Ulica                             |
 | **houseNumber** | NIE      | Numer domu                        |
 | **flatNumber**  | NIE      | Numer mieszkania                  |
@@ -316,6 +319,7 @@ a) kontakt:
   "birthCountry": "PL",
   "citizenship": "PL",
   "companyName": "Usługi programistyczne",
+  "tradeNames": ["FiberPay", "SystemAML"],
   "createdByName": "Adam",
   "documentExpirationDate": "2025-05-08",
   "documentNumber": "aze123123",
@@ -386,7 +390,7 @@ a) kontakt:
   "companyName": "FiberPay",
   "taxIdNumber": "7010634566",
   "nationalBusinessRegistryNumber": "147302566",
-  "tradeName": "FiberPay",
+  "tradeNames": ["FiberPay"],
   "nationalCourtRegistryNumber": "0000512707",
   "businessActivityForm": "stock_company",
   "website": "fiberpay.pl",
@@ -1136,8 +1140,8 @@ Utworzenie nowej transakcji. Parametry żądania:
 
 | Parametr                  | Wymagane | Opis                                                     |
 | ------------------------- | -------- | -------------------------------------------------------- |
-| **type**                  | TAK      | Typ transakcji. Aktualnie wspierane: buyer, vender, broker |
-| **status**                | TAK      | Status transakcji. Aktualnie wspierane: new, draft       |
+| **type**                  | TAK      | Typ transakcji. Aktualnie wspierane: buyer, vender, transfer, other |
+| **status**                | TAK      | Status transakcji. Aktualnie wspierane: draft, in_acceptance, accepted, cancelled |
 | **occasionalTransaction** | TAK      | Informacja czy transakcja jest okazjonalna (bool)        |
 
 Jeśli transakcja jest oznaczona jako okazjonalna wymagane są następujące parametry:
@@ -1148,41 +1152,49 @@ Jeśli transakcja jest oznaczona jako okazjonalna wymagane są następujące par
 | **currency**      | TAK      | Waluta transakcji                                          |
 | **bookedAt**      | TAK      | Data zaksięgowania transakcji                              |
 | **paymentMethod** | TAK      | Sposób płatności                                           |
-| **location**      | NIE      | Kraj w którym została przeprowadzona transakcja            |
-| **description**   | NIE      | Opis transakcji (tytuł, przedmiot transakcji itd.)         |
+| **location**      | TAK      | Kraj w którym została przeprowadzona transakcja            |
+| **title**         | TAK      | Tytuł transakcji                                           |
+| **description**   | NIE      | Opis transakcji (przedmiot transakcji, komentarz itd.)     |
 | **references**    | NIE      | Referencje własne                                          |
-| **senderIban**    | NIE      | Numer konta nadawcy (wymagany gdy sposób płatności to bank_transfer)   |
-| **receiverIban**  | NIE      | Numer konta odbiorcy (wymagany gdy sposób płatności to brank_transfer) |
+| **createdByName** | NIE      | Dane osoby wprowadzającej wpis                             |
+| **entities**      | NIE      | Tablica obiektów z danymi stron transakcji, wymagane w zależności od occasionalTransaction i typu transakcji |
+
 
 Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać poniższe parametry:
 
-| Parametr                | Wymagane | Opis                                                      |
-| ----------------------- | -------- | --------------------------------------------------------- |
-| **senderFirstName**     | NIE      | Imię nadawcy (wymagany jeśli nie jest podany kod nadawcy)          |
-| **senderLastName**      | NIE      | Nazwisko nadawcy (wymagany jeśli nie jest podany kod nadawcy)      |
-| **senderCompanyName**   | NIE      | Nazwa firmy nadawcy (wymagany jeśli nie jest podany kod nadawcy)   |
-| **senderCode**          | TAK      | Kod podmiotu nadawcy                                      |
-| **receiverFirstName**   | NIE      | Imię odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)        |
-| **receiverLastName**    | NIE      | Nazwisko odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)    |
-| **receiverCompanyName** | NIE      | Nazwa firmy odbiorcy (wymagany jeśli nie jest podany kod odbiorcy) |
-| **receiverCode**        | TAK      | Kod podmiotu odbiorcy                                     |
+| Parametr                | Wymagane | Opis                                                                 |
+| ----------------------- | -------- | -------------------------------------------------------------------- |
+| **type**                | TAK      | Typ strony transakcji. Aktualnie wspierane: receiver, sender, seller, buyer, payer|
+| **partyCode**           | NIE      | Kod podmiotu strony transakcji                                       |
+| **firstName**           | NIE      | Imię odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)          |
+| **lastName**            | TAK      | Nazwisko odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)      |
+| **companyName**         | NIE      | Nazwa firmy nadawcy (wymagany jeśli nie jest podany kod nadawcy)     |
+| **description**         | NIE      | Opis strony transakcji                                               |
+| **iban**                | NIE      | Numer iban odbiorcy (wymagany jeśli paymentMethod === bank_transfer) |
 
 #### Przykładowe dane do utworzenia transakcji:
 
 ```json
 {
-  "type": "buyer",
-  "amount": "1250",
-  "currency": "PLN",
-  "location": "PL",
-  "bookedAt": "2023-02-14 15:15:00",
-  "description": "zapłata za rower",
-  "paymentMethod": "Gotówka",
-  "receiverFirstName": "Jan",
-  "receiverLastName": "Kowalski",
+  "status": "accepted",
+  "type": "vender",
   "occasionalTransaction": false,
+  "amount": "780",
+  "currency": "PLN",
+  "bookedAt": "2023-09-10 10:10:10",
+  "paymentMethod": "blik",
+  "title": "transakcja testowa",
+  "location": "PL",
+  "references": "qwerty",
   "createdByName": "Tester",
-  "status": "accepted"
+  "entities": [
+    {
+      "type" : "buyer",
+      "description" : "Testowa strona transakcji",
+      "firstName" : "Jan",
+      "lastName" : "Kowalski",
+    }
+  ]
 }
 ```
 
@@ -1193,28 +1205,36 @@ Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać p
 ```json
 {
   "data": {
-    "code": "wz2xfsumnjrv",
-    "type": "broker",
+    "code": "c1ehu5my3s97",
+    "type": "vender",
     "status": "accepted",
-    "amount": "1250.00",
+    "amount": "780.00",
     "currency": "PLN",
+    "paymentMethod": "blik",
     "location": "PL",
-    "bookedAt": "2021-05-10 11:06:29",
-    "description": "zapłata za rower",
-    "paymentMethod": "bank_transfer",
-    "senderFirstName": "Jan",
-    "senderLastName": "Kowalski",
-    "senderCompanyName": null,
-    "senderIban": "PL12341234123412341234123412",
-    "senderCode": "htu7evj63xkf",
-    "receiverFirstName": null,
-    "receiverLastName": null,
-    "receiverCompanyName": "super firma",
-    "receiverIban": "PL34123412341234123412341234",
-    "receiverCode": "8mjken1c725h",
-    "references": "ABC123123123",
-    "createdAt": "2022-07-18T12:39:00.000000Z",
-    "occasionalTransaction": null
+    "bookedAt": "2023-09-10T08:10:10.000000Z",
+    "description": null,
+    "title": "transakcja testowa",
+    "entities": [
+        {
+            "code": "rtkmyfbavnug",
+            "partyCode": null,
+            "type": "buyer",
+            "description": "Testowa strona transakcji",
+            "firstName": "Jan",
+            "lastName": "Kowalski",
+            "companyName": "",
+            "amount": null,
+            "currency": null,
+            "paymentMethod": null,
+            "iban": "",
+            "bookedAt": null
+        }
+    ],
+    "references": "qwerty",
+    "createdAt": "2023-09-22T08:36:20.000000Z",
+    "occasionalTransaction": false,
+    "createdByName": "Tester"
   }
 }
 ```
@@ -1231,40 +1251,39 @@ Zwraca transakcje utworzone przez użytkownika.
 {
   "data": [
     {
-      "code": "nx9dpmhkrqz7",
-      "type": "broker",
-      "senderFirstName": "Jan",
-      "senderLastName": "Kowalski",
-      "senderCompanyName": null,
-      "amount": "11250.00",
-      "description": "auto",
-      "receiverFirstName": "Adam",
-      "receiverLastName": "Nowak",
-      "receiverCompanyName": null
-    },
-    {
-      "code": "gwt3kpbqr1hy",
-      "type": "buyer",
-      "senderFirstName": null,
-      "senderLastName": null,
-      "senderCompanyName": null,
-      "amount": "1250.00",
-      "description": "rower",
-      "receiverFirstName": "Adam",
-      "receiverLastName": "Nowak",
-      "receiverCompanyName": null
-    },
-    {
-      "code": "2fyu8m6e19qd",
+      "mainEntityType": "buyer",
+      "mainEntityFirstName": "Jan",
+      "mainEntityLastName": "Kowalski",
+      "mainEntityCompanyName": "",
+      "code": "c1ehu5my3s97",
       "type": "vender",
-      "senderFirstName": "Jan",
-      "senderLastName": "Kowalski",
-      "senderCompanyName": null,
-      "amount": "25.00",
-      "description": "bilety",
-      "receiverFirstName": null,
-      "receiverLastName": null,
-      "receiverCompanyName": null
+      "status": "accepted",
+      "description": null,
+      "title": "transakcja z klienta",
+      "amount": "780.00",
+      "currency": "PLN"
+    },
+    {
+      "code": "td4r9v6weunk",
+      "type": "vender",
+      "status": "cancelled",
+      "description": null,
+      "title": "transakcja z klienta",
+      "amount": "780.00",
+      "currency": "PLN"
+    },
+    {
+      "mainEntityType": "buyer",
+      "mainEntityFirstName": "Jan",
+      "mainEntityLastName": "Kowalski",
+      "mainEntityCompanyName": null,
+      "code": "q9hyv32w4b68",
+      "type": "vender",
+      "status": "accepted",
+      "description": null,
+      "title": "transakcja z klienta",
+      "amount": "780.00",
+      "currency": "PLN"
     }
   ]
 }
@@ -1281,28 +1300,36 @@ Pobranie szczegółów danej transakcji.
 ```json
 {
   "data": {
-    "code": "zf14tw35pcqu",
-    "type": "broker",
-    "status": "new",
-    "amount": "1250.00",
+    "code": "c1ehu5my3s97",
+    "type": "vender",
+    "status": "accepted",
+    "amount": "780.00",
     "currency": "PLN",
+    "paymentMethod": "blik",
     "location": "PL",
-    "bookedAt": "2021-05-10 11:06:29",
-    "description": "rower",
-    "paymentMethod": "cash",
-    "senderFirstName": "Jan",
-    "senderLastName": "Kowalski",
-    "senderCompanyName": null,
-    "senderIban": "PL34123412341234123412341234",
-    "senderCode": null,
-    "receiverFirstName": "Adam",
-    "receiverLastName": "Nowak",
-    "receiverCompanyName": null,
-    "receiverIban": "PL12341234123412341234123412",
-    "receiverCode": null,
-    "references": "kupno roweru",
-    "createdAt": "2022-06-20T14:04:38.000000Z",
-    "occasionalTransaction": 0
+    "bookedAt": "2023-09-10T08:10:10.000000Z",
+    "description": null,
+    "title": "transakcja testowa",
+    "entities": [
+      {
+        "code": "rtkmyfbavnug",
+        "partyCode": null,
+        "type": "buyer",
+        "description": "Testowa strona transakcji",
+        "firstName": "Jan",
+        "lastName": "Kowalski",
+        "companyName": "",
+        "amount": null,
+        "currency": null,
+        "paymentMethod": null,
+        "iban": "",
+        "bookedAt": null
+      }
+    ],
+    "references": "qwerty",
+    "createdAt": "2023-09-22T08:36:20.000000Z",
+    "occasionalTransaction": false,
+    "createdByName": "Tester"
   }
 }
 ```
