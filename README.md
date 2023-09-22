@@ -1166,11 +1166,11 @@ Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać p
 | ----------------------- | -------- | -------------------------------------------------------------------- |
 | **type**                | TAK      | Typ strony transakcji. Aktualnie wspierane: receiver, sender, seller, buyer, payer|
 | **partyCode**           | NIE      | Kod podmiotu strony transakcji                                       |
-| **firstName**           | NIE      | Imię odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)          |
-| **lastName**            | NIE      | Nazwisko odbiorcy (wymagany jeśli nie jest podany kod odbiorcy)      |
+| **firstName**           | NIE      | Imię strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)          |
+| **lastName**            | NIE      | Nazwisko strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)      |
 | **companyName**         | NIE      | Nazwa firmy nadawcy (wymagany jeśli nie jest podany kod nadawcy)     |
 | **description**         | NIE      | Opis strony transakcji                                               |
-| **iban**                | NIE      | Numer iban odbiorcy (wymagany jeśli paymentMethod === bank_transfer) |
+| **iban**                | NIE      | Numer iban strony transakcji (wymagany jeśli paymentMethod === bank_transfer) |
 
 #### Przykładowe dane do utworzenia transakcji:
 
