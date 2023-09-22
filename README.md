@@ -1168,7 +1168,7 @@ Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać p
 | **partyCode**           | NIE      | Kod podmiotu strony transakcji                                       |
 | **firstName**           | NIE      | Imię strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)          |
 | **lastName**            | NIE      | Nazwisko strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)      |
-| **companyName**         | NIE      | Nazwa firmy nadawcy (wymagany jeśli nie jest podany kod nadawcy)     |
+| **companyName**         | NIE      | Nazwa firmy strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)     |
 | **description**         | NIE      | Opis strony transakcji                                               |
 | **iban**                | NIE      | Numer iban strony transakcji (wymagany jeśli paymentMethod === bank_transfer) |
 
