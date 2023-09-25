@@ -1152,8 +1152,8 @@ Jeśli transakcja jest oznaczona jako okazjonalna wymagane są następujące par
 | **currency**      | TAK      | Waluta transakcji                                          |
 | **bookedAt**      | TAK      | Data zaksięgowania transakcji                              |
 | **paymentMethod** | TAK      | Sposób płatności                                           |
-| **location**      | TAK      | Kraj w którym została przeprowadzona transakcja            |
 | **title**         | TAK      | Tytuł transakcji                                           |
+| **location**      | NIE      | Kraj w którym została przeprowadzona transakcja            |
 | **description**   | NIE      | Opis transakcji (przedmiot transakcji, komentarz itd.)     |
 | **references**    | NIE      | Referencje własne                                          |
 | **createdByName** | NIE      | Dane osoby wprowadzającej wpis                             |
