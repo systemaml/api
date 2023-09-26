@@ -1160,7 +1160,7 @@ Jeśli transakcja jest oznaczona jako okazjonalna wymagane są następujące par
 | **entities**      | NIE      | Tablica obiektów z danymi stron transakcji, wymagane w zależności od occasionalTransaction i typu transakcji |
 
 
-Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać poniższe parametry:
+Obiekt pojedynczej strony transakcji powinien zawierać poniższe parametry:
 
 | Parametr                | Wymagane | Opis                                                                 |
 | ----------------------- | -------- | -------------------------------------------------------------------- |
@@ -1172,6 +1172,9 @@ Jeśli transakcja nie jest oznaczona jako okazjonalna dodatkowo należy podać p
 | **description**         | NIE      | Opis strony transakcji                                               |
 | **iban**                | NIE      | Numer iban strony transakcji (wymagany jeśli paymentMethod === bank_transfer) |
 
+Dla transakcji typu buyer wymagane jest podanie strony transakcji o typie seller.
+Dla transakcji typu vender wymagane jest podanie strony transakcji o typie buyer.
+Dla transakcji typu transfer wymagane jest podanie stron transakcji o typach payer oraz receiver.
 #### Przykładowe dane do utworzenia transakcji:
 
 ```json
