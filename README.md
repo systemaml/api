@@ -647,7 +647,7 @@ Pobranie szczegółów danego podmiotu.
 ```json
 {
   "data": {
-    "code": "p6qex9137bzd",
+    "code": "6q4vcnb9sh7f",
     "type": "sole_proprietorship",
     "status": "active",
     "riskStatus": "pending",
@@ -655,14 +655,15 @@ Pobranie szczegółów danego podmiotu.
     "riskStatusChangedBy": "",
     "createdByName": "Adam",
     "references": "qwerty",
+    "economicRelationStartDate": "2023-11-14",
     "entity": {
-      "code": "whfkjmqdu85p",
+      "code": "7b8drp1x3shq",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "99120234518",
       "documentType": "passport",
       "documentNumber": "aze123123",
-      "documentExpirationDate": "2025-05-07T22:00:00.000000Z",
+      "documentExpirationDate": "2025-05-08",
       "withoutExpirationDate": false,
       "citizenship": "PL",
       "birthCity": "Warszawa",
@@ -670,26 +671,31 @@ Pobranie szczegółów danego podmiotu.
       "politicallyExposed": "no",
       "politicallyExposedCoworker": "no",
       "politicallyExposedFamily": "yes",
-      "createdAt": "2023-08-24T15:36:50.000000Z",
+      "createdAt": "2023-11-14T15:07:31.000000Z",
       "birthDate": null,
+      "professions": [],
       "soleProprietorship": {
-        "code": "cz47qg2s9hnj",
+        "code": "pz7mua2836xq",
+        "tradeNames": [
+          "FiberPay",
+          "SystemAML"
+        ],
         "companyName": "Usługi programistyczne",
         "taxIdNumber": "3765151981",
         "nationalBusinessRegistryNumber": "123456789",
-        "createdAt": "2023-08-24T15:36:50.000000Z",
+        "createdAt": "2023-11-14T15:07:31.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "1qwnmebv2jxh",
+            "code": "tyfz7m65gnsa",
             "pkdCode": "01.15.Z",
             "pkdName": "Uprawa tytoniu",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "wt5d7racmnze",
+          "code": "duqzkn2peajs",
           "pkdCode": "01.12.Z",
           "pkdName": "Uprawa ryżu",
           "mainPkd": true
@@ -698,7 +704,7 @@ Pobranie szczegółów danego podmiotu.
     },
     "addresses": [
       {
-        "code": "tsmudwrf95cq",
+        "code": "f2kw96a4yzpm",
         "type": "forwarding_address",
         "country": "PL",
         "city": "Warszawa",
@@ -706,10 +712,10 @@ Pobranie szczegółów danego podmiotu.
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-14T15:07:31.000000Z"
       },
       {
-        "code": "bqktvu6zefg7",
+        "code": "1ryht3mx7a45",
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
@@ -717,10 +723,10 @@ Pobranie szczegółów danego podmiotu.
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-14T15:07:31.000000Z"
       },
       {
-        "code": "x9f8qwackejy",
+        "code": "tp2v4urmeawq",
         "type": "accommodation_address",
         "country": "PL",
         "city": "Warszawa",
@@ -728,25 +734,25 @@ Pobranie szczegółów danego podmiotu.
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-14T15:07:31.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "qjp48y13v6fb",
+        "code": "zuxvhjc538nw",
         "type": "personal",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-14T15:07:31.000000Z"
       },
       {
-        "code": "8ps2c5arzkgh",
+        "code": "164fv2xb8jpc",
         "type": "company",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-14T15:07:31.000000Z"
       }
     ],
     "creationIp": null,
