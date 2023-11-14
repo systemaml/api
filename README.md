@@ -134,7 +134,7 @@ a) individual:
 | **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                                             |
 | **references**             | NIE      | Referencje własne                                                                               |
 | **citizenship**            | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                                      |
-| **birthCity**              | NIE      | Miejsce urodzenia                                                                           |
+| **birthCity**              | NIE      | Miejsce urodzenia                                                                               |
 | **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
 | **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                   |
 | **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
@@ -143,6 +143,7 @@ a) individual:
 | **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
 | **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
 | **createdByName**          | NIE      | Osoba wprowadzająca wpis                                                                        |
+| **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
 
 b) sole_proprietorship - wszystkie powyższe oraz:
 
@@ -276,6 +277,7 @@ a) kontakt:
   "documentExpirationDate": "2025-05-15",
   "documentNumber": "aze123123",
   "documentType": "id_card",
+  "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
   "personalIdentityNumber": "09271573233",
@@ -324,6 +326,7 @@ a) kontakt:
   "documentExpirationDate": "2025-05-08",
   "documentNumber": "aze123123",
   "documentType": "passport",
+  "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
   "mainPkdCode": {
@@ -345,6 +348,7 @@ a) kontakt:
   "taxIdNumber": "3765151981",
   "type": "sole_proprietorship",
   "withoutExpirationDate": false,
+  "economicRelationStartDate": "2023-11-14",
   "forwardAddress": {
     "country": "PL",
     "city": "Warszawa",
@@ -388,6 +392,7 @@ a) kontakt:
 {
   "type": "company",
   "companyName": "FiberPay",
+  "economicRelationStartDate": "2023-11-14",
   "taxIdNumber": "7010634566",
   "nationalBusinessRegistryNumber": "147302566",
   "tradeNames": ["FiberPay"],
