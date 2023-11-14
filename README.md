@@ -16,33 +16,31 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.1. [POST /parties](#post-parties)
   - 2.2. [GET /parties](#get-parties)
   - 2.3. [GET /parties/{code}](#get-partiescode)
-  - 2.4. [GET /parties/pdf/{code}](#get-partiespdfcode)
-  - 2.5. [DELETE /parties/{code}](#delete-partiescode)
-  - 2.6. [POST /parties/{code}/beneficiaries](#post-partiescodebeneficiaries)
-  - 2.7. [GET /parties/{code}/beneficiaries](#get-partiescodebeneficiaries)
-  - 2.8. [DELETE /beneficiaries/{code}](#delete-beneficiariescode)
-  - 2.9. [POST /parties/{code}/boardmembers](#post-partiescodeboardmembers)
-  - 2.10. [GET /parties/{code}/boardmembers](#get-partiescodeboardmembers)
-  - 2.11. [DELETE /boardmembers/{code}](#delete-boardmemberscode)
-  - 2.12. [POST /transactions](#post-transactions)
-  - 2.13. [GET /transactions](#get-transactions)
-  - 2.14. [GET /transactions/{code}](#get-transactionscode)
-  - 2.15. [GET /transactions/pdf/{code}](#get-transactionspdfcode)
-  - 2.16. [DELETE /transactions/{code}](#delete-transactionscode)
-  - 2.17. [POST /events](#post-events)
-  - 2.18. [GET /events](#get-events)
-  - 2.19. [GET /events/{code}](#get-eventscode)
-  - 2.20. [DELETE /events/{code}](#delete-eventscode)
-  - 2.21. [POST /comments](#post-comments)
-  - 2.22. [GET /events/{code}/comments](#get-eventscodecomments)
-  - 2.23. [DELETE /comments/{code}](#delete-commentscode)
-  - 2.24. [GET /alerts](#get-alerts)
-  - 2.25. [GET /alerts/{code}](#get-alertscode)
-  - 2.26. [DELETE /alerts/{code}]($delete-alertscode)
-  - 2.27. [POST /tasks](#post-tasks)
-  - 2.28. [GET /tasks](#get-tasks)
-  - 2.29. [GET /tasks/{code}](#get-taskscode)
-  - 2.30. [DELETE /tasks/{code}](#delete-taskscode)
+  - 2.4. [DELETE /parties/{code}](#delete-partiescode)
+  - 2.5. [POST /parties/{code}/beneficiaries](#post-partiescodebeneficiaries)
+  - 2.6. [GET /parties/{code}/beneficiaries](#get-partiescodebeneficiaries)
+  - 2.7. [DELETE /beneficiaries/{code}](#delete-beneficiariescode)
+  - 2.8. [POST /parties/{code}/boardmembers](#post-partiescodeboardmembers)
+  - 2.9. [GET /parties/{code}/boardmembers](#get-partiescodeboardmembers)
+  - 2.10. [DELETE /boardmembers/{code}](#delete-boardmemberscode)
+  - 2.11. [POST /transactions](#post-transactions)
+  - 2.12. [GET /transactions](#get-transactions)
+  - 2.13. [GET /transactions/{code}](#get-transactionscode)
+  - 2.14. [DELETE /transactions/{code}](#delete-transactionscode)
+  - 2.15. [POST /events](#post-events)
+  - 2.16. [GET /events](#get-events)
+  - 2.17. [GET /events/{code}](#get-eventscode)
+  - 2.18. [DELETE /events/{code}](#delete-eventscode)
+  - 2.19. [POST /comments](#post-comments)
+  - 2.20. [GET /events/{code}/comments](#get-eventscodecomments)
+  - 2.21. [DELETE /comments/{code}](#delete-commentscode)
+  - 2.22. [GET /alerts](#get-alerts)
+  - 2.23. [GET /alerts/{code}](#get-alertscode)
+  - 2.24. [DELETE /alerts/{code}](#delete-alertscode)
+  - 2.25. [POST /tasks](#post-tasks)
+  - 2.26. [GET /tasks](#get-tasks)
+  - 2.27. [GET /tasks/{code}](#get-taskscode)
+  - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
 #
 
 ###
@@ -760,10 +758,6 @@ Pobranie szczegółów danego podmiotu.
 }
 ```
 
-### GET /parties/pdf/{code}
-
-Rozpoczyna pobieranie raportu pdf z podmiotu wskazanego kodem identyfikującym.
-
 ### DELETE /parties/{code}
 
 Usunięcie podmiotu wskazanego kodem identyfikującym.
@@ -1360,9 +1354,6 @@ Pobranie szczegółów danej transakcji.
 }
 ```
 
-### GET /transactions/pdf/{code}
-
-Rozpoczyna pobieranie raportu pdf z transakcji wskazanej kodem identyfikującym.
 
 ### DELETE /transactions/{code}
 
