@@ -1589,9 +1589,31 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 | ------------------- | -------- | ------------------------------------------------ |
 | **content**         | TAK      | Treść zadania                                    |
 | **expirationDate**  | NIE      | Data przed którą zadanie powinno zostać wykonane |
-| **partyCode**       | NIE      | Kod podmiotu który będzie powiązany z zadaniem   |
-| **transactionCode** | NIE      | Kod transakcji która będzie powiązana z zadaniem |
+| **alert**           | NIE      | Obiekt zawierający kod powiązanego alertu        |
+| **party**           | NIE      | Obiekt zawierający kod powiązanego podmiotu      |
+| **transaction**     | NIE      | Obiekt zawierający kod powiązanej transakcji     |
 | **alertCode**       | NIE      | Kod alertu który będzie powiązany z zadaniem     |
+
+
+Struktura obiektu party:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanego podmiotu          |
+
+
+Struktura obiektu transaction:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanej transakcji         |
+
+Struktura obiektu alert:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanej transakcji         |
+
 
 #### Przykładowe dane do utworzenia zadania:
 
@@ -1609,10 +1631,14 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "nga1jz6c8v45",
+    "code": "dcsur627nf3w",
     "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-    "status": "new",
-    "createdAt": "2023-04-21T11:08:42.000000Z"
+    "status": null,
+    "alert": null,
+    "party": null,
+    "transaction": null,
+    "expirationDate": null,
+    "createdAt": "2023-11-14T15:57:32.000000Z"
   }
 }
 ```
@@ -1656,13 +1682,14 @@ Pobranie szczegółów zadania wskazanego kodem.
 ```json
 {
   "data": {
-    "code": "x59w7bjksazc",
-    "content": "Uzupełnij dane niezbędne do wystawienia faktury za abonament",
-    "status": "displayed",
-    "alertCode": "6eky4dmqvcwf",
-    "partyCode": null,
-    "transactionCode": null,
-    "expirationDate": null
+    "code": "dcsur627nf3w",
+    "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
+    "status": "new",
+    "alert": null,
+    "party": null,
+    "transaction": null,
+    "expirationDate": null,
+    "createdAt": "2023-11-14T15:57:32.000000Z"
   }
 }
 ```
