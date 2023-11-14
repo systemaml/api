@@ -27,10 +27,10 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.12. [GET /transactions](#get-transactions)
   - 2.13. [GET /transactions/{code}](#get-transactionscode)
   - 2.14. [DELETE /transactions/{code}](#delete-transactionscode)
-  - 2.15. [POST /events](#post-events)
-  - 2.16. [GET /events](#get-events)
-  - 2.17. [GET /events/{code}](#get-eventscode)
-  - 2.18. [DELETE /events/{code}](#delete-eventscode)
+  - 2.15. [POST /history-events](#post-history-events)
+  - 2.16. [GET /history-events](#get-history-events)
+  - 2.17. [GET /history-events/{code}](#get-history-eventscode)
+  - 2.18. [DELETE /history-events/{code}](#delete-history-eventscode)
   - 2.19. [POST /comments](#post-comments)
   - 2.20. [GET /events/{code}/comments](#get-eventscodecomments)
   - 2.21. [DELETE /comments/{code}](#delete-commentscode)
@@ -1359,19 +1359,34 @@ Pobranie szczegółów danej transakcji.
 
 Usunięcie transakcji wskazanej kodem identyfikującym.
 
-### POST /events
+### POST /history-events
 
 Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 
-| Parametr         | Wymagane | Opis                                                          |
-| ---------------- | -------- | ------------------------------------------------------------- |
-| **description**  | TAK      | Opis zdarzenia                                                |
-| **significance** | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
-| **partyCode**    | NIE      | Nazwa powiązanego podmiotu                                    |
-| **transactionCode**| NIE      | Kod powiązanej transakcji                                   |
-| **type**         | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
-| **occursAt**     | TAK      | Data wystąpienia zdarzenia                                    |
-| **createdByName**  | NIE      | Osoba tworząca zdarzenie                                    |
+| Parametr            | Wymagane | Opis                                                          |
+| ------------------- | -------- | ------------------------------------------------------------- |
+| **description**     | TAK      | Opis zdarzenia                                                |
+| **significance**    | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
+| **party**           | NIE      | Obiekt zawierający kod powiązanego podmiotu                   |
+| **transaction**     | NIE      | Obiekt zawierający kod powiązanej transakcji                  |
+| **type**            | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
+| **occursAt**        | TAK      | Data wystąpienia zdarzenia                                    |
+| **createdByName**   | NIE      | Osoba tworząca zdarzenie                                      |
+
+Struktura obiektu party:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanego podmiotu          |
+
+
+Struktura obiektu transaction:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanej transakcji         |
+
+
 
 #### Przykładowe dane do utworzenia zdarzenia:
 
@@ -1390,20 +1405,20 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "6nb9ercma8wd",
-    "partyName": null,
-    "transactionCode": null,
+    "code": "ckfgq8z6y2s5",
+    "significance": "urgent",
     "description": "zdarzenie testowe",
     "type": "user",
-    "significance": "urgent",
-    "occursAt": "2025-08-03T16:42:40.000000Z",
+    "party": null,
+    "transaction": null,
     "createdByName": null,
-    "hasComments": false
+    "hasComments": false,
+    "occursAt": "2025-08-03T16:42:40.000000Z"
   }
 }
 ```
 
-### GET /events
+### GET /history-events
 
 Zwraca zdarzenia przypisane do użytkownika.
 
@@ -1414,27 +1429,27 @@ Zwraca zdarzenia przypisane do użytkownika.
 ```json
 {
   "data": [
-     {
-      "code": "ame15yfgvhzk",
-      "partyName": "FiberPay",
-      "transactionCode": null,
-      "description": "89b88",
-      "type": "user",
-      "significance": "warning",
-      "occursAt": "2023-08-03 18:42:40",
-      "createdByName": null,
-      "hasComments": false
-    },
     {
-      "code": "t4euaxm1p29b",
-      "partyName": null,
-      "transactionCode": null,
+      "code": "ckfgq8z6y2s5",
+      "significance": "urgent",
       "description": "zdarzenie testowe",
       "type": "user",
-      "significance": "urgent",
-      "occursAt": "2023-08-24 18:43:33",
+      "party": null,
+      "transaction": null,
       "createdByName": null,
-      "hasComments": false
+      "hasComments": false,
+      "occursAt": "2025-08-03 18:42:40"
+    },
+    {
+      "code": "m5u9p4zgr2qy",
+      "significance": "info",
+      "description": "fsdf",
+      "type": "user",
+      "party": null,
+      "transaction": null,
+      "createdByName": null,
+      "hasComments": false,
+      "occursAt": "2023-11-14 16:39:59"
     },
   ]
 }
@@ -1442,7 +1457,7 @@ Zwraca zdarzenia przypisane do użytkownika.
 
 Jeśli użytkownik nie posiada żadnych zdarzeń zwracany jest adekwatny komunikat ze statusem 200.
 
-### GET /events/{code}
+### GET /history-events/{code}
 
 Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
@@ -1468,7 +1483,7 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
 Jeśli zdarzenie nie posiada przypisanych komentarzy zmienna zwracana przy kluczu "commentsAmount" równa się 0
 
-### DELETE /events/{code}
+### DELETE /history-events/{code}
 
 Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
@@ -1480,7 +1495,7 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 | ------------- | -------- | -------------------------------------------------------------- |
 | **content**   | TAK      | Treść komentarza                                               |
 | **eventCode** | TAK      | Identyfikator zdarzenia do którego będzie przypisany komentarz |
-| **occursAt**| TAK      | Data wystąpienia zdarzenia                                     |
+| **occursAt**  | TAK      | Data wystąpienia zdarzenia                                     |
 
 #### Przykładowe dane do utworzenia komentarza:
 
