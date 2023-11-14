@@ -32,7 +32,7 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.17. [GET /history-events/{code}](#get-history-eventscode)
   - 2.18. [DELETE /history-events/{code}](#delete-history-eventscode)
   - 2.19. [POST /comments](#post-comments)
-  - 2.20. [GET /events/{code}/comments](#get-eventscodecomments)
+  - 2.20. [GET /history-events/{code}/comments](#get-history-eventscodecomments)
   - 2.21. [DELETE /comments/{code}](#delete-commentscode)
   - 2.22. [GET /alerts](#get-alerts)
   - 2.23. [GET /alerts/{code}](#get-alertscode)
