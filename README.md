@@ -155,7 +155,7 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                        |
-| **mainPkdCode**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
+| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
 
 Struktura obiektu z kodem PKD:
@@ -180,7 +180,7 @@ c) company:
 | **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
-| **mainPkdCode**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)      |
+| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
@@ -232,7 +232,9 @@ Struktura obiektu reprezentanta:
 | **birthCity**                | NIE      | Miejsce urodzenia                                                          |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
-| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
+| **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
+| **politicallyExposed**       | TAK      | Informacja czy reprezentant jest eksponowany politycznie (bool)            |
 
 Do każdego z typów podmiotu można dodać dane kontaktowe.
 
@@ -466,13 +468,14 @@ a) kontakt:
       "birthDate": "2001-01-01",
       "birthCountry": "PL",
       "citizenship": "PL",
-      "description": "Prezes",
+      "description": "Prezes spółki",
       "documentNumber": "aze123123",
       "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "31111161119",
       "politicallyExposed": "no",
+      "roleType" : "president",
       "withoutExpirationDate": false,
     },
     {
@@ -486,6 +489,7 @@ a) kontakt:
       "firstName": "Adam",
       "lastName": "Nowak",
       "politicallyExposed": "yes",
+      "roleType" : "other",
       "withoutExpirationDate": false,
     }
   ]
@@ -498,7 +502,7 @@ a) kontakt:
 ```json
 {
   "data": {
-    "code": "9hf2b4ku3xas",
+    "code": "ycrbvzhgf6wt",
     "type": "company",
     "status": "active",
     "riskStatus": null,
@@ -506,10 +510,13 @@ a) kontakt:
     "riskStatusChangedBy": "",
     "createdByName": null,
     "references": "qwerty",
+    "economicRelationStartDate": "2023-11-14",
     "entity": {
-      "code": "jz3h1qsk8fec",
+      "code": "vde9t1n62m3b",
       "companyName": "FiberPay",
-      "tradeName": "FiberPay",
+      "tradeNames": [
+        "FiberPay"
+      ],
       "taxIdNumber": "7010634566",
       "nationalBusinessRegistryNumber": "147302566",
       "nationalCourtRegistryNumber": "0000512707",
@@ -517,25 +524,25 @@ a) kontakt:
       "industry": null,
       "servicesDescription": null,
       "website": "fiberpay.pl",
-      "createdAt": "2023-08-24T15:20:53.000000Z",
+      "createdAt": "2023-11-14T15:03:06.000000Z",
       "registrationCountry": null,
       "companyIdentifier": null,
       "pkdCodes": [
         {
-          "code": "3wryth5c7skm",
+          "code": "em49danz1fyg",
           "pkdCode": "58.29.Z",
           "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
           "mainPkd": false
         },
         {
-          "code": "48edbr2ms5n3",
+          "code": "gfrdbumw67x5",
           "pkdCode": "62.01.Z",
           "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
           "mainPkd": false
         }
       ],
       "mainPkd": {
-        "code": "4y9dxeb7ac13",
+        "code": "4fzxqhuyw28t",
         "pkdCode": "64.99.Z",
         "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
         "mainPkd": true
@@ -543,7 +550,7 @@ a) kontakt:
     },
     "addresses": [
       {
-        "code": "t1jk8axrnuh5",
+        "code": "h7eyajum1cf3",
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
@@ -551,17 +558,17 @@ a) kontakt:
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:20:53.000000Z"
+        "createdAt": "2023-11-14T15:03:06.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "7ksdjyacbgp9",
+        "code": "ma6cr5vyn1k8",
         "type": "company",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-08-24T15:20:53.000000Z"
+        "createdAt": "2023-11-14T15:03:06.000000Z"
       }
     ],
     "creationIp": null,
