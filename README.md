@@ -218,7 +218,6 @@ Struktura obiektu reprezentanta:
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **description**              | NIE      | Opis reprezentanta                                                         |
 | **firstName**                | TAK      | Imię reprezentanta                                                         |
 | **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
 | **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
@@ -982,7 +981,6 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **description**              | NIE      | Opis reprezentanta                                                         |
 | **firstName**                | TAK      | Imię reprezentanta                                                         |
 | **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
 | **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta  (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
@@ -996,6 +994,8 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 | **birthCity**                | NIE      | Miejsce urodzenia                                                      |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
+| **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
+| **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
 
 #### Przykładowe dane do dodania reprezentanta:
@@ -1013,6 +1013,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
   "lastName": "Nowak",
   "personalIdentityNumber": "97120824889",
   "politicallyExposed": "yes",
+  "roleType" : "proxy",
   "withoutExpirationDate": false,
 }
 ```
@@ -1024,33 +1025,35 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 ```json
 {
   "data": {
-    "code": "qhur4n17awyp",
-    "description": "Prezes",
-    "boardMember": {
-      "individualEntity": {
-        "code": "x2cga8e7zyth",
-        "firstName": "Jan",
-        "lastName": "Nowak",
-        "personalIdentityNumber": "97120824889",
-        "documentType": "id_card",
-        "documentNumber": "aze1f123",
-        "documentExpirationDate": null,
-        "withoutExpirationDate": false,
-        "citizenship": "PL",
-        "birthCity": "Warszawa",
-        "birthCountry": "PL",
-        "politicallyExposed": "yes",
-        "politicallyExposedCoworker": "not_defined",
-        "politicallyExposedFamily": "not_defined",
-        "createdAt": "2023-08-24T16:22:52.000000Z",
-        "birthDate": null
-      }
+    "code": "usm3qyex6azk",
+    "description": "prokurent",
+    "roleType": "proxy",
+    "individualEntity": {
+      "code": "5mad1q3y8v7t",
+      "firstName": "Jan",
+      "lastName": "Nowak",
+      "personalIdentityNumber": "97120824889",
+      "documentType": "id_card",
+      "documentNumber": "aze1f123",
+      "documentExpirationDate": null,
+      "withoutExpirationDate": false,
+      "citizenship": "PL",
+      "birthCity": "Warszawa",
+      "birthCountry": "PL",
+      "politicallyExposed": "yes",
+      "politicallyExposedCoworker": "not_defined",
+      "politicallyExposedFamily": "not_defined",
+      "createdAt": "2023-11-14T15:14:43.000000Z",
+      "birthDate": null,
+      "professions": []
     },
     "company": {
       "legalEntity": {
-        "code": "cga7z8hf3j6r",
+        "code": "qf6p5tcmbz98",
         "companyName": "FiberPay",
-        "tradeName": "FiberPay",
+        "tradeNames": [
+          "FiberPay"
+        ],
         "taxIdNumber": "7010634566",
         "nationalBusinessRegistryNumber": "147302566",
         "nationalCourtRegistryNumber": "0000512707",
@@ -1058,25 +1061,25 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
         "industry": null,
         "servicesDescription": null,
         "website": "fiberpay.pl",
-        "createdAt": "2023-08-24T15:48:19.000000Z",
+        "createdAt": "2023-11-14T15:11:27.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "gf218nj4y5rs",
+            "code": "cypazkgw9ru7",
             "pkdCode": "58.29.Z",
             "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
             "mainPkd": false
           },
           {
-            "code": "qn6vrazgymbp",
+            "code": "p7vn6rwkqztx",
             "pkdCode": "62.01.Z",
             "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "mfxw2yqt7zed",
+          "code": "sxzfra8k6y4q",
           "pkdCode": "64.99.Z",
           "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
           "mainPkd": true
@@ -1084,7 +1087,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
       },
       "addresses": [
         {
-          "code": "9fn2jukbtv7q",
+          "code": "4chmzytqpker",
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
@@ -1092,17 +1095,17 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
           "houseNumber": "4",
           "flatNumber": "106",
           "postalCode": "00-131",
-          "createdAt": "2023-08-24T15:48:19.000000Z"
+          "createdAt": "2023-11-14T15:11:27.000000Z"
         }
       ],
       "contacts": [
         {
-          "code": "5b1gk4jpe9fn",
+          "code": "wqc48js29fgv",
           "type": "company",
           "emailAdress": "info@fiberpay.pl",
           "phoneCountry": "48",
           "phoneNumber": "123123123",
-          "createdAt": "2023-08-24T15:48:19.000000Z"
+          "createdAt": "2023-11-14T15:11:27.000000Z"
         }
       ]
     }
@@ -1122,25 +1125,27 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 {
   "data": [
     {
-      "code": "qhur4n17awyp",
-      "description": "Prezes",
+      "code": "r7jxq51gazu3",
+      "description": "Prezes spółki",
+      "roleType": "president",
       "individualEntity": {
-        "code": "x2cga8e7zyth",
+        "code": "ux9e7pfza6jq",
         "firstName": "Jan",
-        "lastName": "Nowak",
-        "personalIdentityNumber": "97120824889",
+        "lastName": "Kowalski",
+        "personalIdentityNumber": "31111161119",
         "documentType": "id_card",
-        "documentNumber": "aze1f123",
+        "documentNumber": "aze123123",
         "documentExpirationDate": null,
         "withoutExpirationDate": false,
         "citizenship": "PL",
         "birthCity": "Warszawa",
         "birthCountry": "PL",
-        "politicallyExposed": "yes",
+        "politicallyExposed": "no",
         "politicallyExposedCoworker": "not_defined",
         "politicallyExposedFamily": "not_defined",
-        "createdAt": "2023-08-24T16:22:52.000000Z",
-        "birthDate": null
+        "createdAt": "2023-11-14T15:11:27.000000Z",
+        "birthDate": null,
+        "professions": []
       }
     }
   ]
