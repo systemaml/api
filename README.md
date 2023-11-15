@@ -644,112 +644,103 @@ Pobranie szczegółów danego podmiotu.
 ```json
 {
   "data": {
-    "code": "6q4vcnb9sh7f",
+    "code": "pum7n95fbwqk",
     "type": "sole_proprietorship",
     "status": "active",
-    "riskStatus": "pending",
-    "riskExplanation": "Ryzyko na etapie oszacowania",
-    "riskStatusChangedBy": "",
-    "createdByName": "Adam",
-    "references": "qwerty",
-    "economicRelationStartDate": "2023-11-14",
+    "riskStatus": "non-acceptable",
+    "riskExplanation": "jhgjhgj",
+    "riskStatusChangedBy": "jhhhhhhhhhhkllkkl;",
+    "createdByName": null,
+    "references": null,
+    "economicRelationStartDate": "2023-07-11",
     "entity": {
-      "code": "7b8drp1x3shq",
-      "firstName": "Jan",
-      "lastName": "Kowalski",
-      "personalIdentityNumber": "99120234518",
-      "documentType": "passport",
-      "documentNumber": "aze123123",
-      "documentExpirationDate": "2025-05-08",
-      "withoutExpirationDate": false,
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": "no",
-      "politicallyExposedCoworker": "no",
+      "code": "7kyc85pgxubf",
+      "firstName": "234",
+      "lastName": "234",
+      "personalIdentityNumber": "06072196250",
+      "documentType": "Karta pobytu",
+      "documentNumber": "wqrwrw",
+      "documentExpirationDate": null,
+      "withoutExpirationDate": true,
+      "citizenship": "AE",
+      "birthCity": "ewrew",
+      "birthCountry": "AE",
+      "politicallyExposed": "yes",
+      "politicallyExposedCoworker": "yes",
       "politicallyExposedFamily": "yes",
-      "createdAt": "2023-11-14T15:07:31.000000Z",
+      "createdAt": "2023-06-07T11:33:55.000000Z",
       "birthDate": null,
-      "professions": [],
+      "professions": [
+        {
+          "code": "vrg8w3s4untx",
+          "pupCode": "351402",
+          "labelPl": "Administrator systemów poczty elektronicznej"
+        },
+        {
+          "code": "r42hw13zapbq",
+          "pupCode": "252102",
+          "labelPl": "Analityk baz danych"
+        }
+      ],
       "soleProprietorship": {
-        "code": "pz7mua2836xq",
+        "code": "j1mq7rgpf9ca",
         "tradeNames": [
-          "FiberPay",
-          "SystemAML"
+          "fiber"
         ],
-        "companyName": "Usługi programistyczne",
-        "taxIdNumber": "3765151981",
-        "nationalBusinessRegistryNumber": "123456789",
-        "createdAt": "2023-11-14T15:07:31.000000Z",
+        "companyName": "234",
+        "taxIdNumber": "5263783060",
+        "nationalBusinessRegistryNumber": "432431234",
+        "createdAt": "2023-06-07T11:33:55.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "tyfz7m65gnsa",
-            "pkdCode": "01.15.Z",
-            "pkdName": "Uprawa tytoniu",
+            "code": "dvw2q5rz1n4t",
+            "pkdCode": "01.30.Z",
+            "pkdName": "Rozmnażanie roślin",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "duqzkn2peajs",
-          "pkdCode": "01.12.Z",
-          "pkdName": "Uprawa ryżu",
+          "code": "hxcfzgr6dpbj",
+          "pkdCode": "01.22.Z",
+          "pkdName": "Uprawa drzew i krzewów owocowych tropikalnych i podzwrotnikowych",
           "mainPkd": true
         }
       }
     },
     "addresses": [
       {
-        "code": "f2kw96a4yzpm",
-        "type": "forwarding_address",
-        "country": "PL",
-        "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
-        "createdAt": "2023-11-14T15:07:31.000000Z"
-      },
-      {
-        "code": "1ryht3mx7a45",
+        "code": "j8qsnr4fm23t",
         "type": "business_address",
-        "country": "PL",
-        "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
-        "createdAt": "2023-11-14T15:07:31.000000Z"
+        "country": "AQ",
+        "city": null,
+        "street": "rwer",
+        "houseNumber": null,
+        "flatNumber": null,
+        "postalCode": null,
+        "createdAt": "2023-06-07T11:33:55.000000Z"
       },
       {
-        "code": "tp2v4urmeawq",
+        "code": "vy41gnea5phb",
         "type": "accommodation_address",
-        "country": "PL",
-        "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
-        "createdAt": "2023-11-14T15:07:31.000000Z"
+        "country": "BM",
+        "city": null,
+        "street": "wer",
+        "houseNumber": null,
+        "flatNumber": null,
+        "postalCode": null,
+        "createdAt": "2023-06-07T11:33:55.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "zuxvhjc538nw",
+        "code": "hxzcdu73486r",
         "type": "personal",
-        "emailAdress": "info@fiberpay.pl",
-        "phoneCountry": "48",
-        "phoneNumber": "123123123",
-        "createdAt": "2023-11-14T15:07:31.000000Z"
-      },
-      {
-        "code": "164fv2xb8jpc",
-        "type": "company",
-        "emailAdress": "info@fiberpay.pl",
-        "phoneCountry": "48",
-        "phoneNumber": "123123123",
-        "createdAt": "2023-11-14T15:07:31.000000Z"
+        "emailAdress": null,
+        "phoneCountry": null,
+        "phoneNumber": "233234234",
+        "createdAt": "2023-06-07T11:33:55.000000Z"
       }
     ],
     "creationIp": null,
@@ -1039,7 +1030,6 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
       "politicallyExposedFamily": "not_defined",
       "createdAt": "2023-11-14T15:14:43.000000Z",
       "birthDate": null,
-      "professions": []
     },
     "company": {
       "legalEntity": {
@@ -1139,7 +1129,6 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
         "politicallyExposedFamily": "not_defined",
         "createdAt": "2023-11-14T15:11:27.000000Z",
         "birthDate": null,
-        "professions": []
       }
     }
   ]
