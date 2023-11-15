@@ -136,12 +136,23 @@ a) individual:
 | **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
 | **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                   |
 | **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
+| **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
 | **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
 | **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
 | **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
 | **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
-| **createdByName**          | NIE      | Osoba wprowadzająca wpis                                                                        |
-| **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
+| **professions**            | NIE      | Tablica zawierająca wykonywane zawody                                                           |
+| **createdByName**          | NIE      | Osoba wprowadzająca wpis
+
+Struktura obiektu professions:
+
+| Parametr    | Wymagane | Opis                                |
+| ----------- | -------- | ----------------------------------- |
+| **pupCode** | TAK      | Kod zawodu zgodnie ze źródłem       |
+| **labelPl** | TAK      | Nazwa zawodu zgodnie ze źródłem     |
+
+Źródło: [Indeks alfabetyczny zawodów i specjalności](https://psz.praca.gov.pl/documents/10240/19787340/Indeks%20alfabetyczny%20zawod%C3%B3w%20KZiS%20z%202018%20r.%20wg.%20stanu%20na%20dzie%C5%84%2001.01.2023%20r.xlsx/5affb6f8-84c3-4e34-a1b2-577fb8374650)
+
 
 b) sole_proprietorship - wszystkie powyższe oraz:
 
