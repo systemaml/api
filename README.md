@@ -1651,27 +1651,38 @@ Pobranie zadań powiązanych z danym użytkownikiem.
 - **STATUS 200 OK**
 
 ```json
-{
-  "data": {
-    "code": "x59w7bjksazc",
-    "content": "Uzupełnij dane niezbędne do wystawienia faktury za abonament",
-    "status": "displayed",
-    "alertCode": "6eky4dmqvcwf",
-    "partyCode": null,
-    "transactionCode": null,
-    "expirationDate": null
-  },
   {
-    "code": "nga1jz6c8v45",
-    "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-    "status": "new",
-    "alertCode": null,
-    "partyCode": null,
-    "transactionCode": null,
-    "expirationDate": null,
-    "createdAt": "2023-04-21T11:08:42.000000Z"
-  }
-}
+      "code": "94dwpaxk5rzy",
+      "content": "Wymagane manualne ustawienie oceny ryzyka w podmiocie",
+      "status": "new",
+      "alert": {
+        "code": "7fp9srh2vq16",
+        "content": "Sprawdź dane"
+      },
+      "party": {
+        "code": "pum7n95fbwqk",
+        "firstName": "234",
+        "lastName": "234"
+      },
+      "transaction": {
+        "code": "wjnkx4dr2ag9",
+        "title": "Opłata za kupno"
+      },
+      "expirationDate": null
+    },
+    {
+      "code": "svxpezabyg9h",
+      "content": "Przeprowadź środki bezpieczeństwa finansowego - do 2022-06-05 (Od zarejestrowania podmiotu minęło 870 dni)",
+      "status": "done",
+      "alert": null,
+      "party": {
+        "code": "s1vcm5ew9fd4",
+        "firstName": "Jan",
+        "lastName": "Kowalski",
+      },
+      "transaction": null,
+      "expirationDate": null
+    },
 ```
 
 ### GET /tasks/{code}
