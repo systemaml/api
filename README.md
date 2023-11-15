@@ -194,6 +194,7 @@ c) company:
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
 | **createdByName**                  | NIE      | Osoba wprowadzająca wpis                                                     |
+| **economicRelationStartDate**      | TAK     | Data rozpoczęcia stosunków gospodarczych                                      |
 
 
 Struktura obiektu beneficjenta:
@@ -358,7 +359,6 @@ a) kontakt:
   "taxIdNumber": "3765151981",
   "type": "sole_proprietorship",
   "withoutExpirationDate": false,
-  "economicRelationStartDate": "2023-11-14",
   "forwardAddress": {
     "country": "PL",
     "city": "Warszawa",
