@@ -151,7 +151,7 @@ Struktura obiektu professions:
 | **pupCode** | TAK      | Kod zawodu zgodnie ze źródłem       |
 | **labelPl** | TAK      | Nazwa zawodu zgodnie ze źródłem     |
 
-Źródło: [Indeks alfabetyczny zawodów i specjalności](https://psz.praca.gov.pl/documents/10240/19787340/Indeks%20alfabetyczny%20zawod%C3%B3w%20KZiS%20z%202018%20r.%20wg.%20stanu%20na%20dzie%C5%84%2001.01.2023%20r.xlsx/5affb6f8-84c3-4e34-a1b2-577fb8374650)
+Źródło: [Indeks alfabetyczny zawodów i specjalności](https://psz.praca.gov.pl/documents/10240/54723/Alfabetyczny%20indeks%20zawod%C3%B3w%20do%20KZiS%20%28Dz.%20U.%2028.08.14%2C%20poz.%201145%29.pdf/d934d871-e988-482a-8000-2e0ac01b4687)
 
 
 b) sole_proprietorship - wszystkie powyższe oraz:
