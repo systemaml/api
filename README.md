@@ -286,7 +286,7 @@ a) kontakt:
   "citizenship": "PL",
   "createdByName": "Wojtek",
   "documentExpirationDate": "2025-05-15",
-  "documentNumber": "aze123123",
+  "documentNumber": "SQT233656",
   "documentType": "id_card",
   "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
@@ -444,7 +444,7 @@ a) kontakt:
       "directRights": "ABB",
       "birthCity": "Warszawa",
       "citizenship": "PL",
-      "documentNumber": "aze123123",
+      "documentNumber": "JET449773",
       "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
@@ -461,7 +461,7 @@ a) kontakt:
       "birthDate": "2002-10-01",
       "citizenship": "DE",
       "documentNumber": "aze423",
-      "documentType": "id_card",
+      "documentType": "passport",
       "firstName": "Hans",
       "lastName": "Podolski",
       "ownedSharesAmount": "15",
@@ -477,7 +477,7 @@ a) kontakt:
       "birthCountry": "PL",
       "citizenship": "PL",
       "description": "Prezes spółki",
-      "documentNumber": "aze123123",
+      "documentNumber": "GLD358884",
       "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
@@ -492,7 +492,7 @@ a) kontakt:
       "birthCountry": "PL",
       "citizenship": "PL",
       "description": "Wiceprezes",
-      "documentNumber": "aze129923",
+      "documentNumber": "OBG470534",
       "documentType": "id_card",
       "firstName": "Adam",
       "lastName": "Nowak",
@@ -510,7 +510,7 @@ a) kontakt:
 ```json
 {
   "data": {
-    "code": "ycrbvzhgf6wt",
+    "code": "su619f8r7jkp",
     "type": "company",
     "status": "active",
     "riskStatus": null,
@@ -520,7 +520,7 @@ a) kontakt:
     "references": "qwerty",
     "economicRelationStartDate": "2023-11-14",
     "entity": {
-      "code": "vde9t1n62m3b",
+      "code": "huv9q4acby1p",
       "companyName": "FiberPay",
       "tradeNames": [
         "FiberPay"
@@ -532,25 +532,25 @@ a) kontakt:
       "industry": null,
       "servicesDescription": null,
       "website": "fiberpay.pl",
-      "createdAt": "2023-11-14T15:03:06.000000Z",
+      "createdAt": "2023-11-20T16:38:11.000000Z",
       "registrationCountry": null,
       "companyIdentifier": null,
       "pkdCodes": [
         {
-          "code": "em49danz1fyg",
+          "code": "z92xcphmdb5r",
           "pkdCode": "58.29.Z",
           "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
           "mainPkd": false
         },
         {
-          "code": "gfrdbumw67x5",
+          "code": "d8s5qfku9rn4",
           "pkdCode": "62.01.Z",
           "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
           "mainPkd": false
         }
       ],
       "mainPkd": {
-        "code": "4fzxqhuyw28t",
+        "code": "ce1byqmfnr5x",
         "pkdCode": "64.99.Z",
         "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
         "mainPkd": true
@@ -558,7 +558,7 @@ a) kontakt:
     },
     "addresses": [
       {
-        "code": "h7eyajum1cf3",
+        "code": "53m8jqvhcsa4",
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
@@ -566,17 +566,17 @@ a) kontakt:
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-11-14T15:03:06.000000Z"
+        "createdAt": "2023-11-20T16:38:11.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "ma6cr5vyn1k8",
+        "code": "et28pr6cqx5s",
         "type": "company",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-11-14T15:03:06.000000Z"
+        "createdAt": "2023-11-20T16:38:11.000000Z"
       }
     ],
     "creationIp": null,
@@ -1003,7 +1003,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
   "birthCountry": "PL",
   "citizenship": "PL",
   "description": "Prezes",
-  "documentNumber": "aze1f123",
+  "documentNumber": "XIK941595",
   "documentType": "id_card",
   "firstName": "Jan",
   "lastName": "Nowak",
@@ -1021,16 +1021,16 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 ```json
 {
   "data": {
-    "code": "usm3qyex6azk",
-    "description": "prokurent",
+    "code": "9c281v6rkzty",
+    "description": "Prezes",
     "roleType": "proxy",
     "individualEntity": {
-      "code": "5mad1q3y8v7t",
+      "code": "qmce687su31n",
       "firstName": "Jan",
       "lastName": "Nowak",
       "personalIdentityNumber": "97120824889",
       "documentType": "id_card",
-      "documentNumber": "aze1f123",
+      "documentNumber": "XIK941595",
       "documentExpirationDate": null,
       "withoutExpirationDate": false,
       "citizenship": "PL",
@@ -1039,12 +1039,12 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
       "politicallyExposed": "yes",
       "politicallyExposedCoworker": "not_defined",
       "politicallyExposedFamily": "not_defined",
-      "createdAt": "2023-11-14T15:14:43.000000Z",
-      "birthDate": null,
+      "createdAt": "2023-11-20T16:42:39.000000Z",
+      "birthDate": null
     },
     "company": {
       "legalEntity": {
-        "code": "qf6p5tcmbz98",
+        "code": "jx86zfnrhks9",
         "companyName": "FiberPay",
         "tradeNames": [
           "FiberPay"
@@ -1056,25 +1056,25 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
         "industry": null,
         "servicesDescription": null,
         "website": "fiberpay.pl",
-        "createdAt": "2023-11-14T15:11:27.000000Z",
+        "createdAt": "2023-11-20T16:39:46.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "cypazkgw9ru7",
+            "code": "3puhe59mv87k",
             "pkdCode": "58.29.Z",
             "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
             "mainPkd": false
           },
           {
-            "code": "p7vn6rwkqztx",
+            "code": "5st34zgp2db7",
             "pkdCode": "62.01.Z",
             "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "sxzfra8k6y4q",
+          "code": "vsuxzfwbhyk1",
           "pkdCode": "64.99.Z",
           "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
           "mainPkd": true
@@ -1082,7 +1082,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
       },
       "addresses": [
         {
-          "code": "4chmzytqpker",
+          "code": "38z5gseqyp6t",
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
@@ -1090,17 +1090,17 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
           "houseNumber": "4",
           "flatNumber": "106",
           "postalCode": "00-131",
-          "createdAt": "2023-11-14T15:11:27.000000Z"
+          "createdAt": "2023-11-20T16:39:46.000000Z"
         }
       ],
       "contacts": [
         {
-          "code": "wqc48js29fgv",
+          "code": "ers27txw6ync",
           "type": "company",
           "emailAdress": "info@fiberpay.pl",
           "phoneCountry": "48",
           "phoneNumber": "123123123",
-          "createdAt": "2023-11-14T15:11:27.000000Z"
+          "createdAt": "2023-11-20T16:39:46.000000Z"
         }
       ]
     }
