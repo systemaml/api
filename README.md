@@ -141,17 +141,8 @@ a) individual:
 | **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
 | **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
 | **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
-| **professions**            | NIE      | Tablica zawierająca wykonywane zawody                                                           |
+| **employmentType**         | NIE      | Stan zatrudnienia. Wartości proponowane przez system: student, retiree, pensioner, entrepreneur, employedUOP, employedUZUOD, unemployed, jobless, annuitant student|
 | **createdByName**          | NIE      | Osoba wprowadzająca wpis
-
-Struktura obiektu professions:
-
-| Parametr    | Wymagane | Opis                                |
-| ----------- | -------- | ----------------------------------- |
-| **pupCode** | TAK      | Kod zawodu zgodnie ze źródłem       |
-| **labelPl** | TAK      | Nazwa zawodu zgodnie ze źródłem     |
-
-Źródło: [Indeks alfabetyczny zawodów i specjalności](https://psz.praca.gov.pl/documents/10240/19787340/Klasyfikacja%20zawod%C3%B3w%20i%20specjalno%C5%9Bci%20na%20potrzeby%20rynku%20pracy%202018%20z%20p%C3%B3%C5%BAn.%20zm.%20wg.%20stanu%20na%2001.01.2023%20r.pdf/595af7f9-3d72-440c-af62-22ffe9f22a3b)
 
 
 b) sole_proprietorship - wszystkie powyższe oraz:
@@ -655,103 +646,112 @@ Pobranie szczegółów danego podmiotu.
 ```json
 {
   "data": {
-    "code": "pum7n95fbwqk",
+    "code": "yqx7rwu59vbc",
     "type": "sole_proprietorship",
     "status": "active",
-    "riskStatus": "non-acceptable",
-    "riskExplanation": "jhgjhgj",
-    "riskStatusChangedBy": "jhhhhhhhhhhkllkkl;",
-    "createdByName": null,
-    "references": null,
-    "economicRelationStartDate": "2023-07-11",
+    "riskStatus": "pending",
+    "riskExplanation": "Ryzyko na etapie oszacowania",
+    "riskStatusChangedBy": "",
+    "createdByName": "Adam",
+    "references": "qwerty",
+    "economicRelationStartDate": "2023-11-14",
     "entity": {
-      "code": "7kyc85pgxubf",
-      "firstName": "234",
-      "lastName": "234",
-      "personalIdentityNumber": "06072196250",
-      "documentType": "Karta pobytu",
-      "documentNumber": "wqrwrw",
-      "documentExpirationDate": null,
-      "withoutExpirationDate": true,
-      "citizenship": "AE",
-      "birthCity": "ewrew",
-      "birthCountry": "AE",
-      "politicallyExposed": "yes",
-      "politicallyExposedCoworker": "yes",
+      "code": "stzyha1j76fm",
+      "firstName": "Jan",
+      "lastName": "Kowalski",
+      "personalIdentityNumber": "99120234518",
+      "documentType": "passport",
+      "documentNumber": "aze123123",
+      "documentExpirationDate": "2025-05-08",
+      "withoutExpirationDate": false,
+      "citizenship": "PL",
+      "birthCity": "Warszawa",
+      "birthCountry": "PL",
+      "politicallyExposed": "no",
+      "politicallyExposedCoworker": "no",
       "politicallyExposedFamily": "yes",
-      "createdAt": "2023-06-07T11:33:55.000000Z",
+      "createdAt": "2023-11-20T16:49:44.000000Z",
       "birthDate": null,
-      "professions": [
-        {
-          "code": "vrg8w3s4untx",
-          "pupCode": "351402",
-          "labelPl": "Administrator systemów poczty elektronicznej"
-        },
-        {
-          "code": "r42hw13zapbq",
-          "pupCode": "252102",
-          "labelPl": "Analityk baz danych"
-        }
-      ],
+      "employmentType": null,
       "soleProprietorship": {
-        "code": "j1mq7rgpf9ca",
+        "code": "w6mx82nj7k1q",
         "tradeNames": [
-          "fiber"
+          "FiberPay",
+          "SystemAML"
         ],
-        "companyName": "234",
-        "taxIdNumber": "5263783060",
-        "nationalBusinessRegistryNumber": "432431234",
-        "createdAt": "2023-06-07T11:33:55.000000Z",
+        "companyName": "Usługi programistyczne",
+        "taxIdNumber": "3765151981",
+        "nationalBusinessRegistryNumber": "123456789",
+        "createdAt": "2023-11-20T16:49:44.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "dvw2q5rz1n4t",
-            "pkdCode": "01.30.Z",
-            "pkdName": "Rozmnażanie roślin",
+            "code": "cf4jgdpbhayn",
+            "pkdCode": "01.15.Z",
+            "pkdName": "Uprawa tytoniu",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "hxcfzgr6dpbj",
-          "pkdCode": "01.22.Z",
-          "pkdName": "Uprawa drzew i krzewów owocowych tropikalnych i podzwrotnikowych",
+          "code": "c7rdjge2zqs8",
+          "pkdCode": "01.12.Z",
+          "pkdName": "Uprawa ryżu",
           "mainPkd": true
         }
       }
     },
     "addresses": [
       {
-        "code": "j8qsnr4fm23t",
-        "type": "business_address",
-        "country": "AQ",
-        "city": null,
-        "street": "rwer",
-        "houseNumber": null,
-        "flatNumber": null,
-        "postalCode": null,
-        "createdAt": "2023-06-07T11:33:55.000000Z"
+        "code": "nm84r15aq6z2",
+        "type": "forwarding_address",
+        "country": "PL",
+        "city": "Warszawa",
+        "street": "Grzybowska",
+        "houseNumber": "4",
+        "flatNumber": "106",
+        "postalCode": "00-131",
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
-        "code": "vy41gnea5phb",
+        "code": "uv63gb9h57wc",
+        "type": "business_address",
+        "country": "PL",
+        "city": "Warszawa",
+        "street": "Grzybowska",
+        "houseNumber": "4",
+        "flatNumber": "106",
+        "postalCode": "00-131",
+        "createdAt": "2023-11-20T16:49:44.000000Z"
+      },
+      {
+        "code": "ewrjvy2b17f9",
         "type": "accommodation_address",
-        "country": "BM",
-        "city": null,
-        "street": "wer",
-        "houseNumber": null,
-        "flatNumber": null,
-        "postalCode": null,
-        "createdAt": "2023-06-07T11:33:55.000000Z"
+        "country": "PL",
+        "city": "Warszawa",
+        "street": "Grzybowska",
+        "houseNumber": "4",
+        "flatNumber": "106",
+        "postalCode": "00-131",
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "hxzcdu73486r",
+        "code": "uema7tp12b8c",
         "type": "personal",
-        "emailAdress": null,
-        "phoneCountry": null,
-        "phoneNumber": "233234234",
-        "createdAt": "2023-06-07T11:33:55.000000Z"
+        "emailAdress": "info@fiberpay.pl",
+        "phoneCountry": "48",
+        "phoneNumber": "123123123",
+        "createdAt": "2023-11-20T16:49:44.000000Z"
+      },
+      {
+        "code": "haf6b4vgsz7u",
+        "type": "company",
+        "emailAdress": "info@fiberpay.pl",
+        "phoneCountry": "48",
+        "phoneNumber": "123123123",
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       }
     ],
     "creationIp": null,
