@@ -173,7 +173,7 @@ c) company:
 | **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (podawany jeśli nie ma numeru NIP)                 |
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
 | **references**                     | NIE      | Referencje własne                                                            |
-| **companyName**                    | NIE      | Nazwa działalności                                                           |
+| **companyName**                    | TAK      | Nazwa działalności                                                           |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                                 |
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
