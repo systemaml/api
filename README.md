@@ -16,33 +16,31 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.1. [POST /parties](#post-parties)
   - 2.2. [GET /parties](#get-parties)
   - 2.3. [GET /parties/{code}](#get-partiescode)
-  - 2.4. [GET /parties/pdf/{code}](#get-partiespdfcode)
-  - 2.5. [DELETE /parties/{code}](#delete-partiescode)
-  - 2.6. [POST /parties/{code}/beneficiaries](#post-partiescodebeneficiaries)
-  - 2.7. [GET /parties/{code}/beneficiaries](#get-partiescodebeneficiaries)
-  - 2.8. [DELETE /beneficiaries/{code}](#delete-beneficiariescode)
-  - 2.9. [POST /parties/{code}/boardmembers](#post-partiescodeboardmembers)
-  - 2.10. [GET /parties/{code}/boardmembers](#get-partiescodeboardmembers)
-  - 2.11. [DELETE /boardmembers/{code}](#delete-boardmemberscode)
-  - 2.12. [POST /transactions](#post-transactions)
-  - 2.13. [GET /transactions](#get-transactions)
-  - 2.14. [GET /transactions/{code}](#get-transactionscode)
-  - 2.15. [GET /transactions/pdf/{code}](#get-transactionspdfcode)
-  - 2.16. [DELETE /transactions/{code}](#delete-transactionscode)
-  - 2.17. [POST /events](#post-events)
-  - 2.18. [GET /events](#get-events)
-  - 2.19. [GET /events/{code}](#get-eventscode)
-  - 2.20. [DELETE /events/{code}](#delete-eventscode)
-  - 2.21. [POST /comments](#post-comments)
-  - 2.22. [GET /events/{code}/comments](#get-eventscodecomments)
-  - 2.23. [DELETE /comments/{code}](#delete-commentscode)
-  - 2.24. [GET /alerts](#get-alerts)
-  - 2.25. [GET /alerts/{code}](#get-alertscode)
-  - 2.26. [DELETE /alerts/{code}]($delete-alertscode)
-  - 2.27. [POST /tasks](#post-tasks)
-  - 2.28. [GET /tasks](#get-tasks)
-  - 2.29. [GET /tasks/{code}](#get-taskscode)
-  - 2.30. [DELETE /tasks/{code}](#delete-taskscode)
+  - 2.4. [DELETE /parties/{code}](#delete-partiescode)
+  - 2.5. [POST /parties/{code}/beneficiaries](#post-partiescodebeneficiaries)
+  - 2.6. [GET /parties/{code}/beneficiaries](#get-partiescodebeneficiaries)
+  - 2.7. [DELETE /beneficiaries/{code}](#delete-beneficiariescode)
+  - 2.8. [POST /parties/{code}/boardmembers](#post-partiescodeboardmembers)
+  - 2.9. [GET /parties/{code}/boardmembers](#get-partiescodeboardmembers)
+  - 2.10. [DELETE /boardmembers/{code}](#delete-boardmemberscode)
+  - 2.11. [POST /transactions](#post-transactions)
+  - 2.12. [GET /transactions](#get-transactions)
+  - 2.13. [GET /transactions/{code}](#get-transactionscode)
+  - 2.14. [DELETE /transactions/{code}](#delete-transactionscode)
+  - 2.15. [POST /history-events](#post-history-events)
+  - 2.16. [GET /history-events](#get-history-events)
+  - 2.17. [GET /history-events/{code}](#get-history-eventscode)
+  - 2.18. [DELETE /history-events/{code}](#delete-history-eventscode)
+  - 2.19. [POST /comments](#post-comments)
+  - 2.20. [GET /history-events/{code}/comments](#get-history-eventscodecomments)
+  - 2.21. [DELETE /comments/{code}](#delete-commentscode)
+  - 2.22. [GET /alerts](#get-alerts)
+  - 2.23. [GET /alerts/{code}](#get-alertscode)
+  - 2.24. [DELETE /alerts/{code}](#delete-alertscode)
+  - 2.25. [POST /tasks](#post-tasks)
+  - 2.26. [GET /tasks](#get-tasks)
+  - 2.27. [GET /tasks/{code}](#get-taskscode)
+  - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
 #
 
 ###
@@ -134,15 +132,18 @@ a) individual:
 | **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                                             |
 | **references**             | NIE      | Referencje własne                                                                               |
 | **citizenship**            | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                                      |
-| **birthCity**              | NIE      | Miejsce urodzenia                                                                           |
+| **birthCity**              | NIE      | Miejsce urodzenia                                                                               |
 | **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
 | **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                   |
 | **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
+| **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
 | **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
 | **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
 | **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
 | **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
-| **createdByName**          | NIE      | Osoba wprowadzająca wpis                                                                        |
+| **employmentType**         | NIE      | Stan zatrudnienia. Wartości proponowane przez system: student, retiree, pensioner, entrepreneur, employedUOP, employedUZUOD, unemployed, jobless, annuitant student|
+| **createdByName**          | NIE      | Osoba wprowadzająca wpis
+
 
 b) sole_proprietorship - wszystkie powyższe oraz:
 
@@ -154,7 +155,7 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                        |
-| **mainPkdCode**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
+| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
 
 Struktura obiektu z kodem PKD:
@@ -172,18 +173,19 @@ c) company:
 | **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (podawany jeśli nie ma numeru NIP)                 |
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
 | **references**                     | NIE      | Referencje własne                                                            |
-| **companyName**                    | NIE      | Nazwa działalności                                                           |
+| **companyName**                    | TAK      | Nazwa działalności                                                           |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                                 |
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
 | **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
-| **mainPkdCode**                        | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)      |
+| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
 | **createdByName**                  | NIE      | Osoba wprowadzająca wpis                                                     |
+| **economicRelationStartDate**      | TAK     | Data rozpoczęcia stosunków gospodarczych                                      |
 
 
 Struktura obiektu beneficjenta:
@@ -217,7 +219,6 @@ Struktura obiektu reprezentanta:
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **description**              | NIE      | Opis reprezentanta                                                         |
 | **firstName**                | TAK      | Imię reprezentanta                                                         |
 | **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
 | **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
@@ -231,7 +232,9 @@ Struktura obiektu reprezentanta:
 | **birthCity**                | NIE      | Miejsce urodzenia                                                          |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
-| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
+| **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
+| **politicallyExposed**       | TAK      | Informacja czy reprezentant jest eksponowany politycznie (bool)            |
 
 Do każdego z typów podmiotu można dodać dane kontaktowe.
 
@@ -274,8 +277,9 @@ a) kontakt:
   "citizenship": "PL",
   "createdByName": "Wojtek",
   "documentExpirationDate": "2025-05-15",
-  "documentNumber": "aze123123",
+  "documentNumber": "SQT233656",
   "documentType": "id_card",
+  "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
   "personalIdentityNumber": "09271573233",
@@ -324,6 +328,7 @@ a) kontakt:
   "documentExpirationDate": "2025-05-08",
   "documentNumber": "aze123123",
   "documentType": "passport",
+  "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
   "mainPkdCode": {
@@ -388,6 +393,7 @@ a) kontakt:
 {
   "type": "company",
   "companyName": "FiberPay",
+  "economicRelationStartDate": "2023-11-14",
   "taxIdNumber": "7010634566",
   "nationalBusinessRegistryNumber": "147302566",
   "tradeNames": ["FiberPay"],
@@ -429,7 +435,7 @@ a) kontakt:
       "directRights": "ABB",
       "birthCity": "Warszawa",
       "citizenship": "PL",
-      "documentNumber": "aze123123",
+      "documentNumber": "JET449773",
       "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
@@ -446,7 +452,7 @@ a) kontakt:
       "birthDate": "2002-10-01",
       "citizenship": "DE",
       "documentNumber": "aze423",
-      "documentType": "id_card",
+      "documentType": "passport",
       "firstName": "Hans",
       "lastName": "Podolski",
       "ownedSharesAmount": "15",
@@ -461,13 +467,14 @@ a) kontakt:
       "birthDate": "2001-01-01",
       "birthCountry": "PL",
       "citizenship": "PL",
-      "description": "Prezes",
-      "documentNumber": "aze123123",
+      "description": "Prezes spółki",
+      "documentNumber": "GLD358884",
       "documentType": "id_card",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "31111161119",
       "politicallyExposed": "no",
+      "roleType" : "president",
       "withoutExpirationDate": false,
     },
     {
@@ -476,11 +483,12 @@ a) kontakt:
       "birthCountry": "PL",
       "citizenship": "PL",
       "description": "Wiceprezes",
-      "documentNumber": "aze129923",
+      "documentNumber": "OBG470534",
       "documentType": "id_card",
       "firstName": "Adam",
       "lastName": "Nowak",
       "politicallyExposed": "yes",
+      "roleType" : "other",
       "withoutExpirationDate": false,
     }
   ]
@@ -493,7 +501,7 @@ a) kontakt:
 ```json
 {
   "data": {
-    "code": "9hf2b4ku3xas",
+    "code": "su619f8r7jkp",
     "type": "company",
     "status": "active",
     "riskStatus": null,
@@ -501,10 +509,13 @@ a) kontakt:
     "riskStatusChangedBy": "",
     "createdByName": null,
     "references": "qwerty",
+    "economicRelationStartDate": "2023-11-14",
     "entity": {
-      "code": "jz3h1qsk8fec",
+      "code": "huv9q4acby1p",
       "companyName": "FiberPay",
-      "tradeName": "FiberPay",
+      "tradeNames": [
+        "FiberPay"
+      ],
       "taxIdNumber": "7010634566",
       "nationalBusinessRegistryNumber": "147302566",
       "nationalCourtRegistryNumber": "0000512707",
@@ -512,25 +523,25 @@ a) kontakt:
       "industry": null,
       "servicesDescription": null,
       "website": "fiberpay.pl",
-      "createdAt": "2023-08-24T15:20:53.000000Z",
+      "createdAt": "2023-11-20T16:38:11.000000Z",
       "registrationCountry": null,
       "companyIdentifier": null,
       "pkdCodes": [
         {
-          "code": "3wryth5c7skm",
+          "code": "z92xcphmdb5r",
           "pkdCode": "58.29.Z",
           "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
           "mainPkd": false
         },
         {
-          "code": "48edbr2ms5n3",
+          "code": "d8s5qfku9rn4",
           "pkdCode": "62.01.Z",
           "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
           "mainPkd": false
         }
       ],
       "mainPkd": {
-        "code": "4y9dxeb7ac13",
+        "code": "ce1byqmfnr5x",
         "pkdCode": "64.99.Z",
         "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
         "mainPkd": true
@@ -538,7 +549,7 @@ a) kontakt:
     },
     "addresses": [
       {
-        "code": "t1jk8axrnuh5",
+        "code": "53m8jqvhcsa4",
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
@@ -546,17 +557,17 @@ a) kontakt:
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:20:53.000000Z"
+        "createdAt": "2023-11-20T16:38:11.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "7ksdjyacbgp9",
+        "code": "et28pr6cqx5s",
         "type": "company",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-08-24T15:20:53.000000Z"
+        "createdAt": "2023-11-20T16:38:11.000000Z"
       }
     ],
     "creationIp": null,
@@ -635,7 +646,7 @@ Pobranie szczegółów danego podmiotu.
 ```json
 {
   "data": {
-    "code": "p6qex9137bzd",
+    "code": "yqx7rwu59vbc",
     "type": "sole_proprietorship",
     "status": "active",
     "riskStatus": "pending",
@@ -643,14 +654,15 @@ Pobranie szczegółów danego podmiotu.
     "riskStatusChangedBy": "",
     "createdByName": "Adam",
     "references": "qwerty",
+    "economicRelationStartDate": "2023-11-14",
     "entity": {
-      "code": "whfkjmqdu85p",
+      "code": "stzyha1j76fm",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "99120234518",
       "documentType": "passport",
       "documentNumber": "aze123123",
-      "documentExpirationDate": "2025-05-07T22:00:00.000000Z",
+      "documentExpirationDate": "2025-05-08",
       "withoutExpirationDate": false,
       "citizenship": "PL",
       "birthCity": "Warszawa",
@@ -658,26 +670,31 @@ Pobranie szczegółów danego podmiotu.
       "politicallyExposed": "no",
       "politicallyExposedCoworker": "no",
       "politicallyExposedFamily": "yes",
-      "createdAt": "2023-08-24T15:36:50.000000Z",
+      "createdAt": "2023-11-20T16:49:44.000000Z",
       "birthDate": null,
+      "employmentType": null,
       "soleProprietorship": {
-        "code": "cz47qg2s9hnj",
+        "code": "w6mx82nj7k1q",
+        "tradeNames": [
+          "FiberPay",
+          "SystemAML"
+        ],
         "companyName": "Usługi programistyczne",
         "taxIdNumber": "3765151981",
         "nationalBusinessRegistryNumber": "123456789",
-        "createdAt": "2023-08-24T15:36:50.000000Z",
+        "createdAt": "2023-11-20T16:49:44.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "1qwnmebv2jxh",
+            "code": "cf4jgdpbhayn",
             "pkdCode": "01.15.Z",
             "pkdName": "Uprawa tytoniu",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "wt5d7racmnze",
+          "code": "c7rdjge2zqs8",
           "pkdCode": "01.12.Z",
           "pkdName": "Uprawa ryżu",
           "mainPkd": true
@@ -686,7 +703,7 @@ Pobranie szczegółów danego podmiotu.
     },
     "addresses": [
       {
-        "code": "tsmudwrf95cq",
+        "code": "nm84r15aq6z2",
         "type": "forwarding_address",
         "country": "PL",
         "city": "Warszawa",
@@ -694,10 +711,10 @@ Pobranie szczegółów danego podmiotu.
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
-        "code": "bqktvu6zefg7",
+        "code": "uv63gb9h57wc",
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
@@ -705,10 +722,10 @@ Pobranie szczegółów danego podmiotu.
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
-        "code": "x9f8qwackejy",
+        "code": "ewrjvy2b17f9",
         "type": "accommodation_address",
         "country": "PL",
         "city": "Warszawa",
@@ -716,25 +733,25 @@ Pobranie szczegółów danego podmiotu.
         "houseNumber": "4",
         "flatNumber": "106",
         "postalCode": "00-131",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       }
     ],
     "contacts": [
       {
-        "code": "qjp48y13v6fb",
+        "code": "uema7tp12b8c",
         "type": "personal",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
-        "code": "8ps2c5arzkgh",
+        "code": "haf6b4vgsz7u",
         "type": "company",
         "emailAdress": "info@fiberpay.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
-        "createdAt": "2023-08-24T15:36:50.000000Z"
+        "createdAt": "2023-11-20T16:49:44.000000Z"
       }
     ],
     "creationIp": null,
@@ -742,10 +759,6 @@ Pobranie szczegółów danego podmiotu.
   }
 }
 ```
-
-### GET /parties/pdf/{code}
-
-Rozpoczyna pobieranie raportu pdf z podmiotu wskazanego kodem identyfikującym.
 
 ### DELETE /parties/{code}
 
@@ -964,7 +977,6 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 
 | Parametr                     | Wymagane | Opis                                                                       |
 | ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **description**              | NIE      | Opis reprezentanta                                                         |
 | **firstName**                | TAK      | Imię reprezentanta                                                         |
 | **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
 | **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta  (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
@@ -978,6 +990,8 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 | **birthCity**                | NIE      | Miejsce urodzenia                                                      |
 | **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
 | **references**               | NIE      | Referencje własne                                                          |
+| **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
+| **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
 
 #### Przykładowe dane do dodania reprezentanta:
@@ -989,12 +1003,13 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
   "birthCountry": "PL",
   "citizenship": "PL",
   "description": "Prezes",
-  "documentNumber": "aze1f123",
+  "documentNumber": "XIK941595",
   "documentType": "id_card",
   "firstName": "Jan",
   "lastName": "Nowak",
   "personalIdentityNumber": "97120824889",
   "politicallyExposed": "yes",
+  "roleType" : "proxy",
   "withoutExpirationDate": false,
 }
 ```
@@ -1006,33 +1021,34 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 ```json
 {
   "data": {
-    "code": "qhur4n17awyp",
+    "code": "9c281v6rkzty",
     "description": "Prezes",
-    "boardMember": {
-      "individualEntity": {
-        "code": "x2cga8e7zyth",
-        "firstName": "Jan",
-        "lastName": "Nowak",
-        "personalIdentityNumber": "97120824889",
-        "documentType": "id_card",
-        "documentNumber": "aze1f123",
-        "documentExpirationDate": null,
-        "withoutExpirationDate": false,
-        "citizenship": "PL",
-        "birthCity": "Warszawa",
-        "birthCountry": "PL",
-        "politicallyExposed": "yes",
-        "politicallyExposedCoworker": "not_defined",
-        "politicallyExposedFamily": "not_defined",
-        "createdAt": "2023-08-24T16:22:52.000000Z",
-        "birthDate": null
-      }
+    "roleType": "proxy",
+    "individualEntity": {
+      "code": "qmce687su31n",
+      "firstName": "Jan",
+      "lastName": "Nowak",
+      "personalIdentityNumber": "97120824889",
+      "documentType": "id_card",
+      "documentNumber": "XIK941595",
+      "documentExpirationDate": null,
+      "withoutExpirationDate": false,
+      "citizenship": "PL",
+      "birthCity": "Warszawa",
+      "birthCountry": "PL",
+      "politicallyExposed": "yes",
+      "politicallyExposedCoworker": "not_defined",
+      "politicallyExposedFamily": "not_defined",
+      "createdAt": "2023-11-20T16:42:39.000000Z",
+      "birthDate": null
     },
     "company": {
       "legalEntity": {
-        "code": "cga7z8hf3j6r",
+        "code": "jx86zfnrhks9",
         "companyName": "FiberPay",
-        "tradeName": "FiberPay",
+        "tradeNames": [
+          "FiberPay"
+        ],
         "taxIdNumber": "7010634566",
         "nationalBusinessRegistryNumber": "147302566",
         "nationalCourtRegistryNumber": "0000512707",
@@ -1040,25 +1056,25 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
         "industry": null,
         "servicesDescription": null,
         "website": "fiberpay.pl",
-        "createdAt": "2023-08-24T15:48:19.000000Z",
+        "createdAt": "2023-11-20T16:39:46.000000Z",
         "registrationCountry": null,
         "companyIdentifier": null,
         "pkdCodes": [
           {
-            "code": "gf218nj4y5rs",
+            "code": "3puhe59mv87k",
             "pkdCode": "58.29.Z",
             "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
             "mainPkd": false
           },
           {
-            "code": "qn6vrazgymbp",
+            "code": "5st34zgp2db7",
             "pkdCode": "62.01.Z",
             "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
             "mainPkd": false
           }
         ],
         "mainPkd": {
-          "code": "mfxw2yqt7zed",
+          "code": "vsuxzfwbhyk1",
           "pkdCode": "64.99.Z",
           "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
           "mainPkd": true
@@ -1066,7 +1082,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
       },
       "addresses": [
         {
-          "code": "9fn2jukbtv7q",
+          "code": "38z5gseqyp6t",
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
@@ -1074,17 +1090,17 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
           "houseNumber": "4",
           "flatNumber": "106",
           "postalCode": "00-131",
-          "createdAt": "2023-08-24T15:48:19.000000Z"
+          "createdAt": "2023-11-20T16:39:46.000000Z"
         }
       ],
       "contacts": [
         {
-          "code": "5b1gk4jpe9fn",
+          "code": "ers27txw6ync",
           "type": "company",
           "emailAdress": "info@fiberpay.pl",
           "phoneCountry": "48",
           "phoneNumber": "123123123",
-          "createdAt": "2023-08-24T15:48:19.000000Z"
+          "createdAt": "2023-11-20T16:39:46.000000Z"
         }
       ]
     }
@@ -1104,25 +1120,26 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 {
   "data": [
     {
-      "code": "qhur4n17awyp",
-      "description": "Prezes",
+      "code": "r7jxq51gazu3",
+      "description": "Prezes spółki",
+      "roleType": "president",
       "individualEntity": {
-        "code": "x2cga8e7zyth",
+        "code": "ux9e7pfza6jq",
         "firstName": "Jan",
-        "lastName": "Nowak",
-        "personalIdentityNumber": "97120824889",
+        "lastName": "Kowalski",
+        "personalIdentityNumber": "31111161119",
         "documentType": "id_card",
-        "documentNumber": "aze1f123",
+        "documentNumber": "aze123123",
         "documentExpirationDate": null,
         "withoutExpirationDate": false,
         "citizenship": "PL",
         "birthCity": "Warszawa",
         "birthCountry": "PL",
-        "politicallyExposed": "yes",
+        "politicallyExposed": "no",
         "politicallyExposedCoworker": "not_defined",
         "politicallyExposedFamily": "not_defined",
-        "createdAt": "2023-08-24T16:22:52.000000Z",
-        "birthDate": null
+        "createdAt": "2023-11-14T15:11:27.000000Z",
+        "birthDate": null,
       }
     }
   ]
@@ -1337,27 +1354,39 @@ Pobranie szczegółów danej transakcji.
 }
 ```
 
-### GET /transactions/pdf/{code}
-
-Rozpoczyna pobieranie raportu pdf z transakcji wskazanej kodem identyfikującym.
 
 ### DELETE /transactions/{code}
 
 Usunięcie transakcji wskazanej kodem identyfikującym.
 
-### POST /events
+### POST /history-events
 
 Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 
-| Parametr         | Wymagane | Opis                                                          |
-| ---------------- | -------- | ------------------------------------------------------------- |
-| **description**  | TAK      | Opis zdarzenia                                                |
-| **significance** | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
-| **partyCode**    | NIE      | Nazwa powiązanego podmiotu                                    |
-| **transactionCode**| NIE      | Kod powiązanej transakcji                                   |
-| **type**         | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
-| **occursAt**     | TAK      | Data wystąpienia zdarzenia                                    |
-| **createdByName**  | NIE      | Osoba tworząca zdarzenie                                    |
+| Parametr            | Wymagane | Opis                                                          |
+| ------------------- | -------- | ------------------------------------------------------------- |
+| **description**     | TAK      | Opis zdarzenia                                                |
+| **significance**    | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
+| **party**           | NIE      | Obiekt zawierający kod powiązanego podmiotu                   |
+| **transaction**     | NIE      | Obiekt zawierający kod powiązanej transakcji                  |
+| **type**            | NIE      | Typ zgłoszenia. Aktualnie wspierane : user, system            |
+| **occursAt**        | TAK      | Data wystąpienia zdarzenia                                    |
+| **createdByName**   | NIE      | Osoba tworząca zdarzenie                                      |
+
+Struktura obiektu party:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanego podmiotu          |
+
+
+Struktura obiektu transaction:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanej transakcji         |
+
+
 
 #### Przykładowe dane do utworzenia zdarzenia:
 
@@ -1376,20 +1405,20 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "6nb9ercma8wd",
-    "partyName": null,
-    "transactionCode": null,
+    "code": "ckfgq8z6y2s5",
+    "significance": "urgent",
     "description": "zdarzenie testowe",
     "type": "user",
-    "significance": "urgent",
-    "occursAt": "2025-08-03T16:42:40.000000Z",
+    "party": null,
+    "transaction": null,
     "createdByName": null,
-    "hasComments": false
+    "hasComments": false,
+    "occursAt": "2025-08-03T16:42:40.000000Z"
   }
 }
 ```
 
-### GET /events
+### GET /history-events
 
 Zwraca zdarzenia przypisane do użytkownika.
 
@@ -1400,27 +1429,27 @@ Zwraca zdarzenia przypisane do użytkownika.
 ```json
 {
   "data": [
-     {
-      "code": "ame15yfgvhzk",
-      "partyName": "FiberPay",
-      "transactionCode": null,
-      "description": "89b88",
-      "type": "user",
-      "significance": "warning",
-      "occursAt": "2023-08-03 18:42:40",
-      "createdByName": null,
-      "hasComments": false
-    },
     {
-      "code": "t4euaxm1p29b",
-      "partyName": null,
-      "transactionCode": null,
+      "code": "ckfgq8z6y2s5",
+      "significance": "urgent",
       "description": "zdarzenie testowe",
       "type": "user",
-      "significance": "urgent",
-      "occursAt": "2023-08-24 18:43:33",
+      "party": null,
+      "transaction": null,
       "createdByName": null,
-      "hasComments": false
+      "hasComments": false,
+      "occursAt": "2025-08-03 18:42:40"
+    },
+    {
+      "code": "m5u9p4zgr2qy",
+      "significance": "info",
+      "description": "fsdf",
+      "type": "user",
+      "party": null,
+      "transaction": null,
+      "createdByName": null,
+      "hasComments": false,
+      "occursAt": "2023-11-14 16:39:59"
     },
   ]
 }
@@ -1428,7 +1457,7 @@ Zwraca zdarzenia przypisane do użytkownika.
 
 Jeśli użytkownik nie posiada żadnych zdarzeń zwracany jest adekwatny komunikat ze statusem 200.
 
-### GET /events/{code}
+### GET /history-events/{code}
 
 Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
@@ -1454,7 +1483,7 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
 Jeśli zdarzenie nie posiada przypisanych komentarzy zmienna zwracana przy kluczu "commentsAmount" równa się 0
 
-### DELETE /events/{code}
+### DELETE /history-events/{code}
 
 Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
@@ -1466,7 +1495,7 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 | ------------- | -------- | -------------------------------------------------------------- |
 | **content**   | TAK      | Treść komentarza                                               |
 | **eventCode** | TAK      | Identyfikator zdarzenia do którego będzie przypisany komentarz |
-| **occursAt**| TAK      | Data wystąpienia zdarzenia                                     |
+| **occursAt**  | TAK      | Data wystąpienia zdarzenia                                     |
 
 #### Przykładowe dane do utworzenia komentarza:
 
@@ -1560,9 +1589,31 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 | ------------------- | -------- | ------------------------------------------------ |
 | **content**         | TAK      | Treść zadania                                    |
 | **expirationDate**  | NIE      | Data przed którą zadanie powinno zostać wykonane |
-| **partyCode**       | NIE      | Kod podmiotu który będzie powiązany z zadaniem   |
-| **transactionCode** | NIE      | Kod transakcji która będzie powiązana z zadaniem |
+| **alert**           | NIE      | Obiekt zawierający kod powiązanego alertu        |
+| **party**           | NIE      | Obiekt zawierający kod powiązanego podmiotu      |
+| **transaction**     | NIE      | Obiekt zawierający kod powiązanej transakcji     |
 | **alertCode**       | NIE      | Kod alertu który będzie powiązany z zadaniem     |
+
+
+Struktura obiektu party:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanego podmiotu          |
+
+
+Struktura obiektu transaction:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanej transakcji         |
+
+Struktura obiektu alert:
+
+| Parametr        | Wymagane | Opis                              |
+| --------------- | -------- | --------------------------------- |
+| **code**        | NIE      | Kod powiązanej transakcji         |
+
 
 #### Przykładowe dane do utworzenia zadania:
 
@@ -1580,10 +1631,14 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 ```json
 {
   "data": {
-    "code": "nga1jz6c8v45",
+    "code": "dcsur627nf3w",
     "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-    "status": "new",
-    "createdAt": "2023-04-21T11:08:42.000000Z"
+    "status": null,
+    "alert": null,
+    "party": null,
+    "transaction": null,
+    "expirationDate": null,
+    "createdAt": "2023-11-14T15:57:32.000000Z"
   }
 }
 ```
@@ -1596,27 +1651,38 @@ Pobranie zadań powiązanych z danym użytkownikiem.
 - **STATUS 200 OK**
 
 ```json
-{
-  "data": {
-    "code": "x59w7bjksazc",
-    "content": "Uzupełnij dane niezbędne do wystawienia faktury za abonament",
-    "status": "displayed",
-    "alertCode": "6eky4dmqvcwf",
-    "partyCode": null,
-    "transactionCode": null,
-    "expirationDate": null
-  },
   {
-    "code": "nga1jz6c8v45",
-    "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-    "status": "new",
-    "alertCode": null,
-    "partyCode": null,
-    "transactionCode": null,
-    "expirationDate": null,
-    "createdAt": "2023-04-21T11:08:42.000000Z"
-  }
-}
+      "code": "94dwpaxk5rzy",
+      "content": "Wymagane manualne ustawienie oceny ryzyka w podmiocie",
+      "status": "new",
+      "alert": {
+        "code": "7fp9srh2vq16",
+        "content": "Sprawdź dane"
+      },
+      "party": {
+        "code": "pum7n95fbwqk",
+        "firstName": "234",
+        "lastName": "234"
+      },
+      "transaction": {
+        "code": "wjnkx4dr2ag9",
+        "title": "Opłata za kupno"
+      },
+      "expirationDate": null
+    },
+    {
+      "code": "svxpezabyg9h",
+      "content": "Przeprowadź środki bezpieczeństwa finansowego - do 2022-06-05 (Od zarejestrowania podmiotu minęło 870 dni)",
+      "status": "done",
+      "alert": null,
+      "party": {
+        "code": "s1vcm5ew9fd4",
+        "firstName": "Jan",
+        "lastName": "Kowalski",
+      },
+      "transaction": null,
+      "expirationDate": null
+    },
 ```
 
 ### GET /tasks/{code}
@@ -1627,13 +1693,14 @@ Pobranie szczegółów zadania wskazanego kodem.
 ```json
 {
   "data": {
-    "code": "x59w7bjksazc",
-    "content": "Uzupełnij dane niezbędne do wystawienia faktury za abonament",
-    "status": "displayed",
-    "alertCode": "6eky4dmqvcwf",
-    "partyCode": null,
-    "transactionCode": null,
-    "expirationDate": null
+    "code": "dcsur627nf3w",
+    "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
+    "status": "new",
+    "alert": null,
+    "party": null,
+    "transaction": null,
+    "expirationDate": null,
+    "createdAt": "2023-11-14T15:57:32.000000Z"
   }
 }
 ```
