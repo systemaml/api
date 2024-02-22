@@ -41,6 +41,7 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.26. [GET /tasks](#get-tasks)
   - 2.27. [GET /tasks/{code}](#get-taskscode)
   - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
+  - 2.29. [POST /sanctions-lists/search](#post-sanctionlistssearch)
 #
 
 ###
@@ -1708,3 +1709,46 @@ Pobranie szczegółów zadania wskazanego kodem.
 ### DELETE /tasks/{code}
 
 Usunięcie zadania wskazanego kodem identyfikującym.
+
+### POST /sanctions-lists/search
+
+Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
+
+| Parametr            | Wymagane | Opis                                                                         |
+| ------------------- | -------- | ---------------------------------------------------------------------------- |
+| **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any  |
+| **name**            | NIE *    | Imię, nazwisko lub nazwa firmy (* Wymagane gdy entityType === any)           |
+| **firstName**       | NIE *    | Imię (* Wymagane gdy entityType === individual)                              |
+| **lastName**        | NIE *    | Nazwisko (* Wymagane gdy entityType === individual)                          |
+| **companyName**     | NIE *    | Nazwa firmy (* Wymagane gdy entityType === company)                          |
+
+#### Przykładowe dane do wyszukania osoby fizycznej (entityType === 'individual'):
+
+```json
+{
+  "entityType": "individual",
+  "firstName": "Wladimir",
+  "lastName": "Putin"
+}
+```
+
+#### Przykładowa odpowiedź serwera:
+
+- **STATUS 200 OK**
+
+```json
+[
+  {
+    "listName": "eu_financial_sanctions",
+    "name": "Vladimir PUTIN",
+    "aliases": [
+      "Влади́мир ПУ́ТИН",
+      "Vladimir PUTIN",
+      "Vladimir POUTINE",
+      "Vladimir PUTIN"
+    ]
+  }
+]
+```
+
+Jeśli dane nie zostaną odnalezione zwracana jest pusta tablica
