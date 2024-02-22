@@ -41,7 +41,7 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.26. [GET /tasks](#get-tasks)
   - 2.27. [GET /tasks/{code}](#get-taskscode)
   - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
-  - 2.29. [POST /sanctions-lists/search](#post-sanctionlistssearch)
+  - 2.29. [POST /sanctions-lists/search](#post-sanctions-listssearch)
 #
 
 ###
