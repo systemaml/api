@@ -1737,18 +1737,35 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 - **STATUS 200 OK**
 
 ```json
-[
-  {
-    "listName": "eu_financial_sanctions",
-    "name": "Vladimir PUTIN",
-    "aliases": [
-      "Влади́мир ПУ́ТИН",
-      "Vladimir PUTIN",
-      "Vladimir POUTINE",
-      "Vladimir PUTIN"
-    ]
-  }
-]
+{
+    "0": {
+        "listName": "eu_financial_sanctions",
+        "name": "Vladimir PUTIN",
+        "aliases": [
+            "Влади́мир ПУ́ТИН",
+            "Vladimir PUTIN",
+            "Vladimir POUTINE",
+            "Vladimir PUTIN"
+        ],
+        "recordType": "individual"
+    },
+    "1": {
+        "listName": "sanctions_us_sdn",
+        "name": "Vladimir PUTIN",
+        "aliases": [
+            "Vladimir Vladimirovich PUTIN",
+            "Vladimir PUTIN"
+        ],
+        "recordType": "individual"
+    },
+    "code": "z8pf5khntg7v"
+}
 ```
 
-Jeśli dane nie zostaną odnalezione zwracana jest pusta tablica
+Jeśli dane nie zostaną odnalezione na listach sankcyjnych zwracany jest tylko kod do pobrania raportu
+
+### GET /sanctions/{code}/pdf
+
+Pobranie raportu pdf zawierającego wynik sprawdzenia na listach sankcyjnych na podstawie kodu wyszukiwania zwracanego w POST /sanctions-lists/search
+
+
