@@ -214,6 +214,8 @@ Struktura obiektu beneficjenta:
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                   |
 | **birthCountry**             | NIE      | Kraj urodzenia                                                             |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **politicallyExposedFamily**     | TAK     | Informacja czy beneficjent jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
+| **politicallyExposedCoworker**   | TAK     | Informacja czy beneficjent jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
 | **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
 
 Struktura obiektu reprezentanta:
@@ -236,6 +238,8 @@ Struktura obiektu reprezentanta:
 | **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
 | **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
 | **politicallyExposed**       | TAK      | Informacja czy reprezentant jest eksponowany politycznie (bool)            |
+| **politicallyExposedFamily**     | TAK     | Informacja czy reprezentant jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
+| **politicallyExposedCoworker**   | TAK     | Informacja czy reprezentant jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
 
 Do każdego z typów podmiotu można dodać dane kontaktowe.
 
@@ -444,6 +448,8 @@ a) kontakt:
       "ownedSharesUnit": "%",
       "personalIdentityNumber": "64091098920",
       "politicallyExposed": "no",
+      "politicallyExposedCoworker":"no",
+      "politicallyExposedFamily":"no",
       "withoutExpirationDate": false,
     },
     {
@@ -459,6 +465,8 @@ a) kontakt:
       "ownedSharesAmount": "15",
       "ownedSharesUnit": "%",
       "politicallyExposed": "no",
+      "politicallyExposedCoworker":"no",
+      "politicallyExposedFamily":"no",
       "withoutExpirationDate": false,
     },
   ],
@@ -475,6 +483,8 @@ a) kontakt:
       "lastName": "Kowalski",
       "personalIdentityNumber": "31111161119",
       "politicallyExposed": "no",
+      "politicallyExposedCoworker":"no",
+      "politicallyExposedFamily":"no",
       "roleType" : "president",
       "withoutExpirationDate": false,
     },
@@ -489,6 +499,8 @@ a) kontakt:
       "firstName": "Adam",
       "lastName": "Nowak",
       "politicallyExposed": "yes",
+      "politicallyExposedCoworker":"no",
+      "politicallyExposedFamily":"no",
       "roleType" : "other",
       "withoutExpirationDate": false,
     }
@@ -793,6 +805,8 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
 | **birthCountry**             | NIE      | Kraj urodzenia                                                             |
 | **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **politicallyExposedFamily**     | TAK     | Informacja czy beneficjent jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
+| **politicallyExposedCoworker**   | TAK     | Informacja czy beneficjent jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
 | **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
 
 #### Przykładowe dane do dodania beneficjenta rzeczywistego:
@@ -811,6 +825,8 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
   "ownedSharesUnit": "%",
   "personalIdentityNumber": "65122666817",
   "politicallyExposed": "no",
+  "politicallyExposedCoworker":"no",
+  "politicallyExposedFamily":"no",
   "withoutExpirationDate": false,
   "accommodationAddress": {
     "country": "PL",
@@ -993,7 +1009,9 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 | **references**               | NIE      | Referencje własne                                                          |
 | **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
 | **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
-| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
+| **politicallyExposed**       | TAK      | Informacja czy reprezentant jest eksponowany politycznie (bool)             |
+| **politicallyExposedFamily**     | TAK     | Informacja czy reprezentant jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
+| **politicallyExposedCoworker**   | TAK     | Informacja czy reprezentant jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
 
 #### Przykładowe dane do dodania reprezentanta:
 
@@ -1010,6 +1028,8 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
   "lastName": "Nowak",
   "personalIdentityNumber": "97120824889",
   "politicallyExposed": "yes",
+  "politicallyExposedCoworker":"no",
+  "politicallyExposedFamily":"no",
   "roleType" : "proxy",
   "withoutExpirationDate": false,
 }
