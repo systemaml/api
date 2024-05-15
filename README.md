@@ -1178,7 +1178,7 @@ Utworzenie nowej transakcji. Parametry żądania:
 
 | Parametr                  | Wymagane | Opis                                                     |
 | ------------------------- | -------- | -------------------------------------------------------- |
-| **type**                  | TAK      | Typ transakcji. Aktualnie wspierane: buyer, vender, transfer, other |
+| **type**                  | TAK      | Typ transakcji. Aktualnie wspierane: buyer, seller, transfer, other, seller_crypto, buyer_crypto, exchange_fiat |
 | **status**                | TAK      | Status transakcji. Aktualnie wspierane: draft, in_acceptance, accepted, cancelled |
 | **occasionalTransaction** | TAK      | Informacja czy transakcja jest okazjonalna (bool)        |
 
@@ -1190,6 +1190,7 @@ Jeśli transakcja jest oznaczona jako okazjonalna wymagane są następujące par
 | **currency**      | TAK      | Waluta transakcji                                          |
 | **bookedAt**      | TAK      | Data zaksięgowania transakcji                              |
 | **paymentMethod** | TAK      | Sposób płatności                                           |
+| **paymentMethodOther** | NIE      | Sposób płatności (wymagany kiedy paymentMethod === other)                                           |
 | **title**         | TAK      | Tytuł transakcji                                           |
 | **location**      | NIE      | Kraj w którym została przeprowadzona transakcja            |
 | **description**   | NIE      | Opis transakcji (przedmiot transakcji, komentarz itd.)     |
@@ -1202,40 +1203,50 @@ Obiekt pojedynczej strony transakcji powinien zawierać poniższe parametry:
 
 | Parametr                | Wymagane | Opis                                                                 |
 | ----------------------- | -------- | -------------------------------------------------------------------- |
-| **type**                | TAK      | Typ strony transakcji. Aktualnie wspierane: receiver, sender, seller, buyer, payer|
+| **type**                | TAK      | Typ strony transakcji. Aktualnie wspierane: receiver, seller, buyer, payer, buyer_crypto, seller_crypto, exchange_fiat_client, other|
+| **typeOther**           | NIE      | Typ strony transakcji (wymagany jeśli type === other)|
 | **partyCode**           | NIE      | Kod podmiotu strony transakcji                                       |
 | **firstName**           | NIE      | Imię strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)          |
 | **lastName**            | NIE      | Nazwisko strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)      |
 | **companyName**         | NIE      | Nazwa firmy strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)     |
 | **description**         | NIE      | Opis strony transakcji                                               |
+| **amount**              | NIE      | Kwota transakcji                                           |
+| **currency**            | NIE      | Waluta transakcji                                          |
+| **currencyCustom**      | NIE      | Waluta transakcji kiedy waluta nie istnieje na liście, w transakcjach typu buyer_crypto, seller_crypto, exchange_fiat |
+| **currencyOther**       | NIE      | Nazwa waluty kiedy nie istnieje na liście, w transakcjach typu buyer_crypto, seller_crypto, exchange_fiat |
+| **currencyType**        | NIE      | Rodzaj waluty w transakcjach typu buyer_crypto, seller_crypto, exchange_fiat  |
 | **iban**                | NIE      | Numer iban strony transakcji (wymagany jeśli paymentMethod === bank_transfer) |
+| **txId**                | NIE      | Numer identyfikacyjny transakcji waluty wirtualnej w sieci blockchain, w transakcjach typu buyer_crypto, seller_crypto  |
+| **cryptoAddress**       | NIE      | Adres portfela waluty wirtualnej, w transakcjach typu buyer_crypto, seller_crypto |
 
 Dla transakcji typu buyer wymagane jest podanie strony transakcji o typie seller.
-Dla transakcji typu vender wymagane jest podanie strony transakcji o typie buyer.
+Dla transakcji typu seller wymagane jest podanie strony transakcji o typie buyer.
 Dla transakcji typu transfer wymagane jest podanie stron transakcji o typach payer oraz receiver.
+Dla transakcji typu seller_crypto wymagane jest podanie strony transakcji o typie buyer_crypto.
+Dla transakcji typu buyer_crypto wymagane jest podanie strony transakcji o typie seller_crypto.
+Dla transakcji typu other wymagane jest podanie strony transakcji o typach receiver, seller, buyer lub payer.
+Dla transakcji typu exchange_fiat wymagane jest podanie strony transakcji o typie exchange_fiat_client.
 #### Przykładowe dane do utworzenia transakcji:
 
 ```json
 {
-  "status": "accepted",
-  "type": "vender",
-  "occasionalTransaction": false,
-  "amount": "780",
-  "currency": "PLN",
-  "bookedAt": "2023-09-10 10:10:10",
-  "paymentMethod": "blik",
-  "title": "transakcja testowa",
-  "location": "PL",
-  "references": "qwerty",
-  "createdByName": "Tester",
-  "entities": [
-    {
-      "type" : "buyer",
-      "description" : "Testowa strona transakcji",
-      "firstName" : "Jan",
-      "lastName" : "Kowalski",
-    }
-  ]
+    "type": "buyer",
+    "status": "accepted",
+    "amount": "100.00",
+    "currency": "PLN",
+    "paymentMethod": "cash",
+    "location": "PL",
+    "bookedAt": "2024-05-07T13:03:48.000000Z",
+    "title": "testowa transakcja",
+    "entities": [
+            {
+                "type": "seller",
+                "firstName": "Adam",
+                "lastName": "Kowalski",
+            }
+    ],
+    "createdAt": "2024-05-07T13:04:33.000000Z",
+    "occasionalTransaction": false,
 }
 ```
 
@@ -1245,38 +1256,43 @@ Dla transakcji typu transfer wymagane jest podanie stron transakcji o typach pay
 
 ```json
 {
-  "data": {
-    "code": "c1ehu5my3s97",
-    "type": "vender",
-    "status": "accepted",
-    "amount": "780.00",
-    "currency": "PLN",
-    "paymentMethod": "blik",
-    "location": "PL",
-    "bookedAt": "2023-09-10T08:10:10.000000Z",
-    "description": null,
-    "title": "transakcja testowa",
-    "entities": [
-        {
-            "code": "rtkmyfbavnug",
-            "partyCode": null,
-            "type": "buyer",
-            "description": "Testowa strona transakcji",
-            "firstName": "Jan",
-            "lastName": "Kowalski",
-            "companyName": "",
-            "amount": null,
-            "currency": null,
-            "paymentMethod": null,
-            "iban": "",
-            "bookedAt": null
-        }
-    ],
-    "references": "qwerty",
-    "createdAt": "2023-09-22T08:36:20.000000Z",
-    "occasionalTransaction": false,
-    "createdByName": "Tester"
-  }
+    "data": {
+        "code": "8c2vdbhrn5zm",
+        "type": "buyer",
+        "status": "accepted",
+        "amount": "100.00",
+        "currency": "PLN",
+        "paymentMethod": "cash",
+        "paymentMethodOther": null,
+        "location": "PL",
+        "bookedAt": "2024-05-07T11:03:48.000000Z",
+        "description": null,
+        "title": "testowa transakcja",
+        "entities": [
+            {
+                "code": "vpgsq76murxz",
+                "partyCode": null,
+                "type": "seller",
+                "typeOther": null,
+                "description": null,
+                "firstName": "Adam",
+                "lastName": "Kowalski",
+                "companyName": null,
+                "currency": null,
+                "currencyType": null,
+                "currencyOther": null,
+                "currencyCustom": false,
+                "amount": null,
+                "iban": null,
+                "txId": null,
+                "cryptoAddress": null,
+            }
+        ],
+        "references": null,
+        "createdAt": "2024-05-15T09:30:00.000000Z",
+        "occasionalTransaction": false,
+        "createdByName": null
+    }
 }
 ```
 
