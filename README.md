@@ -186,7 +186,8 @@ c) company:
 | **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
 | **createdByName**                  | NIE      | Osoba wprowadzająca wpis                                                     |
-| **economicRelationStartDate**      | TAK     | Data rozpoczęcia stosunków gospodarczych                                      |
+| **economicRelationStartDate**      | TAK      | Data rozpoczęcia stosunków gospodarczych                                     |
+| **listedOnStock**                  | NIE      | Podmiot notowany na giełdzie, przyjmuje wartości "yes" lub "no"                                                 |
 
 
 Struktura obiektu beneficjenta:
@@ -404,6 +405,7 @@ a) kontakt:
   "tradeNames": ["FiberPay"],
   "nationalCourtRegistryNumber": "0000512707",
   "businessActivityForm": "stock_company",
+  "listedOnStock": "no",
   "website": "fiberpay.pl",
   "references": "qwerty",
   "status": "active",
@@ -533,6 +535,7 @@ a) kontakt:
       "nationalBusinessRegistryNumber": "147302566",
       "nationalCourtRegistryNumber": "0000512707",
       "businessActivityForm": "stock_company",
+      "listedOnStock": "no",
       "industry": null,
       "servicesDescription": null,
       "website": "fiberpay.pl",
@@ -1218,6 +1221,7 @@ Obiekt pojedynczej strony transakcji powinien zawierać poniższe parametry:
 | **iban**                | NIE      | Numer iban strony transakcji (wymagany jeśli paymentMethod === bank_transfer) |
 | **txId**                | NIE      | Numer identyfikacyjny transakcji waluty wirtualnej w sieci blockchain, w transakcjach typu buyer_crypto, seller_crypto  |
 | **cryptoAddress**       | NIE      | Adres portfela waluty wirtualnej, w transakcjach typu buyer_crypto, seller_crypto |
+| **ip**                  | NIE      | Adres IP strony transakcji  |
 
 Dla transakcji typu buyer wymagane jest podanie strony transakcji o typie seller.
 Dla transakcji typu seller wymagane jest podanie strony transakcji o typie buyer.
@@ -1284,6 +1288,7 @@ Dla transakcji typu exchange_fiat wymagane jest podanie strony transakcji o typi
                 "currencyCustom": false,
                 "amount": null,
                 "iban": null,
+                "ip": null,
                 "txId": null,
                 "cryptoAddress": null,
             }
@@ -1380,6 +1385,7 @@ Pobranie szczegółów danej transakcji.
         "currency": null,
         "paymentMethod": null,
         "iban": "",
+        "ip": null,
         "bookedAt": null
       }
     ],
