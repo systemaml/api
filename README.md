@@ -821,7 +821,7 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
   "birthCity": "Paryż",
   "citizenship": "PL",
   "documentNumber": "ABC123",
-  "documentType": "Dowód osobisty",
+  "documentType": "id_card",
   "firstName": "Jan",
   "lastName": "Bożek",
   "ownedSharesAmount": "5",
