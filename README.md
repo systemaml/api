@@ -1021,7 +1021,6 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 ```json
 {
   "birthCity": "Warszawa",
-  "birthDate": "2002-01-01",
   "birthCountry": "PL",
   "citizenship": "PL",
   "description": "Prezes",
