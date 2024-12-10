@@ -1790,10 +1790,21 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
             "Vladimir POUTINE",
             "Vladimir PUTIN"
         ],
-        "recordType": "individual"
+        "recordType": "individual",
+        "sourceData": {
+            "entity_logical_id": "135909",
+            "entity_eu_reference_number": "EU.7510.16",
+            "entity_remark": "(Date of UN designation: 2022-02-25)",
+            "entity_subject_type_classification_code": "person",
+            "entity_regulation_number_title": "2022/332 (OJ L53)",
+            "entity_regulation_publication_date": "2022-02-25",
+            "entity_regulation_type": "amendment",
+            "entity_regulation_programme": "UKR",
+            "entity_regulation_publication_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2022.053.01.0001.01.ENG&toc=OJ%3AL%3A2022%3A053%3ATOC"
+        }
     },
     "isMatch": true,
-    "code": "48fq81rfw7x4"
+    "code": "bd6ynd7dppaw"
 }
 ```
 
