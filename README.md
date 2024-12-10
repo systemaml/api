@@ -42,6 +42,7 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.27. [GET /tasks/{code}](#get-taskscode)
   - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
   - 2.29. [POST /sanctions-lists/search](#post-sanctions-listssearch)
+  - 2.30. [GET /sanctions/{code}/pdf](#get-sanctionscodepdf)
 #
 
 ###
@@ -1760,6 +1761,7 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 | **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any  |
 | **name**            | NIE *    | Imię, nazwisko lub nazwa firmy (* Wymagane gdy entityType === any)           |
 | **firstName**       | NIE *    | Imię (* Wymagane gdy entityType === individual)                              |
+| **middleName**      | NIE      | Drugie oraz kolejne imiona                                                   |
 | **lastName**        | NIE *    | Nazwisko (* Wymagane gdy entityType === individual)                          |
 | **companyName**     | NIE *    | Nazwa firmy (* Wymagane gdy entityType === company)                          |
 
@@ -1778,18 +1780,29 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 - **STATUS 200 OK**
 
 ```json
-[
-  {
-    "listName": "eu_financial_sanctions",
-    "name": "Vladimir PUTIN",
-    "aliases": [
-      "Влади́мир ПУ́ТИН",
-      "Vladimir PUTIN",
-      "Vladimir POUTINE",
-      "Vladimir PUTIN"
-    ]
-  }
-]
+{
+    "0": {
+        "listName": "eu_financial_sanctions",
+        "name": "Vladimir PUTIN",
+        "aliases": [
+            "Влади́мир ПУ́ТИН",
+            "Vladimir PUTIN",
+            "Vladimir POUTINE",
+            "Vladimir PUTIN"
+        ],
+        "recordType": "individual"
+    },
+    "isMatch": true,
+    "code": "48fq81rfw7x4"
+}
 ```
 
-Jeśli dane nie zostaną odnalezione zwracana jest pusta tablica
+Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (boolean) w przeciwnym wypadku przyjmuję wartość false (boolean)
+
+### GET /sanctions/{code}/pdf
+
+Pobranie raportu pdf zawierającego wynik wyszukiwania na listach sankcyjnych. Parametry żądania:
+
+| Parametr      | Wymagane | Opis                                                           |
+| ------------- | -------- | -------------------------------------------------------------- |
+| **code**      | TAK      | Kod zapisany w wynikach wyszukiwania na listach sankcyjnych    |
