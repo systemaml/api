@@ -110,6 +110,20 @@ W przypadku zapytań nie posiadających body, należy wysłać żądanie z nagł
 
 Każde ciało zapytania jest przekazywane za pomocą JWT z wykorzystaniem odpowiedniej sygnatury. Body żądania powinno być tekstem (JWT).
 
+#### Przykładowy skrypt tworzenia ciała zapytania JWT 
+
+```javascript
+const { encode } = require("jwt-simple");
+const SECRET = "<secretKey>";
+ //Przykładowy payload do endpointu do wyszukiwania na listach sankcyjnych
+const payload = {
+  "entityType": "any",
+  "name": "Nazwa podmiotu",
+}
+const encoded = encode(payload, SECRET, "HS256");
+
+```
+
 ## Opis usług
 
 ### POST /parties
