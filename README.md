@@ -166,7 +166,7 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | Parametr                           | Wymagane | Opis                                                                |
 | ---------------------------------- | -------- | ------------------------------------------------------------------- |
 | **taxIdNumber**                    | TAK      | NIP prowadzonej działalności                                        |
-| **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (wymagany jeśli nie ma numeru NIP)        |
+| **registrationCountry**            | TAK      | Kraj rejestracji podmiotu                                           |
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)             |
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
@@ -186,7 +186,7 @@ c) company:
 | Parametr                           | Wymagane | Opis                                                                         |
 | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |
 | **taxIdNumber**                    | TAK      | Numer NIP                                                                    |
-| **registrationCountry**            | NIE      | Kraj rejestracji podmiotu (podawany jeśli nie ma numeru NIP)                 |
+| **registrationCountry**            | TAK      | Kraj rejestracji podmiotu                                                    |
 | **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
 | **references**                     | NIE      | Referencje własne                                                            |
 | **companyName**                    | TAK      | Nazwa działalności                                                           |
@@ -202,7 +202,7 @@ c) company:
 | **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
 | **createdByName**                  | NIE      | Osoba wprowadzająca wpis                                                     |
 | **economicRelationStartDate**      | TAK      | Data rozpoczęcia stosunków gospodarczych                                     |
-| **listedOnStock**                  | NIE      | Podmiot notowany na giełdzie, przyjmuje wartości "yes" lub "no"                                                 |
+| **listedOnStock**                  | NIE      | Podmiot notowany na giełdzie                                                 |
 
 
 Struktura obiektu beneficjenta:
@@ -339,6 +339,7 @@ a) kontakt:
 
 ```json
 {
+  "registrationCountry": "PL",
   "birthCity": "Warszawa",
   "nationalBusinessRegistryNumber": "632702201",
   "birthCountry": "PL",
@@ -412,6 +413,7 @@ a) kontakt:
 
 ```json
 {
+  "registrationCountry": "PL",
   "type": "company",
   "companyName": "FiberPay",
   "economicRelationStartDate": "2023-11-14",
@@ -555,7 +557,7 @@ a) kontakt:
       "servicesDescription": null,
       "website": "fiberpay.pl",
       "createdAt": "2023-11-20T16:38:11.000000Z",
-      "registrationCountry": null,
+      "registrationCountry": "PL",
       "companyIdentifier": null,
       "pkdCodes": [
         {
@@ -655,16 +657,6 @@ Zwraca podmioty utworzone przez użytkownika.
 }
 ```
 
-W przypadku gdy użytkownik nie posiada utworzonych podmiotów, serwer zwraca obiekt:
-
-- **STATUS 200 OK**
-
-```json
-{
-  "status": "ERROR",
-  "error": "No parties found"
-}
-```
 
 ### GET /parties/{code}
 
@@ -714,7 +706,7 @@ Pobranie szczegółów danego podmiotu.
         "taxIdNumber": "3765151981",
         "nationalBusinessRegistryNumber": "632702201",
         "createdAt": "2023-11-20T16:49:44.000000Z",
-        "registrationCountry": null,
+        "registrationCountry": "PL",
         "companyIdentifier": null,
         "pkdCodes": [
           {
@@ -901,7 +893,7 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
         "servicesDescription": null,
         "website": "fiberpay.pl",
         "createdAt": "2023-08-24T15:48:19.000000Z",
-        "registrationCountry": null,
+        "registrationCountry": "PL",
         "companyIdentifier": null,
         "pkdCodes": [
           {
@@ -1036,6 +1028,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 ```json
 {
   "birthCity": "Warszawa",
+  "birthDate": "2002-01-01",
   "birthCountry": "PL",
   "citizenship": "PL",
   "description": "Prezes",
@@ -1095,7 +1088,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
         "servicesDescription": null,
         "website": "fiberpay.pl",
         "createdAt": "2023-11-20T16:39:46.000000Z",
-        "registrationCountry": null,
+        "registrationCountry": "PL",
         "companyIdentifier": null,
         "pkdCodes": [
           {
