@@ -1788,30 +1788,55 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 
 ```json
 {
-    "0": {
-        "listName": "eu_financial_sanctions",
-        "name": "Vladimir PUTIN",
-        "aliases": [
-            "Влади́мир ПУ́ТИН",
-            "Vladimir PUTIN",
-            "Vladimir POUTINE",
-            "Vladimir PUTIN"
-        ],
-        "recordType": "individual",
-        "sourceData": {
-            "entity_logical_id": "135909",
-            "entity_eu_reference_number": "EU.7510.16",
-            "entity_remark": "(Date of UN designation: 2022-02-25)",
-            "entity_subject_type_classification_code": "person",
-            "entity_regulation_number_title": "2022/332 (OJ L53)",
-            "entity_regulation_publication_date": "2022-02-25",
-            "entity_regulation_type": "amendment",
-            "entity_regulation_programme": "UKR",
-            "entity_regulation_publication_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2022.053.01.0001.01.ENG&toc=OJ%3AL%3A2022%3A053%3ATOC"
-        }
+  "isMatch": true,
+  "code": "pwzcqczp6nwz",
+  "matchedEntities": [
+    {
+      "listName": "sanctions_uk",
+      "name": "Vladimir Vladimirovich PUTIN",
+      "aliases": [
+        "Vladimir Vladimirovich PUTIN",
+        "Vladimir Putin",
+        "владимир владимирович путин"
+      ],
+      "recordType": "individual",
+      "sourceData": {
+        "type": "individual",
+        "addresses": "{\"Address\":{\"AddressLine6\":\"Moscow\",\"AddressCountry\":\"Russia\"}}",
+        "unique_id": "RUS0251",
+        "ofsi_group_id": "14196",
+        "name_type": "PRIMARY NAME",
+        "first_name": "Vladimir",
+        "second_name": "Vladimirovich",
+        "last_name": "PUTIN",
+        "regime_name": "The Russia (Sanctions) (EU Exit) Regulations 2019",
+        "designation_source": "UK",
+        "sanctions_imposed": "Asset freeze|Trust Services Sanctions"
+      }
     },
-    "isMatch": true,
-    "code": "bd6ynd7dppaw"
+    {
+      "listName": "eu_financial_sanctions",
+      "name": "Vladimir PUTIN",
+      "aliases": [
+        "Влади́мир ПУ́ТИН",
+        "Vladimir PUTIN",
+        "Vladimir POUTINE",
+        "Vladimir PUTIN"
+      ],
+      "recordType": "individual",
+      "sourceData": {
+        "entity_logical_id": "135909",
+        "entity_eu_reference_number": "EU.7510.16",
+        "entity_remark": "(Date of UN designation: 2022-02-25)",
+        "entity_subject_type_classification_code": "person",
+        "entity_regulation_number_title": "2022/332 (OJ L53)",
+        "entity_regulation_publication_date": "2022-02-25",
+        "entity_regulation_type": "amendment",
+        "entity_regulation_programme": "UKR",
+        "entity_regulation_publication_url": "https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=uriserv%3AOJ.L_.2022.053.01.0001.01.ENG&toc=OJ%3AL%3A2022%3A053%3ATOC"
+      }
+    }
+  ]
 }
 ```
 
