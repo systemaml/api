@@ -12,6 +12,7 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 1.1. [Klucze API](#klucze-api)
   - 1.2. [Nagłówek zapytania](#nagłówek-zapytania)
   - 1.3. [Ciało zapytania](#ciało-zapytania)
+  - 1.4. [Mechanizm callbacków](#mechanizm-callbacków)
 - 2. [Opis usług](#opis-usług)
   - 2.1. [POST /parties](#post-parties)
   - 2.2. [GET /parties](#get-parties)
@@ -110,7 +111,7 @@ W przypadku zapytań nie posiadających body, należy wysłać żądanie z nagł
 
 Każde ciało zapytania jest przekazywane za pomocą JWT z wykorzystaniem odpowiedniej sygnatury. Body żądania powinno być tekstem (JWT).
 
-#### Przykładowy skrypt tworzenia ciała zapytania JWT 
+#### Przykładowy skrypt tworzenia ciała zapytania JWT
 
 ```javascript
 const { encode } = require("jwt-simple");
@@ -123,6 +124,60 @@ const payload = {
 const encoded = encode(payload, SECRET, "HS256");
 
 ```
+### Mechanizm callbacków
+
+Wykonując działania na transakcjach i podmiotach **utworzonych przez API** SystemAML może wykonywać żądanie HTTP na wskazany uprzednio adres, gdzie:
+
+* w ciele (body) żądania będzie zawarty **token JWT**,
+* w nagłówku API-Key(header) żądania będzie zawarty jawny klucz API, wskazujacy który **klucz tajny** został wykorzystany do utworzenia JWT.
+
+**Token JWT** należy odkodować używając algorytmu **HS256** oraz **klucza tajnego**.
+Jeśli sygnatura tokenu zgadza się po odszyfrowaniu, to znaczy, że dane są prawdziwe i zostały wysłane przez SystemAML.
+
+#### Przykładowy callback w postaci JWT dla typu transaction_data_updated:
+```
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJ0cmFuc2FjdGlvbl9kYXRhX3VwZGF0ZWQiLCJjb2RlIjoieDh5NnBxZTZ5c3M2IiwiZGF0YSI6eyJ0cmFuc2FjdGlvbiI6eyJjb2RlIjoic3pyenZ6ODlxajhlIiwicmVmZXJlbmNlcyI6bnVsbCwidHlwZSI6ImJ1eWVyIiwic3RhdHVzIjoiYWNjZXB0ZWQifX19LCJpc3MiOiJTeXN0ZW1BTUwzIiwiaWF0IjoxNzQxNzc2OTY0fQ.Xq3HDU9P6m8Va_l4VW-czoUGyGpX446H_8VXcHDv0Mc
+```
+#### Po odszyfrowaniu:
+
+```json
+{
+  "payload": {
+    "type": "transaction_data_updated",
+    "code": "x8y6pqe6yss6",
+    "data": {
+      "transaction": {
+        "code": "szrzvz89qj8e",
+        "references": null,
+        "type": "buyer",
+        "status": "accepted"
+      }
+    }
+  },
+  "iss": "SystemAML",
+  "iat": 1741776964
+}
+```
+
+### Lista wszystkich callbacków w SystemAML
+
+| Akcje | Typ callbacku                         |
+| -------- | --------------------------------------|
+| Aktualizacja danych podmiotu | **PARTY_PROFILE_UPDATED**|
+| Zmiana statusu podmiotu | **TYPE_PARTY_STATUS_CHANGE**|
+| Zmiana statusu ryzyka podmiotu | **PARTY_RISK_CHANGE**|
+| Usunięcie podmiotu | **PARTY_DELETED**|
+| Aktualizacja danych transakcji | **TRANSACTION_DATA_UPDATED**|
+| Zmiana statusu transakcji | **TRANSACTION_STATUS_CHANGE**|
+| Zmiana statusu ryzyka transakcji | **TRANSACTION_RISK_CHANGE**|
+| Usunięcie transakcji | **TRANSACTION_DELETED**|
+
+
+Każdy callback informuje zewnętrzny system o zmianach w podmiotach (Party) lub transakcjach (Transaction), jeśli zostały one **utworzone przez API** i jeśli zespół ma ustawiony URL callbacka.
+
+
+Informacje jak odkodować lub jakich bibliotek użyć do obsługi tokenu JWT znajdziesz pod adresem: [https://jwt.io/](https://jwt.io/)
+
 
 ## Opis usług
 
@@ -143,14 +198,17 @@ a) individual:
 | -------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
 | **firstName**              | TAK      | Imię podmiotu                                                                                   |
 | **lastName**               | TAK      | Nazwisko podmiotu                                                                               |
+| **middleName**             | NIE      | Drugie imię podmiotu                                                                            |
+| **familyName**             | NIE      | Nazwisko rodowe                                                                               |
 | **personalIdentityNumber** | TAK      | Numer PESEL podmiotu (w przypadku braku numeru PESEL wymagany jest parametr birthDate oraz birthCountry) |
 | **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                                             |
 | **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                                             |
 | **references**             | NIE      | Referencje własne                                                                               |
 | **citizenship**            | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                                      |
 | **birthCity**              | NIE      | Miejsce urodzenia                                                                               |
-| **documentType**           | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
+| **documentType**           | TAK      | Rodzaj dokumentu takie jak: "id_card", "electronic_id_card", "passport", "residency_card", "other" (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
 | **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                   |
+| **documentTypeOther**         | NIE      | Rodzaj innego dokumentu, jest wymagany tylko w przypadku kiedy "documentType": "other"                                 |
 | **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
 | **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
 | **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
@@ -171,6 +229,7 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                        |
+| **terminationDate**                | NIE      | Data zakończenia działalności                                       |
 | **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
 | **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
 
@@ -193,6 +252,7 @@ c) company:
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                                 |
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
+| **terminationDate**                | NIE      | Data zakończenia działalności                                                |
 | **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
