@@ -1289,6 +1289,32 @@ Obiekt pojedynczej strony transakcji powinien zawierać poniższe parametry:
 | **txId**                | NIE      | Numer identyfikacyjny transakcji waluty wirtualnej w sieci blockchain, w transakcjach typu buyer_crypto, seller_crypto  |
 | **cryptoAddress**       | NIE      | Adres portfela waluty wirtualnej, w transakcjach typu buyer_crypto, seller_crypto |
 | **ip**                  | NIE      | Adres IP strony transakcji  |
+| **isEntityAWalletOwner**  | NIE*      | Informacja czy podmiot wskazany w transakcji jest faktycznym właścicielem portfela kryptowalutowego użytego w transakcji. Przyjmuje wartości 'yes', 'no'. *Wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto'  |
+| **addressDataFromRelatedParty** | NIE* | Informacja czy dane adresowe właściciela portfela kryptowalutowego są takie same jak wskazanym podmiocie. Przyjmuje wartości 'yes', 'no'. Pole jest wymagane gdy wskazany jest podmiot, Wykorzystywane tylko przy transakcjach typu 'buyer_crypto', 'seller_crypto' |
+| **isVASPEntity** | NIE | Informacja czy portfel kryptowalutowy jest hostowany przez VASP. Przyjmuje wartości 'yes', 'no'. Wykorzystywane tylko przy transakcjach typu 'buyer_crypto', 'seller_crypto'|
+| **vaspName** | NIE* | Nazwa docelowego VASP. *Wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
+| **vaspLeix** | NIE* | VASP LEIX. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
+| **vaspRaid** | NIE* | VASP RAID. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
+| **vaspTxid** | NIE* | VASP TXID. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
+| **vaspMisc** | NIE* | VASP MISC. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
+| **vaspCustomerId** | NIE* | Id klienta VASP. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
+| **walletOwnerData** | NIE* | Obiekt reprezentujące dane właściciela portfela kryptowalutowego. Wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isEntityAWalletOwner === 'no'|
+
+Struktura obiektu walletOwnerData:
+| Parametr                | Wymagane | Opis                                                                 |
+| ----------------------- | -------- | -------------------------------------------------------------------- |
+| **partyType**                | TAK      | Rodzaj danych właściciela portfela kryptowalutowego. Aktualnie wspierane 'individual', 'sole_proprietorship', 'company' |
+| **firstName**                | NIE*     | Imię. Wymagane gdy partyType to 'individual' lub 'sole_proprietorship' |
+| **lastName**                 | NIE*     | Nazwisko. Wymagane gdy partyType to 'individual' lub 'sole_proprietorship' |
+| **companyName**              | NIE*     | Nazwa firmy. Wymagane gdy partyType to 'company' lub 'sole_proprietorship' |
+| **postalCode**               | NIE*     | Kod pocztowy. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
+| **country**                  | NIE*     | Kraj. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
+| **city**                     | NIE*     | Miejscowość. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
+| **street**                   | NIE*     | Ulica. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
+| **houseNumber**              | NIE*     | Numer domu. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
+| **flatNumber**               | NIE     | Numer mieszkania. |
+| **taxIdNumber**              | NIE*     | Numer identyfikacji podatkowej. Wymagane gdy partyType to 'company' lub 'sole_proprietorship' i 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
+| **taxIdCountry**             | NIE*     | Kraj identyfikacji podatkowej. Wymagane podany jest taxIdNumber|
 
 Dla transakcji typu buyer wymagane jest podanie strony transakcji o typie seller.
 Dla transakcji typu seller wymagane jest podanie strony transakcji o typie buyer.
