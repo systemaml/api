@@ -207,9 +207,10 @@ a) individual:
 | **citizenship**            | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                                      |
 | **birthCity**              | NIE      | Miejsce urodzenia                                                                               |
 | **documentType**           | TAK      | Rodzaj dokumentu takie jak: "id_card", "electronic_id_card", "passport", "residency_card", "other" (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
-| **documentNumber**         | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)                                   |
-| **documentTypeOther**         | NIE      | Rodzaj innego dokumentu, jest wymagany tylko w przypadku kiedy "documentType": "other"                                 |
-| **documentExpirationDate** | NIE      | Termin ważności dokumentu                                                                       |
+| **documentNumber**         | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                  |
+| **documentIssueCountry**         | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
+| **documentTypeOther**         | NIE      | Rodzaj innego dokumentu, jest wymagany tylko w przypadku kiedy "documentType": "other"       |
+| **documentExpirationDate** | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                                       |
 | **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
 | **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
 | **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
@@ -282,9 +283,10 @@ Struktura obiektu beneficjenta:
 | **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
 | **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru PESEL wymagany jest parametr birthDate) |
 | **documentType**             | NIE      | Rodzaj dokumentu                                                           |
-| **documentNumber**           | NIE      | Numer dokumentu                                                            |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)              |
+| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                            |
+| **documentIssueCountry**         | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                   |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy             |
 | **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
 | **birthCity**                | NIE      | Miejsce urodzenia                                                      |
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                   |
@@ -302,14 +304,15 @@ Struktura obiektu reprezentanta:
 | **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
 | **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
-| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)              |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
+| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)            |
+| **documentIssueCountry**     | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                 |
 | **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta (wymagany jeśli nie ma numeru PESEL)    |
 | **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
 | **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
 | **birthCity**                | NIE      | Miejsce urodzenia                                                          |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy                        |
 | **references**               | NIE      | Referencje własne                                                          |
 | **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
 | **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
@@ -357,9 +360,10 @@ a) kontakt:
   "birthCountry": "PL",
   "citizenship": "PL",
   "createdByName": "Wojtek",
-  "documentExpirationDate": "2025-05-15",
+  "documentExpirationDate": "2026-05-15",
   "documentNumber": "SQT233656",
   "documentType": "id_card",
+  "documentIssueCountry": "PL",
   "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
@@ -407,9 +411,10 @@ a) kontakt:
   "companyName": "Usługi programistyczne",
   "tradeNames": ["FiberPay", "SystemAML"],
   "createdByName": "Adam",
-  "documentExpirationDate": "2025-05-08",
+  "documentExpirationDate": "2026-05-08",
   "documentNumber": "aze123123",
   "documentType": "passport",
+  "documentIssueCountry": "PL",
   "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
@@ -521,6 +526,7 @@ a) kontakt:
       "citizenship": "PL",
       "documentNumber": "JET449773",
       "documentType": "id_card",
+      "documentIssueCountry": "PL",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "ownedSharesAmount": "45",
@@ -558,6 +564,7 @@ a) kontakt:
       "description": "Prezes spółki",
       "documentNumber": "GLD358884",
       "documentType": "id_card",
+      "documentIssueCountry": "PL",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "31111161119",
@@ -745,6 +752,7 @@ Pobranie szczegółów danego podmiotu.
       "personalIdentityNumber": "99120234518",
       "documentType": "passport",
       "documentNumber": "aze123123",
+      "documentIssueCountry": "PL",
       "documentExpirationDate": "2025-05-08",
       "withoutExpirationDate": false,
       "citizenship": "PL",
@@ -867,9 +875,10 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 | **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
 | **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru PESEL wymagany jest parametr birthDate) |
 | **documentType**             | NIE      | Rodzaj dokumentu                                                           |
-| **documentNumber**           | NIE      | Numer dokumentu                                                            |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool)              |
+| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                             |
+| **documentIssueCountry**     | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                  |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy              |
 | **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
 | **birthCity**                | NIE      | Miejsce urodzenia                                                      |
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
@@ -889,6 +898,7 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
   "citizenship": "PL",
   "documentNumber": "PVL852925",
   "documentType": "id_card",
+  "documentIssueCountry": "PL",
   "firstName": "Jan",
   "lastName": "Bożek",
   "ownedSharesAmount": "5",
@@ -928,6 +938,7 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
         "personalIdentityNumber": "65122666817",
         "documentType": "Dowód osobisty",
         "documentNumber": "PVL852925",
+        "documentIssueCountry": "PL",
         "documentExpirationDate": null,
         "withoutExpirationDate": false,
         "citizenship": "PL",
@@ -1033,6 +1044,7 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
         "personalIdentityNumber": "64091098920",
         "documentType": "id_card",
         "documentNumber": "aze123123",
+        "documentIssueCountry": "PL",
         "documentExpirationDate": null,
         "withoutExpirationDate": false,
         "citizenship": "PL",
@@ -1068,14 +1080,15 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
 | **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
 | **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta  (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
 | **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
-| **documentNumber**           | TAK      | Numer dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)              |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu                                                  |
+| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)           |
+| **documentIssueCountry**     | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
+| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                |
 | **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta  (wymagany jeśli nie ma numeru PESEL) |
 | **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
 | **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
 | **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
 | **birthCity**                | NIE      | Miejsce urodzenia                                                      |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool)                       |
+| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy                       |
 | **references**               | NIE      | Referencje własne                                                          |
 | **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
 | **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
@@ -1094,6 +1107,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
   "description": "Prezes",
   "documentNumber": "XIK941595",
   "documentType": "id_card",
+  "documentIssueCountry": "PL",
   "firstName": "Jan",
   "lastName": "Nowak",
   "personalIdentityNumber": "97120824889",
@@ -1122,6 +1136,7 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
       "personalIdentityNumber": "97120824889",
       "documentType": "id_card",
       "documentNumber": "XIK941595",
+      "documentIssueCountry": "PL",
       "documentExpirationDate": null,
       "withoutExpirationDate": false,
       "citizenship": "PL",
@@ -1221,6 +1236,7 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
         "personalIdentityNumber": "31111161119",
         "documentType": "id_card",
         "documentNumber": "aze123123",
+        "documentIssueCountry": "PL",
         "documentExpirationDate": null,
         "withoutExpirationDate": false,
         "citizenship": "PL",
