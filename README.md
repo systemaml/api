@@ -1867,12 +1867,14 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 
 | Parametr            | Wymagane | Opis                                                                         |
 | ------------------- | -------- | ---------------------------------------------------------------------------- |
-| **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any  |
+| **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any, crypto_address, email  |
 | **name**            | NIE *    | Imię, nazwisko lub nazwa firmy (* Wymagane gdy entityType === any)           |
 | **firstName**       | NIE *    | Imię (* Wymagane gdy entityType === individual)                              |
 | **middleName**      | NIE      | Drugie oraz kolejne imiona                                                   |
 | **lastName**        | NIE *    | Nazwisko (* Wymagane gdy entityType === individual)                          |
 | **companyName**     | NIE *    | Nazwa firmy (* Wymagane gdy entityType === company)                          |
+| **email**           | NIE *    | Adres email (* Wymagane gdy entityType === email)                            |
+| **cryptoAddress**   | NIE *    | Adres portfela waluty wirtualnej (* Wymagane gdy entityType === crypto_address) |
 
 #### Przykładowe dane do wyszukania osoby fizycznej (entityType === 'individual'):
 
