@@ -48,6 +48,8 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.32. [GET /parties/{code}/applicants](#get-partiescodeapplicants)
   - 2.33. [GET /parties/{code}/applicants/current](#get-partiescodeapplicantscurrent)
   - 2.34. [GET /applicants/{code}](#get-applicantscode)
+  - 2.35. [DELETE /applicants/{code}](#delete-applicantscode)
+  - 2.36. [POST /applicants/{code}/acceptance](#post-applicantscodeacceptance)
 #
 
 ###
@@ -2073,7 +2075,7 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 
 ### GET /parties/{code}/applicants/current
 
-Pobranie szczegółów głównego aplikanta powiązanego z danym podmiotem. Parametry żądania:
+Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces weryfikacji nie został zakończony. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
 | ------------- | -------- | -------------------------------------------------------------- |
@@ -2119,11 +2121,11 @@ Pobranie szczegółów głównego aplikanta powiązanego z danym podmiotem. Para
                     "otherRights": null,
                     "otherRightsDescription": null,
                     "additionalInformation": null,
-                    "personalIdentityNumber": "80100511936",
+                    "personalIdentityNumber": "13120880234",
                     "birthDate": null,
                     "birthCountry": null,
-                    "firstName": "SŁAWOMIR",
-                    "lastName": "WIĘCH",
+                    "firstName": "JAN",
+                    "lastName": "KOWALSKI",
                     "middleName": null,
                     "familyName": null,
                     "documentType": null,
@@ -2151,11 +2153,11 @@ Pobranie szczegółów głównego aplikanta powiązanego z danym podmiotem. Para
                     "otherRights": null,
                     "otherRightsDescription": null,
                     "additionalInformation": null,
-                    "personalIdentityNumber": "81040800757",
+                    "personalIdentityNumber": "12032665597",
                     "birthDate": null,
                     "birthCountry": null,
-                    "firstName": "LECH",
-                    "lastName": "WILCZYŃSKI",
+                    "firstName": "ADAM",
+                    "lastName": "NOWAK",
                     "middleName": null,
                     "familyName": null,
                     "documentType": null,
@@ -2214,8 +2216,8 @@ Pobranie szczegółów głównego aplikanta powiązanego z danym podmiotem. Para
             "sourceOfIncomeOther": null,
             "boardMembers": [
                 {
-                    "firstName": "SŁAWOMIR",
-                    "lastName": "WIĘCH",
+                    "firstName": "JAN",
+                    "lastName": "KOWALSKI",
                     "applicantCode": "nwbbm895teaa"
                 }
             ],
@@ -2229,8 +2231,8 @@ Pobranie szczegółów głównego aplikanta powiązanego z danym podmiotem. Para
                 "status": "NEW",
                 "payload": {
                     "type": "representative",
-                    "firstName": "SŁAWOMIR",
-                    "lastName": "WIĘCH"
+                    "firstName": "JAN",
+                    "lastName": "KOWALSKI"
                 },
                 "childrenApplicants": [],
                 "description": "KYC na potrzeby wewnętrzne",
@@ -2276,13 +2278,13 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
         "status": "FORM_SUBMITTED",
         "payload": {
             "personalIdentityNumber": "86041830316",
-            "firstName": "SŁAWOMIR",
-            "lastName": "WIĘCH",
+            "firstName": "JAN",
+            "lastName": "KOWALSKI",
             "middleName": null,
             "familyName": null,
             "documentType": "passport",
             "documentTypeOther": null,
-            "documentNumber": "RO144180",
+            "documentNumber": "PO144180",
             "documentIssueCountry": "PL",
             "documentExpirationDate": null,
             "withoutExpirationDate": true,
@@ -2304,6 +2306,134 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
         "createdAt": "2025-09-29T12:08:28.000000Z",
         "updatedAt": "2025-09-29T12:16:55.000000Z",
         "identityVerification": null,
+        "availableIdentityVerificationMethods": [
+            "BANK_TRANSFER",
+            "SUMSUB",
+            "EPUAP_SIGNATURE",
+            "QUALIFIED_ELECTRONIC_SIGNATURE"
+        ]
+    }
+}
+```
+
+
+### DELETE /applicants/{code}
+
+Usunięcie aplikanta wskazanego kodem.
+
+### POST /applicants/{code}/acceptance
+
+Akceptacja deklarowanych danych aplikanta wskazanego kodem.
+
+Parametry żądania:
+| Parametr      | Wymagane | Opis                                                           |
+| ------------- | -------- | -------------------------------------------------------------- |
+| **isAccepted**      | TAK      | Status weryfikacji. Boolean                                                  |
+| **reason**      | TAK      | Powód odrzucenia weryfikacji. Argument obsługiwany tylko wtedy gdy odrzucana jest weryfikacja głównego aplikanta. Jest wymagany. String                                                  |
+| **partyStatus**      | NIE*      | Status podmiotu. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Jest wymagany. Aktualnie wspierane: draft, active, inactive, in_acceptance |
+| **economicRelationStartDate**      | NIE*      | Data rozpoczęcia stosunków gospodarczych. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Jest wymagany. Data YYYY-MM-DD |
+| **references**      | NIE      | Referencje własne podmiotu. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Nie jest wymagany. String |
+
+#### Przykładowe dane do zaakceptowania weryfikacji:
+
+```json
+{
+  "isAccepted": true,
+  "partyStatus": "active",
+  "references": "KYC-12345",
+  "economicRelationStartDate": "2023-01-01"
+}
+```
+
+#### Przykładowa odpowiedź serwera:
+- **STATUS 200 OK**
+
+```json
+{
+    "data": {
+        "code": "dmrkh5bn77mv",
+        "partyCode": "fsjww9j6ja7h",
+        "partyStatus": "active",
+        "status": "ACCEPTED",
+        "payload": {
+            "personalIdentityNumber": "67071212695",
+            "firstName": "JAN",
+            "lastName": "KOWALSKI",
+            "middleName": null,
+            "familyName": null,
+            "documentType": "passport",
+            "documentTypeOther": null,
+            "documentNumber": "TEST 1234",
+            "documentIssueCountry": "PL",
+            "documentExpirationDate": null,
+            "withoutExpirationDate": true,
+            "citizenship": "PL",
+            "birthCity": "Warszawa",
+            "birthCountry": "PL",
+            "politicallyExposed": "no",
+            "politicallyExposedCoworker": "no",
+            "politicallyExposedFamily": "no",
+            "employmentType": "entrepreneur",
+            "employmentTypeOther": null,
+            "accommodationAddress": {
+                "street": "Sienna",
+                "houseNumber": "86",
+                "flatNumber": "47",
+                "postalCode": "00-815",
+                "city": "Warszawa",
+                "country": "PL"
+            },
+            "personalContact": {
+                "emailAdress": "kontakt@systemaml.pl",
+                "phoneCountry": "48",
+                "phoneNumber": "222302622"
+            },
+            "sourcesOfIncome": {
+                "employment_contract": "yes",
+                "self_employment": "no",
+                "consulting": "no",
+                "construction": "no",
+                "cash_operations": "no",
+                "tourism": "no",
+                "currency_exchange": "no",
+                "real_estate": "no",
+                "art_antique_trading": "no",
+                "pharma_healthcare": "no",
+                "defense": "no",
+                "money_transfers": "no",
+                "public_procurement": "no",
+                "trade_goods": "no",
+                "tax_haven": "no",
+                "tax_exempt": "no",
+                "rental_income": "no",
+                "investment_income": "no",
+                "donation": "no",
+                "savings": "no",
+                "loan": "no",
+                "other": "no"
+            },
+            "sourceOfIncomeOther": null,
+            "type": "individual"
+        },
+        "childrenApplicants": [],
+        "description": null,
+        "companyName": null,
+        "redirectUrl": null,
+        "parentApplicantCode": null,
+        "createdAt": "2025-09-24T07:59:43.000000Z",
+        "updatedAt": "2025-09-29T14:08:18.000000Z",
+        "identityVerification": {
+            "code": "9pb8gcup29m5",
+            "method": "BANK_TRANSFER",
+            "status": "ACCEPTED",
+            "resultData": {
+                "contractor": {
+                    "name": "JAN KOWALSKI",
+                    "iban": "50920600096905706312480431"
+                }
+            },
+            "redirectUrl": "https://fiberpay.pl/order/hbfd2qje57a8"
+        },
         "availableIdentityVerificationMethods": [
             "BANK_TRANSFER",
             "SUMSUB",
