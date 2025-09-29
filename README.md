@@ -1999,9 +1999,7 @@ Utworzenie nowego formualarza KYC.
     "createdAt": "2024-09-24T06:56:43.000000Z",
     "updatedAt": "2024-09-24T06:56:43.000000Z",
     "identityVerification": null,
-    "availableIdentityVerificationMethods": [],
-    "isValidForRiskCheck": null,
-    "isFirstVerificationForParty": "yes"
+    "availableIdentityVerificationMethods": []
   }
 }
 ```
@@ -2022,207 +2020,25 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 {
     "data": [
         {
-            "code": "kd645xamcf25",
-            "partyCode": "pcwtmrugpptd",
+            "code": "8j4kttg46ax6",
+            "partyCode": "rx3pt8kygcnn",
             "partyStatus": "kyc_in_progress",
-            "status": "REPRESENTATIVES_VERIFICATIONS_PENDING",
-            "payload": {
-                "tradeNames": [],
-                "taxIdNumber": "7010634566",
-                "registrationCountry": "PL",
-                "companyName": "FIBERPAY SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
-                "businessActivityForm": "limited_liability_company",
-                "businessActivityFormOther": null,
-                "nationalBusinessRegistryNumber": "365899489",
-                "nationalCourtRegistryNumber": "0000647662",
-                "industry": null,
-                "servicesDescription": null,
-                "website": null,
-                "listedOnStock": "no",
-                "terminationDate": null,
-                "mainPkdCode": {
-                    "pkdCode": "64.19.Z",
-                    "pkdName": "POZOSTAŁE POŚREDNICTWO PIENIĘŻNE"
-                },
-                "beneficiaries": [
-                    {
-                        "ownedSharesAmount": "45000",
-                        "ownedSharesUnit": "PLN",
-                        "directRights": "wspólnik spółki z o.o.",
-                        "directRightsPrivilegeType": "brak",
-                        "directRightsPrivilegeDescription": null,
-                        "indirectRights": "BENEFICJENT POSIADA 41,97% AKCJI W SPÓŁCE INPAY SA (KRS 0000512707) I POSIADA 50% UDZIAŁÓW W SPÓŁCE SWAPLY INT OU (ESTONIA, COMPANY NUMBER 14450623)",
-                        "otherRights": null,
-                        "otherRightsDescription": null,
-                        "additionalInformation": null,
-                        "personalIdentityNumber": "80100511936",
-                        "birthDate": null,
-                        "birthCountry": null,
-                        "firstName": "SŁAWOMIR",
-                        "lastName": "WIĘCH",
-                        "middleName": null,
-                        "familyName": null,
-                        "documentType": null,
-                        "documentTypeOther": null,
-                        "documentNumber": null,
-                        "documentIssueCountry": null,
-                        "documentExpirationDate": null,
-                        "withoutExpirationDate": false,
-                        "citizenship": "PL",
-                        "birthCity": null,
-                        "politicallyExposed": "no",
-                        "politicallyExposedFamily": "no",
-                        "politicallyExposedCoworker": "no",
-                        "accommodationAddress": {
-                            "country": "PL"
-                        }
-                    },
-                    {
-                        "ownedSharesAmount": "45000",
-                        "ownedSharesUnit": "PLN",
-                        "directRights": "wspólnik spółki z o.o.",
-                        "directRightsPrivilegeType": "brak",
-                        "directRightsPrivilegeDescription": null,
-                        "indirectRights": "BENEFICJENT POSIADA 42% AKCJI W SPÓŁCE INPAY SA (KRS 0000512707) I POSIADA 50% UDZIAŁÓW W SPÓŁCE SWAPLY INT OU (ESTONIA, COMPANY NUMBER 14450623)",
-                        "otherRights": null,
-                        "otherRightsDescription": null,
-                        "additionalInformation": null,
-                        "personalIdentityNumber": "81040800757",
-                        "birthDate": null,
-                        "birthCountry": null,
-                        "firstName": "LECH",
-                        "lastName": "WILCZYŃSKI",
-                        "middleName": null,
-                        "familyName": null,
-                        "documentType": null,
-                        "documentTypeOther": null,
-                        "documentNumber": null,
-                        "documentIssueCountry": null,
-                        "documentExpirationDate": null,
-                        "withoutExpirationDate": false,
-                        "citizenship": "PL",
-                        "birthCity": null,
-                        "politicallyExposed": "no",
-                        "politicallyExposedFamily": "no",
-                        "politicallyExposedCoworker": "no",
-                        "accommodationAddress": {
-                            "country": "PL"
-                        }
-                    }
-                ],
-                "businessAddress": {
-                    "country": "PL",
-                    "city": "Warszawa",
-                    "street": "Sienna",
-                    "houseNumber": "86",
-                    "flatNumber": "47",
-                    "postalCode": "00-815"
-                },
-                "companyContact": {
-                    "emailAdress": "asd@o2.pl",
-                    "phoneNumber": "123123123",
-                    "phoneCountry": "48"
-                },
-                "sourcesOfIncome": {
-                    "employment_contract": "no",
-                    "self_employment": "yes",
-                    "consulting": "no",
-                    "construction": "no",
-                    "cash_operations": "no",
-                    "tourism": "no",
-                    "currency_exchange": "no",
-                    "real_estate": "no",
-                    "art_antique_trading": "no",
-                    "pharma_healthcare": "no",
-                    "defense": "no",
-                    "money_transfers": "no",
-                    "public_procurement": "no",
-                    "trade_goods": "no",
-                    "tax_haven": "no",
-                    "tax_exempt": "no",
-                    "rental_income": "no",
-                    "investment_income": "no",
-                    "donation": "no",
-                    "savings": "no",
-                    "loan": "no",
-                    "other": "no"
-                },
-                "sourceOfIncomeOther": null,
-                "boardMembers": [
-                    {
-                        "firstName": "SŁAWOMIR",
-                        "lastName": "WIĘCH",
-                        "applicantCode": "9fuhg13pc61g"
-                    },
-                    {
-                        "firstName": "LECH",
-                        "lastName": "WILCZYŃSKI",
-                        "applicantCode": "bjmfxw2kwmwm"
-                    }
-                ],
-                "type": "company"
-            },
-            "childrenApplicants": [
-                {
-                    "code": "9fuhg13pc61g",
-                    "partyCode": "pcwtmrugpptd",
-                    "partyStatus": "kyc_in_progress",
-                    "status": "NEW",
-                    "payload": {
-                        "type": "representative",
-                        "firstName": "SŁAWOMIR",
-                        "lastName": "WIĘCH"
-                    },
-                    "childrenApplicants": [],
-                    "description": null,
-                    "companyName": null,
-                    "redirectUrl": null,
-                    "parentApplicantCode": "kd645xamcf25",
-                    "createdAt": "2025-09-24T07:17:12.000000Z",
-                    "updatedAt": "2025-09-24T07:17:12.000000Z",
-                    "identityVerification": null,
-                    "availableIdentityVerificationMethods": [],
-                    "isValidForRiskCheck": "no",
-                    "isFirstVerificationForParty": "yes"
-                },
-                {
-                    "code": "bjmfxw2kwmwm",
-                    "partyCode": "pcwtmrugpptd",
-                    "partyStatus": "kyc_in_progress",
-                    "status": "NEW",
-                    "payload": {
-                        "type": "representative",
-                        "firstName": "LECH",
-                        "lastName": "WILCZYŃSKI"
-                    },
-                    "childrenApplicants": [],
-                    "description": null,
-                    "companyName": null,
-                    "redirectUrl": null,
-                    "parentApplicantCode": "kd645xamcf25",
-                    "createdAt": "2025-09-24T07:17:12.000000Z",
-                    "updatedAt": "2025-09-24T07:17:12.000000Z",
-                    "identityVerification": null,
-                    "availableIdentityVerificationMethods": [],
-                    "isValidForRiskCheck": "no",
-                    "isFirstVerificationForParty": "yes"
-                }
-            ],
+            "status": "NEW",
+            "payload": [],
+            "childrenApplicants": [],
             "description": null,
             "companyName": null,
             "redirectUrl": null,
             "parentApplicantCode": null,
-            "createdAt": "2025-09-24T06:47:28.000000Z",
-            "updatedAt": "2025-09-24T07:17:12.000000Z",
+            "createdAt": "2025-09-29T11:51:36.000000Z",
+            "updatedAt": "2025-09-29T11:51:36.000000Z",
             "identityVerification": null,
-            "availableIdentityVerificationMethods": [],
-            "isValidForRiskCheck": "no",
-            "isFirstVerificationForParty": "yes"
+            "availableIdentityVerificationMethods": []
         }
     ],
     "links": {
-        "first": "https://apitest.systemaml.pl/1.0/parties/pcwtmrugpptd/applicants?page=1",
-        "last": "https://apitest.systemaml.pl/1.0/parties/pcwtmrugpptd/applicants?page=1",
+        "first": "http://apitest.systemaml.pl/1.0/parties/rx3pt8kygcnn/applicants?page=1",
+        "last": "http://apitest.systemaml.pl/1.0/parties/rx3pt8kygcnn/applicants?page=1",
         "prev": null,
         "next": null
     },
@@ -2237,7 +2053,7 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
                 "active": false
             },
             {
-                "url": "https://apitest.systemaml.pl/1.0/parties/pcwtmrugpptd/applicants?page=1",
+                "url": "http://apitest.systemaml.pl/1.0/parties/rx3pt8kygcnn/applicants?page=1",
                 "label": "1",
                 "active": true
             },
@@ -2247,7 +2063,7 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
                 "active": false
             }
         ],
-        "path": "https://apitest.systemaml.pl/1.0/parties/pcwtmrugpptd/applicants",
+        "path": "http://apitest.systemaml.pl/1.0/parties/rx3pt8kygcnn/applicants",
         "per_page": 15,
         "to": 1,
         "total": 1
@@ -2269,204 +2085,173 @@ Pobranie szczegółów głównego aplikanta powiązanego z danym podmiotem. Para
 
 ```json
 {
-  "data": {
-    "code": "kd645xamcf25",
-    "partyCode": "pcwtmrugpptd",
-    "partyStatus": "kyc_in_progress",
-    "status": "REPRESENTATIVES_VERIFICATIONS_PENDING",
-    "payload": {
-      "tradeNames": [],
-      "taxIdNumber": "7010634566",
-      "registrationCountry": "PL",
-      "companyName": "FIBERPAY SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
-      "businessActivityForm": "limited_liability_company",
-      "businessActivityFormOther": null,
-      "nationalBusinessRegistryNumber": "365899489",
-      "nationalCourtRegistryNumber": "0000647662",
-      "industry": null,
-      "servicesDescription": null,
-      "website": null,
-      "listedOnStock": "no",
-      "terminationDate": null,
-      "mainPkdCode": {
-        "pkdCode": "64.19.Z",
-        "pkdName": "POZOSTAŁE POŚREDNICTWO PIENIĘŻNE"
-      },
-      "beneficiaries": [
-        {
-          "ownedSharesAmount": "45000",
-          "ownedSharesUnit": "PLN",
-          "directRights": "wspólnik spółki z o.o.",
-          "directRightsPrivilegeType": "brak",
-          "directRightsPrivilegeDescription": null,
-          "indirectRights": "BENEFICJENT POSIADA 41,97% AKCJI W SPÓŁCE INPAY SA (KRS 0000512707) I POSIADA 50% UDZIAŁÓW W SPÓŁCE SWAPLY INT OU (ESTONIA, COMPANY NUMBER 14450623)",
-          "otherRights": null,
-          "otherRightsDescription": null,
-          "additionalInformation": null,
-          "personalIdentityNumber": "80100511936",
-          "birthDate": null,
-          "birthCountry": null,
-          "firstName": "SŁAWOMIR",
-          "lastName": "WIĘCH",
-          "middleName": null,
-          "familyName": null,
-          "documentType": null,
-          "documentTypeOther": null,
-          "documentNumber": null,
-          "documentIssueCountry": null,
-          "documentExpirationDate": null,
-          "withoutExpirationDate": false,
-          "citizenship": "PL",
-          "birthCity": null,
-          "politicallyExposed": "no",
-          "politicallyExposedFamily": "no",
-          "politicallyExposedCoworker": "no",
-          "accommodationAddress": {
-            "country": "PL"
-          }
-        },
-        {
-          "ownedSharesAmount": "45000",
-          "ownedSharesUnit": "PLN",
-          "directRights": "wspólnik spółki z o.o.",
-          "directRightsPrivilegeType": "brak",
-          "directRightsPrivilegeDescription": null,
-          "indirectRights": "BENEFICJENT POSIADA 42% AKCJI W SPÓŁCE INPAY SA (KRS 0000512707) I POSIADA 50% UDZIAŁÓW W SPÓŁCE SWAPLY INT OU (ESTONIA, COMPANY NUMBER 14450623)",
-          "otherRights": null,
-          "otherRightsDescription": null,
-          "additionalInformation": null,
-          "personalIdentityNumber": "81040800757",
-          "birthDate": null,
-          "birthCountry": null,
-          "firstName": "LECH",
-          "lastName": "WILCZYŃSKI",
-          "middleName": null,
-          "familyName": null,
-          "documentType": null,
-          "documentTypeOther": null,
-          "documentNumber": null,
-          "documentIssueCountry": null,
-          "documentExpirationDate": null,
-          "withoutExpirationDate": false,
-          "citizenship": "PL",
-          "birthCity": null,
-          "politicallyExposed": "no",
-          "politicallyExposedFamily": "no",
-          "politicallyExposedCoworker": "no",
-          "accommodationAddress": {
-            "country": "PL"
-          }
-        }
-      ],
-      "businessAddress": {
-        "country": "PL",
-        "city": "Warszawa",
-        "street": "Sienna",
-        "houseNumber": "86",
-        "flatNumber": "47",
-        "postalCode": "00-815"
-      },
-      "companyContact": {
-        "emailAdress": "asd@o2.pl",
-        "phoneNumber": "123123123",
-        "phoneCountry": "48"
-      },
-      "sourcesOfIncome": {
-        "employment_contract": "no",
-        "self_employment": "yes",
-        "consulting": "no",
-        "construction": "no",
-        "cash_operations": "no",
-        "tourism": "no",
-        "currency_exchange": "no",
-        "real_estate": "no",
-        "art_antique_trading": "no",
-        "pharma_healthcare": "no",
-        "defense": "no",
-        "money_transfers": "no",
-        "public_procurement": "no",
-        "trade_goods": "no",
-        "tax_haven": "no",
-        "tax_exempt": "no",
-        "rental_income": "no",
-        "investment_income": "no",
-        "donation": "no",
-        "savings": "no",
-        "loan": "no",
-        "other": "no"
-      },
-      "sourceOfIncomeOther": null,
-      "boardMembers": [
-        {
-          "firstName": "SŁAWOMIR",
-          "lastName": "WIĘCH",
-          "applicantCode": "9fuhg13pc61g"
-        },
-        {
-          "firstName": "LECH",
-          "lastName": "WILCZYŃSKI",
-          "applicantCode": "bjmfxw2kwmwm"
-        }
-      ],
-      "type": "company"
-    },
-    "childrenApplicants": [
-        {
-            "code": "9fuhg13pc61g",
-            "partyCode": "pcwtmrugpptd",
-            "partyStatus": "kyc_in_progress",
-            "status": "NEW",
-            "payload": {
-                "type": "representative",
-                "firstName": "SŁAWOMIR",
-                "lastName": "WIĘCH"
+    "data": {
+        "code": "m5hnnwd5u6v5",
+        "partyCode": "zdgmr8v8aqx3",
+        "partyStatus": "kyc_in_progress",
+        "status": "REPRESENTATIVES_VERIFICATIONS_PENDING",
+        "payload": {
+            "tradeNames": [],
+            "taxIdNumber": "7010634566",
+            "registrationCountry": "PL",
+            "companyName": "FIBERPAY SPÓŁKA Z OGRANICZONĄ ODPOWIEDZIALNOŚCIĄ",
+            "businessActivityForm": "limited_liability_company",
+            "businessActivityFormOther": null,
+            "nationalBusinessRegistryNumber": "365899489",
+            "nationalCourtRegistryNumber": "0000647662",
+            "industry": null,
+            "servicesDescription": null,
+            "website": null,
+            "listedOnStock": "no",
+            "terminationDate": null,
+            "mainPkdCode": {
+                "pkdCode": "64.19.Z",
+                "pkdName": "POZOSTAŁE POŚREDNICTWO PIENIĘŻNE"
             },
-            "childrenApplicants": [],
-            "description": null,
-            "companyName": null,
-            "redirectUrl": null,
-            "parentApplicantCode": "kd645xamcf25",
-            "createdAt": "2025-09-24T07:17:12.000000Z",
-            "updatedAt": "2025-09-24T07:17:12.000000Z",
-            "identityVerification": null,
-            "availableIdentityVerificationMethods": [],
-            "isValidForRiskCheck": "no",
-            "isFirstVerificationForParty": "yes"
-        },
-        {
-            "code": "bjmfxw2kwmwm",
-            "partyCode": "pcwtmrugpptd",
-            "partyStatus": "kyc_in_progress",
-            "status": "NEW",
-            "payload": {
-                "type": "representative",
-                "firstName": "LECH",
-                "lastName": "WILCZYŃSKI"
+            "beneficiaries": [
+                {
+                    "ownedSharesAmount": "45000",
+                    "ownedSharesUnit": "PLN",
+                    "directRights": "wspólnik spółki z o.o.",
+                    "directRightsPrivilegeType": "brak",
+                    "directRightsPrivilegeDescription": null,
+                    "indirectRights": "BENEFICJENT POSIADA 41,97% AKCJI W SPÓŁCE INPAY SA (KRS 0000512707) I POSIADA 50% UDZIAŁÓW W SPÓŁCE SWAPLY INT OU (ESTONIA, COMPANY NUMBER 14450623)",
+                    "otherRights": null,
+                    "otherRightsDescription": null,
+                    "additionalInformation": null,
+                    "personalIdentityNumber": "80100511936",
+                    "birthDate": null,
+                    "birthCountry": null,
+                    "firstName": "SŁAWOMIR",
+                    "lastName": "WIĘCH",
+                    "middleName": null,
+                    "familyName": null,
+                    "documentType": null,
+                    "documentTypeOther": null,
+                    "documentNumber": null,
+                    "documentIssueCountry": null,
+                    "documentExpirationDate": null,
+                    "withoutExpirationDate": false,
+                    "citizenship": "PL",
+                    "birthCity": null,
+                    "politicallyExposed": "no",
+                    "politicallyExposedFamily": "no",
+                    "politicallyExposedCoworker": "no",
+                    "accommodationAddress": {
+                        "country": "PL"
+                    }
+                },
+                {
+                    "ownedSharesAmount": "45000",
+                    "ownedSharesUnit": "PLN",
+                    "directRights": "wspólnik spółki z o.o.",
+                    "directRightsPrivilegeType": "brak",
+                    "directRightsPrivilegeDescription": null,
+                    "indirectRights": "BENEFICJENT POSIADA 42% AKCJI W SPÓŁCE INPAY SA (KRS 0000512707) I POSIADA 50% UDZIAŁÓW W SPÓŁCE SWAPLY INT OU (ESTONIA, COMPANY NUMBER 14450623)",
+                    "otherRights": null,
+                    "otherRightsDescription": null,
+                    "additionalInformation": null,
+                    "personalIdentityNumber": "81040800757",
+                    "birthDate": null,
+                    "birthCountry": null,
+                    "firstName": "LECH",
+                    "lastName": "WILCZYŃSKI",
+                    "middleName": null,
+                    "familyName": null,
+                    "documentType": null,
+                    "documentTypeOther": null,
+                    "documentNumber": null,
+                    "documentIssueCountry": null,
+                    "documentExpirationDate": null,
+                    "withoutExpirationDate": false,
+                    "citizenship": "PL",
+                    "birthCity": null,
+                    "politicallyExposed": "no",
+                    "politicallyExposedFamily": "no",
+                    "politicallyExposedCoworker": "no",
+                    "accommodationAddress": {
+                        "country": "PL"
+                    }
+                }
+            ],
+            "businessAddress": {
+                "country": "PL",
+                "city": "Warszawa",
+                "street": "Sienna",
+                "houseNumber": "86",
+                "flatNumber": "47",
+                "postalCode": "00-815"
             },
-            "childrenApplicants": [],
-            "description": null,
-            "companyName": null,
-            "redirectUrl": null,
-            "parentApplicantCode": "kd645xamcf25",
-            "createdAt": "2025-09-24T07:17:12.000000Z",
-            "updatedAt": "2025-09-24T07:17:12.000000Z",
-            "identityVerification": null,
-            "availableIdentityVerificationMethods": [],
-            "isValidForRiskCheck": "no",
-            "isFirstVerificationForParty": "yes"
-        }
-    ],
-    "description": null,
-    "companyName": null,
-    "redirectUrl": null,
-    "parentApplicantCode": null,
-    "createdAt": "2025-09-24T06:47:28.000000Z",
-    "updatedAt": "2025-09-24T07:17:12.000000Z",
-    "identityVerification": null,
-    "availableIdentityVerificationMethods": [],
-    "isValidForRiskCheck": "no",
-    "isFirstVerificationForParty": "yes"
-  }
+            "companyContact": {
+                "emailAdress": "fiberpay@info.pl",
+                "phoneNumber": "123123123",
+                "phoneCountry": "48"
+            },
+            "sourcesOfIncome": {
+                "employment_contract": "no",
+                "self_employment": "yes",
+                "consulting": "no",
+                "construction": "no",
+                "cash_operations": "no",
+                "tourism": "no",
+                "currency_exchange": "no",
+                "real_estate": "no",
+                "art_antique_trading": "no",
+                "pharma_healthcare": "no",
+                "defense": "no",
+                "money_transfers": "no",
+                "public_procurement": "no",
+                "trade_goods": "no",
+                "tax_haven": "no",
+                "tax_exempt": "no",
+                "rental_income": "no",
+                "investment_income": "no",
+                "donation": "no",
+                "savings": "no",
+                "loan": "no",
+                "other": "no"
+            },
+            "sourceOfIncomeOther": null,
+            "boardMembers": [
+                {
+                    "firstName": "SŁAWOMIR",
+                    "lastName": "WIĘCH",
+                    "applicantCode": "nwbbm895teaa"
+                }
+            ],
+            "type": "company"
+        },
+        "childrenApplicants": [
+            {
+                "code": "nwbbm895teaa",
+                "partyCode": "zdgmr8v8aqx3",
+                "partyStatus": "kyc_in_progress",
+                "status": "NEW",
+                "payload": {
+                    "type": "representative",
+                    "firstName": "SŁAWOMIR",
+                    "lastName": "WIĘCH"
+                },
+                "childrenApplicants": [],
+                "description": "KYC na potrzeby wewnętrzne",
+                "companyName": "Fiberpay Sp. z o.o.",
+                "redirectUrl": "https://fiberpay.pl",
+                "parentApplicantCode": "m5hnnwd5u6v5",
+                "createdAt": "2025-09-29T12:08:28.000000Z",
+                "updatedAt": "2025-09-29T12:08:28.000000Z",
+                "identityVerification": null,
+                "availableIdentityVerificationMethods": []
+            }
+        ],
+        "description": "KYC na potrzeby wewnętrzne",
+        "companyName": "Fiberpay Sp. z o.o.",
+        "redirectUrl": "https://fiberpay.pl",
+        "parentApplicantCode": null,
+        "createdAt": "2025-09-29T12:04:36.000000Z",
+        "updatedAt": "2025-09-29T12:08:28.000000Z",
+        "identityVerification": null,
+        "availableIdentityVerificationMethods": []
+    }
 }
 ```
 
@@ -2485,10 +2270,10 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 ```json
 {
     "data": {
-        "code": "9fuhg13pc61g",
-        "partyCode": "pcwtmrugpptd",
+        "code": "nwbbm895teaa",
+        "partyCode": "zdgmr8v8aqx3",
         "partyStatus": "kyc_in_progress",
-        "status": "IDENTITY_VERIFICATION_IN_REVIEW",
+        "status": "FORM_SUBMITTED",
         "payload": {
             "personalIdentityNumber": "86041830316",
             "firstName": "SŁAWOMIR",
@@ -2512,30 +2297,19 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
             "code": null
         },
         "childrenApplicants": [],
-        "description": null,
-        "companyName": null,
-        "redirectUrl": null,
-        "parentApplicantCode": "kd645xamcf25",
-        "createdAt": "2025-09-24T07:17:12.000000Z",
-        "updatedAt": "2025-09-24T07:36:00.000000Z",
-        "identityVerification": {
-            "code": "c5ztzvnyemp1",
-            "method": "BANK_TRANSFER",
-            "status": "IN_REVIEW",
-            "resultData": null,
-            "contractor": {
-                "name": "Sławomir Więch",
-                "iban": "PL12340000MOCK"
-            }
-        },
+        "description": "KYC na potrzeby wewnętrzne",
+        "companyName": "Fiberpay Sp. z o.o.",
+        "redirectUrl": "https://fiberpay.pl",
+        "parentApplicantCode": "m5hnnwd5u6v5",
+        "createdAt": "2025-09-29T12:08:28.000000Z",
+        "updatedAt": "2025-09-29T12:16:55.000000Z",
+        "identityVerification": null,
         "availableIdentityVerificationMethods": [
             "BANK_TRANSFER",
             "SUMSUB",
             "EPUAP_SIGNATURE",
             "QUALIFIED_ELECTRONIC_SIGNATURE"
-        ],
-        "isValidForRiskCheck": "yes",
-        "isFirstVerificationForParty": "yes"
+        ]
     }
 }
 ```
