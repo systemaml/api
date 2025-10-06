@@ -148,7 +148,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9
 ```json
 {
   "payload": {
-    "type": "TRANSACTION_DATA_UPDATED",
+    "type": "transaction_data_updated",
     "code": "x8y6pqe6yss6",
     "eventTime": 1741776952,
     "data": {
@@ -169,16 +169,16 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9
 
 | Typ | Opis zdarzenia |
 | -------- | --------------------------------------|
-| **PARTY_PROFILE_UPDATED** | Aktualizacja danych podmiotu |
-| **PARTY_STATUS_CHANGE** | Zmiana statusu podmiotu |
-| **PARTY_RISK_CHANGE** | Zmiana statusu ryzyka podmiotu |
-| **PARTY_DELETED** | Usunięcie podmiotu |
-| **TRANSACTION_DATA_UPDATED** | Aktualizacja danych transakcji |
-| **TRANSACTION_STATUS_CHANGE** | Zmiana statusu transakcji |
-| **TRANSACTION_RISK_CHANGE** | Zmiana statusu ryzyka transakcji |
-| **TRANSACTION_DELETED** | Usunięcie transakcji |
-| **APPLICANT_CREATED** | Utworzenie aplikanta KYC |
-| **APPLICANT_STATUS_CHANGED** | Zmiana statusu aplikanta KYC |
+| **party_profile_updated** | Aktualizacja danych podmiotu |
+| **party_status_change** | Zmiana statusu podmiotu |
+| **party_risk_change** | Zmiana statusu ryzyka podmiotu |
+| **party_deleted** | Usunięcie podmiotu |
+| **transaction_data_updated** | Aktualizacja danych transakcji |
+| **transaction_status_change** | Zmiana statusu transakcji |
+| **transaction_risk_change** | Zmiana statusu ryzyka transakcji |
+| **transaction_deleted** | Usunięcie transakcji |
+| **applicant_created** | Utworzenie aplikanta KYC |
+| **applicant_status_change** | Zmiana statusu aplikanta KYC |
 
 Informację o tokenach JWT oraz bibliotekach do weryfikacji tokenów w różnych językach programowania znajdziesz pod adresem: [https://jwt.io/](https://jwt.io/)
 
