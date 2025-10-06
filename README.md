@@ -12,7 +12,7 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 1.1. [Klucze API](#klucze-api)
   - 1.2. [Nagłówek zapytania](#nagłówek-zapytania)
   - 1.3. [Ciało zapytania](#ciało-zapytania)
-  - 1.4. [Mechanizm callbacków](#mechanizm-callbacków)
+  - 1.4. [Mechanizm webhooków](#mechanizm-webhooków)
 - 2. [Opis usług](#opis-usług)
   - 2.1. [POST /parties](#post-parties)
   - 2.2. [GET /parties](#get-parties)
@@ -130,27 +130,27 @@ const payload = {
 const encoded = encode(payload, SECRET, "HS256");
 
 ```
-### Mechanizm callbacków
+### Mechanizm webhooków
 
-Wykonując działania na transakcjach i podmiotach **utworzonych przez API** SystemAML może wykonywać żądanie HTTP na wskazany uprzednio adres, gdzie:
+SystemAML automatycznie wysyła żądania HTTP POST na wcześniej skonfigurowany adres URL w momencie wystąpienia określonych zdarzeń w systemie (np. zmiana statusu podmiotu, utworzenie transakcji).
 
-* w ciele (body) żądania będzie zawarty **token JWT**,
-* w nagłówku API-Key(header) żądania będzie zawarty jawny klucz API, wskazujacy który **klucz tajny** został wykorzystany do utworzenia JWT.
+W ciele (body) żądania HTTP POST będzie zawarty **token JWT** zawierający dane o zdarzeniu.
 
-**Token JWT** należy odkodować używając algorytmu **HS256** oraz **klucza tajnego**.
-Jeśli sygnatura tokenu zgadza się po odszyfrowaniu, to znaczy, że dane są prawdziwe i zostały wysłane przez SystemAML.
+**Token JWT** należy zweryfikować używając algorytmu **HS256** oraz **webhook secret** wygenerowanego w [panelu konfiguracji webhooków](https://systemaml.pl/dashboard/settings/api/).
+Weryfikacja sygnatury tokenu potwierdza autentyczność danych i gwarantuje, że zostały wysłane przez SystemAML.
 
-#### Przykładowy callback w postaci JWT dla typu transaction_data_updated:
+#### Przykładowy webhook w postaci JWT dla typu TRANSACTION_DATA_UPDATED:
 ```
-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJ0cmFuc2FjdGlvbl9kYXRhX3VwZGF0ZWQiLCJjb2RlIjoieDh5NnBxZTZ5c3M2IiwiZGF0YSI6eyJ0cmFuc2FjdGlvbiI6eyJjb2RlIjoic3pyenZ6ODlxajhlIiwicmVmZXJlbmNlcyI6bnVsbCwidHlwZSI6ImJ1eWVyIiwic3RhdHVzIjoiYWNjZXB0ZWQifX19LCJpc3MiOiJTeXN0ZW1BTUwzIiwiaWF0IjoxNzQxNzc2OTY0fQ.Xq3HDU9P6m8Va_l4VW-czoUGyGpX446H_8VXcHDv0Mc
+eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9EQVRBX1VQREFURUQiLCJjb2RlIjoieDh5NnBxZTZ5c3M2IiwiZGF0YSI6eyJ0cmFuc2FjdGlvbiI6eyJjb2RlIjoic3pyenZ6ODlxajhlIiwicmVmZXJlbmNlcyI6bnVsbCwidHlwZSI6ImJ1eWVyIiwic3RhdHVzIjoiYWNjZXB0ZWQifX19LCJpc3MiOiJTeXN0ZW1BTUwiLCJpYXQiOjE3NDE3NzY5NjQsImV2ZW50VGltZSI6IjIwMjUtMDMtMTRUMTI6NDk6MjQuMDAwMDAwWiJ9.Xq3HDU9P6m8Va_l4VW-czoUGyGpX446H_8VXcHDv0Mc
 ```
-#### Po odszyfrowaniu:
+#### Po zdekodowaniu:
 
 ```json
 {
   "payload": {
-    "type": "transaction_data_updated",
+    "type": "TRANSACTION_DATA_UPDATED",
     "code": "x8y6pqe6yss6",
+    "eventTime": 1741776952,
     "data": {
       "transaction": {
         "code": "szrzvz89qj8e",
@@ -165,24 +165,22 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJ0cmFuc2FjdGlvbl9
 }
 ```
 
-### Lista wszystkich callbacków w SystemAML
+### Lista typów webhooków
 
-| Akcje | Typ callbacku                         |
+| Typ | Opis zdarzenia |
 | -------- | --------------------------------------|
-| Aktualizacja danych podmiotu | **PARTY_PROFILE_UPDATED**|
-| Zmiana statusu podmiotu | **TYPE_PARTY_STATUS_CHANGE**|
-| Zmiana statusu ryzyka podmiotu | **PARTY_RISK_CHANGE**|
-| Usunięcie podmiotu | **PARTY_DELETED**|
-| Aktualizacja danych transakcji | **TRANSACTION_DATA_UPDATED**|
-| Zmiana statusu transakcji | **TRANSACTION_STATUS_CHANGE**|
-| Zmiana statusu ryzyka transakcji | **TRANSACTION_RISK_CHANGE**|
-| Usunięcie transakcji | **TRANSACTION_DELETED**|
+| **PARTY_PROFILE_UPDATED** | Aktualizacja danych podmiotu |
+| **PARTY_STATUS_CHANGE** | Zmiana statusu podmiotu |
+| **PARTY_RISK_CHANGE** | Zmiana statusu ryzyka podmiotu |
+| **PARTY_DELETED** | Usunięcie podmiotu |
+| **TRANSACTION_DATA_UPDATED** | Aktualizacja danych transakcji |
+| **TRANSACTION_STATUS_CHANGE** | Zmiana statusu transakcji |
+| **TRANSACTION_RISK_CHANGE** | Zmiana statusu ryzyka transakcji |
+| **TRANSACTION_DELETED** | Usunięcie transakcji |
+| **APPLICANT_CREATED** | Utworzenie aplikanta KYC |
+| **APPLICANT_STATUS_CHANGED** | Zmiana statusu aplikanta KYC |
 
-
-Każdy callback informuje zewnętrzny system o zmianach w podmiotach (Party) lub transakcjach (Transaction), jeśli zostały one **utworzone przez API** i jeśli zespół ma ustawiony URL callbacka.
-
-
-Informacje jak odkodować lub jakich bibliotek użyć do obsługi tokenu JWT znajdziesz pod adresem: [https://jwt.io/](https://jwt.io/)
+Informację o tokenach JWT oraz bibliotekach do weryfikacji tokenów w różnych językach programowania znajdziesz pod adresem: [https://jwt.io/](https://jwt.io/)
 
 
 ## Opis usług
