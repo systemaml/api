@@ -44,15 +44,16 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
   - 2.29. [POST /tasks/{code}/comments](#post-taskscodecomments)
   - 2.30. [GET /tasks/{code}/comments](#get-taskscodecomments)
-  - 2.31. [DELETE /tasks/{code}/comments/{commentsCode}](#delete-taskcodecommentscommentsCode)
-  - 2.32. [POST /sanctions-lists/search](#post-sanctions-listssearch)
-  - 2.33. [GET /sanctions/{code}/pdf](#get-sanctionscodepdf)
-  - 2.34. [POST /parties/applicants](#post-partiesapplicants)
-  - 2.35. [GET /parties/{code}/applicants](#get-partiescodeapplicants)
-  - 2.36. [GET /parties/{code}/applicants/current](#get-partiescodeapplicantscurrent)
-  - 2.37. [GET /applicants/{code}](#get-applicantscode)
-  - 2.38. [DELETE /applicants/{code}](#delete-applicantscode)
-  - 2.39. [POST /applicants/{code}/acceptance](#post-applicantscodeacceptance)
+  - 2.31. [PATCH /tasks/{code}/comments/{commentsCode}](#delete-taskcodecommentscommentsCode)
+  - 2.32. [DELETE /tasks/{code}/comments/{commentsCode}](#patch-taskcodecommentscommentsCode)
+  - 2.33. [POST /sanctions-lists/search](#post-sanctions-listssearch)
+  - 2.34. [GET /sanctions/{code}/pdf](#get-sanctionscodepdf)
+  - 2.35. [POST /parties/applicants](#post-partiesapplicants)
+  - 2.36. [GET /parties/{code}/applicants](#get-partiescodeapplicants)
+  - 2.37. [GET /parties/{code}/applicants/current](#get-partiescodeapplicantscurrent)
+  - 2.38. [GET /applicants/{code}](#get-applicantscode)
+  - 2.39. [DELETE /applicants/{code}](#delete-applicantscode)
+  - 2.40. [POST /applicants/{code}/acceptance](#post-applicantscodeacceptance)
 #
 
 ###
@@ -1912,6 +1913,42 @@ Zwraca komentarze przypisane do zadania.
 ### DELETE /task/{code}/comments/{commentsCode}
 
 Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie
+
+### PATCH /task/{code}/comments/{commentsCode}
+
+Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie
+
+| Parametr      | Wymagane | Opis                                                           |
+| ------------- | -------- | -------------------------------------------------------------- |
+| **content**   | TAK      | Treść komentarza                                               |
+| **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
+
+#### Przykładowe dane do utworzenia komentarza:
+
+```json
+{
+  "content": "aktualizacja komentarza",
+  "occurredAt": "2025-11-04 15:24:10",
+ }
+
+```
+
+#### Przykładowa odpowiedź serwera:
+
+- **STATUS 201 CREATED**
+
+```json
+{
+  "data": {
+    "code": "4hvard7z49eh",
+    "content": "aktualizacja komentarza",
+    "authorName": "Jan Kowalski",
+    "occurredAt": "2025-08-04T13:24:10.000000Z",
+    "createdAt": "2025-11-04T14:24:13.000000Z",
+    "updatedAt": "2025-11-04T14:27:49.000000Z"
+  }
+}
+```
 
 ### POST /sanctions-lists/search
 
