@@ -1780,7 +1780,7 @@ Struktura obiektu alert:
 ```json
 {
   "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-  "expirationDate": "2023-04-24",
+  "expirationDate": "2025-11-06",
 }
 ```
 
@@ -1792,13 +1792,21 @@ Struktura obiektu alert:
 {
   "data": {
     "code": "dcsur627nf3w",
+    "identifier": "Z-1",
     "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
     "status": null,
     "alert": null,
     "party": null,
+    "kycApplicant": null,
     "transaction": null,
-    "expirationDate": null,
-    "createdAt": "2023-11-14T15:57:32.000000Z"
+    "alert": null,
+    "expirationDate": "2025-11-06",
+    "createdAt": "2025-11-05T09:34:56.000000Z",
+    "type": null,
+    "canEdit": true,
+    "createdByName": "Jan Kowalski",
+    "redirectTarget": null,
+    "commentsCount": 0
   }
 }
 ```
