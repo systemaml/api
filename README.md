@@ -232,9 +232,9 @@ b) sole_proprietorship - wszystkie powyższe oraz:
 
 | Parametr                           | Wymagane | Opis                                                                |
 | ---------------------------------- | -------- | ------------------------------------------------------------------- |
-| **taxIdNumber**                    | TAK      | NIP prowadzonej działalności                                        |
 | **registrationCountry**            | TAK      | Kraj rejestracji podmiotu                                           |
-| **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)             |
+| **taxIdNumber**                    | TAK      | NIP prowadzonej działalności(wymagany jeśli kraj rejestracji podmiotu to Polska)     |
+| **companyIdentifier**              | TAK      | Numer identyfikujący (wymagany jeśli kraj rejestracji podmiotu jest inny niż Polska) |
 | **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
 | **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                        |
@@ -253,9 +253,9 @@ c) company:
 
 | Parametr                           | Wymagane | Opis                                                                         |
 | ---------------------------------- | -------- | ---------------------------------------------------------------------------- |
-| **taxIdNumber**                    | TAK      | Numer NIP                                                                    |
 | **registrationCountry**            | TAK      | Kraj rejestracji podmiotu                                                    |
-| **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
+| **taxIdNumber**                    | NIE      | NIP prowadzonej działalności                                                 |
+| **companyIdentifier**              | TAK      | Numer identyfikujący (wymagany jeśli kraj rejestracji podmiotu jest inny niż Polska) |
 | **references**                     | NIE      | Referencje własne                                                            |
 | **companyName**                    | TAK      | Nazwa działalności                                                           |
 | **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                                 |
