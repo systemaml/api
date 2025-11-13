@@ -262,7 +262,7 @@ c) company:
 | **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
 | **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
 | **terminationDate**                | NIE      | Data zakończenia działalności                                                |
-| **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
+| **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagany jeśli kraj rejestracji podmiotu jest inny niż Polska) |
 | **website**                        | NIE      | Strona internetowa                                                           |
 | **servicesDescription**            | NIE      | Opis usług                                                                   |
 | **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
