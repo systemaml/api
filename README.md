@@ -1964,7 +1964,7 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 
 | Parametr            | Wymagane | Opis                                                                         |
 | ------------------- | -------- | ---------------------------------------------------------------------------- |
-| **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any, crypto_address, email  |
+| **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any, crypto_address, email, pesel, nip, regon, krs  |
 | **name**            | NIE *    | Imię, nazwisko lub nazwa firmy (* Wymagane gdy entityType === any)           |
 | **firstName**       | NIE *    | Imię (* Wymagane gdy entityType === individual)                              |
 | **middleName**      | NIE      | Drugie oraz kolejne imiona                                                   |
@@ -1972,6 +1972,10 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 | **companyName**     | NIE *    | Nazwa firmy (* Wymagane gdy entityType === company)                          |
 | **email**           | NIE *    | Adres email (* Wymagane gdy entityType === email)                            |
 | **cryptoAddress**   | NIE *    | Adres portfela waluty wirtualnej (* Wymagane gdy entityType === crypto_address) |
+| **pesel**           | NIE *    | Pesel (* Wymagane gdy entityType === pesel)                                  |
+| **nip**             | NIE *    | Nip (* Wymagane gdy entityType === nip)                                      |
+| **regon**           | NIE *    | Regon (* Wymagane gdy entityType === regon)                                  |
+| **krs**             | NIE *    | Krs (* Wymagane gdy entityType === krs)                                      |
 
 #### Przykładowe dane do wyszukania osoby fizycznej (entityType === 'individual'):
 
