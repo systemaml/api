@@ -391,10 +391,10 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
   "accommodationAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
   "personalContact": {
     "emailAdress": "jan.kowalski@example.com",
@@ -497,25 +497,25 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
   "accommodationAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
   "businessAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "postalCode": "00-815"
   },
   "forwardAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
 
   // Kontakty
@@ -853,10 +853,10 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 {
   "country": "PL",
   "city": "Warszawa",
-  "street": "Grzybowska",
-  "houseNumber": "4",
-  "flatNumber": "106",
-  "postalCode": "00-131"
+  "street": "Sienna",
+  "houseNumber": "86",
+  "flatNumber": "47",
+  "postalCode": "00-185"
 }
 ```
 
@@ -1009,10 +1009,10 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
   "businessAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
   "companyContact": {
     "emailAdress": "info@fiberpay.pl",
@@ -1083,10 +1083,10 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:38:11.000000Z"
       }
     ],
@@ -1228,10 +1228,10 @@ Pobranie szczegółów danego podmiotu.
         "type": "forwarding_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
@@ -1239,10 +1239,10 @@ Pobranie szczegółów danego podmiotu.
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
@@ -1250,10 +1250,10 @@ Pobranie szczegółów danego podmiotu.
         "type": "accommodation_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:49:44.000000Z"
       }
     ],
@@ -1521,10 +1521,10 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
-          "street": "Grzybowska",
-          "houseNumber": "4",
-          "flatNumber": "106",
-          "postalCode": "00-131",
+          "street": "Sienna",
+          "houseNumber": "86",
+          "flatNumber": "47",
+          "postalCode": "00-815",
           "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ],
@@ -1795,10 +1795,10 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
-          "street": "Grzybowska",
-          "houseNumber": "4",
-          "flatNumber": "106",
-          "postalCode": "00-131",
+          "street": "Sienna",
+          "houseNumber": "86",
+          "flatNumber": "47",
+          "postalCode": "00-815",
           "createdAt": "2023-11-20T16:39:46.000000Z"
         }
       ],
