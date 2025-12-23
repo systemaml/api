@@ -281,8 +281,6 @@ Tworzy nowy podmiot w systemie AML.
 
 SystemAML wspiera trzy typy podmiotów:
 
-SystemAML wspiera trzy typy podmiotów:
-
 | Typ | Kod | Opis | Przykład użycia |
 |-----|-----|------|-----------------|
 | **Osoba fizyczna** | `individual` | Klient indywidualny | Kupujący kryptowaluty |
@@ -1821,7 +1819,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 
 ### GET /parties/{code}/boardmembers
 
-Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
+Pobranie reprezentantów wskazanego kodem podmiotu typu company.
 
 #### Przykładowa odpowiedź serwera:
 
