@@ -6,72 +6,81 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
 
 ## Spis treści
 
-### 1. Konfiguracja
-- [1.1. Informacje ogólne](#informacje-ogólne)
-- [1.2. Adresy serwerów](#adresy-serwerów)
-- [1.3. Klucze API](#klucze-api)
-- [1.4. Webhooks](#webhooks)
+## 1. Konfiguracja
+- [1.1. Informacje ogólne](#11-informacje-ogólne)
+- [1.2. Adresy serwerów](#12-adresy-serwerów)
+- [1.3. Klucze API](#13-klucze-api)
+- [1.4. Webhooks](#14-webhooks)
 
-### 2. Zarządzanie podmiotami
-- [2.1. Podmioty](#podmioty)
-  - [2.1.1. Tworzenie podmiotu](#post-parties) `POST /parties`
-  - [2.1.2. Lista podmiotów](#get-parties) `GET /parties`
-  - [2.1.3. Szczegóły podmiotu](#get-partiescode) `GET /parties/{code}`
-  - [2.1.4. Zmiana statusu podmiotu](#post-partiescodestatus) `POST /parties/{code}/status`
-  - [2.1.5. Usuwanie podmiotu](#delete-partiescode) `DELETE /parties/{code}`
-- [2.2. Beneficjenci](#beneficjenci)
-  - [2.2.1. Dodawanie beneficjenta](#post-partiescodebeneficiaries) `POST /parties/{code}/beneficiaries`
-  - [2.2.2. Lista beneficjentów](#get-partiescodebeneficiaries) `GET /parties/{code}/beneficiaries`
-  - [2.2.3. Usuwanie beneficjenta](#delete-beneficiariescode) `DELETE /beneficiaries/{code}`
-- [2.3. Reprezentanci](#reprezentanci)
-  - [2.3.1. Dodawanie reprezentanta](#post-partiescodeboardmembers) `POST /parties/{code}/boardmembers`
-  - [2.3.2. Lista reprezentantów](#get-partiescodeboardmembers) `GET /parties/{code}/boardmembers`
-  - [2.3.3. Usuwanie reprezentanta](#delete-boardmemberscode) `DELETE /boardmembers/{code}`
+## 2. Zarządzanie podmiotami
 
-### 3. Transakcje
-- [3.1. Tworzenie transakcji](#post-transactions) `POST /transactions`
-- [3.2. Lista transakcji](#get-transactions) `GET /transactions`
-- [3.3. Szczegóły transakcji](#get-transactionscode) `GET /transactions/{code}`
-- [3.4. Zmiana statusu transakcji](#post-transactionscodestatus) `POST /transactions/{code}/status`
-- [3.5. Usuwanie transakcji](#delete-transactionscode) `DELETE /transactions/{code}`
+### 2.1. Podmioty
+  - [2.1.1. Tworzenie podmiotu](#211-post-parties) `POST /parties`
+  - [2.1.2. Lista podmiotów](#212-get-parties) `GET /parties`
+  - [2.1.3. Szczegóły podmiotu](#213-get-partiescode) `GET /parties/{code}`
+  - [2.1.4. Zmiana statusu podmiotu](#214-post-partiescodestatus) `POST /parties/{code}/status`
+  - [2.1.5. Usuwanie podmiotu](#215-delete-partiescode) `DELETE /parties/{code}`
 
-### 4. Zdarzenia i zadania
-- [4.1. Zdarzenia](#zdarzenia)
-  - [4.1.1. Tworzenie zdarzenia](#post-history-events) `POST /history-events`
-  - [4.1.2. Lista zdarzeń](#get-history-events) `GET /history-events`
-  - [4.1.3. Szczegóły zdarzenia](#get-history-eventscode) `GET /history-events/{code}`
-  - [4.1.4. Usuwanie zdarzenia](#delete-history-eventscode) `DELETE /history-events/{code}`
-- [4.2. Komentarze do zdarzeń](#komentarze-do-zdarzeń)
-  - [4.2.1. Dodaj komentarz](#post-comments) `POST /comments`
-  - [4.2.2. Lista komentarzy](#get-history-eventscodecomments) `GET /history-events/{code}/comments`
-  - [4.2.3. Usuń komentarz](#delete-commentscode) `DELETE /comments/{code}`
-- [4.3. Zadania](#zadania)
-  - [4.3.1. Tworzenie zadania](#post-tasks) `POST /tasks`
-  - [4.3.2. Lista zadań](#get-tasks) `GET /tasks`
-  - [4.3.3. Szczegóły zadania](#get-taskscode) `GET /tasks/{code}`
-  - [4.3.4. Usuwanie zadania](#delete-taskscode) `DELETE /tasks/{code}`
-- [4.4. Komentarze do zadań](#komentarze-do-zadań)
-  - [4.4.1. Dodaj komentarz](#post-taskscodecomments) `POST /tasks/{code}/comments`
-  - [4.4.2. Lista komentarzy](#get-taskscodecomments) `GET /tasks/{code}/comments`
-  - [4.4.3. Edytuj komentarz](#patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
-  - [4.4.4. Usuń komentarz](#delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
+### 2.2. Beneficjenci
+  - [2.2.1. Dodawanie beneficjenta](#221-post-partiescodebeneficiaries) `POST /parties/{code}/beneficiaries`
+  - [2.2.2. Lista beneficjentów](#222-get-partiescodebeneficiaries) `GET /parties/{code}/beneficiaries`
+  - [2.2.3. Usuwanie beneficjenta](#223-delete-beneficiariescode) `DELETE /beneficiaries/{code}`
 
-### 5. Alerty
-- [5.1. Lista alertów](#get-alerts) `GET /alerts`
-- [5.2. Szczegóły alertu](#get-alertscode) `GET /alerts/{code}`
-- [5.3. Usuwanie alertu](#delete-alertscode) `DELETE /alerts/{code}`
+### 2.3. Reprezentanci
+  - [2.3.1. Dodawanie reprezentanta](#231-post-partiescodeboardmembers) `POST /parties/{code}/boardmembers`
+  - [2.3.2. Lista reprezentantów](#232-get-partiescodeboardmembers) `GET /parties/{code}/boardmembers`
+  - [2.3.3. Usuwanie reprezentanta](#233-delete-boardmemberscode) `DELETE /boardmembers/{code}`
 
-### 6. Compliance i weryfikacja
-- [6.1. Listy sankcyjne](#listy-sankcyjne)
-  - [6.1.1. Wyszukiwanie](#post-sanctions-listssearch) `POST /sanctions-lists/search`
-  - [6.1.2. Raport PDF](#get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
-- [6.2. Proces KYC](#proces-kyc)
-  - [6.2.1. Utworzenie formularza](#post-partiesapplicants) `POST /parties/applicants`
-  - [6.2.2. Lista aplikantów](#get-partiescodeapplicants) `GET /parties/{code}/applicants`
-  - [6.2.3. Aktualny aplikant](#get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
-  - [6.2.4. Szczegóły aplikanta](#get-applicantscode) `GET /applicants/{code}`
-  - [6.2.5. Usuwanie aplikanta](#delete-applicantscode) `DELETE /applicants/{code}`
-  - [6.2.6. Akceptacja aplikanta](#post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
+## 3. Transakcje
+- [3.1. Tworzenie transakcji](#31-post-transactions) `POST /transactions`
+- [3.2. Lista transakcji](#32-get-transactions) `GET /transactions`
+- [3.3. Szczegóły transakcji](#33-get-transactionscode) `GET /transactions/{code}`
+- [3.4. Zmiana statusu transakcji](#34-post-transactionscodestatus) `POST /transactions/{code}/status`
+- [3.5. Usuwanie transakcji](#35-delete-transactionscode) `DELETE /transactions/{code}`
+
+## 4. Zdarzenia i zadania
+
+### 4.1. Zdarzenia
+  - [4.1.1. Tworzenie zdarzenia](#411-post-history-events) `POST /history-events`
+  - [4.1.2. Lista zdarzeń](#412-get-history-events) `GET /history-events`
+  - [4.1.3. Szczegóły zdarzenia](#413-get-history-eventscode) `GET /history-events/{code}`
+  - [4.1.4. Usuwanie zdarzenia](#414-delete-history-eventscode) `DELETE /history-events/{code}`
+
+### 4.2. Komentarze do zdarzeń
+  - [4.2.1. Dodaj komentarz](#421-post-comments) `POST /comments`
+  - [4.2.2. Lista komentarzy](#422-get-history-eventscodecomments) `GET /history-events/{code}/comments`
+  - [4.2.3. Usuń komentarz](#423-delete-commentscode) `DELETE /comments/{code}`
+
+### 4.3. Zadania
+  - [4.3.1. Tworzenie zadania](#431-post-tasks) `POST /tasks`
+  - [4.3.2. Lista zadań](#432-get-tasks) `GET /tasks`
+  - [4.3.3. Szczegóły zadania](#433-get-taskscode) `GET /tasks/{code}`
+  - [4.3.4. Usuwanie zadania](#434-delete-taskscode) `DELETE /tasks/{code}`
+
+### 4.4. Komentarze do zadań
+  - [4.4.1. Dodaj komentarz](#441-post-taskscodecomments) `POST /tasks/{code}/comments`
+  - [4.4.2. Lista komentarzy](#442-get-taskscodecomments) `GET /tasks/{code}/comments`
+  - [4.4.3. Usuń komentarz](#443-delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
+  - [4.4.4. Edytuj komentarz](#444-patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
+
+## 5. Alerty
+- [5.1. Lista alertów](#51-get-alerts) `GET /alerts`
+- [5.2. Szczegóły alertu](#52-get-alertscode) `GET /alerts/{code}`
+- [5.3. Usuwanie alertu](#53-delete-alertscode) `DELETE /alerts/{code}`
+
+## 6. Compliance i weryfikacja
+
+### 6.1. Listy sankcyjne
+  - [6.1.1. Wyszukiwanie](#611-post-sanctions-listssearch) `POST /sanctions-lists/search`
+  - [6.1.2. Raport PDF](#612-get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
+
+### 6.2. Proces KYC
+  - [6.2.1. Utworzenie formularza](#621-post-partiesapplicants) `POST /parties/applicants`
+  - [6.2.2. Lista aplikantów](#622-get-partiescodeapplicants) `GET /parties/{code}/applicants`
+  - [6.2.3. Aktualny aplikant](#623-get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
+  - [6.2.4. Szczegóły aplikanta](#624-get-applicantscode) `GET /applicants/{code}`
+  - [6.2.5. Usuwanie aplikanta](#625-delete-applicantscode) `DELETE /applicants/{code}`
+  - [6.2.6. Akceptacja aplikanta](#626-post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
 
 ## 1. Konfiguracja
 
@@ -273,7 +282,7 @@ https://abc123.ngrok.io/webhook
 
 ### 2.1. Podmioty
 
-### 2.1.1. POST /parties
+#### 2.1.1. POST /parties
 
 Tworzy nowy podmiot w systemie AML.
 
@@ -358,7 +367,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 | `annuitant` | Rentier |
 | `other` | Inny |
 
-### Dane PEP (wymagane)
+### Dane Politically Exposed Person (PEP) (wymagane)
 
 | Parametr | Wartości | Opis |
 |:----------:|:----------:|:------:|
@@ -525,7 +534,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ```
 
 
-## Typ 3: Company (Osoba prawna)
+## Typ 3: Company (Organizacja)
 
 ### Parametry podstawowe firmy
 
@@ -836,6 +845,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 | Parametr | Wymagane | Opis |
 |:----------:|:----------:|:------:|
 | **country** | NIE | Kraj (kod ISO) |
+| **region** | NIE | Region/Województwo |
 | **city** | NIE | Miasto |
 | **street** | NIE | Ulica |
 | **houseNumber** | NIE | Numer domu |
@@ -1091,7 +1101,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 }
 ```
 
-### 2.1.2. GET /parties
+#### 2.1.2. GET /parties
 
 Zwraca podmioty utworzone przez użytkownika.
 
@@ -1140,7 +1150,7 @@ Zwraca podmioty utworzone przez użytkownika.
 ```
 
 
-### 2.1.3. GET /parties/{code}
+#### 2.1.3. GET /parties/{code}
 
 Pobranie szczegółów danego podmiotu.
 
@@ -1266,7 +1276,7 @@ Pobranie szczegółów danego podmiotu.
 }
 ```
 
-### 2.1.4. POST /parties/{code}/status
+#### 2.1.4. POST /parties/{code}/status
 
 Zmiana statusu podmiotu.
 
@@ -1359,7 +1369,7 @@ Zmiana statusu podmiotu powoduje:
 
 ---
 
-### 2.1.5. DELETE /parties/{code}
+#### 2.1.5. DELETE /parties/{code}
 
 Usunięcie podmiotu wskazanego kodem identyfikującym.
 
@@ -1367,7 +1377,7 @@ Usunięcie podmiotu wskazanego kodem identyfikującym.
 
 ### 2.2. Beneficjenci
 
-### 2.2.1. POST /parties/{code}/beneficiaries
+#### 2.2.1. POST /parties/{code}/beneficiaries
 
 Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 
@@ -1625,7 +1635,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 }
 ```
 
-### 2.2.2. GET /parties/{code}/beneficiaries
+#### 2.2.2. GET /parties/{code}/beneficiaries
 
 Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 
@@ -1674,7 +1684,7 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 
 W przypadku gdy podmiot nie posiada dodanych beneficjentów rzeczywistych zwracana tablica jest pusta
 
-### 2.2.3. DELETE /beneficiaries/{code}
+#### 2.2.3. DELETE /beneficiaries/{code}
 
 Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
@@ -1682,7 +1692,7 @@ Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
 ### 2.3. Reprezentanci
 
-### 2.3.1. POST /parties/{code}/boardmembers
+#### 2.3.1. POST /parties/{code}/boardmembers
 
 Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 
@@ -1902,7 +1912,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 }
 ```
 
-### 2.3.2. GET /parties/{code}/boardmembers
+#### 2.3.2. GET /parties/{code}/boardmembers
 
 Pobranie reprezentantów wskazanego kodem podmiotu typu company.
 
@@ -1942,7 +1952,7 @@ Pobranie reprezentantów wskazanego kodem podmiotu typu company.
 ```
 W przypadku gdy podmiot nie posiada dodanych reprezentantów zwracana tablica jest pusta
 
-### 2.3.3. DELETE /boardmembers/{code}
+#### 2.3.3. DELETE /boardmembers/{code}
 
 Usunięcie reprezentanta wskazanego kodem identyfikującym.
 
@@ -2117,6 +2127,7 @@ Tworzy nową transakcję w systemie.
 | Parametr | Wymagane | Opis |
 |:----------:|:----------:|:------:|
 | **country** | TAK | Kraj (kod ISO) |
+| **region** | NIE | Region/Województwo |
 | **city** | TAK | Miasto |
 | **street** | TAK | Ulica |
 | **houseNumber** | TAK | Numer domu |
@@ -2449,12 +2460,12 @@ Usunięcie transakcji wskazanej kodem identyfikującym.
 
 ### 4.1. Zdarzenia
 
-### 4.1.1. POST /history-events
+#### 4.1.1. POST /history-events
 
 Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 
 | Parametr            | Wymagane | Opis                                                          |
-| ------------------- | -------- | ------------------------------------------------------------- |
+|:-------------------:|:--------:|:-------------------------------------------------------------:|
 | **description**     | TAK      | Opis zdarzenia                                                |
 | **significance**    | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
 | **party**           | NIE      | Obiekt zawierający kod powiązanego podmiotu                   |
@@ -2466,14 +2477,14 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 Struktura obiektu party:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanego podmiotu          |
 
 
 Struktura obiektu transaction:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanej transakcji         |
 
 
@@ -2508,7 +2519,7 @@ Struktura obiektu transaction:
 }
 ```
 
-### 4.1.2. GET /history-events
+#### 4.1.2. GET /history-events
 
 Zwraca zdarzenia przypisane do użytkownika.
 
@@ -2547,7 +2558,7 @@ Zwraca zdarzenia przypisane do użytkownika.
 
 Jeśli użytkownik nie posiada żadnych zdarzeń zwracany jest adekwatny komunikat ze statusem 200.
 
-### 4.1.3. GET /history-events/{code}
+#### 4.1.3. GET /history-events/{code}
 
 Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
@@ -2573,7 +2584,7 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
 Jeśli zdarzenie nie posiada przypisanych komentarzy zmienna zwracana przy kluczu "commentsAmount" równa się 0
 
-### 4.1.4. DELETE /history-events/{code}
+#### 4.1.4. DELETE /history-events/{code}
 
 Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
@@ -2581,12 +2592,12 @@ Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
 ### 4.2. Komentarze do zdarzeń
 
-### 4.2.1. POST /comments
+#### 4.2.1. POST /comments
 
 Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **content**   | TAK      | Treść komentarza                                               |
 | **eventCode** | TAK      | Identyfikator zdarzenia do którego będzie przypisany komentarz |
 | **occursAt**  | TAK      | Data wystąpienia zdarzenia                                     |
@@ -2617,11 +2628,11 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 }
 ```
 
-### 4.2.2. GET /history-events/{code}/comments
+#### 4.2.2. GET /history-events/{code}/comments
 
 Zwraca komentarze przypisane do zdarzenia.
 
-### 4.2.3. DELETE /comments/{code}
+#### 4.2.3. DELETE /comments/{code}
 
 Usunięcie komentarza wskazanego kodem identyfikującym.
 
@@ -2629,12 +2640,12 @@ Usunięcie komentarza wskazanego kodem identyfikującym.
 
 ### 4.3. Zadania
 
-### 4.3.1. POST /tasks
+#### 4.3.1. POST /tasks
 
 Tworzenie nowego zadania w systemie. Parametry żądania:
 
 | Parametr            | Wymagane | Opis                                             |
-| ------------------- | -------- | ------------------------------------------------ |
+|:-------------------:|:--------:|:------------------------------------------------:|
 | **content**         | TAK      | Treść zadania                                    |
 | **expirationDate**  | NIE      | Data przed którą zadanie powinno zostać wykonane |
 | **alert**           | NIE      | Obiekt zawierający kod powiązanego alertu        |
@@ -2646,20 +2657,20 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 Struktura obiektu party:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanego podmiotu          |
 
 
 Struktura obiektu transaction:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanej transakcji         |
 
 Struktura obiektu alert:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanego alertu            |
 
 
@@ -2698,7 +2709,7 @@ Struktura obiektu alert:
 }
 ```
 
-### 4.3.2. GET /tasks
+#### 4.3.2. GET /tasks
 
 Pobranie zadań powiązanych z danym użytkownikiem.
 
@@ -2745,7 +2756,7 @@ Pobranie zadań powiązanych z danym użytkownikiem.
 }
 ```
 
-### 4.3.3. GET /tasks/{code}
+#### 4.3.3. GET /tasks/{code}
 
 Pobranie szczegółów zadania wskazanego kodem.
 
@@ -2768,7 +2779,7 @@ Pobranie szczegółów zadania wskazanego kodem.
 }
 ```
 
-### 4.3.4. DELETE /tasks/{code}
+#### 4.3.4. DELETE /tasks/{code}
 
 Usunięcie zadania wskazanego kodem identyfikującym.
 
@@ -2776,12 +2787,12 @@ Usunięcie zadania wskazanego kodem identyfikującym.
 
 ### 4.4. Komentarze do zadań
 
-### 4.4.1. POST /tasks/{code}/comments
+#### 4.4.1. POST /tasks/{code}/comments
 
 Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **content**   | TAK      | Treść komentarza                                               |
 | **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
 
@@ -2812,20 +2823,20 @@ Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 }
 ```
 
-### 4.4.2. GET /tasks/{code}/comments
+#### 4.4.2. GET /tasks/{code}/comments
 
 Zwraca komentarze przypisane do zadania.
 
-### 4.4.3. DELETE /tasks/{code}/comments/{commentsCode}
+#### 4.4.3. DELETE /tasks/{code}/comments/{commentsCode}
 
 Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
-### 4.4.4. PATCH /tasks/{code}/comments/{commentsCode}
+#### 4.4.4. PATCH /tasks/{code}/comments/{commentsCode}
 
 Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **content**   | TAK      | Treść komentarza                                               |
 | **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
 
@@ -3118,7 +3129,7 @@ Raport zawiera:
 Utworzenie nowego formualarza KYC.
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **companyName**      | NIE      | Nazwa firmy wyświetlana na formularzu                   |
 | **description**      | NIE      | Opis wyświetlany na formularzu                          |
 | **redirectUrl**      | NIE      | URL przekierowania po wypełnieniu formualarza           |
@@ -3164,7 +3175,7 @@ Utworzenie nowego formualarza KYC.
 Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **code**      | TAK      | Kod podmiotu                                                   |
 
 #### Przykładowa odpowiedź serwera:
@@ -3232,7 +3243,7 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces weryfikacji nie został zakończony. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **code**      | TAK      | Kod podmiotu                                                   |
 
 #### Przykładowa odpowiedź serwera:
@@ -3418,7 +3429,7 @@ Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces
 Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **code**      | TAK      | Kod aplikanta                                                  |
 
 #### Przykładowa odpowiedź serwera:
@@ -3482,14 +3493,19 @@ Usunięcie aplikanta wskazanego kodem.
 
 Akceptacja deklarowanych danych aplikanta wskazanego kodem.
 
+**Uwaga:** Endpoint obsługuje dwa scenariusze:
+- **Akceptacja** (`isAccepted: true`) - wymaga: `partyStatus`, `economicRelationStartDate`; opcjonalnie: `references`
+- **Odrzucenie** (`isAccepted: false`) - wymaga: `reason`
+
 Parametry żądania:
-| Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
-| **isAccepted**      | TAK      | Status weryfikacji. Boolean                                                  |
-| **reason**      | TAK      | Powód odrzucenia weryfikacji. Argument obsługiwany tylko wtedy gdy odrzucana jest weryfikacja głównego aplikanta. Jest wymagany. String                                                  |
-| **partyStatus**      | NIE*      | Status podmiotu. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Jest wymagany. Aktualnie wspierane: draft, active, inactive, in_acceptance |
-| **economicRelationStartDate**      | NIE*      | Data rozpoczęcia stosunków gospodarczych. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Jest wymagany. Data YYYY-MM-DD |
-| **references**      | NIE      | Referencje własne podmiotu. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Nie jest wymagany. String |
+
+| Parametr                      | Typ     | Wymagane          | Opis                                                                               |
+|:-----------------------------:|:-------:|:-----------------:|:----------------------------------------------------------------------------------:|
+| **isAccepted**                | Boolean | TAK               | Decyzja o akceptacji weryfikacji                                                   |
+| **reason**                    | String  | Przy odrzuceniu   | Powód odrzucenia weryfikacji                                                       |
+| **partyStatus**               | String  | Przy akceptacji   | Status podmiotu: `draft`, `active`, `inactive`, `in_acceptance`                    |
+| **economicRelationStartDate** | Date    | Przy akceptacji   | Data rozpoczęcia stosunków gospodarczych (format: YYYY-MM-DD)                      |
+| **references**                | String  | NIE               | Referencje własne podmiotu (tylko przy akceptacji)                                 |
 
 #### Przykładowe dane do zaakceptowania weryfikacji:
 
