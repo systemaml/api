@@ -4,8 +4,6 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
 
 # SystemAML
 
-###
-
 ## Spis treści
 
 ### 1. Konfiguracja
@@ -16,66 +14,68 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
 
 ### 2. Zarządzanie podmiotami
 - [2.1. Podmioty](#podmioty)
-  - [Tworzenie podmiotu](#post-parties) `POST /parties`
-  - [Lista podmiotów](#get-parties) `GET /parties`
-  - [Szczegóły podmiotu](#get-partiescode) `GET /parties/{code}`
-  - [Usuwanie podmiotu](#delete-partiescode) `DELETE /parties/{code}`
+  - [2.1.1. Tworzenie podmiotu](#post-parties) `POST /parties`
+  - [2.1.2. Lista podmiotów](#get-parties) `GET /parties`
+  - [2.1.3. Szczegóły podmiotu](#get-partiescode) `GET /parties/{code}`
+  - [2.1.4. Zmiana statusu podmiotu](#post-partiescodestatus) `POST /parties/{code}/status`
+  - [2.1.5. Usuwanie podmiotu](#delete-partiescode) `DELETE /parties/{code}`
 - [2.2. Beneficjenci](#beneficjenci)
-  - [Dodawanie beneficjenta](#post-partiescodebeneficiaries) `POST /parties/{code}/beneficiaries`
-  - [Lista beneficjentów](#get-partiescodebeneficiaries) `GET /parties/{code}/beneficiaries`
-  - [Usuwanie beneficjenta](#delete-beneficiariescode) `DELETE /beneficiaries/{code}`
+  - [2.2.1. Dodawanie beneficjenta](#post-partiescodebeneficiaries) `POST /parties/{code}/beneficiaries`
+  - [2.2.2. Lista beneficjentów](#get-partiescodebeneficiaries) `GET /parties/{code}/beneficiaries`
+  - [2.2.3. Usuwanie beneficjenta](#delete-beneficiariescode) `DELETE /beneficiaries/{code}`
 - [2.3. Reprezentanci](#reprezentanci)
-  - [Dodawanie reprezentanta](#post-partiescodeboardmembers) `POST /parties/{code}/boardmembers`
-  - [Lista reprezentantów](#get-partiescodeboardmembers) `GET /parties/{code}/boardmembers`
-  - [Usuwanie reprezentanta](#delete-boardmemberscode) `DELETE /boardmembers/{code}`
+  - [2.3.1. Dodawanie reprezentanta](#post-partiescodeboardmembers) `POST /parties/{code}/boardmembers`
+  - [2.3.2. Lista reprezentantów](#get-partiescodeboardmembers) `GET /parties/{code}/boardmembers`
+  - [2.3.3. Usuwanie reprezentanta](#delete-boardmemberscode) `DELETE /boardmembers/{code}`
 
 ### 3. Transakcje
-- [Tworzenie transakcji](#post-transactions) `POST /transactions`
-- [Lista transakcji](#get-transactions) `GET /transactions`
-- [Szczegóły transakcji](#get-transactionscode) `GET /transactions/{code}`
-- [Usuwanie transakcji](#delete-transactionscode) `DELETE /transactions/{code}`
+- [3.1. Tworzenie transakcji](#post-transactions) `POST /transactions`
+- [3.2. Lista transakcji](#get-transactions) `GET /transactions`
+- [3.3. Szczegóły transakcji](#get-transactionscode) `GET /transactions/{code}`
+- [3.4. Zmiana statusu transakcji](#post-transactionscodestatus) `POST /transactions/{code}/status`
+- [3.5. Usuwanie transakcji](#delete-transactionscode) `DELETE /transactions/{code}`
 
 ### 4. Zdarzenia i zadania
 - [4.1. Zdarzenia](#zdarzenia)
-  - [Tworzenie zdarzenia](#post-history-events) `POST /history-events`
-  - [Lista zdarzeń](#get-history-events) `GET /history-events`
-  - [Szczegóły zdarzenia](#get-history-eventscode) `GET /history-events/{code}`
-  - [Usuwanie zdarzenia](#delete-history-eventscode) `DELETE /history-events/{code}`
+  - [4.1.1. Tworzenie zdarzenia](#post-history-events) `POST /history-events`
+  - [4.1.2. Lista zdarzeń](#get-history-events) `GET /history-events`
+  - [4.1.3. Szczegóły zdarzenia](#get-history-eventscode) `GET /history-events/{code}`
+  - [4.1.4. Usuwanie zdarzenia](#delete-history-eventscode) `DELETE /history-events/{code}`
 - [4.2. Komentarze do zdarzeń](#komentarze-do-zdarzeń)
-  - [Dodaj komentarz](#post-comments) `POST /comments`
-  - [Lista komentarzy](#get-history-eventscodecomments) `GET /history-events/{code}/comments`
-  - [Usuń komentarz](#delete-commentscode) `DELETE /comments/{code}`
+  - [4.2.1. Dodaj komentarz](#post-comments) `POST /comments`
+  - [4.2.2. Lista komentarzy](#get-history-eventscodecomments) `GET /history-events/{code}/comments`
+  - [4.2.3. Usuń komentarz](#delete-commentscode) `DELETE /comments/{code}`
 - [4.3. Zadania](#zadania)
-  - [Tworzenie zadania](#post-tasks) `POST /tasks`
-  - [Lista zadań](#get-tasks) `GET /tasks`
-  - [Szczegóły zadania](#get-taskscode) `GET /tasks/{code}`
-  - [Usuwanie zadania](#delete-taskscode) `DELETE /tasks/{code}`
+  - [4.3.1. Tworzenie zadania](#post-tasks) `POST /tasks`
+  - [4.3.2. Lista zadań](#get-tasks) `GET /tasks`
+  - [4.3.3. Szczegóły zadania](#get-taskscode) `GET /tasks/{code}`
+  - [4.3.4. Usuwanie zadania](#delete-taskscode) `DELETE /tasks/{code}`
 - [4.4. Komentarze do zadań](#komentarze-do-zadań)
-  - [Dodaj komentarz](#post-taskscodecomments) `POST /tasks/{code}/comments`
-  - [Lista komentarzy](#get-taskscodecomments) `GET /tasks/{code}/comments`
-  - [Edytuj komentarz](#patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
-  - [Usuń komentarz](#delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
+  - [4.4.1. Dodaj komentarz](#post-taskscodecomments) `POST /tasks/{code}/comments`
+  - [4.4.2. Lista komentarzy](#get-taskscodecomments) `GET /tasks/{code}/comments`
+  - [4.4.3. Edytuj komentarz](#patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
+  - [4.4.4. Usuń komentarz](#delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
 
 ### 5. Alerty
-- [Lista alertów](#get-alerts) `GET /alerts`
-- [Szczegóły alertu](#get-alertscode) `GET /alerts/{code}`
-- [Usuwanie alertu](#delete-alertscode) `DELETE /alerts/{code}`
+- [5.1. Lista alertów](#get-alerts) `GET /alerts`
+- [5.2. Szczegóły alertu](#get-alertscode) `GET /alerts/{code}`
+- [5.3. Usuwanie alertu](#delete-alertscode) `DELETE /alerts/{code}`
 
 ### 6. Compliance i weryfikacja
 - [6.1. Listy sankcyjne](#listy-sankcyjne)
-  - [Wyszukiwanie](#post-sanctions-listssearch) `POST /sanctions-lists/search`
-  - [Raport PDF](#get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
+  - [6.1.1. Wyszukiwanie](#post-sanctions-listssearch) `POST /sanctions-lists/search`
+  - [6.1.2. Raport PDF](#get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
 - [6.2. Proces KYC](#proces-kyc)
-  - [Utworzenie formularza](#post-partiesapplicants) `POST /parties/applicants`
-  - [Lista aplikantów](#get-partiescodeapplicants) `GET /parties/{code}/applicants`
-  - [Aktualny aplikant](#get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
-  - [Szczegóły aplikanta](#get-applicantscode) `GET /applicants/{code}`
-  - [Usuwanie aplikanta](#delete-applicantscode) `DELETE /applicants/{code}`
-  - [Akceptacja aplikanta](#post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
+  - [6.2.1. Utworzenie formularza](#post-partiesapplicants) `POST /parties/applicants`
+  - [6.2.2. Lista aplikantów](#get-partiescodeapplicants) `GET /parties/{code}/applicants`
+  - [6.2.3. Aktualny aplikant](#get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
+  - [6.2.4. Szczegóły aplikanta](#get-applicantscode) `GET /applicants/{code}`
+  - [6.2.5. Usuwanie aplikanta](#delete-applicantscode) `DELETE /applicants/{code}`
+  - [6.2.6. Akceptacja aplikanta](#post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
 
-###
+## 1. Konfiguracja
 
-## Informacje ogólne
+### 1.1. Informacje ogólne
 
 API SystemAML umożliwia automatyzację procesów związanych z:
 - Zarządzaniem bazą klientów (podmiotów)
@@ -84,13 +84,13 @@ API SystemAML umożliwia automatyzację procesów związanych z:
 - Przeprowadzaniem procesu KYC (Know Your Customer)
 - Tworzeniem alertów i zarządzaniem zadaniami
 
-### Dla kogo?
+#### Dla kogo?
 API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji klientów zgodnie z ustawą o przeciwdziałaniu praniu pieniędzy.
 
-### Adresy serwerów
+### 1.2. Adresy serwerów
 
 | Środowisko | Funkcjonalność | Ścieżka bazowa |
-|------------|----------------|----------------|
+|:------------:|:----------------:|:----------------:|
 | **Produkcyjne** | API | `/1.0/` |
 | **Produkcyjne** | Panel aplikacji | `/` |
 | **Testowe** | API | `/1.0/` |
@@ -101,14 +101,14 @@ API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji kli
 ### ⚠️ Ważne informacje o środowiskach
 
 | Aspekt | Opis |
-|--------|------|
+|:--------:|:------:|
 | **Separacja** | Środowiska są całkowicie rozdzielone (osobna infrastruktura) |
 | **Klucze API** | Klucze z jednego środowiska **nie działają** w drugim |
 | **Dane** | Dane nie są synchronizowane między środowiskami |
 | **Testowe** | Służy do testów integracji, dane nie są prawdziwe |
 | **Produkcyjne** | Środowisko operacyjne z prawdziwymi danymi |
 
-### Klucze API
+### 1.3. Klucze API
 
 Do korzystania z API konieczne jest wygenerowanie kluczy:
 
@@ -167,7 +167,7 @@ const payload = {
 const encoded = encode(payload, SECRET, "HS256");
 
 ```
-### Webhooks
+### 1.4. Webhooks
 
 Webhooks umożliwiają automatyczne powiadomienia o zdarzeniach w SystemAML.
 
@@ -228,7 +228,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9
 
 ##### Podmioty
 | Typ | Opis | Przykładowe dane |
-|-----|------|------------------|
+|:-----:|:------:|:------------------:|
 | `party_profile_updated` | Aktualizacja danych podmiotu | `{ party: { code, firstName, lastName } }` |
 | `party_status_change` | Zmiana statusu | `{ party: { code, status } }` |
 | `party_risk_change` | Zmiana ryzyka | `{ party: { code, riskStatus } }` |
@@ -236,7 +236,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9
 
 ##### Transakcje
 | Typ | Opis |
-|-----|------|
+|:-----:|:------:|
 | `transaction_data_updated` | Aktualizacja danych transakcji |
 | `transaction_status_change` | Zmiana statusu transakcji |
 | `transaction_risk_change` | Zmiana ryzyka transakcji |
@@ -244,7 +244,7 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9
 
 ##### Proces KYC
 | Typ | Opis |
-|-----|------|
+|:-----:|:------:|
 | `applicant_created` | Utworzenie nowego aplikanta |
 | `applicant_status_change` | Zmiana statusu weryfikacji |
 
@@ -269,11 +269,11 @@ https://abc123.ngrok.io/webhook
 - [Ngrok - Tunelowanie lokalne](https://ngrok.com/)
 
 
-## Opis usług
+## 2. Zarządzanie podmiotami
 
-## Zarządzanie podmiotami
+### 2.1. Podmioty
 
-### POST /parties
+### 2.1.1. POST /parties
 
 Tworzy nowy podmiot w systemie AML.
 
@@ -282,17 +282,17 @@ Tworzy nowy podmiot w systemie AML.
 SystemAML wspiera trzy typy podmiotów:
 
 | Typ | Kod | Opis | Przykład użycia |
-|-----|-----|------|-----------------|
+|:-----:|:-----:|:------:|:-----------------:|
 | **Osoba fizyczna** | `individual` | Klient indywidualny | Kupujący kryptowaluty |
 | **Jednoosobowa działalność** | `sole_proprietorship` | Przedsiębiorca | Freelancer, konsultant |
-| **Firma** | `company` | Osoba prawna | Sp. z o.o., S.A. |
+| **Firma** | `company` | Organizacja | Sp. z o.o., S.A. |
 
 #### Parametry wspólne dla wszystkich typów
 
 | Parametr | Typ | Wymagane | Wartości | Opis |
-|----------|-----|----------|----------|------|
+|:----------:|:-----:|:----------:|:----------:|:------:|
 | **type** | string | TAK | `individual`, `sole_proprietorship`, `company` | Typ podmiotu |
-| **status** | string | TAK | `draft`, `active`, `inactive`, `in_acceptance` | Status podmiotu |
+| **status** | string | TAK | `draft`, `active`, `occasional`, `inactive`, `in_acceptance` | Status podmiotu |
 | **economicRelationStartDate** | date | TAK | `YYYY-MM-DD` | Data rozpoczęcia współpracy |
 | **references** | string | NIE | - | Własny identyfikator/notatka |
 | **createdByName** | string | NIE | - | Osoba wprowadzająca wpis |
@@ -304,7 +304,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Parametry podstawowe
 
 | Parametr | Typ | Wymagane | Opis | Przykład | Walidacja |
-|----------|-----|----------|------|----------|-----------|
+|:----------:|:-----:|:----------:|:------:|:----------:|:-----------:|
 | **firstName** | string | TAK | Imię | `"Jan"` | Max 255 znaków |
 | **lastName** | string | TAK | Nazwisko | `"Kowalski"` | Max 255 znaków |
 | **personalIdentityNumber** | string | WARUNKOWO* | PESEL | `"09271573233"` | 11 cyfr + suma kontrolna |
@@ -322,7 +322,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Dokument tożsamości
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **documentType** | TAK | Typ dokumentu | `"id_card"` |
 | **documentNumber** | TAK | Numer dokumentu | `"SQT233656"` |
 | **documentIssueCountry** | TAK | Kraj wydania | `"PL"` |
@@ -336,7 +336,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 #### Typy dokumentów (documentType)
 
 | Kod | Nazwa |
-|-----|-------|
+|:-----:|:-------:|
 | `id_card` | Dowód osobisty |
 | `electronic_id_card` | E-dowód |
 | `passport` | Paszport |
@@ -346,21 +346,22 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Status zatrudnienia (employmentType)
 
 | Kod | Nazwa |
-|-----|-------|
+|:-----:|:-------:|
 | `student` | Student |
 | `retiree` | Emeryt |
 | `pensioner` | Rencista |
 | `entrepreneur` | Przedsiębiorca |
-| `employedUOP` | Zatrudniony (UoP) |
-| `employedUZUOD` | Zatrudniony (UZ/UoD) |
-| `unemployed` | Bezrobotny |
-| `jobless` | Bez pracy |
-| `annuitant` | Rencista |
+| `employed_uop` | Zatrudniony na UOP |
+| `employed_uzuod` | Zatrudniony na UZ/UOD |
+| `unemployed` | Niezatrudniony |
+| `jobless` | Bezrobotny |
+| `annuitant` | Rentier |
+| `other` | Inny |
 
 ### Dane PEP (wymagane)
 
 | Parametr | Wartości | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **politicallyExposed** | `yes`, `no` | Czy osoba jest PEP? |
 | **politicallyExposedFamily** | `yes`, `no` | Czy jest rodziną PEP? |
 | **politicallyExposedCoworker** | `yes`, `no` | Czy jest współpracownikiem PEP? |
@@ -412,7 +413,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Parametry działalności gospodarczej
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **taxIdNumber** | TAK | NIP działalności | `"3765151981"` |
 | **registrationCountry** | TAK | Kraj rejestracji | `"PL"` |
 | **companyName** | TAK | Nazwa działalności | `"Usługi IT Jan Kowalski"` |
@@ -439,7 +440,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Typy adresów dla jednoosobowej działalności
 
 | Parametr | Opis | Wymagane |
-|----------|------|----------|
+|:----------:|:------:|:----------:|
 | **accommodationAddress** | Adres zamieszkania właściciela | NIE |
 | **forwardAddress** | Adres korespondencyjny | NIE |
 | **businessAddress** | Adres prowadzenia działalności | NIE |
@@ -447,7 +448,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Typy kontaktów dla jednoosobowej działalności
 
 | Parametr | Opis | Wymagane |
-|----------|------|----------|
+|:----------:|:------:|:----------:|
 | **personalContact** | Kontakt osobisty właściciela | NIE |
 | **companyContact** | Kontakt firmowy działalności | NIE |
 
@@ -458,12 +459,10 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
   "type": "sole_proprietorship",
   "status": "active",
   "registrationCountry": "PL",
-  
-  // Dane osobowe
   "firstName": "Jan",
   "lastName": "Kowalski",
   "personalIdentityNumber": "99120234518",
-  "documentType": "id_card",
+  "documentType": "passport",
   "documentNumber": "ABC123456",
   "documentIssueCountry": "PL",
   "documentExpirationDate": "2026-05-08",
@@ -474,14 +473,11 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
   "politicallyExposed": "no",
   "politicallyExposedFamily": "no",
   "politicallyExposedCoworker": "no",
-  
-  // Dane działalności
   "companyName": "Usługi programistyczne Jan Kowalski",
   "tradeNames": ["CodeMaster", "DevPro"],
   "taxIdNumber": "3765151981",
   "nationalBusinessRegistryNumber": "632702201",
   "economicRelationStartDate": "2023-11-14",
-  
   "mainPkdCode": {
     "pkdCode": "62.01.Z",
     "pkdName": "Działalność związana z oprogramowaniem"
@@ -492,8 +488,6 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
       "pkdName": "Przetwarzanie danych"
     }
   ],
-  
-  // Adresy
   "accommodationAddress": {
     "country": "PL",
     "city": "Warszawa",
@@ -517,8 +511,6 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
     "flatNumber": "47",
     "postalCode": "00-815"
   },
-
-  // Kontakty
   "personalContact": {
     "emailAdress": "jan@example.com",
     "phoneCountry": "48",
@@ -538,7 +530,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Parametry podstawowe firmy
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **taxIdNumber** | TAK | NIP | `"7010634566"` |
 | **registrationCountry** | TAK | Kraj rejestracji | `"PL"` |
 | **companyName** | TAK | Nazwa firmy | `"FiberPay Sp. z o.o."` |
@@ -564,15 +556,16 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 ### Formy prawne (businessActivityForm)
 
 | Kod | Nazwa |
-|-----|-------|
-| `stock_company` | Spółka akcyjna (S.A.) |
-| `limited_liability_company` | Spółka z o.o. |
-| `limited_partnership` | Spółka komandytowa |
-| `general_partnership` | Spółka jawna |
-| `civil_partnership` | Spółka cywilna |
-| `foundation` | Fundacja |
-| `association` | Stowarzyszenie |
-| `cooperative` | Spółdzielnia |
+|:-----:|:-------:|
+| `limited_liability_company` | Spółka z ograniczoną odpowiedzialnością |
+| `stock_company` | Spółka akcyjna |
+| `simple_joint_stock_company` | Prosta spółka akcyjna |
+| `civil_partnership_company` | Spółka cywilna |
+| `general_partnership_company` | Spółka jawna |
+| `professional_partnership_company` | Spółka partnerska |
+| `limited_partnership_company` | Spółka komandytowa |
+| `limited_joint_stock_partnership_company` | Spółka komandytowo-akcyjna |
+| `branches_of_foreign_entrepreneur` | Oddziały zagranicznych przedsiębiorców |
 | `other` | Inna |
 
 ### Struktura PKD
@@ -598,7 +591,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
 ### Parametry podstawowe beneficjenta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **firstName** | TAK | Imię | `"Jan"` |
 | **lastName** | TAK | Nazwisko | `"Kowalski"` |
 | **personalIdentityNumber** | WARUNKOWO* | PESEL | `"64091098920"` |
@@ -613,7 +606,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
 ### Dokument tożsamości beneficjenta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **documentType** | NIE | Typ dokumentu | `"id_card"` |
 | **documentNumber** | WARUNKOWO* | Numer dokumentu | `"JET449773"` |
 | **documentIssueCountry** | WARUNKOWO* | Kraj wydania | `"PL"` |
@@ -626,7 +619,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
 ### Uprawnienia beneficjenta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **ownedSharesAmount** | NIE | Liczba udziałów | `"45"` |
 | **ownedSharesUnit** | NIE | Jednostka | `"%"` lub `"PLN"` |
 | **directRights** | NIE | Bezpośrednie uprawnienia | `"Wspólnik spółki"` |
@@ -643,7 +636,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
 ### Dane PEP beneficjenta
 
 | Parametr | Wymagane | Wartości | Opis |
-|----------|----------|----------|------|
+|:----------:|:----------:|:----------:|:------:|
 | **politicallyExposed** | TAK | `yes`, `no` | Czy beneficjent jest PEP? |
 | **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
 | **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
@@ -651,7 +644,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
 ### Adres beneficjenta
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **accommodationAddress** | NIE | Obiekt z adresem zamieszkania |
 
 **Struktura adresu:**
@@ -676,6 +669,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
   "documentType": "id_card",
   "documentNumber": "JET449773",
   "documentIssueCountry": "PL",
+  "withoutExpirationDate": true,
   "citizenship": "PL",
   "birthCountry": "PL",
   "birthCity": "Warszawa",
@@ -714,7 +708,7 @@ Beneficjenci rzeczywiści to osoby fizyczne, które:
   "politicallyExposed": "no",
   "politicallyExposedFamily": "no",
   "politicallyExposedCoworker": "no",
-  "withoutExpirationDate": false
+  "withoutExpirationDate": true
 }
 ```
 
@@ -733,7 +727,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 ### Parametry podstawowe reprezentanta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **firstName** | TAK | Imię | `"Jan"` |
 | **lastName** | TAK | Nazwisko | `"Kowalski"` |
 | **personalIdentityNumber** | WARUNKOWO* | PESEL | `"31111161119"` |
@@ -749,7 +743,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 ### Dokument tożsamości reprezentanta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **documentType** | TAK | Typ dokumentu | `"id_card"` |
 | **documentNumber** | TAK | Numer dokumentu | `"GLD358884"` |
 | **documentIssueCountry** | TAK | Kraj wydania | `"PL"` |
@@ -759,7 +753,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 ### Rola reprezentanta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **roleType** | TAK | Typ roli | `"president"` |
 | **description** | WARUNKOWO* | Opis roli | `"Prezes zarządu"` |
 
@@ -769,7 +763,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 #### Typy ról (roleType)
 
 | Kod | Nazwa |
-|-----|-------|
+|:-----:|:-------:|
 | `president` | Prezes |
 | `board_member` | Członek zarządu |
 | `proxy` | Prokurent |
@@ -778,7 +772,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 ### Dane PEP reprezentanta
 
 | Parametr | Wymagane | Wartości | Opis |
-|----------|----------|----------|------|
+|:----------:|:----------:|:----------:|:------:|
 | **politicallyExposed** | TAK | `yes`, `no` | Czy reprezentant jest PEP? |
 | **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
 | **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
@@ -802,7 +796,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
   "politicallyExposed": "no",
   "politicallyExposedFamily": "no",
   "politicallyExposedCoworker": "no",
-  "withoutExpirationDate": false
+  "withoutExpirationDate": true
 }
 ```
 
@@ -823,7 +817,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
   "politicallyExposed": "yes",
   "politicallyExposedFamily": "no",
   "politicallyExposedCoworker": "no",
-  "withoutExpirationDate": false
+  "withoutExpirationDate": true
 }
 ```
 
@@ -834,13 +828,13 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 ### Typy adresów
 
 | Parametr | Opis | Wymagane |
-|----------|------|----------|
+|:----------:|:------:|:----------:|
 | **businessAddress** | Adres prowadzenia działalności | NIE |
 
 ### Struktura adresu
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **country** | NIE | Kraj (kod ISO) |
 | **city** | NIE | Miasto |
 | **street** | NIE | Ulica |
@@ -856,20 +850,20 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
   "street": "Sienna",
   "houseNumber": "86",
   "flatNumber": "47",
-  "postalCode": "00-185"
+  "postalCode": "00-131"
 }
 ```
 
 ### Typy kontaktów
 
 | Parametr | Opis | Wymagane |
-|----------|------|----------|
+|:----------:|:------:|:----------:|
 | **companyContact** | Kontakt firmowy | NIE |
 
 ### Struktura kontaktu
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **emailAdress** | NIE | Adres email |
 | **phoneCountry** | NIE | Prefix kraju |
 | **phoneNumber** | NIE | Numer telefonu |
@@ -892,8 +886,6 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
   "type": "company",
   "status": "active",
   "registrationCountry": "PL",
-  
-  // Dane firmy
   "companyName": "FiberPay Sp. z o.o.",
   "tradeNames": ["FiberPay", "SystemAML"],
   "taxIdNumber": "7010634566",
@@ -904,10 +896,9 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
   "website": "fiberpay.pl",
   "economicRelationStartDate": "2023-11-14",
   "references": "qwerty",
-  
   "mainPkdCode": {
     "pkdCode": "64.99.Z",
-    "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA"
+    "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH"
   },
   "pkdCodes": [
     {
@@ -919,8 +910,6 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
       "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM"
     }
   ],
-  
-  // Beneficjenci rzeczywiści
   "beneficiaries": [
     {
       "firstName": "Jan",
@@ -939,7 +928,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
       "politicallyExposed": "no",
       "politicallyExposedFamily": "no",
       "politicallyExposedCoworker": "no",
-      "withoutExpirationDate": false,
+      "withoutExpirationDate": true,
       "accommodationAddress": {
         "country": "PL",
         "city": "Warszawa",
@@ -963,11 +952,9 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
       "politicallyExposed": "no",
       "politicallyExposedFamily": "no",
       "politicallyExposedCoworker": "no",
-      "withoutExpirationDate": false
+      "withoutExpirationDate": true
     }
   ],
-  
-  // Reprezentanci (zarząd)
   "boardMembers": [
     {
       "firstName": "Jan",
@@ -985,7 +972,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
       "politicallyExposed": "no",
       "politicallyExposedFamily": "no",
       "politicallyExposedCoworker": "no",
-      "withoutExpirationDate": false
+      "withoutExpirationDate": true
     },
     {
       "firstName": "Adam",
@@ -1001,11 +988,9 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
       "politicallyExposed": "yes",
       "politicallyExposedFamily": "no",
       "politicallyExposedCoworker": "no",
-      "withoutExpirationDate": false
+      "withoutExpirationDate": true
     }
   ],
-  
-  // Adresy i kontakt
   "businessAddress": {
     "country": "PL",
     "city": "Warszawa",
@@ -1106,7 +1091,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 }
 ```
 
-### GET /parties
+### 2.1.2. GET /parties
 
 Zwraca podmioty utworzone przez użytkownika.
 
@@ -1155,7 +1140,7 @@ Zwraca podmioty utworzone przez użytkownika.
 ```
 
 
-### GET /parties/{code}
+### 2.1.3. GET /parties/{code}
 
 Pobranie szczegółów danego podmiotu.
 
@@ -1281,12 +1266,108 @@ Pobranie szczegółów danego podmiotu.
 }
 ```
 
-### DELETE /parties/{code}
+### 2.1.4. POST /parties/{code}/status
+
+Zmiana statusu podmiotu.
+
+Endpoint umożliwia aktualizację statusu podmiotu w systemie. Status podmiotu określa jego aktualny stan w relacji z systemem AML.
+
+#### Parametry URL
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **code** | TAK | Unikalny kod identyfikujący podmiot |
+
+#### Parametry body (JSON)
+
+| Parametr | Typ | Wymagane | Wartości | Opis |
+|:----------:|:-----:|:----------:|:----------:|:------:|
+| **newStatus** | string | TAK | `draft`, `active`, `occasional`, `inactive`, `in_acceptance` | Nowy status podmiotu |
+
+#### Dozwolone statusy
+
+| Status | Opis |
+|:--------:|:------:|
+| `draft` | Szkic - podmiot w trakcie tworzenia |
+| `active` | Aktywny - podmiot w pełnej współpracy |
+| `occasional` | Okazjonalny - podmiot występujący incydentalnie |
+| `inactive` | Nieaktywny - podmiot zakończył współpracę |
+| `in_acceptance` | W akceptacji - podmiot oczekuje na weryfikację |
+
+#### Zachowanie systemu
+
+Zmiana statusu podmiotu powoduje:
+- **Utworzenie zdarzenia systemowego** w historii podmiotu
+- **Wysłanie webhooka** `party_status_change` (jeśli skonfigurowany)
+- **Aktualizację kolejki screeningu** list sankcyjnych (dla statusu `active`)
+- **Walidację unikalności** identyfikatorów (PESEL/NIP)
+
+> **Uwaga:** Jeśli nowy status jest taki sam jak obecny, system zwraca podmiot bez zmian.
+
+#### Przykładowe dane do zmiany statusu
+
+```json
+{
+  "newStatus": "active"
+}
+```
+
+#### Przykładowa odpowiedź serwera
+
+**STATUS 200 OK**
+
+```json
+{
+  "data": {
+    "code": "abc123xyz456",
+    "type": "individual",
+    "status": "active",
+    "riskStatus": "pending",
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "personalIdentityNumber": "09271573233",
+    "economicRelationStartDate": "2023-11-14T00:00:00.000000Z"
+  }
+}
+```
+
+#### Możliwe błędy
+
+**STATUS 400 Bad Request**
+```json
+{
+  "status": "ERROR",
+  "error": "The new status field is required."
+}
+```
+
+**STATUS 404 Not Found**
+```json
+{
+  "status": "ERROR",
+  "error": "Party not found"
+}
+```
+
+**STATUS 422 Unprocessable Entity**
+```json
+{
+  "status": "ERROR",
+  "error": "The selected new status is invalid."
+}
+```
+
+---
+
+### 2.1.5. DELETE /parties/{code}
 
 Usunięcie podmiotu wskazanego kodem identyfikującym.
 
+---
 
-### POST /parties/{code}/beneficiaries
+### 2.2. Beneficjenci
+
+### 2.2.1. POST /parties/{code}/beneficiaries
 
 Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 
@@ -1297,7 +1378,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 #### Parametry podstawowe beneficjenta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **firstName** | TAK | Imię beneficjenta | `"Jan"` |
 | **lastName** | TAK | Nazwisko beneficjenta | `"Bożek"` |
 | **personalIdentityNumber** | WARUNKOWO* | PESEL | `"65122666817"` |
@@ -1314,7 +1395,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 #### Dokument tożsamości beneficjenta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **documentType** | NIE | Typ dokumentu | `"id_card"` |
 | **documentNumber** | WARUNKOWO* | Numer dokumentu | `"PVL852925"` |
 | **documentIssueCountry** | WARUNKOWO* | Kraj wydania | `"PL"` |
@@ -1329,7 +1410,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 #### Uprawnienia beneficjenta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **ownedSharesAmount** | NIE | Liczba udziałów | `"5"` |
 | **ownedSharesUnit** | NIE | Jednostka | `"%"` lub `"PLN"` |
 | **directRights** | NIE | Bezpośrednie uprawnienia | `"Wspólnik spółki"` |
@@ -1348,7 +1429,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 #### Dane PEP beneficjenta
 
 | Parametr | Wymagane | Wartości | Opis |
-|----------|----------|----------|------|
+|:----------:|:----------:|:----------:|:------:|
 | **politicallyExposed** | TAK | `yes`, `no` | Czy beneficjent jest PEP? |
 | **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
 | **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
@@ -1358,7 +1439,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 #### Adres beneficjenta
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **accommodationAddress** | NIE | Obiekt z adresem zamieszkania |
 
 **Struktura adresu:**
@@ -1386,6 +1467,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
   "documentNumber": "PVL852925",
   "documentType": "id_card",
   "documentIssueCountry": "PL",
+  "withoutExpirationDate": true,
   "firstName": "Jan",
   "lastName": "Bożek",
   "ownedSharesAmount": "5",
@@ -1394,7 +1476,6 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
   "politicallyExposed": "no",
   "politicallyExposedCoworker": "no",
   "politicallyExposedFamily": "no",
-  "withoutExpirationDate": false,
   "accommodationAddress": {
     "country": "PL",
     "city": "Krakow",
@@ -1419,13 +1500,14 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
   "documentType": "passport",
   "documentNumber": "C01X00T47",
   "documentIssueCountry": "DE",
+  "withoutExpirationDate": true,
   "ownedSharesAmount": "15",
   "ownedSharesUnit": "%",
   "directRights": "Udziałowiec",
   "politicallyExposed": "no",
   "politicallyExposedFamily": "no",
   "politicallyExposedCoworker": "no",
-  "withoutExpirationDate": false
+  "withoutExpirationDate": true
 }
 ```
 
@@ -1543,7 +1625,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
 }
 ```
 
-### GET /parties/{code}/beneficiaries
+### 2.2.2. GET /parties/{code}/beneficiaries
 
 Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 
@@ -1592,12 +1674,15 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 
 W przypadku gdy podmiot nie posiada dodanych beneficjentów rzeczywistych zwracana tablica jest pusta
 
-### DELETE /beneficiaries/{code}
+### 2.2.3. DELETE /beneficiaries/{code}
 
 Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
+---
 
-### POST /parties/{code}/boardmembers
+### 2.3. Reprezentanci
+
+### 2.3.1. POST /parties/{code}/boardmembers
 
 Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 
@@ -1608,7 +1693,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 #### Parametry podstawowe reprezentanta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **firstName** | TAK | Imię reprezentanta | `"Jan"` |
 | **lastName** | TAK | Nazwisko reprezentanta | `"Nowak"` |
 | **personalIdentityNumber** | WARUNKOWO* | PESEL | `"97120824889"` |
@@ -1626,7 +1711,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 #### Dokument tożsamości reprezentanta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **documentType** | TAK | Typ dokumentu | `"id_card"` |
 | **documentNumber** | WARUNKOWO* | Numer dokumentu | `"XIK941595"` |
 | **documentIssueCountry** | WARUNKOWO* | Kraj wydania | `"PL"` |
@@ -1641,7 +1726,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 #### Rola reprezentanta
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **roleType** | TAK | Typ roli | `"president"` |
 | **description** | WARUNKOWO* | Opis roli | `"Prezes zarządu"` |
 
@@ -1651,7 +1736,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 #### Typy ról (roleType)
 
 | Kod | Nazwa |
-|-----|-------|
+|:-----:|:-------:|
 | `president` | Prezes |
 | `board_member` | Członek zarządu |
 | `proxy` | Prokurent |
@@ -1662,7 +1747,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 #### Dane PEP reprezentanta
 
 | Parametr | Wymagane | Wartości | Opis |
-|----------|----------|----------|------|
+|:----------:|:----------:|:----------:|:------:|
 | **politicallyExposed** | TAK | `yes`, `no` | Czy reprezentant jest PEP? |
 | **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
 | **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
@@ -1672,7 +1757,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 #### Dodatkowe parametry
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **references** | NIE | Referencje własne |
 
 ---
@@ -1696,7 +1781,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
   "politicallyExposedCoworker": "no",
   "politicallyExposedFamily": "no",
   "roleType": "proxy",
-  "withoutExpirationDate": false
+  "withoutExpirationDate": true
 }
 ```
 
@@ -1718,7 +1803,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
   "politicallyExposed": "no",
   "politicallyExposedFamily": "no",
   "politicallyExposedCoworker": "no",
-  "withoutExpirationDate": false
+  "withoutExpirationDate": true
 }
 ```
 
@@ -1817,7 +1902,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 }
 ```
 
-### GET /parties/{code}/boardmembers
+### 2.3.2. GET /parties/{code}/boardmembers
 
 Pobranie reprezentantów wskazanego kodem podmiotu typu company.
 
@@ -1857,11 +1942,13 @@ Pobranie reprezentantów wskazanego kodem podmiotu typu company.
 ```
 W przypadku gdy podmiot nie posiada dodanych reprezentantów zwracana tablica jest pusta
 
-### DELETE /boardmembers/{code}
+### 2.3.3. DELETE /boardmembers/{code}
 
 Usunięcie reprezentanta wskazanego kodem identyfikującym.
 
-## POST /transactions
+## 3. Transakcje
+
+### 3.1. POST /transactions
 
 Tworzy nową transakcję w systemie.
 
@@ -1870,7 +1957,7 @@ Tworzy nową transakcję w systemie.
 ### Parametry podstawowe transakcji
 
 | Parametr | Wymagane | Wartości | Opis |
-|----------|----------|----------|------|
+|:----------:|:----------:|:----------:|:------:|
 | **type** | TAK | `buyer`, `seller`, `transfer`, `other`, `seller_crypto`, `buyer_crypto`, `exchange_fiat` | Typ transakcji |
 | **status** | TAK | `draft`, `in_acceptance`, `accepted`, `cancelled` | Status transakcji |
 | **occasionalTransaction** | TAK | `true`, `false` | Czy transakcja jest okazjonalna? |
@@ -1882,7 +1969,7 @@ Tworzy nową transakcję w systemie.
 **Wymagane gdy `occasionalTransaction: true`**
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **amount** | TAK | Kwota transakcji | `"100.00"` |
 | **currency** | TAK | Waluta (kod ISO) | `"PLN"` |
 | **bookedAt** | TAK | Data zaksięgowania | `"2024-05-07T13:03:48.000000Z"` |
@@ -1903,7 +1990,7 @@ Tworzy nową transakcję w systemie.
 ### Typy transakcji i wymagane strony
 
 | Typ transakcji | Wymagane strony | Opis |
-|----------------|-----------------|------|
+|:----------------:|:-----------------:|:------:|
 | `buyer` | `seller` | Zakup od kontrahenta |
 | `seller` | `buyer` | Sprzedaż kontrahentowi |
 | `transfer` | `payer`, `receiver` | Transfer środków |
@@ -1921,7 +2008,7 @@ Tworzy nową transakcję w systemie.
 ### Parametry podstawowe strony
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **type** | TAK | Typ strony | `"seller"` |
 | **typeOther** | WARUNKOWO* | Opis innego typu | - |
 | **partyCode** | NIE | Kod podmiotu z systemu | `"abc123xyz"` |
@@ -1937,7 +2024,7 @@ Tworzy nową transakcję w systemie.
 #### Typy stron transakcji (type)
 
 | Kod | Nazwa | Użycie |
-|-----|-------|--------|
+|:-----:|:-------:|:--------:|
 | `receiver` | Odbiorca | Transfer |
 | `seller` | Sprzedawca | Zakup |
 | `buyer` | Kupujący | Sprzedaż |
@@ -1952,7 +2039,7 @@ Tworzy nową transakcję w systemie.
 ### Parametry dodatkowe strony
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **amount** | NIE | Kwota dla tej strony | `"100.00"` |
 | **currency** | NIE | Waluta | `"PLN"` |
 | **iban** | WARUNKOWO* | Numer IBAN | `"PL61109010140000071219812874"` |
@@ -1970,7 +2057,7 @@ Tworzy nową transakcję w systemie.
 ### Parametry kryptowalutowe strony
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **currencyCustom** | NIE | Czy waluta niestandardowa? | `true`/`false` |
 | **currencyOther** | NIE | Nazwa niestandardowej waluty | `"DOGE"` |
 | **currencyType** | NIE | Typ waluty krypto | `"cryptocurrency"` |
@@ -1989,7 +2076,7 @@ Tworzy nową transakcję w systemie.
 **Parametry dla portfeli hostowanych przez VASP**
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **isVASPEntity** | NIE | Czy portfel hostowany przez VASP? | `"yes"`, `"no"` |
 | **vaspName** | WARUNKOWO* | Nazwa VASP | `"Binance"` |
 | **vaspLeix** | WARUNKOWO** | VASP LEIX | - |
@@ -2013,7 +2100,7 @@ Tworzy nową transakcję w systemie.
 #### Parametry podstawowe
 
 | Parametr | Wymagane | Opis | Przykład |
-|----------|----------|------|----------|
+|:----------:|:----------:|:------:|:----------:|
 | **partyType** | TAK | Typ właściciela | `"individual"`, `"sole_proprietorship"`, `"company"` |
 | **firstName** | WARUNKOWO* | Imię | `"Jan"` |
 | **lastName** | WARUNKOWO* | Nazwisko | `"Kowalski"` |
@@ -2028,7 +2115,7 @@ Tworzy nową transakcję w systemie.
 **Wymagane gdy `isEntityAWalletOwner: "no"` lub `addressDataFromRelatedParty: "no"`**
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **country** | TAK | Kraj (kod ISO) |
 | **city** | TAK | Miasto |
 | **street** | TAK | Ulica |
@@ -2041,7 +2128,7 @@ Tworzy nową transakcję w systemie.
 **Wymagane dla firm gdy `isEntityAWalletOwner: "no"` lub `addressDataFromRelatedParty: "no"`**
 
 | Parametr | Wymagane | Opis |
-|----------|----------|------|
+|:----------:|:----------:|:------:|
 | **taxIdNumber** | WARUNKOWO* | NIP | `"7010634566"` |
 | **taxIdCountry** | WARUNKOWO** | Kraj NIP | `"PL"` |
 
@@ -2092,14 +2179,26 @@ Tworzy nową transakcję w systemie.
   "entities": [
     {
       "type": "seller_crypto",
-      "partyCode": "abc123xyz",
+      "firstName": "Satoshi",
+      "lastName": "Nakamoto",
       "amount": "0.15",
       "currency": "BTC",
-      "currencyType": "cryptocurrency",
+      "currencyCustom": false,
+      "currencyType": "crypto",
       "txId": "0x123abc...",
       "cryptoAddress": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
-      "isEntityAWalletOwner": "yes",
-      "isVASPEntity": "no"
+      "isEntityAWalletOwner": "no",
+      "isVASPEntity": "no",
+      "walletOwnerData": {
+        "partyType": "individual",
+        "firstName": "Satoshi",
+        "lastName": "Nakamoto",
+        "country": "JP",
+        "city": "Tokyo",
+        "street": "Main Street",
+        "houseNumber": "123",
+        "postalCode": "100-0001"
+      }
     }
   ]
 }
@@ -2145,7 +2244,7 @@ Tworzy nową transakcję w systemie.
 }
 ```
 
-### GET /transactions
+### 3.2. GET /transactions
 
 Zwraca transakcje utworzone przez użytkownika.
 
@@ -2162,7 +2261,7 @@ Zwraca transakcje utworzone przez użytkownika.
       "mainEntityLastName": "Kowalski",
       "mainEntityCompanyName": "",
       "code": "c1ehu5my3s97",
-      "type": "vender",
+      "type": "seller",
       "status": "accepted",
       "description": null,
       "title": "transakcja z klienta",
@@ -2171,7 +2270,7 @@ Zwraca transakcje utworzone przez użytkownika.
     },
     {
       "code": "td4r9v6weunk",
-      "type": "vender",
+      "type": "seller",
       "status": "cancelled",
       "description": null,
       "title": "transakcja z klienta",
@@ -2184,7 +2283,7 @@ Zwraca transakcje utworzone przez użytkownika.
       "mainEntityLastName": "Kowalski",
       "mainEntityCompanyName": null,
       "code": "q9hyv32w4b68",
-      "type": "vender",
+      "type": "seller",
       "status": "accepted",
       "description": null,
       "title": "transakcja z klienta",
@@ -2195,7 +2294,7 @@ Zwraca transakcje utworzone przez użytkownika.
 }
 ```
 
-### GET /transactions/{code}
+### 3.3. GET /transactions/{code}
 
 Pobranie szczegółów danej transakcji.
 
@@ -2207,7 +2306,7 @@ Pobranie szczegółów danej transakcji.
 {
   "data": {
     "code": "c1ehu5my3s97",
-    "type": "vender",
+    "type": "seller",
     "status": "accepted",
     "amount": "780.00",
     "currency": "PLN",
@@ -2242,11 +2341,115 @@ Pobranie szczegółów danej transakcji.
 ```
 
 
-### DELETE /transactions/{code}
+### 3.4. POST /transactions/{code}/status
+
+Zmiana statusu transakcji.
+
+Endpoint umożliwia aktualizację statusu transakcji w systemie. Status transakcji określa jej obecny stan procesu weryfikacji i akceptacji.
+
+#### Parametry URL
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **code** | TAK | Unikalny kod identyfikujący transakcję |
+
+#### Parametry body (JSON)
+
+| Parametr | Typ | Wymagane | Wartości | Opis |
+|:----------:|:-----:|:----------:|:----------:|:------:|
+| **newStatus** | string | TAK | `draft`, `in_acceptance`, `accepted`, `cancelled` | Nowy status transakcji |
+
+#### Dozwolone statusy
+
+| Status | Opis |
+|:--------:|:------:|
+| `draft` | Szkic - transakcja w trakcie rejestracji |
+| `in_acceptance` | W akceptacji - transakcja oczekuje na weryfikację |
+| `accepted` | Zaakceptowana - transakcja zatwierdzona |
+| `cancelled` | Anulowana - transakcja odrzucona/anulowana |
+
+#### Zachowanie systemu
+
+Zmiana statusu transakcji powoduje:
+- **Aktualizację agregatu transakcji** - przeliczenie sum dla powiązanych podmiotów
+- **Utworzenie zdarzenia systemowego** w historii transakcji
+- **Wysłanie webhooka** `transaction_status_change` (jeśli skonfigurowany)
+- **Dodanie podmiotów do kolejki screeningu** (dla statusów `accepted`/`in_acceptance`)
+- **Utworzenie zdarzenia rejestracji** (przy pierwszej zmianie statusu)
+
+> **Uwaga:** 
+> - Zmiana statusu z `accepted`/`in_acceptance` na `draft`/`cancelled` powoduje **odjęcie kwoty z agregatu**
+> - Zmiana statusu z `draft`/`cancelled` na `accepted`/`in_acceptance` powoduje **dodanie kwoty do agregatu**
+
+#### Przykładowe dane do zmiany statusu
+
+```json
+{
+  "newStatus": "accepted"
+}
+```
+
+#### Przykładowa odpowiedź serwera
+
+**STATUS 200 OK**
+
+```json
+{
+  "data": {
+    "code": "xyz789abc123",
+    "type": "buyer",
+    "status": "accepted",
+    "riskStatus": "pending",
+    "amount": 15000,
+    "currency": "PLN",
+    "paymentMethod": "transfer",
+    "location": "Poland",
+    "bookedAt": "2024-01-15T00:00:00.000000Z",
+    "description": "Zakup nieruchomości",
+    "entities": []
+  }
+}
+```
+
+#### Możliwe błędy
+
+**STATUS 400 Bad Request**
+```json
+{
+  "status": "ERROR",
+  "error": "The new status field is required."
+}
+```
+
+**STATUS 404 Not Found**
+```json
+{
+  "status": "ERROR",
+  "error": "Transaction not found"
+}
+```
+
+**STATUS 422 Unprocessable Entity**
+```json
+{
+  "status": "ERROR",
+  "error": "The selected new status is invalid."
+}
+```
+
+---
+
+### 3.5. DELETE /transactions/{code}
 
 Usunięcie transakcji wskazanej kodem identyfikującym.
 
-### POST /history-events
+---
+
+## 4. Zdarzenia i zadania
+
+### 4.1. Zdarzenia
+
+### 4.1.1. POST /history-events
 
 Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 
@@ -2305,7 +2508,7 @@ Struktura obiektu transaction:
 }
 ```
 
-### GET /history-events
+### 4.1.2. GET /history-events
 
 Zwraca zdarzenia przypisane do użytkownika.
 
@@ -2344,7 +2547,7 @@ Zwraca zdarzenia przypisane do użytkownika.
 
 Jeśli użytkownik nie posiada żadnych zdarzeń zwracany jest adekwatny komunikat ze statusem 200.
 
-### GET /history-events/{code}
+### 4.1.3. GET /history-events/{code}
 
 Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
@@ -2370,11 +2573,15 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
 Jeśli zdarzenie nie posiada przypisanych komentarzy zmienna zwracana przy kluczu "commentsAmount" równa się 0
 
-### DELETE /history-events/{code}
+### 4.1.4. DELETE /history-events/{code}
 
 Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
-### POST /comments
+---
+
+### 4.2. Komentarze do zdarzeń
+
+### 4.2.1. POST /comments
 
 Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 
@@ -2410,65 +2617,19 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 }
 ```
 
-### GET /events/{code}/comments
+### 4.2.2. GET /history-events/{code}/comments
 
 Zwraca komentarze przypisane do zdarzenia.
 
-### DELETE /comments/{code}
+### 4.2.3. DELETE /comments/{code}
 
 Usunięcie komentarza wskazanego kodem identyfikującym.
 
-### GET /alerts
+---
 
-Pobranie alertów powiązanych z danym użytkownikiem.
+### 4.3. Zadania
 
-#### Przykładowa odpowiedź serwera:
-
-- **STATUS 200 OK**
-
-```json
-{
-  "data": [
-    {
-      "code": "9u187g4y2fcq",
-      "content": "alert testowy api",
-      "type": "task",
-      "status": "new",
-      "partyCode": null,
-      "transactionCode": null
-    }
-  ]
-}
-```
-
-### GET /alerts/{code}
-
-Pobranie szczegółów alertu wskazanego kodem.
-
-#### Przykładowa odpowiedź serwera:
-
-- **STATUS 200 OK**
-
-```json
-{
-  "data": {
-    "code": "9u187g4y2fcq",
-    "content": "alert testowy api",
-    "type": "task",
-    "status": "new",
-    "taskDone": false,
-    "partyCode": null,
-    "transactionCode": null,
-    "createdAt": "2022-07-18T13:22:42.000000Z"
-  }
-}
-```
-
-### DELETE /alerts/{code}
-
-Usunięcie alertu wskazanego kodem identyfikującym.
-
-### POST /tasks
+### 4.3.1. POST /tasks
 
 Tworzenie nowego zadania w systemie. Parametry żądania:
 
@@ -2499,7 +2660,7 @@ Struktura obiektu alert:
 
 | Parametr        | Wymagane | Opis                              |
 | --------------- | -------- | --------------------------------- |
-| **code**        | NIE      | Kod powiązanej transakcji         |
+| **code**        | NIE      | Kod powiązanego alertu            |
 
 
 #### Przykładowe dane do utworzenia zadania:
@@ -2507,7 +2668,7 @@ Struktura obiektu alert:
 ```json
 {
   "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-  "expirationDate": "2025-11-06",
+  "expirationDate": "2025-11-06"
 }
 ```
 
@@ -2526,7 +2687,6 @@ Struktura obiektu alert:
     "party": null,
     "kycApplicant": null,
     "transaction": null,
-    "alert": null,
     "expirationDate": "2025-11-06",
     "createdAt": "2025-11-05T09:34:56.000000Z",
     "type": null,
@@ -2538,7 +2698,8 @@ Struktura obiektu alert:
 }
 ```
 
-### GET /tasks
+### 4.3.2. GET /tasks
+
 Pobranie zadań powiązanych z danym użytkownikiem.
 
 #### Przykładowa odpowiedź serwera:
@@ -2546,7 +2707,9 @@ Pobranie zadań powiązanych z danym użytkownikiem.
 - **STATUS 200 OK**
 
 ```json
-  {
+{
+  "data": [
+    {
       "code": "94dwpaxk5rzy",
       "content": "Wymagane manualne ustawienie oceny ryzyka w podmiocie",
       "status": "new",
@@ -2573,15 +2736,20 @@ Pobranie zadań powiązanych z danym użytkownikiem.
       "party": {
         "code": "s1vcm5ew9fd4",
         "firstName": "Jan",
-        "lastName": "Kowalski",
+        "lastName": "Kowalski"
       },
       "transaction": null,
       "expirationDate": null
-    },
+    }
+  ]
+}
 ```
 
-### GET /tasks/{code}
+### 4.3.3. GET /tasks/{code}
+
 Pobranie szczegółów zadania wskazanego kodem.
+
+#### Przykładowa odpowiedź serwera:
 
 - **STATUS 200 OK**
 
@@ -2600,27 +2768,30 @@ Pobranie szczegółów zadania wskazanego kodem.
 }
 ```
 
-### DELETE /tasks/{code}
+### 4.3.4. DELETE /tasks/{code}
 
 Usunięcie zadania wskazanego kodem identyfikującym.
 
-### POST /tasks/{code}/comments
+---
+
+### 4.4. Komentarze do zadań
+
+### 4.4.1. POST /tasks/{code}/comments
 
 Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
 | ------------- | -------- | -------------------------------------------------------------- |
 | **content**   | TAK      | Treść komentarza                                               |
-| **occurredAt**  | TAK      | Data wystąpienia komentarza                                    |
+| **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
 
 #### Przykładowe dane do utworzenia komentarza:
 
 ```json
 {
   "content": "testowy komentarz",
-  "occurredAt": "2025-11-03 15:52:40",
- }
-
+  "occurredAt": "2025-11-03 15:52:40"
+}
 ```
 
 #### Przykładowa odpowiedź serwera:
@@ -2641,36 +2812,35 @@ Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 }
 ```
 
-### GET /tasks/{code}/comments
+### 4.4.2. GET /tasks/{code}/comments
 
 Zwraca komentarze przypisane do zadania.
 
-### DELETE /task/{code}/comments/{commentsCode}
+### 4.4.3. DELETE /tasks/{code}/comments/{commentsCode}
 
-Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie
+Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
-### PATCH /task/{code}/comments/{commentsCode}
+### 4.4.4. PATCH /tasks/{code}/comments/{commentsCode}
 
-Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie
+Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
 | Parametr      | Wymagane | Opis                                                           |
 | ------------- | -------- | -------------------------------------------------------------- |
 | **content**   | TAK      | Treść komentarza                                               |
 | **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
 
-#### Przykładowe dane do utworzenia komentarza:
+#### Przykładowe dane do aktualizacji komentarza:
 
 ```json
 {
   "content": "aktualizacja komentarza",
-  "occurredAt": "2025-11-04 15:24:10",
- }
-
+  "occurredAt": "2025-11-04 15:24:10"
+}
 ```
 
 #### Przykładowa odpowiedź serwera:
 
-- **STATUS 201 CREATED**
+- **STATUS 200 OK**
 
 ```json
 {
@@ -2685,9 +2855,67 @@ Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikuj
 }
 ```
 
-## 11. Listy sankcyjne
+---
 
-### POST /sanctions-lists/search
+## 5. Alerty
+
+### 5.1. GET /alerts
+
+Pobranie alertów powiązanych z danym użytkownikiem.
+
+#### Przykładowa odpowiedź serwera:
+
+- **STATUS 200 OK**
+
+```json
+{
+  "data": [
+    {
+      "code": "9u187g4y2fcq",
+      "content": "alert testowy api",
+      "type": "task",
+      "status": "new",
+      "partyCode": null,
+      "transactionCode": null
+    }
+  ]
+}
+```
+
+### 5.2. GET /alerts/{code}
+
+Pobranie szczegółów alertu wskazanego kodem.
+
+#### Przykładowa odpowiedź serwera:
+
+- **STATUS 200 OK**
+
+```json
+{
+  "data": {
+    "code": "9u187g4y2fcq",
+    "content": "alert testowy api",
+    "type": "task",
+    "status": "new",
+    "taskDone": false,
+    "partyCode": null,
+    "transactionCode": null,
+    "createdAt": "2022-07-18T13:22:42.000000Z"
+  }
+}
+```
+
+### 5.3. DELETE /alerts/{code}
+
+Usunięcie alertu wskazanego kodem identyfikującym.
+
+---
+
+## 6. Compliance i weryfikacja
+
+### 6.1. Listy sankcyjne
+
+#### 6.1.1. POST /sanctions-lists/search
 
 Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ).
 
@@ -2701,8 +2929,8 @@ Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ).
 #### Parametry żądania
 
 | Parametr | Typ | Wymagane | Opis |
-|----------|-----|----------|------|
-| **entityType** | string | TAK | Typ weryfikowanego obiektu |
+|:----------:|:-----:|:----------:|:------:|
+| **entityType** | string | TAK | Typ weryfikowanego obiektu. Aktualnie akceptowane: individual, company, any, crypto_address, email, pesel, nip, regon, krs |
 | **name** | string | WARUNKOWO | Pełna nazwa (wymagane gdy `entityType: "any"`) |
 | **firstName** | string | WARUNKOWO | Imię (wymagane gdy `entityType: "individual"`) |
 | **middleName** | string | NIE | Drugie i kolejne imiona |
@@ -2710,16 +2938,24 @@ Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ).
 | **companyName** | string | WARUNKOWO | Nazwa firmy (wymagane gdy `entityType: "company"`) |
 | **email** | string | WARUNKOWO | Adres email (wymagane gdy `entityType: "email"`) |
 | **cryptoAddress** | string | WARUNKOWO | Adres portfela krypto (wymagane gdy `entityType: "crypto_address"`) |
+| **pesel** | string | WARUNKOWO | Pesel (wymagane gdy `entityType: "pesel"`) |
+| **nip** | string | WARUNKOWO | Nip (wymagane gdy `entityType: "nip"`) |
+| **regon** | string | WARUNKOWO | Regon (wymagane gdy `entityType: "regon"`) |
+| **krs** | string | WARUNKOWO | Krs (wymagane gdy `entityType: "krs"`) |
 
 #### Typy weryfikacji (entityType)
 
 | Wartość | Użycie | Wymagane pola |
-|---------|--------|---------------|
+|:---------:|:--------:|:---------------:|
 | `individual` | Osoby fizyczne | `firstName`, `lastName` |
 | `company` | Firmy/organizacje | `companyName` |
 | `any` | Wyszukiwanie uniwersalne | `name` |
 | `email` | Adresy email | `email` |
 | `crypto_address` | Portfele kryptowalut | `cryptoAddress` |
+| `pesel` | Numer PESEL | `pesel` |
+| `nip` | Numer NIP | `nip` |
+| `regon` | Numer REGON | `regon` |
+| `krs` | Numer KRS | `krs` |
 
 #### Przykłady żądań
 
@@ -2828,7 +3064,7 @@ Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ).
 #### Struktura odpowiedzi
 
 | Pole | Typ | Opis |
-|------|-----|------|
+|:------:|:-----:|:------:|
 | **isMatch** | boolean | `true` - znaleziono dopasowanie<br>`false` - brak dopasowania |
 | **code** | string | Unikalny identyfikator wyszukiwania (do pobrania raportu PDF) |
 | **matchedEntities** | array | Lista znalezionych dopasowań |
@@ -2838,7 +3074,7 @@ Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (
 #### Struktura obiektu matchedEntity
 
 | Pole | Typ | Opis |
-|------|-----|------|
+|:------:|:-----:|:------:|
 | **listName** | string | Nazwa listy sankcyjnej |
 | **name** | string | Główna nazwa wpisu |
 | **aliases** | array | Lista aliasów i alternatywnych nazw |
@@ -2848,7 +3084,7 @@ Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (
 #### Listy sankcyjne objęte weryfikacją
 
 | Lista | Zakres | Aktualizacja |
-|-------|--------|--------------|
+|:-------:|:--------:|:--------------:|
 | **EU Financial Sanctions** | Unia Europejska | Dzienna |
 | **UK OFSI** | Wielka Brytania | Dzienna |
 | **UN Consolidated List** | Organizacja Narodów Zjednoczonych | Dzienna |
@@ -2856,14 +3092,14 @@ Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (
 
 
 
-### GET /sanctions/{code}/pdf
+#### 6.1.2. GET /sanctions/{code}/pdf
 
 Pobiera raport PDF z wynikami wyszukiwania na listach sankcyjnych.
 
 #### Parametry
 
 | Parametr | Typ | Wymagane | Opis |
-|----------|-----|----------|------|
+|:----------:|:-----:|:----------:|:------:|
 | **code** | string | TAK | Kod zwrócony przez endpoint `/sanctions-lists/search` |
 
 #### Zawartość raportu PDF
@@ -2875,7 +3111,9 @@ Raport zawiera:
 - Listę znalezionych dopasowań
 - Szczegóły każdego dopasowania (lista, aliasy, dane źródłowe)
 
-### POST /parties/applicants
+### 6.2. Proces KYC
+
+#### 6.2.1. POST /parties/applicants
 
 Utworzenie nowego formualarza KYC.
 
@@ -2921,7 +3159,7 @@ Utworzenie nowego formualarza KYC.
 }
 ```
 
-### GET /parties/{code}/applicants
+#### 6.2.2. GET /parties/{code}/applicants
 
 Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 
@@ -2989,7 +3227,7 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 }
 ```
 
-### GET /parties/{code}/applicants/current
+#### 6.2.3. GET /parties/{code}/applicants/current
 
 Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces weryfikacji nie został zakończony. Parametry żądania:
 
@@ -3175,7 +3413,7 @@ Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces
 }
 ```
 
-### GET /applicants/{code}
+#### 6.2.4. GET /applicants/{code}
 
 Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 
@@ -3236,11 +3474,11 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 ```
 
 
-### DELETE /applicants/{code}
+#### 6.2.5. DELETE /applicants/{code}
 
 Usunięcie aplikanta wskazanego kodem.
 
-### POST /applicants/{code}/acceptance
+#### 6.2.6. POST /applicants/{code}/acceptance
 
 Akceptacja deklarowanych danych aplikanta wskazanego kodem.
 
