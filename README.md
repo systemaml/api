@@ -2928,7 +2928,7 @@ Usunięcie alertu wskazanego kodem identyfikującym.
 
 #### 6.1.1. POST /sanctions-lists/search
 
-Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ).
+Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ, USA).
 
 #### Kiedy używać?
 
@@ -3100,6 +3100,7 @@ Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (
 | **UK OFSI** | Wielka Brytania | Dzienna |
 | **UN Consolidated List** | Organizacja Narodów Zjednoczonych | Dzienna |
 | **OFAC SDN** | USA (Treasury) | Dzienna |
+| **MSWiA** | Polska (Ministerstwo Spraw Wewnętrznych i Administracji) | Dzienna |
 
 
 
@@ -3503,7 +3504,7 @@ Parametry żądania:
 |:-----------------------------:|:-------:|:-----------------:|:----------------------------------------------------------------------------------:|
 | **isAccepted**                | Boolean | TAK               | Decyzja o akceptacji weryfikacji                                                   |
 | **reason**                    | String  | Przy odrzuceniu   | Powód odrzucenia weryfikacji                                                       |
-| **partyStatus**               | String  | Przy akceptacji   | Status podmiotu: `draft`, `active`, `inactive`, `in_acceptance`                    |
+| **partyStatus**               | String  | Przy akceptacji   | Status podmiotu: `draft`, `active`, `inactive`, `occasional`, `in_acceptance`                    |
 | **economicRelationStartDate** | Date    | Przy akceptacji   | Data rozpoczęcia stosunków gospodarczych (format: YYYY-MM-DD)                      |
 | **references**                | String  | NIE               | Referencje własne podmiotu (tylko przy akceptacji)                                 |
 
