@@ -6,85 +6,94 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
 
 ## Spis treści
 
-## 1. Konfiguracja
+<h3>1. Konfiguracja</h3>
+
 - [1.1. Informacje ogólne](#11-informacje-ogólne)
 - [1.2. Adresy serwerów](#12-adresy-serwerów)
 - [1.3. Klucze API](#13-klucze-api)
 - [1.4. Webhooks](#14-webhooks)
 
-## 2. Zarządzanie podmiotami
+<h3>2. Zarządzanie podmiotami</h3>
 
-### 2.1. Podmioty
+  <strong><a href="#21-podmioty">2.1. Podmioty</a></strong>
   - [2.1.1. Tworzenie podmiotu](#211-post-parties) `POST /parties`
   - [2.1.2. Lista podmiotów](#212-get-parties) `GET /parties`
   - [2.1.3. Szczegóły podmiotu](#213-get-partiescode) `GET /parties/{code}`
   - [2.1.4. Zmiana statusu podmiotu](#214-post-partiescodestatus) `POST /parties/{code}/status`
   - [2.1.5. Usuwanie podmiotu](#215-delete-partiescode) `DELETE /parties/{code}`
 
-### 2.2. Beneficjenci
+  <strong><a href="#22-beneficjenci">2.2. Beneficjenci</a></strong>
   - [2.2.1. Dodawanie beneficjenta](#221-post-partiescodebeneficiaries) `POST /parties/{code}/beneficiaries`
   - [2.2.2. Lista beneficjentów](#222-get-partiescodebeneficiaries) `GET /parties/{code}/beneficiaries`
   - [2.2.3. Usuwanie beneficjenta](#223-delete-beneficiariescode) `DELETE /beneficiaries/{code}`
 
-### 2.3. Reprezentanci
+  <strong><a href="#23-reprezentanci">2.3. Reprezentanci</a></strong>
   - [2.3.1. Dodawanie reprezentanta](#231-post-partiescodeboardmembers) `POST /parties/{code}/boardmembers`
   - [2.3.2. Lista reprezentantów](#232-get-partiescodeboardmembers) `GET /parties/{code}/boardmembers`
   - [2.3.3. Usuwanie reprezentanta](#233-delete-boardmemberscode) `DELETE /boardmembers/{code}`
 
-## 3. Transakcje
+<h3>3. Transakcje</h3>
+
 - [3.1. Tworzenie transakcji](#31-post-transactions) `POST /transactions`
 - [3.2. Lista transakcji](#32-get-transactions) `GET /transactions`
 - [3.3. Szczegóły transakcji](#33-get-transactionscode) `GET /transactions/{code}`
 - [3.4. Zmiana statusu transakcji](#34-post-transactionscodestatus) `POST /transactions/{code}/status`
 - [3.5. Usuwanie transakcji](#35-delete-transactionscode) `DELETE /transactions/{code}`
 
-## 4. Zdarzenia i zadania
+<h3>4. Zdarzenia</h3>
 
-### 4.1. Zdarzenia
+  <strong><a href="#41-zdarzenia">4.1. Zdarzenia</a></strong>
   - [4.1.1. Tworzenie zdarzenia](#411-post-history-events) `POST /history-events`
   - [4.1.2. Lista zdarzeń](#412-get-history-events) `GET /history-events`
   - [4.1.3. Szczegóły zdarzenia](#413-get-history-eventscode) `GET /history-events/{code}`
   - [4.1.4. Usuwanie zdarzenia](#414-delete-history-eventscode) `DELETE /history-events/{code}`
 
-### 4.2. Komentarze do zdarzeń
+  <strong><a href="#42-komentarze-do-zdarzeń">4.2. Komentarze do zdarzeń</a></strong>
   - [4.2.1. Dodaj komentarz](#421-post-comments) `POST /comments`
   - [4.2.2. Lista komentarzy](#422-get-history-eventscodecomments) `GET /history-events/{code}/comments`
   - [4.2.3. Usuń komentarz](#423-delete-commentscode) `DELETE /comments/{code}`
 
-### 4.3. Zadania
-  - [4.3.1. Tworzenie zadania](#431-post-tasks) `POST /tasks`
-  - [4.3.2. Lista zadań](#432-get-tasks) `GET /tasks`
-  - [4.3.3. Szczegóły zadania](#433-get-taskscode) `GET /tasks/{code}`
-  - [4.3.4. Usuwanie zadania](#434-delete-taskscode) `DELETE /tasks/{code}`
+<h3>5. Zadania</h3>
 
-### 4.4. Komentarze do zadań
-  - [4.4.1. Dodaj komentarz](#441-post-taskscodecomments) `POST /tasks/{code}/comments`
-  - [4.4.2. Lista komentarzy](#442-get-taskscodecomments) `GET /tasks/{code}/comments`
-  - [4.4.3. Usuń komentarz](#443-delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
-  - [4.4.4. Edytuj komentarz](#444-patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
+  <strong><a href="#51-zadania">5.1. Zadania</a></strong>
+  - [5.1.1. Tworzenie zadania](#511-post-tasks) `POST /tasks`
+  - [5.1.2. Lista zadań](#512-get-tasks) `GET /tasks`
+  - [5.1.3. Szczegóły zadania](#513-get-taskscode) `GET /tasks/{code}`
+  - [5.1.4. Usuwanie zadania](#514-delete-taskscode) `DELETE /tasks/{code}`
 
-## 5. Alerty
-- [5.1. Lista alertów](#51-get-alerts) `GET /alerts`
-- [5.2. Szczegóły alertu](#52-get-alertscode) `GET /alerts/{code}`
-- [5.3. Usuwanie alertu](#53-delete-alertscode) `DELETE /alerts/{code}`
+  <strong><a href="#52-komentarze-do-zadań">5.2. Komentarze do zadań</a></strong>
+  - [5.2.1. Dodaj komentarz](#521-post-taskscodecomments) `POST /tasks/{code}/comments`
+  - [5.2.2. Lista komentarzy](#522-get-taskscodecomments) `GET /tasks/{code}/comments`
+  - [5.2.3. Usuń komentarz](#523-delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
+  - [5.2.4. Edytuj komentarz](#524-patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
 
-## 6. Compliance i weryfikacja
+<h3>6. Alerty</h3>
 
-### 6.1. Listy sankcyjne
-  - [6.1.1. Wyszukiwanie](#611-post-sanctions-listssearch) `POST /sanctions-lists/search`
-  - [6.1.2. Raport PDF](#612-get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
+- [6.1. Lista alertów](#61-get-alerts) `GET /alerts`
+- [6.2. Szczegóły alertu](#62-get-alertscode) `GET /alerts/{code}`
+- [6.3. Usuwanie alertu](#63-delete-alertscode) `DELETE /alerts/{code}`
 
-### 6.2. Proces KYC
-  - [6.2.1. Utworzenie formularza](#621-post-partiesapplicants) `POST /parties/applicants`
-  - [6.2.2. Lista aplikantów](#622-get-partiescodeapplicants) `GET /parties/{code}/applicants`
-  - [6.2.3. Aktualny aplikant](#623-get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
-  - [6.2.4. Szczegóły aplikanta](#624-get-applicantscode) `GET /applicants/{code}`
-  - [6.2.5. Usuwanie aplikanta](#625-delete-applicantscode) `DELETE /applicants/{code}`
-  - [6.2.6. Akceptacja aplikanta](#626-post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
+<h3>7. Compliance i weryfikacja</h3>
+
+  <strong><a href="#71-listy-sankcyjne">7.1. Listy sankcyjne</a></strong>
+  - [7.1.1. Wyszukiwanie](#711-post-sanctions-listssearch) `POST /sanctions-lists/search`
+  - [7.1.2. Raport PDF](#712-get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
+
+  <strong><a href="#72-proces-kyc">7.2. Proces KYC</a></strong>
+  - [7.2.1. Utworzenie formularza](#721-post-partiesapplicants) `POST /parties/applicants`
+  - [7.2.2. Lista aplikantów](#722-get-partiescodeapplicants) `GET /parties/{code}/applicants`
+  - [7.2.3. Aktualny aplikant](#723-get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
+  - [7.2.4. Szczegóły aplikanta](#724-get-applicantscode) `GET /applicants/{code}`
+  - [7.2.5. Usuwanie aplikanta](#725-delete-applicantscode) `DELETE /applicants/{code}`
+  - [7.2.6. Akceptacja aplikanta](#726-post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
+
+---
 
 ## 1. Konfiguracja
 
 ### 1.1. Informacje ogólne
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 API SystemAML umożliwia automatyzację procesów związanych z:
 - Zarządzaniem bazą klientów (podmiotów)
@@ -98,6 +107,8 @@ API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji kli
 
 ### 1.2. Adresy serwerów
 
+[↩️ Powrót do spisu treści](#spis-treści)
+
 | Środowisko | Funkcjonalność | Ścieżka bazowa |
 |:------------:|:----------------:|:----------------:|
 | **Produkcyjne** | API | `/1.0/` |
@@ -105,7 +116,7 @@ API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji kli
 | **Testowe** | API | `/1.0/` |
 | **Testowe** | Panel aplikacji | `/` |
 
-> 📧 **Aby uzyskać właściwe adresy URL:** Skontaktuj się z zespołem pod adresem info@fiberpay.pl
+> 📧 **Aby uzyskać właściwe adresy URL:** Skontaktuj się z zespołem pod adresem kontakt@systemaml.pl
 
 ### ⚠️ Ważne informacje o środowiskach
 
@@ -119,12 +130,14 @@ API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji kli
 
 ### 1.3. Klucze API
 
+[↩️ Powrót do spisu treści](#spis-treści)
+
 Do korzystania z API konieczne jest wygenerowanie kluczy:
 
 - jawnego (apiKey) - używanego do przesyłania w ramach żądań API
 - tajnego (secretKey) - używanego do podpisywania żądań (nigdy nie powinien by przesyłany lub ujawniany)
 
-W celu uzyskania danych dostępowych niezbędnych do poprawnego korzystania z API należy wygenerować klucze na frontendzie aplikacji lub skontaktować się bezpośrednio z usługodawcą (info@fiberpay.pl).
+W celu uzyskania danych dostępowych niezbędnych do poprawnego korzystania z API należy wygenerować klucze na frontendzie aplikacji lub skontaktować się bezpośrednio z usługodawcą (kontakt@systemaml.pl).
 
 W przypadku niepoprawnego wykorzystania kluczy dostępowych serwer zwraca następujące błędy:
 
@@ -163,7 +176,7 @@ W przypadku zapytań nie posiadających body, należy wysłać żądanie z nagł
 
 Każde ciało zapytania jest przekazywane za pomocą JWT z wykorzystaniem odpowiedniej sygnatury. Body żądania powinno być tekstem (JWT).
 
-#### Przykładowy skrypt tworzenia ciała zapytania JWT
+#### Przykładowy skrypt tworzenia ciała zapytania JWT (JavaScript/Node.js)
 
 ```javascript
 const { encode } = require("jwt-simple");
@@ -178,6 +191,8 @@ const encoded = encode(payload, SECRET, "HS256");
 ```
 ### 1.4. Webhooks
 
+[↩️ Powrót do spisu treści](#spis-treści)
+
 Webhooks umożliwiają automatyczne powiadomienia o zdarzeniach w SystemAML.
 
 #### Jak to działa?
@@ -191,8 +206,8 @@ sequenceDiagram
 
 #### Konfiguracja
 
-1. Zaloguj się do [panelu SystemAML](/dashboard/settings/api/)
-2. Przejdź do **Ustawienia → API → Webhooks**
+1. Zaloguj się do [panelu SystemAML](https://systemaml.pl/dashboard/settings/api/))
+2. Przejdź do **Ustawienia → Integracja API → Webhooks**
 3. Dodaj URL swojego endpointu: `https://twoja-domena.pl/webhook`
 4. Wygeneruj **Webhook Secret** (klucz do weryfikacji)
 5. Wybierz typy zdarzeń, które Cię interesują
@@ -274,13 +289,15 @@ https://abc123.ngrok.io/webhook
 ```
 
 #### Dodatkowe zasoby
-- [JWT.io - Debugowanie tokenów](https://jwt.io/)
-- [Ngrok - Tunelowanie lokalne](https://ngrok.com/)
+- [JWT.io – narzędzie do inspekcji i dekodowania tokenów JWT](https://jwt.io/)
+- [Ngrok – usługa bezpiecznego tunelowania HTTP/HTTPS](https://ngrok.com/)
 
 
 ## 2. Zarządzanie podmiotami
 
 ### 2.1. Podmioty
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 #### 2.1.1. POST /parties
 
@@ -429,8 +446,8 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 | **companyIdentifier** | WARUNKOWO* | Numer identyfikacyjny | - |
 | **nationalBusinessRegistryNumber** | NIE | REGON | `"632702201"` |
 | **tradeNames** | NIE | Nazwy handlowe | `["FiberPay", "SystemAML"]` |
-| **mainPkdCode** | WARUNKOWO** | Główny kod PKD | Zobacz strukturę |
-| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica obiektów |
+| **mainPkdCode** | WARUNKOWO** | Główny kod PKD | Zobacz [strukturę PKD](#struktura-pkd) |
+| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów](#struktura-pkd) |
 | **terminationDate** | NIE | Data zakończenia działalności | `"2024-12-31"` |
 
 **Wymagalność:**
@@ -549,7 +566,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 | **nationalCourtRegistryNumber** | NIE | KRS | `"0000512707"` |
 | **tradeNames** | NIE | Nazwy handlowe | `["FiberPay"]` |
 | **mainPkdCode** | WARUNKOWO* | Główny PKD | Zobacz [strukturę PKD](#struktura-pkd) |
-| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica obiektów |
+| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów](#struktura-pkd) |
 | **website** | NIE | Strona WWW | `"fiberpay.pl"` |
 | **servicesDescription** | NIE | Opis usług | - |
 | **listedOnStock** | NIE | Notowana na giełdzie? | `"yes"`, `"no"` |
@@ -581,8 +598,8 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 
 ```json
 {
-  "pkdCode": "64.99.Z",
-  "pkdName": "Pozostała finansowa działalność usługowa"
+  "pkdCode": "62.01.Z",
+  "pkdName": "Działalność związana z oprogramowaniem"
 }
 ```
 
@@ -763,7 +780,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 
 | Parametr | Wymagane | Opis | Przykład |
 |:----------:|:----------:|:------:|:----------:|
-| **roleType** | TAK | Typ roli | `"president"` |
+| **roleType** | TAK | [Typ roli](#typy-ról-roletype) | `"president"` |
 | **description** | WARUNKOWO* | Opis roli | `"Prezes zarządu"` |
 
 **Wymagalność:**
@@ -881,7 +898,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
 **Przykład:**
 ```json
 {
-  "emailAdress": "info@fiberpay.pl",
+  "emailAdress": "kontakt@systemaml.pl",
   "phoneCountry": "48",
   "phoneNumber": "222302622"
 }
@@ -1010,7 +1027,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
     "postalCode": "00-815"
   },
   "companyContact": {
-    "emailAdress": "info@fiberpay.pl",
+    "emailAdress": "kontakt@systemaml.pl",
     "phoneCountry": "48",
     "phoneNumber": "222302622"
   }
@@ -1089,7 +1106,7 @@ Reprezentanci to osoby upoważnione do działania w imieniu firmy:
       {
         "code": "et28pr6cqx5s",
         "type": "company",
-        "emailAdress": "info@fiberpay.pl",
+        "emailAdress": "kontakt@systemaml.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
         "createdAt": "2023-11-20T16:38:11.000000Z"
@@ -1256,7 +1273,7 @@ Pobranie szczegółów danego podmiotu.
       {
         "code": "uema7tp12b8c",
         "type": "personal",
-        "emailAdress": "info@fiberpay.pl",
+        "emailAdress": "kontakt@systemaml.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
         "createdAt": "2023-11-20T16:49:44.000000Z"
@@ -1264,7 +1281,7 @@ Pobranie szczegółów danego podmiotu.
       {
         "code": "haf6b4vgsz7u",
         "type": "company",
-        "emailAdress": "info@fiberpay.pl",
+        "emailAdress": "kontakt@systemaml.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
         "createdAt": "2023-11-20T16:49:44.000000Z"
@@ -1376,6 +1393,8 @@ Usunięcie podmiotu wskazanego kodem identyfikującym.
 ---
 
 ### 2.2. Beneficjenci
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 #### 2.2.1. POST /parties/{code}/beneficiaries
 
@@ -1624,7 +1643,7 @@ Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
         {
           "code": "5b1gk4jpe9fn",
           "type": "company",
-          "emailAdress": "info@fiberpay.pl",
+          "emailAdress": "kontakt@systemaml.pl",
           "phoneCountry": "48",
           "phoneNumber": "222302622",
           "createdAt": "2023-08-24T15:48:19.000000Z"
@@ -1692,6 +1711,8 @@ Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
 ### 2.3. Reprezentanci
 
+[↩️ Powrót do spisu treści](#spis-treści)
+
 #### 2.3.1. POST /parties/{code}/boardmembers
 
 Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
@@ -1737,7 +1758,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 
 | Parametr | Wymagane | Opis | Przykład |
 |:----------:|:----------:|:------:|:----------:|
-| **roleType** | TAK | Typ roli | `"president"` |
+| **roleType** | TAK | [Typ roli](#typy-ról-roletype) | `"president"` |
 | **description** | WARUNKOWO* | Opis roli | `"Prezes zarządu"` |
 
 **Wymagalność:**
@@ -1825,90 +1846,100 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
 
 ```json
 {
-  "data": {
-    "code": "9c281v6rkzty",
-    "description": "Prezes",
-    "roleType": "proxy",
-    "individualEntity": {
-      "code": "qmce687su31n",
-      "firstName": "Jan",
-      "lastName": "Nowak",
-      "personalIdentityNumber": "97120824889",
-      "documentType": "id_card",
-      "documentNumber": "XIK941595",
-      "documentIssueCountry": "PL",
-      "documentExpirationDate": null,
-      "withoutExpirationDate": false,
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": "yes",
-      "politicallyExposedCoworker": "no",
-      "politicallyExposedFamily": "no",
-      "createdAt": "2023-11-20T16:42:39.000000Z",
-      "birthDate": null
-    },
-    "company": {
-      "legalEntity": {
-        "code": "jx86zfnrhks9",
-        "companyName": "FiberPay",
-        "tradeNames": ["FiberPay"],
-        "taxIdNumber": "7010634566",
-        "nationalBusinessRegistryNumber": "147302566",
-        "nationalCourtRegistryNumber": "0000512707",
-        "businessActivityForm": "stock_company",
-        "industry": null,
-        "servicesDescription": null,
-        "website": "fiberpay.pl",
-        "createdAt": "2023-11-20T16:39:46.000000Z",
-        "registrationCountry": "PL",
-        "companyIdentifier": null,
-        "pkdCodes": [
-          {
-            "code": "3puhe59mv87k",
-            "pkdCode": "58.29.Z",
-            "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
-            "mainPkd": false
-          },
-          {
-            "code": "5st34zgp2db7",
-            "pkdCode": "62.01.Z",
-            "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
-            "mainPkd": false
-          }
-        ],
-        "mainPkd": {
-          "code": "vsuxzfwbhyk1",
-          "pkdCode": "64.99.Z",
-          "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA",
-          "mainPkd": true
+    "data": {
+        "code": "kzfruz4kd11p",
+        "description": "Prezes",
+        "roleType": "proxy",
+        "individualEntity": {
+            "code": "1kwm56n8mdhc",
+            "firstName": "Jan",
+            "lastName": "Nowak",
+            "middleName": null,
+            "familyName": null,
+            "personalIdentityNumber": "97120824889",
+            "documentType": "id_card",
+            "documentTypeOther": null,
+            "documentNumber": "XIK941595",
+            "documentIssueCountry": "PL",
+            "documentExpirationDate": null,
+            "withoutExpirationDate": true,
+            "citizenship": "PL",
+            "birthCity": "Warszawa",
+            "birthCountry": "PL",
+            "politicallyExposed": "yes",
+            "politicallyExposedCoworker": "no",
+            "politicallyExposedFamily": "no",
+            "createdAt": "2026-01-15T12:38:43.000000Z",
+            "birthDate": null
+        },
+        "company": {
+            "legalEntity": {
+                "code": "kpcccjd7c4vs",
+                "companyName": "FiberPay Sp. z o.o.",
+                "tradeNames": [
+                    "FiberPay",
+                    "SystemAML"
+                ],
+                "taxIdNumber": "7010634566",
+                "nationalBusinessRegistryNumber": "147302566",
+                "nationalCourtRegistryNumber": "0000512707",
+                "businessActivityForm": "limited_liability_company",
+                "businessActivityFormOther": null,
+                "listedOnStock": "no",
+                "industry": null,
+                "servicesDescription": null,
+                "website": "fiberpay.pl",
+                "createdAt": "2026-01-15T12:38:36.000000Z",
+                "registrationCountry": "PL",
+                "companyIdentifier": null,
+                "terminationDate": null,
+                "pkdCodes": [
+                    {
+                        "code": "5a4ze76whr5s",
+                        "pkdCode": "58.29.Z",
+                        "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
+                        "mainPkd": false
+                    },
+                    {
+                        "code": "tgzgpurts4nd",
+                        "pkdCode": "62.01.Z",
+                        "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
+                        "mainPkd": false
+                    }
+                ],
+                "mainPkd": {
+                    "code": "63wbub1g8n23",
+                    "pkdCode": "64.99.Z",
+                    "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
+                    "mainPkd": true
+                }
+            },
+            "addresses": [
+                {
+                    "code": "wxpheqzu1b9b",
+                    "type": "business_address",
+                    "country": "PL",
+                    "region": null,
+                    "city": "Warszawa",
+                    "street": "Sienna",
+                    "houseNumber": "86",
+                    "flatNumber": "47",
+                    "postalCode": "00-815",
+                    "createdAt": "2026-01-15T12:38:36.000000Z"
+                }
+            ],
+            "contacts": [
+                {
+                    "code": "jbmfwwgwpfd3",
+                    "type": "company",
+                    "emailAdress": "info@fiberpay.pl",
+                    "phoneCountry": "48",
+                    "phoneNumber": "222302622",
+                    "createdAt": "2026-01-15T12:38:36.000000Z"
+                }
+            ]
         }
-      },
-      "addresses": [
-        {
-          "code": "38z5gseqyp6t",
-          "type": "business_address",
-          "country": "PL",
-          "city": "Warszawa",
-          "street": "Sienna",
-          "houseNumber": "86",
-          "flatNumber": "47",
-          "postalCode": "00-815",
-          "createdAt": "2023-11-20T16:39:46.000000Z"
-        }
-      ],
-      "contacts": [
-        {
-          "code": "ers27txw6ync",
-          "type": "company",
-          "emailAdress": "info@fiberpay.pl",
-          "phoneCountry": "48",
-          "phoneNumber": "123123123",
-          "createdAt": "2023-11-20T16:39:46.000000Z"
-        }
-      ]
     }
-  }
 }
 ```
 
@@ -1959,6 +1990,8 @@ Usunięcie reprezentanta wskazanego kodem identyfikującym.
 ## 3. Transakcje
 
 ### 3.1. POST /transactions
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 Tworzy nową transakcję w systemie.
 
@@ -2452,13 +2485,17 @@ Zmiana statusu transakcji powoduje:
 
 ### 3.5. DELETE /transactions/{code}
 
+[↩️ Powrót do spisu treści](#spis-treści)
+
 Usunięcie transakcji wskazanej kodem identyfikującym.
 
 ---
 
-## 4. Zdarzenia i zadania
+## 4. Zdarzenia
 
 ### 4.1. Zdarzenia
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 #### 4.1.1. POST /history-events
 
@@ -2592,6 +2629,8 @@ Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
 ### 4.2. Komentarze do zdarzeń
 
+[↩️ Powrót do spisu treści](#spis-treści)
+
 #### 4.2.1. POST /comments
 
 Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
@@ -2638,9 +2677,13 @@ Usunięcie komentarza wskazanego kodem identyfikującym.
 
 ---
 
-### 4.3. Zadania
+## 5. Zadania
 
-#### 4.3.1. POST /tasks
+### 5.1. Zadania
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 5.1.1. POST /tasks
 
 Tworzenie nowego zadania w systemie. Parametry żądania:
 
@@ -2709,7 +2752,7 @@ Struktura obiektu alert:
 }
 ```
 
-#### 4.3.2. GET /tasks
+#### 5.1.2. GET /tasks
 
 Pobranie zadań powiązanych z danym użytkownikiem.
 
@@ -2756,7 +2799,7 @@ Pobranie zadań powiązanych z danym użytkownikiem.
 }
 ```
 
-#### 4.3.3. GET /tasks/{code}
+#### 5.1.3. GET /tasks/{code}
 
 Pobranie szczegółów zadania wskazanego kodem.
 
@@ -2779,15 +2822,17 @@ Pobranie szczegółów zadania wskazanego kodem.
 }
 ```
 
-#### 4.3.4. DELETE /tasks/{code}
+#### 5.1.4. DELETE /tasks/{code}
 
 Usunięcie zadania wskazanego kodem identyfikującym.
 
 ---
 
-### 4.4. Komentarze do zadań
+### 5.2. Komentarze do zadań
 
-#### 4.4.1. POST /tasks/{code}/comments
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 5.2.1. POST /tasks/{code}/comments
 
 Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 
@@ -2823,15 +2868,15 @@ Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 }
 ```
 
-#### 4.4.2. GET /tasks/{code}/comments
+#### 5.2.2. GET /tasks/{code}/comments
 
 Zwraca komentarze przypisane do zadania.
 
-#### 4.4.3. DELETE /tasks/{code}/comments/{commentsCode}
+#### 5.2.3. DELETE /tasks/{code}/comments/{commentsCode}
 
 Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
-#### 4.4.4. PATCH /tasks/{code}/comments/{commentsCode}
+#### 5.2.4. PATCH /tasks/{code}/comments/{commentsCode}
 
 Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
@@ -2868,9 +2913,11 @@ Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikuj
 
 ---
 
-## 5. Alerty
+## 6. Alerty
 
-### 5.1. GET /alerts
+### 6.1. GET /alerts
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 Pobranie alertów powiązanych z danym użytkownikiem.
 
@@ -2893,7 +2940,9 @@ Pobranie alertów powiązanych z danym użytkownikiem.
 }
 ```
 
-### 5.2. GET /alerts/{code}
+### 6.2. GET /alerts/{code}
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 Pobranie szczegółów alertu wskazanego kodem.
 
@@ -2916,17 +2965,21 @@ Pobranie szczegółów alertu wskazanego kodem.
 }
 ```
 
-### 5.3. DELETE /alerts/{code}
+### 6.3. DELETE /alerts/{code}
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 Usunięcie alertu wskazanego kodem identyfikującym.
 
 ---
 
-## 6. Compliance i weryfikacja
+## 7. Compliance i weryfikacja
 
-### 6.1. Listy sankcyjne
+### 7.1. Listy sankcyjne
 
-#### 6.1.1. POST /sanctions-lists/search
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 7.1.1. POST /sanctions-lists/search
 
 Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ, USA).
 
@@ -3104,7 +3157,7 @@ Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (
 
 
 
-#### 6.1.2. GET /sanctions/{code}/pdf
+#### 7.1.2. GET /sanctions/{code}/pdf
 
 Pobiera raport PDF z wynikami wyszukiwania na listach sankcyjnych.
 
@@ -3123,9 +3176,9 @@ Raport zawiera:
 - Listę znalezionych dopasowań
 - Szczegóły każdego dopasowania (lista, aliasy, dane źródłowe)
 
-### 6.2. Proces KYC
+### 7.2. Proces KYC
 
-#### 6.2.1. POST /parties/applicants
+#### 7.2.1. POST /parties/applicants
 
 Utworzenie nowego formualarza KYC.
 
@@ -3171,7 +3224,7 @@ Utworzenie nowego formualarza KYC.
 }
 ```
 
-#### 6.2.2. GET /parties/{code}/applicants
+#### 7.2.2. GET /parties/{code}/applicants
 
 Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 
@@ -3239,7 +3292,7 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 }
 ```
 
-#### 6.2.3. GET /parties/{code}/applicants/current
+#### 7.2.3. GET /parties/{code}/applicants/current
 
 Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces weryfikacji nie został zakończony. Parametry żądania:
 
@@ -3425,7 +3478,7 @@ Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces
 }
 ```
 
-#### 6.2.4. GET /applicants/{code}
+#### 7.2.4. GET /applicants/{code}
 
 Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 
@@ -3486,11 +3539,11 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 ```
 
 
-#### 6.2.5. DELETE /applicants/{code}
+#### 7.2.5. DELETE /applicants/{code}
 
 Usunięcie aplikanta wskazanego kodem.
 
-#### 6.2.6. POST /applicants/{code}/acceptance
+#### 7.2.6. POST /applicants/{code}/acceptance
 
 Akceptacja deklarowanych danych aplikanta wskazanego kodem.
 
