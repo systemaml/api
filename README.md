@@ -49,9 +49,9 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - [4.1.4. Usuwanie zdarzenia](#414-delete-history-eventscode) `DELETE /history-events/{code}`
 
   <strong><a href="#42-komentarze-do-zdarzeń">4.2. Komentarze do zdarzeń</a></strong>
-  - [4.2.1. Dodaj komentarz](#421-post-comments) `POST /comments`
+  - [4.2.1. Dodawanie komentarza](#421-post-comments) `POST /comments`
   - [4.2.2. Lista komentarzy](#422-get-history-eventscodecomments) `GET /history-events/{code}/comments`
-  - [4.2.3. Usuń komentarz](#423-delete-commentscode) `DELETE /comments/{code}`
+  - [4.2.3. Usuwanie komentarza](#423-delete-commentscode) `DELETE /comments/{code}`
 
 <h3>5. Zadania</h3>
 
@@ -62,10 +62,10 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
   - [5.1.4. Usuwanie zadania](#514-delete-taskscode) `DELETE /tasks/{code}`
 
   <strong><a href="#52-komentarze-do-zadań">5.2. Komentarze do zadań</a></strong>
-  - [5.2.1. Dodaj komentarz](#521-post-taskscodecomments) `POST /tasks/{code}/comments`
+  - [5.2.1. Dodawanie komentarza](#521-post-taskscodecomments) `POST /tasks/{code}/comments`
   - [5.2.2. Lista komentarzy](#522-get-taskscodecomments) `GET /tasks/{code}/comments`
-  - [5.2.3. Usuń komentarz](#523-delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
-  - [5.2.4. Edytuj komentarz](#524-patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
+  - [5.2.3. Usuwanie komentarza](#523-delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
+  - [5.2.4. Edytowanie komentarza](#524-patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
 
 <h3>6. Alerty</h3>
 
@@ -206,11 +206,10 @@ sequenceDiagram
 
 #### Konfiguracja
 
-1. Zaloguj się do [panelu SystemAML](https://systemaml.pl/dashboard/settings/api/))
+1. Zaloguj się do [panelu SystemAML](https://systemaml.pl/dashboard/settings/api/)
 2. Przejdź do **Ustawienia → Integracja API → Webhooks**
 3. Dodaj URL swojego endpointu: `https://twoja-domena.pl/webhook`
 4. Wygeneruj **Webhook Secret** (klucz do weryfikacji)
-5. Wybierz typy zdarzeń, które Cię interesują
 
 #### Format webhook
 
@@ -447,7 +446,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 | **nationalBusinessRegistryNumber** | NIE | REGON | `"632702201"` |
 | **tradeNames** | NIE | Nazwy handlowe | `["FiberPay", "SystemAML"]` |
 | **mainPkdCode** | WARUNKOWO** | Główny kod PKD | Zobacz [strukturę PKD](#struktura-pkd) |
-| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów](#struktura-pkd) |
+| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów ze strukturą PKD](#struktura-pkd) |
 | **terminationDate** | NIE | Data zakończenia działalności | `"2024-12-31"` |
 
 **Wymagalność:**
@@ -566,7 +565,7 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 | **nationalCourtRegistryNumber** | NIE | KRS | `"0000512707"` |
 | **tradeNames** | NIE | Nazwy handlowe | `["FiberPay"]` |
 | **mainPkdCode** | WARUNKOWO* | Główny PKD | Zobacz [strukturę PKD](#struktura-pkd) |
-| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów](#struktura-pkd) |
+| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów ze strukturą PKD](#struktura-pkd) |
 | **website** | NIE | Strona WWW | `"fiberpay.pl"` |
 | **servicesDescription** | NIE | Opis usług | - |
 | **listedOnStock** | NIE | Notowana na giełdzie? | `"yes"`, `"no"` |
@@ -593,17 +592,6 @@ W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniż
 | `limited_joint_stock_partnership_company` | Spółka komandytowo-akcyjna |
 | `branches_of_foreign_entrepreneur` | Oddziały zagranicznych przedsiębiorców |
 | `other` | Inna |
-
-### Struktura PKD
-
-```json
-{
-  "pkdCode": "62.01.Z",
-  "pkdName": "Działalność związana z oprogramowaniem"
-}
-```
-
----
 
 ## Beneficjenci rzeczywiści
 
@@ -1376,14 +1364,6 @@ Zmiana statusu podmiotu powoduje:
 }
 ```
 
-**STATUS 422 Unprocessable Entity**
-```json
-{
-  "status": "ERROR",
-  "error": "The selected new status is invalid."
-}
-```
-
 ---
 
 #### 2.1.5. DELETE /parties/{code}
@@ -1398,7 +1378,7 @@ Usunięcie podmiotu wskazanego kodem identyfikującym.
 
 #### 2.2.1. POST /parties/{code}/beneficiaries
 
-Dodaje beneficjenta rzeczywistego do podmiotu typu `company`.
+Dodawanie beneficjenta rzeczywistego do podmiotu typu `company`.
 
 > **Uwaga:** Endpoint dostępny tylko dla podmiotów typu `company` (osoba prawna).
 
@@ -1715,7 +1695,7 @@ Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
 #### 2.3.1. POST /parties/{code}/boardmembers
 
-Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
+Dodawanie reprezentanta (członka zarządu) do podmiotu typu `company`.
 
 > **Uwaga:** Endpoint dostępny tylko dla podmiotów typu `company` (osoba prawna).
 
@@ -1932,7 +1912,7 @@ Dodaje reprezentanta (członka zarządu) do podmiotu typu `company`.
                 {
                     "code": "jbmfwwgwpfd3",
                     "type": "company",
-                    "emailAdress": "info@fiberpay.pl",
+                    "emailAdress": "kontakt@systemaml.pl",
                     "phoneCountry": "48",
                     "phoneNumber": "222302622",
                     "createdAt": "2026-01-15T12:38:36.000000Z"
@@ -2607,14 +2587,22 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 {
   "data": {
     "code": "ame15yfgvhzk",
-    "partyCode": "7u2nbzjx83dg",
-    "transactionCode": null,
+    "significance": "warning",
     "description": "89b88",
     "type": "user",
-    "significance": "warning",
-    "occursAt": "2023-08-03 18:42:40",
+    "party": {
+      "code": "7u2nbzjx83dg",
+      "status": "active",
+      "description": "Jan Kowalski"
+    },
+    "kycApplicant": null,
+    "transaction": null,
+    "team": null,
+    "commentsAmount": 2,
+    "hasComments": true,
+    "occursAt": "2023-08-03T18:42:40.000000Z",
     "createdByName": null,
-    "commentsAmount": 2
+    "redirectTarget": null
   }
 }
 ```
@@ -2765,6 +2753,7 @@ Pobranie zadań powiązanych z danym użytkownikiem.
   "data": [
     {
       "code": "94dwpaxk5rzy",
+      "identifier": "Z-15",
       "content": "Wymagane manualne ustawienie oceny ryzyka w podmiocie",
       "status": "new",
       "alert": {
@@ -2773,8 +2762,8 @@ Pobranie zadań powiązanych z danym użytkownikiem.
       },
       "party": {
         "code": "pum7n95fbwqk",
-        "firstName": "234",
-        "lastName": "234"
+        "name": "234 234",
+        "status": "active"
       },
       "transaction": {
         "code": "wjnkx4dr2ag9",
@@ -2784,13 +2773,14 @@ Pobranie zadań powiązanych z danym użytkownikiem.
     },
     {
       "code": "svxpezabyg9h",
+      "identifier": "Z-8",
       "content": "Przeprowadź środki bezpieczeństwa finansowego - do 2022-06-05 (Od zarejestrowania podmiotu minęło 870 dni)",
       "status": "done",
       "alert": null,
       "party": {
         "code": "s1vcm5ew9fd4",
-        "firstName": "Jan",
-        "lastName": "Kowalski"
+        "name": "Jan Kowalski",
+        "status": "active"
       },
       "transaction": null,
       "expirationDate": null
@@ -2811,13 +2801,20 @@ Pobranie szczegółów zadania wskazanego kodem.
 {
   "data": {
     "code": "dcsur627nf3w",
+    "identifier": "Z-1",
     "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
     "status": "new",
-    "alert": null,
     "party": null,
+    "kycApplicant": null,
     "transaction": null,
+    "alert": null,
     "expirationDate": null,
-    "createdAt": "2023-11-14T15:57:32.000000Z"
+    "createdAt": "2023-11-14T15:57:32.000000Z",
+    "type": null,
+    "canEdit": true,
+    "createdByName": null,
+    "redirectTarget": null,
+    "commentsCount": 0
   }
 }
 ```
@@ -2931,10 +2928,12 @@ Pobranie alertów powiązanych z danym użytkownikiem.
     {
       "code": "9u187g4y2fcq",
       "content": "alert testowy api",
-      "type": "task",
       "status": "new",
       "partyCode": null,
-      "transactionCode": null
+      "partyName": null,
+      "transactionCode": null,
+      "transactionTitle": null,
+      "createdAt": "2022-07-18"
     }
   ]
 }
@@ -2955,12 +2954,15 @@ Pobranie szczegółów alertu wskazanego kodem.
   "data": {
     "code": "9u187g4y2fcq",
     "content": "alert testowy api",
-    "type": "task",
     "status": "new",
-    "taskDone": false,
-    "partyCode": null,
-    "transactionCode": null,
-    "createdAt": "2022-07-18T13:22:42.000000Z"
+    "party": null,
+    "kycApplicant": null,
+    "transaction": null,
+    "employee": null,
+    "createdAt": "2022-07-18T13:22:42.000000Z",
+    "canEdit": true,
+    "type": "task",
+    "redirectTarget": null
   }
 }
 ```
