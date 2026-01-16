@@ -4,85 +4,140 @@ Wspomaganie działań przeciwdziałania praniu pieniędzy i finansowania terrory
 
 # SystemAML
 
-###
+## Spis treści
 
-## Spis treści:
+<h3>1. Konfiguracja</h3>
 
-- 1. [Informacje ogólne](#informacje-ogólne)
-  - 1.1. [Klucze API](#klucze-api)
-  - 1.2. [Nagłówek zapytania](#nagłówek-zapytania)
-  - 1.3. [Ciało zapytania](#ciało-zapytania)
-  - 1.4. [Mechanizm webhooków](#mechanizm-webhooków)
-- 2. [Opis usług](#opis-usług)
-  - 2.1. [POST /parties](#post-parties)
-  - 2.2. [GET /parties](#get-parties)
-  - 2.3. [GET /parties/{code}](#get-partiescode)
-  - 2.4. [DELETE /parties/{code}](#delete-partiescode)
-  - 2.5. [POST /parties/{code}/beneficiaries](#post-partiescodebeneficiaries)
-  - 2.6. [GET /parties/{code}/beneficiaries](#get-partiescodebeneficiaries)
-  - 2.7. [DELETE /beneficiaries/{code}](#delete-beneficiariescode)
-  - 2.8. [POST /parties/{code}/boardmembers](#post-partiescodeboardmembers)
-  - 2.9. [GET /parties/{code}/boardmembers](#get-partiescodeboardmembers)
-  - 2.10. [DELETE /boardmembers/{code}](#delete-boardmemberscode)
-  - 2.11. [POST /transactions](#post-transactions)
-  - 2.12. [GET /transactions](#get-transactions)
-  - 2.13. [GET /transactions/{code}](#get-transactionscode)
-  - 2.14. [DELETE /transactions/{code}](#delete-transactionscode)
-  - 2.15. [POST /history-events](#post-history-events)
-  - 2.16. [GET /history-events](#get-history-events)
-  - 2.17. [GET /history-events/{code}](#get-history-eventscode)
-  - 2.18. [DELETE /history-events/{code}](#delete-history-eventscode)
-  - 2.19. [POST /comments](#post-comments)
-  - 2.20. [GET /history-events/{code}/comments](#get-history-eventscodecomments)
-  - 2.21. [DELETE /comments/{code}](#delete-commentscode)
-  - 2.22. [GET /alerts](#get-alerts)
-  - 2.23. [GET /alerts/{code}](#get-alertscode)
-  - 2.24. [DELETE /alerts/{code}](#delete-alertscode)
-  - 2.25. [POST /tasks](#post-tasks)
-  - 2.26. [GET /tasks](#get-tasks)
-  - 2.27. [GET /tasks/{code}](#get-taskscode)
-  - 2.28. [DELETE /tasks/{code}](#delete-taskscode)
-  - 2.29. [POST /tasks/{code}/comments](#post-taskscodecomments)
-  - 2.30. [GET /tasks/{code}/comments](#get-taskscodecomments)
-  - 2.31. [PATCH /tasks/{code}/comments/{commentsCode}](#delete-taskcodecommentscommentsCode)
-  - 2.32. [DELETE /tasks/{code}/comments/{commentsCode}](#patch-taskcodecommentscommentsCode)
-  - 2.33. [POST /sanctions-lists/search](#post-sanctions-listssearch)
-  - 2.34. [GET /sanctions/{code}/pdf](#get-sanctionscodepdf)
-  - 2.35. [POST /parties/applicants](#post-partiesapplicants)
-  - 2.36. [GET /parties/{code}/applicants](#get-partiescodeapplicants)
-  - 2.37. [GET /parties/{code}/applicants/current](#get-partiescodeapplicantscurrent)
-  - 2.38. [GET /applicants/{code}](#get-applicantscode)
-  - 2.39. [DELETE /applicants/{code}](#delete-applicantscode)
-  - 2.40. [POST /applicants/{code}/acceptance](#post-applicantscodeacceptance)
-#
+- [1.1. Informacje ogólne](#11-informacje-ogólne)
+- [1.2. Adresy serwerów](#12-adresy-serwerów)
+- [1.3. Klucze API](#13-klucze-api)
+- [1.4. Webhooks](#14-webhooks)
 
-###
+<h3>2. Zarządzanie podmiotami</h3>
 
-## Informacje ogólne
+  <strong><a href="#21-podmioty">2.1. Podmioty</a></strong>
+  - [2.1.1. Tworzenie podmiotu](#211-post-parties) `POST /parties`
+  - [2.1.2. Lista podmiotów](#212-get-parties) `GET /parties`
+  - [2.1.3. Szczegóły podmiotu](#213-get-partiescode) `GET /parties/{code}`
+  - [2.1.4. Zmiana statusu podmiotu](#214-post-partiescodestatus) `POST /parties/{code}/status`
+  - [2.1.5. Usuwanie podmiotu](#215-delete-partiescode) `DELETE /parties/{code}`
 
-Głównym zastosowaniem API jest katalogowanie podmiotów, przez działalności od których wymagane jest prowadzenie ewidencji klientów.
+  <strong><a href="#22-beneficjenci">2.2. Beneficjenci</a></strong>
+  - [2.2.1. Dodawanie beneficjenta](#221-post-partiescodebeneficiaries) `POST /parties/{code}/beneficiaries`
+  - [2.2.2. Lista beneficjentów](#222-get-partiescodebeneficiaries) `GET /parties/{code}/beneficiaries`
+  - [2.2.3. Usuwanie beneficjenta](#223-delete-beneficiariescode) `DELETE /beneficiaries/{code}`
 
-### Adresy serwerów
+  <strong><a href="#23-reprezentanci">2.3. Reprezentanci</a></strong>
+  - [2.3.1. Dodawanie reprezentanta](#231-post-partiescodeboardmembers) `POST /parties/{code}/boardmembers`
+  - [2.3.2. Lista reprezentantów](#232-get-partiescodeboardmembers) `GET /parties/{code}/boardmembers`
+  - [2.3.3. Usuwanie reprezentanta](#233-delete-boardmemberscode) `DELETE /boardmembers/{code}`
 
-| Funkcjonalność | Środowisko | URL                                                                 |
-| -------- | -------- | --------------------------------------------------------------------------- |
-| Serwer API | Produkcyjne   | https://api.systemaml.pl/1.0/ |
-| Frontend aplikacji | Produkcyjne   | https://systemaml.pl/ |
-| Serwer API | Testowe   | http://apitest.systemaml.pl/1.0/ |
-| Frontend aplikacji | Testowe   | https://test.systemaml.pl/ |
+<h3>3. Transakcje</h3>
 
-### UWAGA!
+- [3.1. Tworzenie transakcji](#31-post-transactions) `POST /transactions`
+- [3.2. Lista transakcji](#32-get-transactions) `GET /transactions`
+- [3.3. Szczegóły transakcji](#33-get-transactionscode) `GET /transactions/{code}`
+- [3.4. Zmiana statusu transakcji](#34-post-transactionscodestatus) `POST /transactions/{code}/status`
+- [3.5. Usuwanie transakcji](#35-delete-transactionscode) `DELETE /transactions/{code}`
 
-Są to zupełnie rozdzielone środowiska (łącznie z infrastrukturą). Klucze API z jednego środowiska nie będą działać w drugim.
+<h3>4. Zdarzenia</h3>
 
-### Klucze API
+  <strong><a href="#41-zdarzenia">4.1. Zdarzenia</a></strong>
+  - [4.1.1. Tworzenie zdarzenia](#411-post-history-events) `POST /history-events`
+  - [4.1.2. Lista zdarzeń](#412-get-history-events) `GET /history-events`
+  - [4.1.3. Szczegóły zdarzenia](#413-get-history-eventscode) `GET /history-events/{code}`
+  - [4.1.4. Usuwanie zdarzenia](#414-delete-history-eventscode) `DELETE /history-events/{code}`
+
+  <strong><a href="#42-komentarze-do-zdarzeń">4.2. Komentarze do zdarzeń</a></strong>
+  - [4.2.1. Dodawanie komentarza](#421-post-comments) `POST /comments`
+  - [4.2.2. Lista komentarzy](#422-get-history-eventscodecomments) `GET /history-events/{code}/comments`
+  - [4.2.3. Usuwanie komentarza](#423-delete-commentscode) `DELETE /comments/{code}`
+
+<h3>5. Zadania</h3>
+
+  <strong><a href="#51-zadania">5.1. Zadania</a></strong>
+  - [5.1.1. Tworzenie zadania](#511-post-tasks) `POST /tasks`
+  - [5.1.2. Lista zadań](#512-get-tasks) `GET /tasks`
+  - [5.1.3. Szczegóły zadania](#513-get-taskscode) `GET /tasks/{code}`
+  - [5.1.4. Usuwanie zadania](#514-delete-taskscode) `DELETE /tasks/{code}`
+
+  <strong><a href="#52-komentarze-do-zadań">5.2. Komentarze do zadań</a></strong>
+  - [5.2.1. Dodawanie komentarza](#521-post-taskscodecomments) `POST /tasks/{code}/comments`
+  - [5.2.2. Lista komentarzy](#522-get-taskscodecomments) `GET /tasks/{code}/comments`
+  - [5.2.3. Usuwanie komentarza](#523-delete-taskscodecommentscommentscode) `DELETE /tasks/{code}/comments/{commentsCode}`
+  - [5.2.4. Edytowanie komentarza](#524-patch-taskscodecommentscommentscode) `PATCH /tasks/{code}/comments/{commentsCode}`
+
+<h3>6. Alerty</h3>
+
+- [6.1. Lista alertów](#61-get-alerts) `GET /alerts`
+- [6.2. Szczegóły alertu](#62-get-alertscode) `GET /alerts/{code}`
+- [6.3. Usuwanie alertu](#63-delete-alertscode) `DELETE /alerts/{code}`
+
+<h3>7. Compliance i weryfikacja</h3>
+
+  <strong><a href="#71-listy-sankcyjne">7.1. Listy sankcyjne</a></strong>
+  - [7.1.1. Wyszukiwanie](#711-post-sanctions-listssearch) `POST /sanctions-lists/search`
+  - [7.1.2. Raport PDF](#712-get-sanctionscodepdf) `GET /sanctions/{code}/pdf`
+
+  <strong><a href="#72-proces-kyc">7.2. Proces KYC</a></strong>
+  - [7.2.1. Utworzenie formularza](#721-post-partiesapplicants) `POST /parties/applicants`
+  - [7.2.2. Lista aplikantów](#722-get-partiescodeapplicants) `GET /parties/{code}/applicants`
+  - [7.2.3. Aktualny aplikant](#723-get-partiescodeapplicantscurrent) `GET /parties/{code}/applicants/current`
+  - [7.2.4. Szczegóły aplikanta](#724-get-applicantscode) `GET /applicants/{code}`
+  - [7.2.5. Usuwanie aplikanta](#725-delete-applicantscode) `DELETE /applicants/{code}`
+  - [7.2.6. Akceptacja aplikanta](#726-post-applicantscodeacceptance) `POST /applicants/{code}/acceptance`
+
+---
+
+## 1. Konfiguracja
+
+### 1.1. Informacje ogólne
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+API SystemAML umożliwia automatyzację procesów związanych z:
+- Zarządzaniem bazą klientów (podmiotów)
+- Rejestrowaniem transakcji
+- Weryfikacją na listach sankcyjnych
+- Przeprowadzaniem procesu KYC (Know Your Customer)
+- Tworzeniem alertów i zarządzaniem zadaniami
+
+#### Dla kogo?
+API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji klientów zgodnie z ustawą o przeciwdziałaniu praniu pieniędzy.
+
+### 1.2. Adresy serwerów
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+| Środowisko | Funkcjonalność | Ścieżka bazowa |
+|:------------:|:----------------:|:----------------:|
+| **Produkcyjne** | API | `/1.0/` |
+| **Produkcyjne** | Panel aplikacji | `/` |
+| **Testowe** | API | `/1.0/` |
+| **Testowe** | Panel aplikacji | `/` |
+
+> 📧 **Aby uzyskać właściwe adresy URL:** Skontaktuj się z zespołem pod adresem kontakt@systemaml.pl
+
+### ⚠️ Ważne informacje o środowiskach
+
+| Aspekt | Opis |
+|:--------:|:------:|
+| **Separacja** | Środowiska są całkowicie rozdzielone (osobna infrastruktura) |
+| **Klucze API** | Klucze z jednego środowiska **nie działają** w drugim |
+| **Dane** | Dane nie są synchronizowane między środowiskami |
+| **Testowe** | Służy do testów integracji, dane nie są prawdziwe |
+| **Produkcyjne** | Środowisko operacyjne z prawdziwymi danymi |
+
+### 1.3. Klucze API
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 Do korzystania z API konieczne jest wygenerowanie kluczy:
 
 - jawnego (apiKey) - używanego do przesyłania w ramach żądań API
 - tajnego (secretKey) - używanego do podpisywania żądań (nigdy nie powinien by przesyłany lub ujawniany)
 
-W celu uzyskania danych dostępowych niezbędnych do poprawnego korzystania z API należy wygenerować klucze na frontendzie aplikacji lub skontaktować się bezpośrednio z usługodawcą (info@fiberpay.pl).
+W celu uzyskania danych dostępowych niezbędnych do poprawnego korzystania z API należy wygenerować klucze na frontendzie aplikacji lub skontaktować się bezpośrednio z usługodawcą (kontakt@systemaml.pl).
 
 W przypadku niepoprawnego wykorzystania kluczy dostępowych serwer zwraca następujące błędy:
 
@@ -121,7 +176,7 @@ W przypadku zapytań nie posiadających body, należy wysłać żądanie z nagł
 
 Każde ciało zapytania jest przekazywane za pomocą JWT z wykorzystaniem odpowiedniej sygnatury. Body żądania powinno być tekstem (JWT).
 
-#### Przykładowy skrypt tworzenia ciała zapytania JWT
+#### Przykładowy skrypt tworzenia ciała zapytania JWT (JavaScript/Node.js)
 
 ```javascript
 const { encode } = require("jwt-simple");
@@ -134,14 +189,37 @@ const payload = {
 const encoded = encode(payload, SECRET, "HS256");
 
 ```
-### Mechanizm webhooków
+### 1.4. Webhooks
 
-SystemAML automatycznie wysyła żądania HTTP POST na wcześniej skonfigurowany adres URL w momencie wystąpienia określonych zdarzeń w systemie (np. zmiana statusu podmiotu, utworzenie transakcji).
+[↩️ Powrót do spisu treści](#spis-treści)
 
-W ciele (body) żądania HTTP POST będzie zawarty **token JWT** zawierający dane o zdarzeniu.
+Webhooks umożliwiają automatyczne powiadomienia o zdarzeniach w SystemAML.
 
-**Token JWT** należy zweryfikować używając algorytmu **HS256** oraz **webhook secret** wygenerowanego w [panelu konfiguracji webhooków](https://systemaml.pl/dashboard/settings/api/).
-Weryfikacja sygnatury tokenu potwierdza autentyczność danych i gwarantuje, że zostały wysłane przez SystemAML.
+#### Jak to działa?
+
+```mermaid
+sequenceDiagram
+    SystemAML->>Twój serwer: POST /webhook (JWT token)
+    Twój serwer->>Twój serwer: Weryfikacja podpisu JWT
+    Twój serwer->>SystemAML: 200 OK
+```
+
+#### Konfiguracja
+
+1. Zaloguj się do [panelu SystemAML](https://systemaml.pl/dashboard/settings/api/)
+2. Przejdź do **Ustawienia → Integracja API → Webhooks**
+3. Dodaj URL swojego endpointu: `https://twoja-domena.pl/webhook`
+4. Wygeneruj **Webhook Secret** (klucz do weryfikacji)
+
+#### Format webhook
+
+SystemAML wysyła **POST** z tokenem JWT w body:
+
+```http
+POST /webhook HTTP/1.1
+Host: twoja-domena.pl
+Content-Type: text/plain
+```
 
 #### Przykładowy webhook w postaci JWT dla typu TRANSACTION_DATA_UPDATED:
 ```
@@ -169,349 +247,670 @@ eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJwYXlsb2FkIjp7InR5cGUiOiJUUkFOU0FDVElPTl9
 }
 ```
 
-### Lista typów webhooków
+#### Typy zdarzeń webhooków
 
-| Typ | Opis zdarzenia |
-| -------- | --------------------------------------|
-| **party_profile_updated** | Aktualizacja danych podmiotu |
-| **party_status_change** | Zmiana statusu podmiotu |
-| **party_risk_change** | Zmiana statusu ryzyka podmiotu |
-| **party_deleted** | Usunięcie podmiotu |
-| **transaction_data_updated** | Aktualizacja danych transakcji |
-| **transaction_status_change** | Zmiana statusu transakcji |
-| **transaction_risk_change** | Zmiana statusu ryzyka transakcji |
-| **transaction_deleted** | Usunięcie transakcji |
-| **applicant_created** | Utworzenie aplikanta KYC |
-| **applicant_status_change** | Zmiana statusu aplikanta KYC |
+##### Podmioty
+| Typ | Opis | Przykładowe dane |
+|:-----:|:------:|:------------------:|
+| `party_profile_updated` | Aktualizacja danych podmiotu | `{ party: { code, firstName, lastName } }` |
+| `party_status_change` | Zmiana statusu | `{ party: { code, status } }` |
+| `party_risk_change` | Zmiana ryzyka | `{ party: { code, riskStatus } }` |
+| `party_deleted` | Usunięcie | `{ party: { code } }` |
 
-Informację o tokenach JWT oraz bibliotekach do weryfikacji tokenów w różnych językach programowania znajdziesz pod adresem: [https://jwt.io/](https://jwt.io/)
+##### Transakcje
+| Typ | Opis |
+|:-----:|:------:|
+| `transaction_data_updated` | Aktualizacja danych transakcji |
+| `transaction_status_change` | Zmiana statusu transakcji |
+| `transaction_risk_change` | Zmiana ryzyka transakcji |
+| `transaction_deleted` | Usunięcie transakcji |
 
+##### Proces KYC
+| Typ | Opis |
+|:-----:|:------:|
+| `applicant_created` | Utworzenie nowego aplikanta |
+| `applicant_status_change` | Zmiana statusu weryfikacji |
 
-## Opis usług
+#### Ponowne wysyłanie
 
-### POST /parties
+Jeśli Twój serwer nie odpowie statusem `2xx`:
+- SystemAML ponowi próbę **3 razy**
+- Z odstępem **5 minut**
 
-Utworzenie nowego podmiotu. Parametry żądania:
+#### Testowanie webhooków
 
-| Parametr | Wymagane | Opis                                                                        |
-| -------- | -------- | --------------------------------------------------------------------------- |
-| **type** | TAK      | Typ podmiotu. Aktualnie wspierane: individual, sole_proprietorship, company |
-| **status** | TAK    | Status podmiotu. Aktualnie wspierane: draft, active, inactive, in_acceptance |
+```bash
+# Użyj ngrok do lokalnego testowania
+ngrok http 3000
 
-W zależności od wybranego typu wymagane są następujące parametry:
+# Ustaw URL w panelu:
+https://abc123.ngrok.io/webhook
+```
 
-a) individual:
-
-| Parametr                   | Wymagane | Opis                                                                                            |
-| -------------------------- | -------- | ----------------------------------------------------------------------------------------------- |
-| **firstName**              | TAK      | Imię podmiotu                                                                                   |
-| **lastName**               | TAK      | Nazwisko podmiotu                                                                               |
-| **middleName**             | NIE      | Drugie imię podmiotu                                                                            |
-| **familyName**             | NIE      | Nazwisko rodowe                                                                               |
-| **personalIdentityNumber** | TAK      | Numer PESEL podmiotu (w przypadku braku numeru PESEL wymagany jest parametr birthDate oraz birthCountry) |
-| **birthDate**              | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                                             |
-| **birthCountry**           | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                                             |
-| **references**             | NIE      | Referencje własne                                                                               |
-| **citizenship**            | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                                      |
-| **birthCity**              | NIE      | Miejsce urodzenia                                                                               |
-| **documentType**           | TAK      | Rodzaj dokumentu takie jak: "id_card", "electronic_id_card", "passport", "residency_card", "other" (nie jest wymagany jeśli nie ma numeru PESEL)                                  |
-| **documentNumber**         | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                  |
-| **documentIssueCountry**         | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
-| **documentTypeOther**         | NIE      | Rodzaj innego dokumentu, jest wymagany tylko w przypadku kiedy "documentType": "other"       |
-| **documentExpirationDate** | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                                       |
-| **economicRelationStartDate**    | TAK     | Data rozpoczęcia stosunków gospodarczych                                                   |
-| **withoutExpirationDate**  | NIE      | Informacja czy dokument posiada datę ważności (bool)                                            |
-| **politicallyExposed**           | TAK     | Informacja czy podmiot jest eksponowany politycznie ('yes' lub 'no')                                 |
-| **politicallyExposedFamily**     | TAK     | Informacja czy podmiot jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
-| **politicallyExposedCoworker**   | TAK     | Informacja czy podmiot jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
-| **employmentType**         | NIE      | Stan zatrudnienia. Wartości proponowane przez system: student, retiree, pensioner, entrepreneur, employedUOP, employedUZUOD, unemployed, jobless, annuitant student|
-| **createdByName**          | NIE      | Osoba wprowadzająca wpis
+#### Dodatkowe zasoby
+- [JWT.io – narzędzie do inspekcji i dekodowania tokenów JWT](https://jwt.io/)
+- [Ngrok – usługa bezpiecznego tunelowania HTTP/HTTPS](https://ngrok.com/)
 
 
-b) sole_proprietorship - wszystkie powyższe oraz:
+## 2. Zarządzanie podmiotami
 
-| Parametr                           | Wymagane | Opis                                                                |
-| ---------------------------------- | -------- | ------------------------------------------------------------------- |
-| **taxIdNumber**                    | TAK      | NIP prowadzonej działalności                                        |
-| **registrationCountry**            | TAK      | Kraj rejestracji podmiotu                                           |
-| **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)             |
-| **nationalBusinessRegistryNumber** | NIE      | Regon prowadzonej działalności                                      |
-| **companyName**                    | TAK      | Nazwa prowadzonej działalności                                      |
-| **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                        |
-| **terminationDate**                | NIE      | Data zakończenia działalności                                       |
-| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP) |
-| **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)  |
+### 2.1. Podmioty
 
-Struktura obiektu z kodem PKD:
+[↩️ Powrót do spisu treści](#spis-treści)
 
-| Parametr    | Wymagane | Opis                                |
-| ----------- | -------- | ----------------------------------- |
-| **pkdCode** | TAK      | Numer kodu PKD w formacie (00.00.X) |
-| **pkdName** | NIE      | Opis kodu PKD                       |
+#### 2.1.1. POST /parties
 
-c) company:
+Tworzy nowy podmiot w systemie AML.
 
-| Parametr                           | Wymagane | Opis                                                                         |
-| ---------------------------------- | -------- | ---------------------------------------------------------------------------- |
-| **taxIdNumber**                    | TAK      | Numer NIP                                                                    |
-| **registrationCountry**            | TAK      | Kraj rejestracji podmiotu                                                    |
-| **companyIdentifier**              | NIE      | Numer identyfikujący (wymagany jeśli nie ma numeru NIP)                      |
-| **references**                     | NIE      | Referencje własne                                                            |
-| **companyName**                    | TAK      | Nazwa działalności                                                           |
-| **tradeNames**                     | NIE      | Tablica z nazwami handlowymi                                                 |
-| **nationalBusinessRegistryNumber** | NIE      | Numer Regon                                                                  |
-| **nationalCourtRegistryNumber**    | NIE      | Numer KRS                                                                    |
-| **terminationDate**                | NIE      | Data zakończenia działalności                                                |
-| **businessActivityForm**           | TAK      | Rodzaj prowadzonej działalności (nie jest wymagane jeśli nie ma numeru NIP)  |
-| **website**                        | NIE      | Strona internetowa                                                           |
-| **servicesDescription**            | NIE      | Opis usług                                                                   |
-| **mainPkdCode**                    | TAK      | Obiekt z przeważającym kodem PKD (nie jest wymagany gdy nie ma NIP)          |
-| **pkdCodes**                       | NIE      | Tablica z pozostałymi kodami PKD (tablica zawierająca obiekty jw.)           |
-| **beneficiaries**                  | NIE      | Tablica obiektów z danymi beneficjentów                                      |
-| **boardMembers**                   | NIE      | Tablica obiektów z danymi reprezentantów                                     |
-| **createdByName**                  | NIE      | Osoba wprowadzająca wpis                                                     |
-| **economicRelationStartDate**      | TAK      | Data rozpoczęcia stosunków gospodarczych                                     |
-| **listedOnStock**                  | NIE      | Podmiot notowany na giełdzie                                                 |
+#### Typy podmiotów
+
+SystemAML wspiera trzy typy podmiotów:
+
+| Typ | Kod | Opis | Przykład użycia |
+|:-----:|:-----:|:------:|:-----------------:|
+| **Osoba fizyczna** | `individual` | Klient indywidualny | Kupujący kryptowaluty |
+| **Jednoosobowa działalność** | `sole_proprietorship` | Przedsiębiorca | Freelancer, konsultant |
+| **Firma** | `company` | Organizacja | Sp. z o.o., S.A. |
+
+#### Parametry wspólne dla wszystkich typów
+
+| Parametr | Typ | Wymagane | Wartości | Opis |
+|:----------:|:-----:|:----------:|:----------:|:------:|
+| **type** | string | TAK | `individual`, `sole_proprietorship`, `company` | Typ podmiotu |
+| **status** | string | TAK | `draft`, `active`, `occasional`, `inactive`, `in_acceptance` | Status podmiotu |
+| **economicRelationStartDate** | date | TAK | `YYYY-MM-DD` | Data rozpoczęcia współpracy |
+| **references** | string | NIE | - | Własny identyfikator/notatka |
+| **createdByName** | string | NIE | - | Osoba wprowadzająca wpis |
+
+W zależności od wybranego typu wymagane są dodatkowe parametry opisane poniżej.
+
+## Typ 1: Individual (Osoba fizyczna)
+
+### Parametry podstawowe
+
+| Parametr | Typ | Wymagane | Opis | Przykład | Walidacja |
+|:----------:|:-----:|:----------:|:------:|:----------:|:-----------:|
+| **firstName** | string | TAK | Imię | `"Jan"` | Max 255 znaków |
+| **lastName** | string | TAK | Nazwisko | `"Kowalski"` | Max 255 znaków |
+| **personalIdentityNumber** | string | WARUNKOWO* | PESEL | `"09271573233"` | 11 cyfr + suma kontrolna |
+| **birthDate** | date | WARUNKOWO* | Data urodzenia | `"2000-01-12"` | Format: YYYY-MM-DD |
+| **birthCountry** | string | WARUNKOWO* | Kraj urodzenia | `"PL"` | Kod ISO (2 znaki) |
+| **birthCity** | string | NIE | Miejsce urodzenia | `"Warszawa"` | Max 255 znaków |
+| **citizenship** | string | NIE | Obywatelstwo | `"PL"` | Kod ISO (2 znaki) |
+| **middleName** | string | NIE | Drugie imię | `"Andrzej"` | Max 255 znaków |
+| **familyName** | string | NIE | Nazwisko rodowe | `"Nowak"` | Max 255 znaków |
+
+> **Uwaga dotycząca PESEL:**
+> `*` W przypadku braku numeru PESEL wymagany jest parametr `birthDate`, `birthCountry`
 
 
-Struktura obiektu beneficjenta:
+### Dokument tożsamości
 
-| Parametr                     | Wymagane | Opis                                                                       |
-| ---------------------------- | -------- | -------------------------------------------------------------------------  |
-| **directRights**             | NIE      | Bezpośrednie uprawnienia                                                   |
-| **ownedSharesAmount**        | NIE      | Liczba posiadanych udziałów                                                |
-| **ownedSharesUnit**          | NIE      | Jednostka posiadanych udziałów ('%' lub 'PLN')                             |
-| **directRightsPrivilegeType**           | NIE      | Rodzaj uprzywilejowania                                         |
-| **directRightsPrivilegeDescription**    | NIE      | Opis uprzywilejowania                                           |
-| **indirectRights**           | NIE      | Pośrednie uprawnienia                                                      |
-| **otherRights**              | NIE      | Inne uprawnienia                                                           |
-| **otherRightsDescription**   | NIE      | Opis uprawnień                                                             |
-| **additionalInformation**    | TAK      | Dodatkowe informacje, nie są wymagane, o ile przynajmniej jeden z parametrów (directRights, ownedSharesAmount, ownedSharesUnit, directRightsPrivilegeType, indirectRights, otherRights, otherRightsDescription) posiada wartość |
-| **firstName**                | TAK      | Imię beneficjenta                                                          |
-| **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
-| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru PESEL wymagany jest parametr birthDate) |
-| **documentType**             | NIE      | Rodzaj dokumentu                                                           |
-| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                            |
-| **documentIssueCountry**         | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                   |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy             |
-| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
-| **birthCity**                | NIE      | Miejsce urodzenia                                                      |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                   |
-| **birthCountry**             | NIE      | Kraj urodzenia                                                             |
-| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
-| **politicallyExposedFamily**     | TAK     | Informacja czy beneficjent jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
-| **politicallyExposedCoworker**   | TAK     | Informacja czy beneficjent jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
-| **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **documentType** | TAK | Typ dokumentu | `"id_card"` |
+| **documentNumber** | TAK | Numer dokumentu | `"SQT233656"` |
+| **documentIssueCountry** | TAK | Kraj wydania | `"PL"` |
+| **documentExpirationDate** | TAK | Data ważności | `"2026-05-15"` |
+| **withoutExpirationDate** | NIE | Dokument bezterminowy? | `true`/`false` |
+| **documentTypeOther** | WARUNKOWO* | Opis innego dokumentu | - |
 
-Struktura obiektu reprezentanta:
+**Wymagalność:**
+- `*` Wymagane gdy `documentType: "other"`
 
-| Parametr                     | Wymagane | Opis                                                                       |
-| ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **firstName**                | TAK      | Imię reprezentanta                                                         |
-| **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta (w przypadku braku numeru PESEL wymagany jest parametr (personalIdentifier) |
-| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
-| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)            |
-| **documentIssueCountry**     | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                 |
-| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta (wymagany jeśli nie ma numeru PESEL)    |
-| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
-| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
-| **birthCity**                | NIE      | Miejsce urodzenia                                                          |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy                        |
-| **references**               | NIE      | Referencje własne                                                          |
-| **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
-| **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
-| **politicallyExposed**       | TAK      | Informacja czy reprezentant jest eksponowany politycznie (bool)            |
-| **politicallyExposedFamily**     | TAK     | Informacja czy reprezentant jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
-| **politicallyExposedCoworker**   | TAK     | Informacja czy reprezentant jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
+#### Typy dokumentów (documentType)
 
-Do każdego z typów podmiotu można dodać dane kontaktowe.
+| Kod | Nazwa |
+|:-----:|:-------:|
+| `id_card` | Dowód osobisty |
+| `electronic_id_card` | E-dowód |
+| `passport` | Paszport |
+| `residency_card` | Karta pobytu |
+| `other` | Inny dokument |
 
-| Parametr                 | Wymagane | Opis                                              |
-| ------------------------ | -------- | ------------------------------------------------- |
-| **accommodationAddress** | NIE      | Obiekt zawierający adres zamieszkania             |
-| **forwardAddress**       | NIE      | Obiekt zawierający adres korespondencyjny         |
-| **businessAddress**      | NIE      | Obiekt zawierający adres prowadzenia działalności |
-| **personalContact**      | NIE      | Obiekt zawierający dane kontaktowe                |
-| **companyContact**       | NIE      | Obiekt zawierający dane kontaktowe działalności   |
+### Status zatrudnienia (employmentType)
 
-Struktura obiektów:&#x20;
+| Kod | Nazwa |
+|:-----:|:-------:|
+| `student` | Student |
+| `retiree` | Emeryt |
+| `pensioner` | Rencista |
+| `entrepreneur` | Przedsiębiorca |
+| `employed_uop` | Zatrudniony na UOP |
+| `employed_uzuod` | Zatrudniony na UZ/UOD |
+| `unemployed` | Niezatrudniony |
+| `jobless` | Bezrobotny |
+| `annuitant` | Rentier |
+| `other` | Inny |
 
-a) adres:
+### Dane Politically Exposed Person (PEP) (wymagane)
 
-| Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
-| **country**     | NIE      | Nazwa kraju (kod standardzie ISO) |
-| **city**        | NIE      | Miasto                            |
-| **street**      | NIE      | Ulica                             |
-| **houseNumber** | NIE      | Numer domu                        |
-| **flatNumber**  | NIE      | Numer mieszkania                  |
-| **postalCode**  | NIE      | Kod pocztowy                      |
+| Parametr | Wartości | Opis |
+|:----------:|:----------:|:------:|
+| **politicallyExposed** | `yes`, `no` | Czy osoba jest PEP? |
+| **politicallyExposedFamily** | `yes`, `no` | Czy jest rodziną PEP? |
+| **politicallyExposedCoworker** | `yes`, `no` | Czy jest współpracownikiem PEP? |
 
-a) kontakt:
-
-| Parametr         | Wymagane | Opis                   |
-| ---------------- | -------- | ---------------------- |
-| **emailAdress**  | NIE      | Adres email            |
-| **phoneCountry** | NIE      | Prefix numeru telefonu |
-| **phoneNumber**  | NIE      | Numer telefonu         |
-
-#### Przykładowe dane do utworzenia podmiotu typu 'individual':
-
+### Przykładowe dane do utworzenia podmiotu typu 'individual':
 ```json
 {
-  "birthCity": "Warszawa",
-  "birthDate": "2000-01-12",
-  "birthCountry": "PL",
-  "citizenship": "PL",
-  "createdByName": "Wojtek",
-  "documentExpirationDate": "2026-05-15",
-  "documentNumber": "SQT233656",
-  "documentType": "id_card",
-  "documentIssueCountry": "PL",
-  "economicRelationStartDate": "2023-11-14",
+  "type": "individual",
+  "status": "active",
   "firstName": "Jan",
   "lastName": "Kowalski",
   "personalIdentityNumber": "09271573233",
-  "politicallyExposed": "no",
-  "politicallyExposedCoworker":"no",
-  "politicallyExposedFamily":"yes",
-  "references": "qwerty",
-  "status": "active",
-  "type": "individual",
+  "documentType": "id_card",
+  "documentNumber": "SQT233656",
+  "documentIssueCountry": "PL",
+  "documentExpirationDate": "2026-05-15",
   "withoutExpirationDate": false,
+  "citizenship": "PL",
+  "birthCity": "Warszawa",
+  "birthCountry": "PL",
+  "birthDate": "2000-01-12",
+  "economicRelationStartDate": "2023-11-14",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "createdByName": "Wojtek",
+  "references": "KL-2023-001",
   "accommodationAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
-  },
-  "forwardAddress": {
-    "country": "PL",
-    "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
   "personalContact": {
-    "emailAdress": "info@fiberpay.pl",
+    "emailAdress": "jan.kowalski@example.com",
     "phoneCountry": "48",
     "phoneNumber": "123123123"
   }
 }
 ```
 
-#### Przykładowe dane do utworzenia podmiotu typu 'sole_proprietorship':
+
+## Typ 2: Sole Proprietorship (Jednoosobowa działalność)
+
+**Wszystkie parametry z typu Individual + dodatkowe poniżej**
+
+### Parametry działalności gospodarczej
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **taxIdNumber** | TAK | NIP działalności | `"3765151981"` |
+| **registrationCountry** | TAK | Kraj rejestracji | `"PL"` |
+| **companyName** | TAK | Nazwa działalności | `"Usługi IT Jan Kowalski"` |
+| **companyIdentifier** | WARUNKOWO* | Numer identyfikacyjny | - |
+| **nationalBusinessRegistryNumber** | NIE | REGON | `"632702201"` |
+| **tradeNames** | NIE | Nazwy handlowe | `["FiberPay", "SystemAML"]` |
+| **mainPkdCode** | WARUNKOWO** | Główny kod PKD | Zobacz [strukturę PKD](#struktura-pkd) |
+| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów ze strukturą PKD](#struktura-pkd) |
+| **terminationDate** | NIE | Data zakończenia działalności | `"2024-12-31"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy brak NIP
+- `**` Wymagane gdy podany jest NIP
+
+### Struktura PKD
 
 ```json
 {
+  "pkdCode": "62.01.Z",
+  "pkdName": "Działalność związana z oprogramowaniem"
+}
+```
+
+### Typy adresów dla jednoosobowej działalności
+
+| Parametr | Opis | Wymagane |
+|:----------:|:------:|:----------:|
+| **accommodationAddress** | Adres zamieszkania właściciela | NIE |
+| **forwardAddress** | Adres korespondencyjny | NIE |
+| **businessAddress** | Adres prowadzenia działalności | NIE |
+
+### Typy kontaktów dla jednoosobowej działalności
+
+| Parametr | Opis | Wymagane |
+|:----------:|:------:|:----------:|
+| **personalContact** | Kontakt osobisty właściciela | NIE |
+| **companyContact** | Kontakt firmowy działalności | NIE |
+
+### Przykład - Jednoosobowa działalność
+
+```json
+{
+  "type": "sole_proprietorship",
+  "status": "active",
   "registrationCountry": "PL",
-  "birthCity": "Warszawa",
-  "nationalBusinessRegistryNumber": "632702201",
-  "birthCountry": "PL",
-  "citizenship": "PL",
-  "companyName": "Usługi programistyczne",
-  "tradeNames": ["FiberPay", "SystemAML"],
-  "createdByName": "Adam",
-  "documentExpirationDate": "2026-05-08",
-  "documentNumber": "aze123123",
-  "documentType": "passport",
-  "documentIssueCountry": "PL",
-  "economicRelationStartDate": "2023-11-14",
   "firstName": "Jan",
   "lastName": "Kowalski",
-  "mainPkdCode": {
-    "pkdCode": "01.12.Z",
-    "pkdName": "Uprawa ryżu"
-  },
   "personalIdentityNumber": "99120234518",
+  "documentType": "passport",
+  "documentNumber": "ABC123456",
+  "documentIssueCountry": "PL",
+  "documentExpirationDate": "2026-05-08",
+  "withoutExpirationDate": false,
+  "citizenship": "PL",
+  "birthCity": "Warszawa",
+  "birthCountry": "PL",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "companyName": "Usługi programistyczne Jan Kowalski",
+  "tradeNames": ["CodeMaster", "DevPro"],
+  "taxIdNumber": "3765151981",
+  "nationalBusinessRegistryNumber": "632702201",
+  "economicRelationStartDate": "2023-11-14",
+  "mainPkdCode": {
+    "pkdCode": "62.01.Z",
+    "pkdName": "Działalność związana z oprogramowaniem"
+  },
   "pkdCodes": [
     {
-      "pkdCode": "01.15.Z",
-      "pkdName": "Uprawa tytoniu"
+      "pkdCode": "63.11.Z",
+      "pkdName": "Przetwarzanie danych"
     }
   ],
-  "politicallyExposed": "no",
-  "politicallyExposedCoworker": "no",
-  "politicallyExposedFamily": "yes",
-  "references": "qwerty",
-  "status": "active",
-  "taxIdNumber": "3765151981",
-  "type": "sole_proprietorship",
-  "withoutExpirationDate": false,
-  "forwardAddress": {
+  "accommodationAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
   "businessAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "postalCode": "00-815"
   },
-  "accommodationAddress": {
+  "forwardAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
   },
   "personalContact": {
-    "emailAdress": "info@fiberpay.pl",
+    "emailAdress": "jan@example.com",
     "phoneCountry": "48",
     "phoneNumber": "123123123"
   },
   "companyContact": {
-    "emailAdress": "info@fiberpay.pl",
+    "emailAdress": "biuro@example.com",
     "phoneCountry": "48",
-    "phoneNumber": "123123123"
+    "phoneNumber": "222302622"
   }
 }
 ```
 
-#### Przykładowe dane do utworzenia podmiotu typu 'company':
+
+## Typ 3: Company (Organizacja)
+
+### Parametry podstawowe firmy
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **taxIdNumber** | TAK | NIP | `"7010634566"` |
+| **registrationCountry** | TAK | Kraj rejestracji | `"PL"` |
+| **companyName** | TAK | Nazwa firmy | `"FiberPay Sp. z o.o."` |
+| **businessActivityForm** | WARUNKOWO* | Forma prawna | Zobacz [formy prawne](#formy-prawne-businessactivityform) |
+| **companyIdentifier** | WARUNKOWO** | Numer identyfikacyjny | - |
+| **nationalBusinessRegistryNumber** | NIE | REGON | `"147302566"` |
+| **nationalCourtRegistryNumber** | NIE | KRS | `"0000512707"` |
+| **tradeNames** | NIE | Nazwy handlowe | `["FiberPay"]` |
+| **mainPkdCode** | WARUNKOWO* | Główny PKD | Zobacz [strukturę PKD](#struktura-pkd) |
+| **pkdCodes** | NIE | Dodatkowe kody PKD | Tablica [obiektów ze strukturą PKD](#struktura-pkd) |
+| **website** | NIE | Strona WWW | `"fiberpay.pl"` |
+| **servicesDescription** | NIE | Opis usług | - |
+| **listedOnStock** | NIE | Notowana na giełdzie? | `"yes"`, `"no"` |
+| **terminationDate** | NIE | Data zakończenia działalności | `"2024-12-31"` |
+| **economicRelationStartDate** | TAK | Data rozpoczęcia współpracy | `"2023-11-14"` |
+| **references** | NIE | Własny identyfikator/notatka | - |
+| **createdByName** | NIE | Osoba wprowadzająca wpis | - |
+
+**Wymagalność:**
+- `*` Wymagane gdy podany jest NIP
+- `**` Wymagane gdy brak NIP
+
+### Formy prawne (businessActivityForm)
+
+| Kod | Nazwa |
+|:-----:|:-------:|
+| `limited_liability_company` | Spółka z ograniczoną odpowiedzialnością |
+| `stock_company` | Spółka akcyjna |
+| `simple_joint_stock_company` | Prosta spółka akcyjna |
+| `civil_partnership_company` | Spółka cywilna |
+| `general_partnership_company` | Spółka jawna |
+| `professional_partnership_company` | Spółka partnerska |
+| `limited_partnership_company` | Spółka komandytowa |
+| `limited_joint_stock_partnership_company` | Spółka komandytowo-akcyjna |
+| `branches_of_foreign_entrepreneur` | Oddziały zagranicznych przedsiębiorców |
+| `other` | Inna |
+
+## Beneficjenci rzeczywiści
+
+**Dodawane w tablicy `beneficiaries`**
+
+Beneficjenci rzeczywiści to osoby fizyczne, które:
+- Posiadają minimum 25% udziałów lub akcji
+- Wywierają kontrolę nad spółką w inny sposób
+- Są ostatecznymi odbiorcami korzyści finansowych
+
+### Parametry podstawowe beneficjenta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **firstName** | TAK | Imię | `"Jan"` |
+| **lastName** | TAK | Nazwisko | `"Kowalski"` |
+| **personalIdentityNumber** | WARUNKOWO* | PESEL | `"64091098920"` |
+| **birthDate** | WARUNKOWO* | Data urodzenia | `"1985-06-15"` |
+| **birthCountry** | NIE | Kraj urodzenia | `"PL"` |
+| **birthCity** | NIE | Miejsce urodzenia | `"Warszawa"` |
+| **citizenship** | NIE | Obywatelstwo | `"PL"` |
+
+**Wymagalność:**
+- `*` PESEL lub `birthDate` - jedno z nich jest wymagane
+
+### Dokument tożsamości beneficjenta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **documentType** | NIE | Typ dokumentu | `"id_card"` |
+| **documentNumber** | WARUNKOWO* | Numer dokumentu | `"JET449773"` |
+| **documentIssueCountry** | WARUNKOWO* | Kraj wydania | `"PL"` |
+| **documentExpirationDate** | WARUNKOWO* | Data ważności | `"2026-05-15"` |
+| **withoutExpirationDate** | NIE | Dokument bezterminowy? | `true`/`false` |
+
+**Wymagalność:**
+- `*` Wymagane gdy podano `documentType`
+
+### Uprawnienia beneficjenta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **ownedSharesAmount** | NIE | Liczba udziałów | `"45"` |
+| **ownedSharesUnit** | NIE | Jednostka | `"%"` lub `"PLN"` |
+| **directRights** | NIE | Bezpośrednie uprawnienia | `"Wspólnik spółki"` |
+| **directRightsPrivilegeType** | NIE | Rodzaj uprzywilejowania | `"brak"` |
+| **directRightsPrivilegeDescription** | NIE | Opis uprzywilejowania | `"brak"` |
+| **indirectRights** | NIE | Pośrednie uprawnienia | `"brak"` |
+| **otherRights** | NIE | Inne uprawnienia | `"brak"` |
+| **otherRightsDescription** | NIE | Opis innych uprawnień | `"brak"` |
+| **additionalInformation** | WARUNKOWO* | Dodatkowe informacje | `"brak"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy wszystkie powyższe uprawnienia są puste
+
+### Dane PEP beneficjenta
+
+| Parametr | Wymagane | Wartości | Opis |
+|:----------:|:----------:|:----------:|:------:|
+| **politicallyExposed** | TAK | `yes`, `no` | Czy beneficjent jest PEP? |
+| **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
+| **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
+
+### Adres beneficjenta
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **accommodationAddress** | NIE | Obiekt z adresem zamieszkania |
+
+**Struktura adresu:**
+```json
+{
+  "country": "PL",
+  "city": "Warszawa",
+  "street": "Nowa",
+  "houseNumber": "1",
+  "flatNumber": "10",
+  "postalCode": "00-001"
+}
+```
+
+### Przykład beneficjenta z PESEL
 
 ```json
 {
-  "registrationCountry": "PL",
-  "type": "company",
-  "companyName": "FiberPay",
-  "economicRelationStartDate": "2023-11-14",
-  "taxIdNumber": "7010634566",
-  "nationalBusinessRegistryNumber": "147302566",
-  "tradeNames": ["FiberPay"],
-  "nationalCourtRegistryNumber": "0000512707",
-  "businessActivityForm": "stock_company",
-  "listedOnStock": "no",
-  "website": "fiberpay.pl",
-  "references": "qwerty",
-  "status": "active",
-  "businessAddress": {
+  "firstName": "Jan",
+  "lastName": "Kowalski",
+  "personalIdentityNumber": "64091098920",
+  "documentType": "id_card",
+  "documentNumber": "JET449773",
+  "documentIssueCountry": "PL",
+  "withoutExpirationDate": true,
+  "citizenship": "PL",
+  "birthCountry": "PL",
+  "birthCity": "Warszawa",
+  "ownedSharesAmount": "45",
+  "ownedSharesUnit": "%",
+  "directRights": "Wspólnik spółki",
+  "directRightsPrivilegeType": "brak",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "accommodationAddress": {
     "country": "PL",
     "city": "Warszawa",
-    "street": "Grzybowska",
-    "houseNumber": "4",
-    "flatNumber": "106",
-    "postalCode": "00-131"
-  },
-  "companyContact": {
-    "emailAdress": "info@fiberpay.pl",
-    "phoneCountry": "48",
-    "phoneNumber": "123123123"
-  },
+    "street": "Nowa",
+    "houseNumber": "1",
+    "postalCode": "00-001"
+  }
+}
+```
+
+### Przykład beneficjenta bez PESEL
+
+```json
+{
+  "firstName": "Hans",
+  "lastName": "Podolski",
+  "birthDate": "2002-10-01",
+  "birthCountry": "DE",
+  "birthCity": "Berlin",
+  "citizenship": "DE",
+  "documentType": "passport",
+  "documentNumber": "aze423",
+  "ownedSharesAmount": "15",
+  "ownedSharesUnit": "%",
+  "directRights": "Udziałowiec",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "withoutExpirationDate": true
+}
+```
+
+---
+
+## Reprezentanci (zarząd)
+
+**Dodawane w tablicy `boardMembers`**
+
+Reprezentanci to osoby upoważnione do działania w imieniu firmy:
+- Prezesi, wiceprezesi zarządu
+- Członkowie zarządu
+- Prokurenci
+- Inne osoby z pełnomocnictwami
+
+### Parametry podstawowe reprezentanta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **firstName** | TAK | Imię | `"Jan"` |
+| **lastName** | TAK | Nazwisko | `"Kowalski"` |
+| **personalIdentityNumber** | WARUNKOWO* | PESEL | `"31111161119"` |
+| **birthDate** | WARUNKOWO** | Data urodzenia | `"2001-01-01"` |
+| **birthCountry** | WARUNKOWO** | Kraj urodzenia | `"PL"` |
+| **birthCity** | NIE | Miejsce urodzenia | `"Warszawa"` |
+| **citizenship** | NIE | Obywatelstwo | `"PL"` |
+
+**Wymagalność:**
+- `*` Jedno z dwóch jest wymagane: `personalIdentityNumber`
+- `**` Wymagane gdy brak PESEL
+
+### Dokument tożsamości reprezentanta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **documentType** | TAK | Typ dokumentu | `"id_card"` |
+| **documentNumber** | TAK | Numer dokumentu | `"GLD358884"` |
+| **documentIssueCountry** | TAK | Kraj wydania | `"PL"` |
+| **documentExpirationDate** | TAK | Data ważności | `"2026-05-15"` |
+| **withoutExpirationDate** | NIE | Dokument bezterminowy? | `true`/`false` |
+
+### Rola reprezentanta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **roleType** | TAK | [Typ roli](#typy-ról-roletype) | `"president"` |
+| **description** | WARUNKOWO* | Opis roli | `"Prezes zarządu"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy `roleType: "other"`
+
+#### Typy ról (roleType)
+
+| Kod | Nazwa |
+|:-----:|:-------:|
+| `president` | Prezes |
+| `board_member` | Członek zarządu |
+| `proxy` | Prokurent |
+| `other` | Inna rola |
+
+### Dane PEP reprezentanta
+
+| Parametr | Wymagane | Wartości | Opis |
+|:----------:|:----------:|:----------:|:------:|
+| **politicallyExposed** | TAK | `yes`, `no` | Czy reprezentant jest PEP? |
+| **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
+| **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
+
+### Przykład reprezentanta z PESEL
+
+```json
+{
+  "firstName": "Jan",
+  "lastName": "Kowalski",
+  "personalIdentityNumber": "31111161119",
+  "documentType": "id_card",
+  "documentNumber": "GLD358884",
+  "documentIssueCountry": "PL",
+  "citizenship": "PL",
+  "birthDate": "2001-01-01",
+  "birthCountry": "PL",
+  "birthCity": "Warszawa",
+  "roleType": "president",
+  "description": "Prezes zarządu",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "withoutExpirationDate": true
+}
+```
+
+### Przykład reprezentanta bez PESEL
+
+```json
+{
+  "firstName": "Adam",
+  "lastName": "Nowak",
+  "birthDate": "2001-01-01",
+  "birthCountry": "PL",
+  "birthCity": "Warszawa",
+  "citizenship": "PL",
+  "documentType": "id_card",
+  "documentNumber": "OBG470534",
+  "roleType": "other",
+  "description": "Wiceprezes",
+  "politicallyExposed": "yes",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "withoutExpirationDate": true
+}
+```
+
+---
+
+## Dane kontaktowe i adresy firmy
+
+### Typy adresów
+
+| Parametr | Opis | Wymagane |
+|:----------:|:------:|:----------:|
+| **businessAddress** | Adres prowadzenia działalności | NIE |
+
+### Struktura adresu
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **country** | NIE | Kraj (kod ISO) |
+| **region** | NIE | Region/Województwo |
+| **city** | NIE | Miasto |
+| **street** | NIE | Ulica |
+| **houseNumber** | NIE | Numer domu |
+| **flatNumber** | NIE | Numer mieszkania |
+| **postalCode** | NIE | Kod pocztowy |
+
+**Przykład:**
+```json
+{
+  "country": "PL",
+  "city": "Warszawa",
+  "street": "Sienna",
+  "houseNumber": "86",
+  "flatNumber": "47",
+  "postalCode": "00-131"
+}
+```
+
+### Typy kontaktów
+
+| Parametr | Opis | Wymagane |
+|:----------:|:------:|:----------:|
+| **companyContact** | Kontakt firmowy | NIE |
+
+### Struktura kontaktu
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **emailAdress** | NIE | Adres email |
+| **phoneCountry** | NIE | Prefix kraju |
+| **phoneNumber** | NIE | Numer telefonu |
+
+**Przykład:**
+```json
+{
+  "emailAdress": "kontakt@systemaml.pl",
+  "phoneCountry": "48",
+  "phoneNumber": "222302622"
+}
+```
+
+---
+
+## Przykład - Kompletna firma
+
+```json
+{
+  "type": "company",
+  "status": "active",
+  "registrationCountry": "PL",
+  "companyName": "FiberPay Sp. z o.o.",
+  "tradeNames": ["FiberPay", "SystemAML"],
+  "taxIdNumber": "7010634566",
+  "nationalBusinessRegistryNumber": "147302566",
+  "nationalCourtRegistryNumber": "0000512707",
+  "businessActivityForm": "limited_liability_company",
+  "listedOnStock": "no",
+  "website": "fiberpay.pl",
+  "economicRelationStartDate": "2023-11-14",
+  "references": "qwerty",
   "mainPkdCode": {
     "pkdCode": "64.99.Z",
     "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH"
@@ -528,79 +927,102 @@ a) kontakt:
   ],
   "beneficiaries": [
     {
-      "birthCountry": "PL",
-      "directRights": "ABB",
-      "birthCity": "Warszawa",
-      "citizenship": "PL",
-      "documentNumber": "JET449773",
-      "documentType": "id_card",
-      "documentIssueCountry": "PL",
       "firstName": "Jan",
       "lastName": "Kowalski",
+      "personalIdentityNumber": "64091098920",
+      "documentType": "id_card",
+      "documentNumber": "JET449773",
+      "documentIssueCountry": "PL",
+      "citizenship": "PL",
+      "birthCountry": "PL",
+      "birthCity": "Warszawa",
       "ownedSharesAmount": "45",
       "ownedSharesUnit": "%",
-      "personalIdentityNumber": "64091098920",
+      "directRights": "Wspólnik spółki",
+      "directRightsPrivilegeType": "brak",
       "politicallyExposed": "no",
-      "politicallyExposedCoworker":"no",
-      "politicallyExposedFamily":"no",
-      "withoutExpirationDate": false,
+      "politicallyExposedFamily": "no",
+      "politicallyExposedCoworker": "no",
+      "withoutExpirationDate": true,
+      "accommodationAddress": {
+        "country": "PL",
+        "city": "Warszawa",
+        "street": "Nowa",
+        "houseNumber": "1",
+        "postalCode": "00-001"
+      }
     },
     {
-      "birthCountry": "DE",
-      "directRights": "3M",
-      "birthCity": "Germany",
-      "birthDate": "2002-10-01",
-      "citizenship": "DE",
-      "documentNumber": "aze423",
-      "documentType": "passport",
       "firstName": "Hans",
       "lastName": "Podolski",
+      "birthDate": "2002-10-01",
+      "birthCountry": "DE",
+      "birthCity": "Berlin",
+      "citizenship": "DE",
+      "documentType": "passport",
+      "documentNumber": "aze423",
       "ownedSharesAmount": "15",
       "ownedSharesUnit": "%",
+      "directRights": "Udziałowiec",
       "politicallyExposed": "no",
-      "politicallyExposedCoworker":"no",
-      "politicallyExposedFamily":"no",
-      "withoutExpirationDate": false,
-    },
+      "politicallyExposedFamily": "no",
+      "politicallyExposedCoworker": "no",
+      "withoutExpirationDate": true
+    }
   ],
   "boardMembers": [
     {
-      "birthCity": "Warszawa",
-      "birthDate": "2001-01-01",
-      "birthCountry": "PL",
-      "citizenship": "PL",
-      "description": "Prezes spółki",
-      "documentNumber": "GLD358884",
-      "documentType": "id_card",
-      "documentIssueCountry": "PL",
       "firstName": "Jan",
       "lastName": "Kowalski",
       "personalIdentityNumber": "31111161119",
-      "politicallyExposed": "no",
-      "politicallyExposedCoworker":"no",
-      "politicallyExposedFamily":"no",
-      "roleType" : "president",
-      "withoutExpirationDate": false,
-    },
-    {
-      "birthCity": "Warszawa",
+      "documentType": "id_card",
+      "documentNumber": "GLD358884",
+      "documentIssueCountry": "PL",
+      "citizenship": "PL",
       "birthDate": "2001-01-01",
       "birthCountry": "PL",
-      "citizenship": "PL",
-      "description": "Wiceprezes",
-      "documentNumber": "OBG470534",
-      "documentType": "id_card",
+      "birthCity": "Warszawa",
+      "roleType": "president",
+      "description": "Prezes zarządu",
+      "politicallyExposed": "no",
+      "politicallyExposedFamily": "no",
+      "politicallyExposedCoworker": "no",
+      "withoutExpirationDate": true
+    },
+    {
       "firstName": "Adam",
       "lastName": "Nowak",
+      "birthDate": "2001-01-01",
+      "birthCountry": "PL",
+      "birthCity": "Warszawa",
+      "citizenship": "PL",
+      "documentType": "id_card",
+      "documentNumber": "OBG470534",
+      "roleType": "other",
+      "description": "Wiceprezes",
       "politicallyExposed": "yes",
-      "politicallyExposedCoworker":"no",
-      "politicallyExposedFamily":"no",
-      "roleType" : "other",
-      "withoutExpirationDate": false,
+      "politicallyExposedFamily": "no",
+      "politicallyExposedCoworker": "no",
+      "withoutExpirationDate": true
     }
-  ]
+  ],
+  "businessAddress": {
+    "country": "PL",
+    "city": "Warszawa",
+    "street": "Sienna",
+    "houseNumber": "86",
+    "flatNumber": "47",
+    "postalCode": "00-815"
+  },
+  "companyContact": {
+    "emailAdress": "kontakt@systemaml.pl",
+    "phoneCountry": "48",
+    "phoneNumber": "222302622"
+  }
 }
 ```
+
+---
 
 #### Przykładowa odpowiedź serwera:
 - **STATUS 201 CREATED**
@@ -661,10 +1083,10 @@ a) kontakt:
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:38:11.000000Z"
       }
     ],
@@ -672,7 +1094,7 @@ a) kontakt:
       {
         "code": "et28pr6cqx5s",
         "type": "company",
-        "emailAdress": "info@fiberpay.pl",
+        "emailAdress": "kontakt@systemaml.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
         "createdAt": "2023-11-20T16:38:11.000000Z"
@@ -684,7 +1106,7 @@ a) kontakt:
 }
 ```
 
-### GET /parties
+#### 2.1.2. GET /parties
 
 Zwraca podmioty utworzone przez użytkownika.
 
@@ -733,7 +1155,7 @@ Zwraca podmioty utworzone przez użytkownika.
 ```
 
 
-### GET /parties/{code}
+#### 2.1.3. GET /parties/{code}
 
 Pobranie szczegółów danego podmiotu.
 
@@ -806,10 +1228,10 @@ Pobranie szczegółów danego podmiotu.
         "type": "forwarding_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
@@ -817,10 +1239,10 @@ Pobranie szczegółów danego podmiotu.
         "type": "business_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:49:44.000000Z"
       },
       {
@@ -828,10 +1250,10 @@ Pobranie szczegółów danego podmiotu.
         "type": "accommodation_address",
         "country": "PL",
         "city": "Warszawa",
-        "street": "Grzybowska",
-        "houseNumber": "4",
-        "flatNumber": "106",
-        "postalCode": "00-131",
+        "street": "Sienna",
+        "houseNumber": "86",
+        "flatNumber": "47",
+        "postalCode": "00-815",
         "createdAt": "2023-11-20T16:49:44.000000Z"
       }
     ],
@@ -839,7 +1261,7 @@ Pobranie szczegółów danego podmiotu.
       {
         "code": "uema7tp12b8c",
         "type": "personal",
-        "emailAdress": "info@fiberpay.pl",
+        "emailAdress": "kontakt@systemaml.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
         "createdAt": "2023-11-20T16:49:44.000000Z"
@@ -847,7 +1269,7 @@ Pobranie szczegółów danego podmiotu.
       {
         "code": "haf6b4vgsz7u",
         "type": "company",
-        "emailAdress": "info@fiberpay.pl",
+        "emailAdress": "kontakt@systemaml.pl",
         "phoneCountry": "48",
         "phoneNumber": "123123123",
         "createdAt": "2023-11-20T16:49:44.000000Z"
@@ -859,63 +1281,210 @@ Pobranie szczegółów danego podmiotu.
 }
 ```
 
-### DELETE /parties/{code}
+#### 2.1.4. POST /parties/{code}/status
+
+Zmiana statusu podmiotu.
+
+Endpoint umożliwia aktualizację statusu podmiotu w systemie. Status podmiotu określa jego aktualny stan w relacji z systemem AML.
+
+#### Parametry URL
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **code** | TAK | Unikalny kod identyfikujący podmiot |
+
+#### Parametry body (JSON)
+
+| Parametr | Typ | Wymagane | Wartości | Opis |
+|:----------:|:-----:|:----------:|:----------:|:------:|
+| **newStatus** | string | TAK | `draft`, `active`, `occasional`, `inactive`, `in_acceptance` | Nowy status podmiotu |
+
+#### Dozwolone statusy
+
+| Status | Opis |
+|:--------:|:------:|
+| `draft` | Szkic - podmiot w trakcie tworzenia |
+| `active` | Aktywny - podmiot w pełnej współpracy |
+| `occasional` | Okazjonalny - podmiot występujący incydentalnie |
+| `inactive` | Nieaktywny - podmiot zakończył współpracę |
+| `in_acceptance` | W akceptacji - podmiot oczekuje na weryfikację |
+
+#### Zachowanie systemu
+
+Zmiana statusu podmiotu powoduje:
+- **Utworzenie zdarzenia systemowego** w historii podmiotu
+- **Wysłanie webhooka** `party_status_change` (jeśli skonfigurowany)
+- **Aktualizację kolejki screeningu** list sankcyjnych (dla statusu `active`)
+- **Walidację unikalności** identyfikatorów (PESEL/NIP)
+
+> **Uwaga:** Jeśli nowy status jest taki sam jak obecny, system zwraca podmiot bez zmian.
+
+#### Przykładowe dane do zmiany statusu
+
+```json
+{
+  "newStatus": "active"
+}
+```
+
+#### Przykładowa odpowiedź serwera
+
+**STATUS 200 OK**
+
+```json
+{
+  "data": {
+    "code": "abc123xyz456",
+    "type": "individual",
+    "status": "active",
+    "riskStatus": "pending",
+    "firstName": "Jan",
+    "lastName": "Kowalski",
+    "personalIdentityNumber": "09271573233",
+    "economicRelationStartDate": "2023-11-14T00:00:00.000000Z"
+  }
+}
+```
+
+#### Możliwe błędy
+
+**STATUS 400 Bad Request**
+```json
+{
+  "status": "ERROR",
+  "error": "The new status field is required."
+}
+```
+
+**STATUS 404 Not Found**
+```json
+{
+  "status": "ERROR",
+  "error": "Party not found"
+}
+```
+
+---
+
+#### 2.1.5. DELETE /parties/{code}
 
 Usunięcie podmiotu wskazanego kodem identyfikującym.
 
+---
 
-### POST /parties/{code}/beneficiaries
+### 2.2. Beneficjenci
 
-Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania:
+[↩️ Powrót do spisu treści](#spis-treści)
 
-| Parametr                     | Wymagane | Opis                                                                       |
-| ---------------------------- | -------- | -------------------------------------------------------------------------  |
-| **directRights**             | NIE      | Bezpośrednie uprawnienia                                                   |
-| **ownedSharesAmount**        | NIE      | Liczba posiadanych udziałów                                                |
-| **ownedSharesUnit**          | NIE      | Jednostka posiadanych udziałów ('%' lub 'PLN')                             |
-| **directRightsPrivilegeType**           | NIE      | Rodzaj uprzywilejowania                                         |
-| **directRightsPrivilegeDescription**    | NIE      | Opis uprzywilejowania                                           |
-| **indirectRights**           | NIE      | Pośrednie uprawnienia                                                      |
-| **otherRights**              | NIE      | Inne uprawnienia                                                           |
-| **otherRightsDescription**   | NIE      | Opis uprawnień                                                             |
-| **additionalInformation**    | TAK      | Dodatkowe informacje, nie są wymagane, o ile przynajmniej jeden z parametrów (directRights, ownedSharesAmount, ownedSharesUnit, directRightsPrivilegeType, indirectRights, otherRights, otherRightsDescription) posiada wartość |
-| **firstName**                | TAK      | Imię beneficjenta                                                          |
-| **lastName**                 | TAK      | Nazwisko beneficjenta                                                      |
-| **personalIdentityNumber**   | TAK      | Numer PESEL beneficjenta (w przypadku braku numeru PESEL wymagany jest parametr birthDate) |
-| **documentType**             | NIE      | Rodzaj dokumentu                                                           |
-| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                             |
-| **documentIssueCountry**     | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                  |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument beneficjenta jest bezterminowy (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy              |
-| **birthDate**                | TAK      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
-| **birthCity**                | NIE      | Miejsce urodzenia                                                      |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
-| **birthCountry**             | NIE      | Kraj urodzenia                                                             |
-| **politicallyExposed**       | TAK      | Informacja czy beneficjent jest eksponowany politycznie (bool)             |
-| **politicallyExposedFamily**     | TAK     | Informacja czy beneficjent jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
-| **politicallyExposedCoworker**   | TAK     | Informacja czy beneficjent jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
-| **accommodationAddress**     | NIE      | Obiekt zawierający adres zamieszkania (opis struktury w punkcie "a) adres")|
+#### 2.2.1. POST /parties/{code}/beneficiaries
 
-#### Przykładowe dane do dodania beneficjenta rzeczywistego:
+Dodawanie beneficjenta rzeczywistego do podmiotu typu `company`.
+
+> **Uwaga:** Endpoint dostępny tylko dla podmiotów typu `company` (osoba prawna).
+
+---
+
+#### Parametry podstawowe beneficjenta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **firstName** | TAK | Imię beneficjenta | `"Jan"` |
+| **lastName** | TAK | Nazwisko beneficjenta | `"Bożek"` |
+| **personalIdentityNumber** | WARUNKOWO* | PESEL | `"65122666817"` |
+| **birthDate** | WARUNKOWO* | Data urodzenia | `"1985-06-15"` |
+| **birthCountry** | NIE | Kraj urodzenia | `"FR"` |
+| **birthCity** | NIE | Miejsce urodzenia | `"Paryż"` |
+| **citizenship** | NIE | Obywatelstwo | `"PL"` |
+
+**Wymagalność:**
+- `*` PESEL lub `birthDate` - jedno z nich jest wymagane
+
+---
+
+#### Dokument tożsamości beneficjenta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **documentType** | NIE | Typ dokumentu | `"id_card"` |
+| **documentNumber** | WARUNKOWO* | Numer dokumentu | `"PVL852925"` |
+| **documentIssueCountry** | WARUNKOWO* | Kraj wydania | `"PL"` |
+| **documentExpirationDate** | WARUNKOWO* | Data ważności | `"2026-05-15"` |
+| **withoutExpirationDate** | NIE | Dokument bezterminowy? | `true`/`false` |
+
+**Wymagalność:**
+- `*` Wymagane gdy podano `documentType`
+
+---
+
+#### Uprawnienia beneficjenta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **ownedSharesAmount** | NIE | Liczba udziałów | `"5"` |
+| **ownedSharesUnit** | NIE | Jednostka | `"%"` lub `"PLN"` |
+| **directRights** | NIE | Bezpośrednie uprawnienia | `"Wspólnik spółki"` |
+| **directRightsPrivilegeType** | NIE | Rodzaj uprzywilejowania | `"brak"` |
+| **directRightsPrivilegeDescription** | NIE | Opis uprzywilejowania | `"brak"` |
+| **indirectRights** | NIE | Pośrednie uprawnienia | `"brak"` |
+| **otherRights** | NIE | Inne uprawnienia | `"brak"` |
+| **otherRightsDescription** | NIE | Opis innych uprawnień | `"brak"` |
+| **additionalInformation** | WARUNKOWO* | Dodatkowe informacje | `"brak"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy wszystkie powyższe uprawnienia są puste
+
+---
+
+#### Dane PEP beneficjenta
+
+| Parametr | Wymagane | Wartości | Opis |
+|:----------:|:----------:|:----------:|:------:|
+| **politicallyExposed** | TAK | `yes`, `no` | Czy beneficjent jest PEP? |
+| **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
+| **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
+
+---
+
+#### Adres beneficjenta
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **accommodationAddress** | NIE | Obiekt z adresem zamieszkania |
+
+**Struktura adresu:**
+```json
+{
+  "country": "PL",
+  "city": "Krakow",
+  "street": "Kazimierza",
+  "houseNumber": "41",
+  "flatNumber": "10",
+  "postalCode": "20-131"
+}
+```
+
+---
+
+### Przykład - Dodanie beneficjenta z PESEL
 
 ```json
 {
   "birthCountry": "FR",
-  "directRights": "Ford",
+  "directRights": "Wspólnik spółki",
   "birthCity": "Paryż",
   "citizenship": "PL",
   "documentNumber": "PVL852925",
   "documentType": "id_card",
   "documentIssueCountry": "PL",
+  "withoutExpirationDate": true,
   "firstName": "Jan",
   "lastName": "Bożek",
   "ownedSharesAmount": "5",
   "ownedSharesUnit": "%",
   "personalIdentityNumber": "65122666817",
   "politicallyExposed": "no",
-  "politicallyExposedCoworker":"no",
-  "politicallyExposedFamily":"no",
-  "withoutExpirationDate": false,
+  "politicallyExposedCoworker": "no",
+  "politicallyExposedFamily": "no",
   "accommodationAddress": {
     "country": "PL",
     "city": "Krakow",
@@ -927,9 +1496,35 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 }
 ```
 
-#### Przykładowa odpowiedź serwera:
+### Przykład - Dodanie beneficjenta bez PESEL
 
-- **STATUS 201 CREATED**
+```json
+{
+  "firstName": "Hans",
+  "lastName": "Schmidt",
+  "birthDate": "1985-06-15",
+  "birthCountry": "DE",
+  "birthCity": "Berlin",
+  "citizenship": "DE",
+  "documentType": "passport",
+  "documentNumber": "C01X00T47",
+  "documentIssueCountry": "DE",
+  "withoutExpirationDate": true,
+  "ownedSharesAmount": "15",
+  "ownedSharesUnit": "%",
+  "directRights": "Udziałowiec",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "withoutExpirationDate": true
+}
+```
+
+---
+
+### Odpowiedź API
+
+**STATUS 201 Created**
 
 ```json
 {
@@ -938,6 +1533,13 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
     "ownedSharesAmount": "5.00",
     "ownedSharesUnit": "%",
     "description": null,
+    "directRights": "Wspólnik spółki",
+    "directRightsPrivilegeType": null,
+    "directRightsPrivilegeDescription": null,
+    "indirectRights": null,
+    "otherRights": null,
+    "otherRightsDescription": null,
+    "additionalInformation": null,
     "beneficiary": {
       "individualEntity": {
         "code": "yrfp7ug51vwn",
@@ -953,17 +1555,26 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
         "birthCity": "Paryż",
         "birthCountry": "FR",
         "politicallyExposed": "no",
-        "politicallyExposedCoworker": "not_defined",
-        "politicallyExposedFamily": "not_defined",
+        "politicallyExposedCoworker": "no",
+        "politicallyExposedFamily": "no",
         "createdAt": "2023-08-24T15:51:27.000000Z",
         "birthDate": null
+      },
+      "accommodationAddress": {
+        "code": "abc123xyz",
+        "country": "PL",
+        "city": "Krakow",
+        "street": "Kazimierza",
+        "houseNumber": "41",
+        "flatNumber": "10",
+        "postalCode": "20-131"
       }
     },
     "company": {
       "legalEntity": {
         "code": "cga7z8hf3j6r",
         "companyName": "FiberPay",
-        "tradeName": "FiberPay",
+        "tradeNames": ["FiberPay"],
         "taxIdNumber": "7010634566",
         "nationalBusinessRegistryNumber": "147302566",
         "nationalCourtRegistryNumber": "0000512707",
@@ -991,7 +1602,7 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
         "mainPkd": {
           "code": "mfxw2yqt7zed",
           "pkdCode": "64.99.Z",
-          "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
+          "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA",
           "mainPkd": true
         }
       },
@@ -1001,10 +1612,10 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
           "type": "business_address",
           "country": "PL",
           "city": "Warszawa",
-          "street": "Grzybowska",
-          "houseNumber": "4",
-          "flatNumber": "106",
-          "postalCode": "00-131",
+          "street": "Sienna",
+          "houseNumber": "86",
+          "flatNumber": "47",
+          "postalCode": "00-815",
           "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ],
@@ -1012,9 +1623,9 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
         {
           "code": "5b1gk4jpe9fn",
           "type": "company",
-          "emailAdress": "info@fiberpay.pl",
+          "emailAdress": "kontakt@systemaml.pl",
           "phoneCountry": "48",
-          "phoneNumber": "123123123",
+          "phoneNumber": "222302622",
           "createdAt": "2023-08-24T15:48:19.000000Z"
         }
       ]
@@ -1023,7 +1634,7 @@ Dodanie beneficjenta rzeczywistego do podmiotu typu company. Parametry żądania
 }
 ```
 
-### GET /parties/{code}/beneficiaries
+#### 2.2.2. GET /parties/{code}/beneficiaries
 
 Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 
@@ -1072,39 +1683,97 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 
 W przypadku gdy podmiot nie posiada dodanych beneficjentów rzeczywistych zwracana tablica jest pusta
 
-### DELETE /beneficiaries/{code}
+#### 2.2.3. DELETE /beneficiaries/{code}
 
 Usunięcie beneficjenta rzeczywistego wskazanego kodem identyfikującym.
 
+---
 
-### POST /parties/{code}/boardmembers
+### 2.3. Reprezentanci
 
-Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądania:
+[↩️ Powrót do spisu treści](#spis-treści)
 
+#### 2.3.1. POST /parties/{code}/boardmembers
 
-| Parametr                     | Wymagane | Opis                                                                       |
-| ---------------------------- | -------- | -------------------------------------------------------------------------- |
-| **firstName**                | TAK      | Imię reprezentanta                                                         |
-| **lastName**                 | TAK      | Nazwisko reprezentanta                                                     |
-| **personalIdentityNumber**   | TAK      | Numer PESEL reprezentanta  (w przypadku braku numeru PESEL wymagany jest parametr personalIdentifier) |
-| **documentType**             | TAK      | Rodzaj dokumentu (nie jest wymagany jeśli nie ma numeru PESEL)             |
-| **documentNumber**           | NIE      | Numer dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)           |
-| **documentIssueCountry**     | NIE      | Kraj wydania dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                       |
-| **documentExpirationDate**   | NIE      | Termin ważności dokumentu (jest wymagane kiedy jest podany jakikolwiek documentType)                                                |
-| **personalIdentifier**       | NIE      | Numer identyfikujący reprezentanta  (wymagany jeśli nie ma numeru PESEL) |
-| **birthDate**                | NIE      | Data urodzenia (wymagana jeśli nie ma numeru PESEL)                        |
-| **birthCountry**             | NIE      | Kraj urodzenia (wymagany jeśli nie ma numeru PESEL)                        |
-| **citizenship**              | NIE      | Obywatelstwo (kod kraju w standardzie ISO)                                 |
-| **birthCity**                | NIE      | Miejsce urodzenia                                                      |
-| **withoutExpirationDate**    | NIE      | Informacja czy dokument posiada datę ważności (bool) jest wymagane kiedy jest podany jakikolwiek documentType i dokument jest bezterminowy                       |
-| **references**               | NIE      | Referencje własne                                                          |
-| **roleType**                 | TAK      | Pełniona rola. Aktualnie wspierane: president, board_member , proxy, other |
-| **description**              | TAK      | Opis pełnione roli (wymagane jeśli roleType ma wartość other)              |
-| **politicallyExposed**       | TAK      | Informacja czy reprezentant jest eksponowany politycznie (bool)             |
-| **politicallyExposedFamily**     | TAK     | Informacja czy reprezentant jest rodziną osoby eksponowanej politycznie ('yes' lub 'no')                  |
-| **politicallyExposedCoworker**   | TAK     | Informacja czy reprezentant jest bliskim współpracownikiem osoby eksponowanej politycznie ('yes' lub 'no')|
+Dodawanie reprezentanta (członka zarządu) do podmiotu typu `company`.
 
-#### Przykładowe dane do dodania reprezentanta:
+> **Uwaga:** Endpoint dostępny tylko dla podmiotów typu `company` (osoba prawna).
+
+---
+
+#### Parametry podstawowe reprezentanta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **firstName** | TAK | Imię reprezentanta | `"Jan"` |
+| **lastName** | TAK | Nazwisko reprezentanta | `"Nowak"` |
+| **personalIdentityNumber** | WARUNKOWO* | PESEL | `"97120824889"` |
+| **birthDate** | WARUNKOWO** | Data urodzenia | `"2002-01-01"` |
+| **birthCountry** | WARUNKOWO** | Kraj urodzenia | `"PL"` |
+| **birthCity** | NIE | Miejsce urodzenia | `"Warszawa"` |
+| **citizenship** | NIE | Obywatelstwo | `"PL"` |
+
+**Wymagalność:**
+- `*` Jedno z dwóch jest wymagane: `personalIdentityNumber`
+- `**` Wymagane gdy brak PESEL
+
+---
+
+#### Dokument tożsamości reprezentanta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **documentType** | TAK | Typ dokumentu | `"id_card"` |
+| **documentNumber** | WARUNKOWO* | Numer dokumentu | `"XIK941595"` |
+| **documentIssueCountry** | WARUNKOWO* | Kraj wydania | `"PL"` |
+| **documentExpirationDate** | WARUNKOWO* | Data ważności | `"2026-05-15"` |
+| **withoutExpirationDate** | NIE | Dokument bezterminowy? | `true`/`false` |
+
+**Wymagalność:**
+- `*` Wymagane gdy podano `documentType`
+
+---
+
+#### Rola reprezentanta
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **roleType** | TAK | [Typ roli](#typy-ról-roletype) | `"president"` |
+| **description** | WARUNKOWO* | Opis roli | `"Prezes zarządu"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy `roleType: "other"`
+
+#### Typy ról (roleType)
+
+| Kod | Nazwa |
+|:-----:|:-------:|
+| `president` | Prezes |
+| `board_member` | Członek zarządu |
+| `proxy` | Prokurent |
+| `other` | Inna rola |
+
+---
+
+#### Dane PEP reprezentanta
+
+| Parametr | Wymagane | Wartości | Opis |
+|:----------:|:----------:|:----------:|:------:|
+| **politicallyExposed** | TAK | `yes`, `no` | Czy reprezentant jest PEP? |
+| **politicallyExposedFamily** | TAK | `yes`, `no` | Czy jest rodziną PEP? |
+| **politicallyExposedCoworker** | TAK | `yes`, `no` | Czy jest współpracownikiem PEP? |
+
+---
+
+#### Dodatkowe parametry
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **references** | NIE | Referencje własne |
+
+---
+
+### Przykład - Dodanie reprezentanta z PESEL
 
 ```json
 {
@@ -1120,111 +1789,143 @@ Dodanie reprezentanta do podmiotu typu osoba prawna (company). Parametry żądan
   "lastName": "Nowak",
   "personalIdentityNumber": "97120824889",
   "politicallyExposed": "yes",
-  "politicallyExposedCoworker":"no",
-  "politicallyExposedFamily":"no",
-  "roleType" : "proxy",
-  "withoutExpirationDate": false,
+  "politicallyExposedCoworker": "no",
+  "politicallyExposedFamily": "no",
+  "roleType": "proxy",
+  "withoutExpirationDate": true
 }
 ```
 
-#### Przykładowa odpowiedź serwera:
-
-- **STATUS 201 CREATED**
+### Przykład - Dodanie reprezentanta bez PESEL
 
 ```json
 {
-  "data": {
-    "code": "9c281v6rkzty",
-    "description": "Prezes",
-    "roleType": "proxy",
-    "individualEntity": {
-      "code": "qmce687su31n",
-      "firstName": "Jan",
-      "lastName": "Nowak",
-      "personalIdentityNumber": "97120824889",
-      "documentType": "id_card",
-      "documentNumber": "XIK941595",
-      "documentIssueCountry": "PL",
-      "documentExpirationDate": null,
-      "withoutExpirationDate": false,
-      "citizenship": "PL",
-      "birthCity": "Warszawa",
-      "birthCountry": "PL",
-      "politicallyExposed": "yes",
-      "politicallyExposedCoworker": "not_defined",
-      "politicallyExposedFamily": "not_defined",
-      "createdAt": "2023-11-20T16:42:39.000000Z",
-      "birthDate": null
-    },
-    "company": {
-      "legalEntity": {
-        "code": "jx86zfnrhks9",
-        "companyName": "FiberPay",
-        "tradeNames": [
-          "FiberPay"
-        ],
-        "taxIdNumber": "7010634566",
-        "nationalBusinessRegistryNumber": "147302566",
-        "nationalCourtRegistryNumber": "0000512707",
-        "businessActivityForm": "stock_company",
-        "industry": null,
-        "servicesDescription": null,
-        "website": "fiberpay.pl",
-        "createdAt": "2023-11-20T16:39:46.000000Z",
-        "registrationCountry": "PL",
-        "companyIdentifier": null,
-        "pkdCodes": [
-          {
-            "code": "3puhe59mv87k",
-            "pkdCode": "58.29.Z",
-            "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
-            "mainPkd": false
-          },
-          {
-            "code": "5st34zgp2db7",
-            "pkdCode": "62.01.Z",
-            "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
-            "mainPkd": false
-          }
-        ],
-        "mainPkd": {
-          "code": "vsuxzfwbhyk1",
-          "pkdCode": "64.99.Z",
-          "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
-          "mainPkd": true
-        }
-      },
-      "addresses": [
-        {
-          "code": "38z5gseqyp6t",
-          "type": "business_address",
-          "country": "PL",
-          "city": "Warszawa",
-          "street": "Grzybowska",
-          "houseNumber": "4",
-          "flatNumber": "106",
-          "postalCode": "00-131",
-          "createdAt": "2023-11-20T16:39:46.000000Z"
-        }
-      ],
-      "contacts": [
-        {
-          "code": "ers27txw6ync",
-          "type": "company",
-          "emailAdress": "info@fiberpay.pl",
-          "phoneCountry": "48",
-          "phoneNumber": "123123123",
-          "createdAt": "2023-11-20T16:39:46.000000Z"
-        }
-      ]
-    }
-  }
+  "firstName": "Hans",
+  "lastName": "Schmidt",
+  "birthDate": "1985-06-15",
+  "birthCountry": "DE",
+  "birthCity": "Berlin",
+  "citizenship": "DE",
+  "documentType": "passport",
+  "documentNumber": "C01X00T47",
+  "documentIssueCountry": "DE",
+  "roleType": "board_member",
+  "description": "Członek zarządu",
+  "politicallyExposed": "no",
+  "politicallyExposedFamily": "no",
+  "politicallyExposedCoworker": "no",
+  "withoutExpirationDate": true
 }
 ```
 
-### GET /parties/{code}/boardmembers
+---
 
-Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
+### Odpowiedź API
+
+**STATUS 201 Created**
+
+```json
+{
+    "data": {
+        "code": "kzfruz4kd11p",
+        "description": "Prezes",
+        "roleType": "proxy",
+        "individualEntity": {
+            "code": "1kwm56n8mdhc",
+            "firstName": "Jan",
+            "lastName": "Nowak",
+            "middleName": null,
+            "familyName": null,
+            "personalIdentityNumber": "97120824889",
+            "documentType": "id_card",
+            "documentTypeOther": null,
+            "documentNumber": "XIK941595",
+            "documentIssueCountry": "PL",
+            "documentExpirationDate": null,
+            "withoutExpirationDate": true,
+            "citizenship": "PL",
+            "birthCity": "Warszawa",
+            "birthCountry": "PL",
+            "politicallyExposed": "yes",
+            "politicallyExposedCoworker": "no",
+            "politicallyExposedFamily": "no",
+            "createdAt": "2026-01-15T12:38:43.000000Z",
+            "birthDate": null
+        },
+        "company": {
+            "legalEntity": {
+                "code": "kpcccjd7c4vs",
+                "companyName": "FiberPay Sp. z o.o.",
+                "tradeNames": [
+                    "FiberPay",
+                    "SystemAML"
+                ],
+                "taxIdNumber": "7010634566",
+                "nationalBusinessRegistryNumber": "147302566",
+                "nationalCourtRegistryNumber": "0000512707",
+                "businessActivityForm": "limited_liability_company",
+                "businessActivityFormOther": null,
+                "listedOnStock": "no",
+                "industry": null,
+                "servicesDescription": null,
+                "website": "fiberpay.pl",
+                "createdAt": "2026-01-15T12:38:36.000000Z",
+                "registrationCountry": "PL",
+                "companyIdentifier": null,
+                "terminationDate": null,
+                "pkdCodes": [
+                    {
+                        "code": "5a4ze76whr5s",
+                        "pkdCode": "58.29.Z",
+                        "pkdName": "DZIAŁALNOŚĆ WYDAWNICZA W ZAKRESIE POZOSTAŁEGO OPROGRAMOWANIA",
+                        "mainPkd": false
+                    },
+                    {
+                        "code": "tgzgpurts4nd",
+                        "pkdCode": "62.01.Z",
+                        "pkdName": "DZIAŁALNOŚĆ ZWIĄZANA Z OPROGRAMOWANIEM",
+                        "mainPkd": false
+                    }
+                ],
+                "mainPkd": {
+                    "code": "63wbub1g8n23",
+                    "pkdCode": "64.99.Z",
+                    "pkdName": "POZOSTAŁA FINANSOWA DZIAŁALNOŚĆ USŁUGOWA, GDZIE INDZIEJ NIESKLASYFIKOWANA, Z WYŁĄCZENIEM UBEZPIECZEŃ I FUNDUSZÓW EMERYTALNYCH",
+                    "mainPkd": true
+                }
+            },
+            "addresses": [
+                {
+                    "code": "wxpheqzu1b9b",
+                    "type": "business_address",
+                    "country": "PL",
+                    "region": null,
+                    "city": "Warszawa",
+                    "street": "Sienna",
+                    "houseNumber": "86",
+                    "flatNumber": "47",
+                    "postalCode": "00-815",
+                    "createdAt": "2026-01-15T12:38:36.000000Z"
+                }
+            ],
+            "contacts": [
+                {
+                    "code": "jbmfwwgwpfd3",
+                    "type": "company",
+                    "emailAdress": "kontakt@systemaml.pl",
+                    "phoneCountry": "48",
+                    "phoneNumber": "222302622",
+                    "createdAt": "2026-01-15T12:38:36.000000Z"
+                }
+            ]
+        }
+    }
+}
+```
+
+#### 2.3.2. GET /parties/{code}/boardmembers
+
+Pobranie reprezentantów wskazanego kodem podmiotu typu company.
 
 #### Przykładowa odpowiedź serwera:
 
@@ -1262,163 +1963,312 @@ Pobranie beneficjentów rzeczywistych wskazanego kodem podmiotu typu company.
 ```
 W przypadku gdy podmiot nie posiada dodanych reprezentantów zwracana tablica jest pusta
 
-### DELETE /boardmembers/{code}
+#### 2.3.3. DELETE /boardmembers/{code}
 
 Usunięcie reprezentanta wskazanego kodem identyfikującym.
 
-## POST /transactions
+## 3. Transakcje
 
-Utworzenie nowej transakcji. Parametry żądania:
+### 3.1. POST /transactions
 
-| Parametr                  | Wymagane | Opis                                                     |
-| ------------------------- | -------- | -------------------------------------------------------- |
-| **type**                  | TAK      | Typ transakcji. Aktualnie wspierane: buyer, seller, transfer, other, seller_crypto, buyer_crypto, exchange_fiat |
-| **status**                | TAK      | Status transakcji. Aktualnie wspierane: draft, in_acceptance, accepted, cancelled |
-| **occasionalTransaction** | TAK      | Informacja czy transakcja jest okazjonalna (bool)        |
+[↩️ Powrót do spisu treści](#spis-treści)
 
-Jeśli transakcja jest oznaczona jako okazjonalna wymagane są następujące parametry:
+Tworzy nową transakcję w systemie.
 
-| Parametr          | Wymagane | Opis                                                       |
-| ----------------- | -------- | ---------------------------------------------------------- |
-| **amount**        | TAK      | Kwota transakcji                                           |
-| **currency**      | TAK      | Waluta transakcji                                          |
-| **bookedAt**      | TAK      | Data zaksięgowania transakcji                              |
-| **paymentMethod** | TAK      | Sposób płatności                                           |
-| **paymentMethodOther** | NIE      | Sposób płatności (wymagany kiedy paymentMethod === other)                                           |
-| **title**         | TAK      | Tytuł transakcji                                           |
-| **location**      | NIE      | Kraj w którym została przeprowadzona transakcja            |
-| **description**   | NIE      | Opis transakcji (przedmiot transakcji, komentarz itd.)     |
-| **references**    | NIE      | Referencje własne                                          |
-| **createdByName** | NIE      | Dane osoby wprowadzającej wpis                             |
-| **entities**      | NIE      | Tablica obiektów z danymi stron transakcji, wymagane w zależności od occasionalTransaction i typu transakcji |
+---
 
+### Parametry podstawowe transakcji
 
-Obiekt pojedynczej strony transakcji powinien zawierać poniższe parametry:
+| Parametr | Wymagane | Wartości | Opis |
+|:----------:|:----------:|:----------:|:------:|
+| **type** | TAK | `buyer`, `seller`, `transfer`, `other`, `seller_crypto`, `buyer_crypto`, `exchange_fiat` | Typ transakcji |
+| **status** | TAK | `draft`, `in_acceptance`, `accepted`, `cancelled` | Status transakcji |
+| **occasionalTransaction** | TAK | `true`, `false` | Czy transakcja jest okazjonalna? |
 
-| Parametr                | Wymagane | Opis                                                                 |
-| ----------------------- | -------- | -------------------------------------------------------------------- |
-| **type**                | TAK      | Typ strony transakcji. Aktualnie wspierane: receiver, seller, buyer, payer, buyer_crypto, seller_crypto, exchange_fiat_client, other|
-| **typeOther**           | NIE      | Typ strony transakcji (wymagany jeśli type === other)|
-| **partyCode**           | NIE      | Kod podmiotu strony transakcji                                       |
-| **firstName**           | NIE      | Imię strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)          |
-| **lastName**            | NIE      | Nazwisko strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)      |
-| **companyName**         | NIE      | Nazwa firmy strony transakcji (wymagany jeśli nie jest podany kod strony transakcji)     |
-| **description**         | NIE      | Opis strony transakcji                                               |
-| **amount**              | NIE      | Kwota transakcji                                           |
-| **currency**            | NIE      | Waluta transakcji                                          |
-| **currencyCustom**      | NIE      | Waluta transakcji kiedy waluta nie istnieje na liście, w transakcjach typu buyer_crypto, seller_crypto, exchange_fiat |
-| **currencyOther**       | NIE      | Nazwa waluty kiedy nie istnieje na liście, w transakcjach typu buyer_crypto, seller_crypto, exchange_fiat |
-| **currencyType**        | NIE      | Rodzaj waluty w transakcjach typu buyer_crypto, seller_crypto, exchange_fiat  |
-| **iban**                | NIE      | Numer iban strony transakcji (wymagany jeśli paymentMethod === bank_transfer) |
-| **txId**                | NIE      | Numer identyfikacyjny transakcji waluty wirtualnej w sieci blockchain, w transakcjach typu buyer_crypto, seller_crypto  |
-| **cryptoAddress**       | NIE      | Adres portfela waluty wirtualnej, w transakcjach typu buyer_crypto, seller_crypto |
-| **ip**                  | NIE      | Adres IP strony transakcji  |
-| **isEntityAWalletOwner**  | NIE*      | Informacja czy podmiot wskazany w transakcji jest faktycznym właścicielem portfela kryptowalutowego użytego w transakcji. Przyjmuje wartości 'yes', 'no'. *Wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto'  |
-| **addressDataFromRelatedParty** | NIE* | Informacja czy dane adresowe właściciela portfela kryptowalutowego są takie same jak wskazanym podmiocie. Przyjmuje wartości 'yes', 'no'. Pole jest wymagane gdy wskazany jest podmiot, Wykorzystywane tylko przy transakcjach typu 'buyer_crypto', 'seller_crypto' |
-| **isVASPEntity** | NIE | Informacja czy portfel kryptowalutowy jest hostowany przez VASP. Przyjmuje wartości 'yes', 'no'. Wykorzystywane tylko przy transakcjach typu 'buyer_crypto', 'seller_crypto'|
-| **vaspName** | NIE* | Nazwa docelowego VASP. *Wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
-| **vaspLeix** | NIE* | VASP LEIX. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
-| **vaspRaid** | NIE* | VASP RAID. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
-| **vaspTxid** | NIE* | VASP TXID. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
-| **vaspMisc** | NIE* | VASP MISC. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
-| **vaspCustomerId** | NIE* | Id klienta VASP. *Co najmniej jedno z pól vasp jest wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isVASPEntity === 'yes' |
-| **walletOwnerData** | NIE* | Obiekt reprezentujące dane właściciela portfela kryptowalutowego. Wymagane dla transakcji typu 'buyer_crypto', 'seller_crypto' gdy isEntityAWalletOwner === 'no'|
+---
 
-Struktura obiektu walletOwnerData:
-| Parametr                | Wymagane | Opis                                                                 |
-| ----------------------- | -------- | -------------------------------------------------------------------- |
-| **partyType**                | TAK      | Rodzaj danych właściciela portfela kryptowalutowego. Aktualnie wspierane 'individual', 'sole_proprietorship', 'company' |
-| **firstName**                | NIE*     | Imię. Wymagane gdy partyType to 'individual' lub 'sole_proprietorship' |
-| **lastName**                 | NIE*     | Nazwisko. Wymagane gdy partyType to 'individual' lub 'sole_proprietorship' |
-| **companyName**              | NIE*     | Nazwa firmy. Wymagane gdy partyType to 'company' lub 'sole_proprietorship' |
-| **postalCode**               | NIE*     | Kod pocztowy. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
-| **country**                  | NIE*     | Kraj. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
-| **city**                     | NIE*     | Miejscowość. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
-| **street**                   | NIE*     | Ulica. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
-| **houseNumber**              | NIE*     | Numer domu. Wymagane gdy 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
-| **flatNumber**               | NIE     | Numer mieszkania. |
-| **taxIdNumber**              | NIE*     | Numer identyfikacji podatkowej. Wymagane gdy partyType to 'company' lub 'sole_proprietorship' i 'isEntityAWalletOwner' === 'no' lub 'addressDataFromRelatedParty' === 'no' |
-| **taxIdCountry**             | NIE*     | Kraj identyfikacji podatkowej. Wymagane podany jest taxIdNumber|
+### Parametry dla transakcji okazjonalnych
 
-Dla transakcji typu buyer wymagane jest podanie strony transakcji o typie seller.
-Dla transakcji typu seller wymagane jest podanie strony transakcji o typie buyer.
-Dla transakcji typu transfer wymagane jest podanie stron transakcji o typach payer oraz receiver.
-Dla transakcji typu seller_crypto wymagane jest podanie strony transakcji o typie buyer_crypto.
-Dla transakcji typu buyer_crypto wymagane jest podanie strony transakcji o typie seller_crypto.
-Dla transakcji typu other wymagane jest podanie strony transakcji o typach receiver, seller, buyer lub payer.
-Dla transakcji typu exchange_fiat wymagane jest podanie strony transakcji o typie exchange_fiat_client.
-#### Przykładowe dane do utworzenia transakcji:
+**Wymagane gdy `occasionalTransaction: true`**
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **amount** | TAK | Kwota transakcji | `"100.00"` |
+| **currency** | TAK | Waluta (kod ISO) | `"PLN"` |
+| **bookedAt** | TAK | Data zaksięgowania | `"2024-05-07T13:03:48.000000Z"` |
+| **paymentMethod** | TAK | Sposób płatności | `"cash"` |
+| **paymentMethodOther** | WARUNKOWO* | Opis innego sposobu płatności | - |
+| **title** | TAK | Tytuł transakcji | `"Zakup usług"` |
+| **location** | NIE | Kraj przeprowadzenia | `"PL"` |
+| **description** | NIE | Opis transakcji | - |
+| **references** | NIE | Referencje własne | - |
+| **createdByName** | NIE | Osoba wprowadzająca | - |
+| **entities** | NIE | Tablica stron transakcji | Zobacz [Strony transakcji](#strony-transakcji) |
+
+**Wymagalność:**
+- `*` Wymagane gdy `paymentMethod: "other"`
+
+---
+
+### Typy transakcji i wymagane strony
+
+| Typ transakcji | Wymagane strony | Opis |
+|:----------------:|:-----------------:|:------:|
+| `buyer` | `seller` | Zakup od kontrahenta |
+| `seller` | `buyer` | Sprzedaż kontrahentowi |
+| `transfer` | `payer`, `receiver` | Transfer środków |
+| `seller_crypto` | `buyer_crypto` | Sprzedaż kryptowalut |
+| `buyer_crypto` | `seller_crypto` | Zakup kryptowalut |
+| `exchange_fiat` | `exchange_fiat_client` | Wymiana walut fiat |
+| `other` | `receiver`, `seller`, `buyer` lub `payer` | Inna transakcja |
+
+---
+
+## Strony transakcji
+
+**Dodawane w tablicy `entities`**
+
+### Parametry podstawowe strony
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **type** | TAK | Typ strony | `"seller"` |
+| **typeOther** | WARUNKOWO* | Opis innego typu | - |
+| **partyCode** | NIE | Kod podmiotu z systemu | `"abc123xyz"` |
+| **firstName** | WARUNKOWO** | Imię | `"Jan"` |
+| **lastName** | WARUNKOWO** | Nazwisko | `"Kowalski"` |
+| **companyName** | WARUNKOWO** | Nazwa firmy | `"FiberPay Sp. z o.o."` |
+| **description** | NIE | Opis strony | - |
+
+**Wymagalność:**
+- `*` Wymagane gdy `type: "other"`
+- `**` Wymagane gdy brak `partyCode`
+
+#### Typy stron transakcji (type)
+
+| Kod | Nazwa | Użycie |
+|:-----:|:-------:|:--------:|
+| `receiver` | Odbiorca | Transfer |
+| `seller` | Sprzedawca | Zakup |
+| `buyer` | Kupujący | Sprzedaż |
+| `payer` | Płatnik | Transfer |
+| `buyer_crypto` | Kupujący krypto | Sprzedaż kryptowalut |
+| `seller_crypto` | Sprzedawca krypto | Zakup kryptowalut |
+| `exchange_fiat_client` | Klient kantoru | Wymiana walut |
+| `other` | Inna rola | Niestandardowa transakcja |
+
+---
+
+### Parametry dodatkowe strony
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **amount** | NIE | Kwota dla tej strony | `"100.00"` |
+| **currency** | NIE | Waluta | `"PLN"` |
+| **iban** | WARUNKOWO* | Numer IBAN | `"PL61109010140000071219812874"` |
+| **ip** | NIE | Adres IP | `"192.168.1.1"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy `paymentMethod: "bank_transfer"`
+
+---
+
+## Transakcje kryptowalutowe
+
+**Dodatkowe parametry dla typów: `buyer_crypto`, `seller_crypto`**
+
+### Parametry kryptowalutowe strony
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **currencyCustom** | NIE | Czy waluta niestandardowa? | `true`/`false` |
+| **currencyOther** | NIE | Nazwa niestandardowej waluty | `"DOGE"` |
+| **currencyType** | NIE | Typ waluty krypto | `"cryptocurrency"` |
+| **txId** | NIE | ID transakcji blockchain | `"0x123..."` |
+| **cryptoAddress** | NIE | Adres portfela | `"1A1zP1eP5QGefi..."` |
+| **isEntityAWalletOwner** | TAK | Czy podmiot jest właścicielem portfela? | `"yes"`, `"no"` |
+| **addressDataFromRelatedParty** | WARUNKOWO* | Czy dane adresowe takie same jak podmiotu? | `"yes"`, `"no"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy podano `partyCode`
+
+---
+
+### Dane VASP (Virtual Asset Service Provider)
+
+**Parametry dla portfeli hostowanych przez VASP**
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **isVASPEntity** | NIE | Czy portfel hostowany przez VASP? | `"yes"`, `"no"` |
+| **vaspName** | WARUNKOWO* | Nazwa VASP | `"Binance"` |
+| **vaspLeix** | WARUNKOWO** | VASP LEIX | - |
+| **vaspRaid** | WARUNKOWO** | VASP RAID | - |
+| **vaspTxid** | WARUNKOWO** | VASP TXID | - |
+| **vaspMisc** | WARUNKOWO** | VASP MISC | - |
+| **vaspCustomerId** | WARUNKOWO** | ID klienta VASP | - |
+
+**Wymagalność:**
+- `*` Wymagane gdy `isVASPEntity: "yes"`
+- `**` Co najmniej jedno z pól jest wymagane gdy `isVASPEntity: "yes"`
+
+---
+
+### Dane właściciela portfela
+
+**Obiekt `walletOwnerData`**
+
+**Wymagane gdy `isEntityAWalletOwner: "no"`**
+
+#### Parametry podstawowe
+
+| Parametr | Wymagane | Opis | Przykład |
+|:----------:|:----------:|:------:|:----------:|
+| **partyType** | TAK | Typ właściciela | `"individual"`, `"sole_proprietorship"`, `"company"` |
+| **firstName** | WARUNKOWO* | Imię | `"Jan"` |
+| **lastName** | WARUNKOWO* | Nazwisko | `"Kowalski"` |
+| **companyName** | WARUNKOWO** | Nazwa firmy | `"FiberPay Sp. z o.o."` |
+
+**Wymagalność:**
+- `*` Wymagane gdy `partyType: "individual"` lub `"sole_proprietorship"`
+- `**` Wymagane gdy `partyType: "company"` lub `"sole_proprietorship"`
+
+#### Adres właściciela
+
+**Wymagane gdy `isEntityAWalletOwner: "no"` lub `addressDataFromRelatedParty: "no"`**
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **country** | TAK | Kraj (kod ISO) |
+| **region** | NIE | Region/Województwo |
+| **city** | TAK | Miasto |
+| **street** | TAK | Ulica |
+| **houseNumber** | TAK | Numer domu |
+| **flatNumber** | NIE | Numer mieszkania |
+| **postalCode** | TAK | Kod pocztowy |
+
+#### Identyfikacja podatkowa
+
+**Wymagane dla firm gdy `isEntityAWalletOwner: "no"` lub `addressDataFromRelatedParty: "no"`**
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **taxIdNumber** | WARUNKOWO* | NIP | `"7010634566"` |
+| **taxIdCountry** | WARUNKOWO** | Kraj NIP | `"PL"` |
+
+**Wymagalność:**
+- `*` Wymagane gdy `partyType: "company"` lub `"sole_proprietorship"`
+- `**` Wymagane gdy podano `taxIdNumber`
+
+---
+
+## Przykłady transakcji
+
+### Przykład 1: Transakcja standardowa (zakup)
 
 ```json
 {
-    "type": "buyer",
-    "status": "accepted",
-    "amount": "100.00",
-    "currency": "PLN",
-    "paymentMethod": "cash",
-    "location": "PL",
-    "bookedAt": "2024-05-07T13:03:48.000000Z",
-    "title": "testowa transakcja",
-    "entities": [
-            {
-                "type": "seller",
-                "firstName": "Adam",
-                "lastName": "Kowalski",
-            }
-    ],
-    "createdAt": "2024-05-07T13:04:33.000000Z",
-    "occasionalTransaction": false,
-}
-```
-
-#### Przykładowa odpowiedź serwera:
-
-- **STATUS 201 CREATED**
-
-```json
-{
-    "data": {
-        "code": "8c2vdbhrn5zm",
-        "type": "buyer",
-        "status": "accepted",
-        "amount": "100.00",
-        "currency": "PLN",
-        "paymentMethod": "cash",
-        "paymentMethodOther": null,
-        "location": "PL",
-        "bookedAt": "2024-05-07T11:03:48.000000Z",
-        "description": null,
-        "title": "testowa transakcja",
-        "entities": [
-            {
-                "code": "vpgsq76murxz",
-                "partyCode": null,
-                "type": "seller",
-                "typeOther": null,
-                "description": null,
-                "firstName": "Adam",
-                "lastName": "Kowalski",
-                "companyName": null,
-                "currency": null,
-                "currencyType": null,
-                "currencyOther": null,
-                "currencyCustom": false,
-                "amount": null,
-                "iban": null,
-                "ip": null,
-                "txId": null,
-                "cryptoAddress": null,
-            }
-        ],
-        "references": null,
-        "createdAt": "2024-05-15T09:30:00.000000Z",
-        "occasionalTransaction": false,
-        "createdByName": null
+  "type": "buyer",
+  "status": "accepted",
+  "amount": "100.00",
+  "currency": "PLN",
+  "paymentMethod": "cash",
+  "location": "PL",
+  "bookedAt": "2024-05-07T13:03:48.000000Z",
+  "title": "Zakup usług konsultingowych",
+  "occasionalTransaction": false,
+  "entities": [
+    {
+      "type": "seller",
+      "firstName": "Adam",
+      "lastName": "Kowalski"
     }
+  ]
 }
 ```
 
-### GET /transactions
+### Przykład 2: Transakcja kryptowalutowa
+
+```json
+{
+  "type": "buyer_crypto",
+  "status": "accepted",
+  "amount": "5000.00",
+  "currency": "PLN",
+  "paymentMethod": "bank_transfer",
+  "location": "PL",
+  "bookedAt": "2024-05-07T13:03:48.000000Z",
+  "title": "Zakup Bitcoin",
+  "occasionalTransaction": false,
+  "entities": [
+    {
+      "type": "seller_crypto",
+      "firstName": "Satoshi",
+      "lastName": "Nakamoto",
+      "amount": "0.15",
+      "currency": "BTC",
+      "currencyCustom": false,
+      "currencyType": "crypto",
+      "txId": "0x123abc...",
+      "cryptoAddress": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa",
+      "isEntityAWalletOwner": "no",
+      "isVASPEntity": "no",
+      "walletOwnerData": {
+        "partyType": "individual",
+        "firstName": "Satoshi",
+        "lastName": "Nakamoto",
+        "country": "JP",
+        "city": "Tokyo",
+        "street": "Main Street",
+        "houseNumber": "123",
+        "postalCode": "100-0001"
+      }
+    }
+  ]
+}
+```
+
+### Przykład 3: Transakcja z VASP
+
+```json
+{
+  "type": "seller_crypto",
+  "status": "accepted",
+  "amount": "10000.00",
+  "currency": "PLN",
+  "paymentMethod": "bank_transfer",
+  "bookedAt": "2024-05-07T13:03:48.000000Z",
+  "title": "Sprzedaż Ethereum",
+  "occasionalTransaction": false,
+  "entities": [
+    {
+      "type": "buyer_crypto",
+      "firstName": "Hans",
+      "lastName": "Schmidt",
+      "amount": "5",
+      "currency": "ETH",
+      "currencyType": "cryptocurrency",
+      "cryptoAddress": "0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb",
+      "isEntityAWalletOwner": "no",
+      "isVASPEntity": "yes",
+      "vaspName": "Binance",
+      "vaspCustomerId": "USER123456",
+      "walletOwnerData": {
+        "partyType": "individual",
+        "firstName": "Hans",
+        "lastName": "Schmidt",
+        "country": "DE",
+        "city": "Berlin",
+        "street": "Unter den Linden",
+        "houseNumber": "1",
+        "postalCode": "10117"
+      }
+    }
+  ]
+}
+```
+
+### 3.2. GET /transactions
 
 Zwraca transakcje utworzone przez użytkownika.
 
@@ -1435,7 +2285,7 @@ Zwraca transakcje utworzone przez użytkownika.
       "mainEntityLastName": "Kowalski",
       "mainEntityCompanyName": "",
       "code": "c1ehu5my3s97",
-      "type": "vender",
+      "type": "seller",
       "status": "accepted",
       "description": null,
       "title": "transakcja z klienta",
@@ -1444,7 +2294,7 @@ Zwraca transakcje utworzone przez użytkownika.
     },
     {
       "code": "td4r9v6weunk",
-      "type": "vender",
+      "type": "seller",
       "status": "cancelled",
       "description": null,
       "title": "transakcja z klienta",
@@ -1457,7 +2307,7 @@ Zwraca transakcje utworzone przez użytkownika.
       "mainEntityLastName": "Kowalski",
       "mainEntityCompanyName": null,
       "code": "q9hyv32w4b68",
-      "type": "vender",
+      "type": "seller",
       "status": "accepted",
       "description": null,
       "title": "transakcja z klienta",
@@ -1468,7 +2318,7 @@ Zwraca transakcje utworzone przez użytkownika.
 }
 ```
 
-### GET /transactions/{code}
+### 3.3. GET /transactions/{code}
 
 Pobranie szczegółów danej transakcji.
 
@@ -1480,7 +2330,7 @@ Pobranie szczegółów danej transakcji.
 {
   "data": {
     "code": "c1ehu5my3s97",
-    "type": "vender",
+    "type": "seller",
     "status": "accepted",
     "amount": "780.00",
     "currency": "PLN",
@@ -1515,16 +2365,124 @@ Pobranie szczegółów danej transakcji.
 ```
 
 
-### DELETE /transactions/{code}
+### 3.4. POST /transactions/{code}/status
+
+Zmiana statusu transakcji.
+
+Endpoint umożliwia aktualizację statusu transakcji w systemie. Status transakcji określa jej obecny stan procesu weryfikacji i akceptacji.
+
+#### Parametry URL
+
+| Parametr | Wymagane | Opis |
+|:----------:|:----------:|:------:|
+| **code** | TAK | Unikalny kod identyfikujący transakcję |
+
+#### Parametry body (JSON)
+
+| Parametr | Typ | Wymagane | Wartości | Opis |
+|:----------:|:-----:|:----------:|:----------:|:------:|
+| **newStatus** | string | TAK | `draft`, `in_acceptance`, `accepted`, `cancelled` | Nowy status transakcji |
+
+#### Dozwolone statusy
+
+| Status | Opis |
+|:--------:|:------:|
+| `draft` | Szkic - transakcja w trakcie rejestracji |
+| `in_acceptance` | W akceptacji - transakcja oczekuje na weryfikację |
+| `accepted` | Zaakceptowana - transakcja zatwierdzona |
+| `cancelled` | Anulowana - transakcja odrzucona/anulowana |
+
+#### Zachowanie systemu
+
+Zmiana statusu transakcji powoduje:
+- **Aktualizację agregatu transakcji** - przeliczenie sum dla powiązanych podmiotów
+- **Utworzenie zdarzenia systemowego** w historii transakcji
+- **Wysłanie webhooka** `transaction_status_change` (jeśli skonfigurowany)
+- **Dodanie podmiotów do kolejki screeningu** (dla statusów `accepted`/`in_acceptance`)
+- **Utworzenie zdarzenia rejestracji** (przy pierwszej zmianie statusu)
+
+> **Uwaga:** 
+> - Zmiana statusu z `accepted`/`in_acceptance` na `draft`/`cancelled` powoduje **odjęcie kwoty z agregatu**
+> - Zmiana statusu z `draft`/`cancelled` na `accepted`/`in_acceptance` powoduje **dodanie kwoty do agregatu**
+
+#### Przykładowe dane do zmiany statusu
+
+```json
+{
+  "newStatus": "accepted"
+}
+```
+
+#### Przykładowa odpowiedź serwera
+
+**STATUS 200 OK**
+
+```json
+{
+  "data": {
+    "code": "xyz789abc123",
+    "type": "buyer",
+    "status": "accepted",
+    "riskStatus": "pending",
+    "amount": 15000,
+    "currency": "PLN",
+    "paymentMethod": "transfer",
+    "location": "Poland",
+    "bookedAt": "2024-01-15T00:00:00.000000Z",
+    "description": "Zakup nieruchomości",
+    "entities": []
+  }
+}
+```
+
+#### Możliwe błędy
+
+**STATUS 400 Bad Request**
+```json
+{
+  "status": "ERROR",
+  "error": "The new status field is required."
+}
+```
+
+**STATUS 404 Not Found**
+```json
+{
+  "status": "ERROR",
+  "error": "Transaction not found"
+}
+```
+
+**STATUS 422 Unprocessable Entity**
+```json
+{
+  "status": "ERROR",
+  "error": "The selected new status is invalid."
+}
+```
+
+---
+
+### 3.5. DELETE /transactions/{code}
+
+[↩️ Powrót do spisu treści](#spis-treści)
 
 Usunięcie transakcji wskazanej kodem identyfikującym.
 
-### POST /history-events
+---
+
+## 4. Zdarzenia
+
+### 4.1. Zdarzenia
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 4.1.1. POST /history-events
 
 Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 
 | Parametr            | Wymagane | Opis                                                          |
-| ------------------- | -------- | ------------------------------------------------------------- |
+|:-------------------:|:--------:|:-------------------------------------------------------------:|
 | **description**     | TAK      | Opis zdarzenia                                                |
 | **significance**    | TAK      | Ważność zdarzenia. Aktualnie wspierane: info, warning, urgent |
 | **party**           | NIE      | Obiekt zawierający kod powiązanego podmiotu                   |
@@ -1536,14 +2494,14 @@ Tworzenie nowego zdarzenia w systemie. Parametry żądania:
 Struktura obiektu party:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanego podmiotu          |
 
 
 Struktura obiektu transaction:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanej transakcji         |
 
 
@@ -1578,7 +2536,7 @@ Struktura obiektu transaction:
 }
 ```
 
-### GET /history-events
+#### 4.1.2. GET /history-events
 
 Zwraca zdarzenia przypisane do użytkownika.
 
@@ -1617,7 +2575,7 @@ Zwraca zdarzenia przypisane do użytkownika.
 
 Jeśli użytkownik nie posiada żadnych zdarzeń zwracany jest adekwatny komunikat ze statusem 200.
 
-### GET /history-events/{code}
+#### 4.1.3. GET /history-events/{code}
 
 Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 
@@ -1629,30 +2587,44 @@ Zwraca zdarzenie o podanym identyfikatorze wraz z liczbą komentarzy.
 {
   "data": {
     "code": "ame15yfgvhzk",
-    "partyCode": "7u2nbzjx83dg",
-    "transactionCode": null,
+    "significance": "warning",
     "description": "89b88",
     "type": "user",
-    "significance": "warning",
-    "occursAt": "2023-08-03 18:42:40",
+    "party": {
+      "code": "7u2nbzjx83dg",
+      "status": "active",
+      "description": "Jan Kowalski"
+    },
+    "kycApplicant": null,
+    "transaction": null,
+    "team": null,
+    "commentsAmount": 2,
+    "hasComments": true,
+    "occursAt": "2023-08-03T18:42:40.000000Z",
     "createdByName": null,
-    "commentsAmount": 2
+    "redirectTarget": null
   }
 }
 ```
 
 Jeśli zdarzenie nie posiada przypisanych komentarzy zmienna zwracana przy kluczu "commentsAmount" równa się 0
 
-### DELETE /history-events/{code}
+#### 4.1.4. DELETE /history-events/{code}
 
 Usunięcie zdarzenia wskazanego kodem identyfikującym.
 
-### POST /comments
+---
+
+### 4.2. Komentarze do zdarzeń
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 4.2.1. POST /comments
 
 Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **content**   | TAK      | Treść komentarza                                               |
 | **eventCode** | TAK      | Identyfikator zdarzenia do którego będzie przypisany komentarz |
 | **occursAt**  | TAK      | Data wystąpienia zdarzenia                                     |
@@ -1683,70 +2655,28 @@ Tworzenie nowego komentarza do zdarzenia w systemie. Parametry żądania:
 }
 ```
 
-### GET /events/{code}/comments
+#### 4.2.2. GET /history-events/{code}/comments
 
 Zwraca komentarze przypisane do zdarzenia.
 
-### DELETE /comments/{code}
+#### 4.2.3. DELETE /comments/{code}
 
 Usunięcie komentarza wskazanego kodem identyfikującym.
 
-### GET /alerts
+---
 
-Pobranie alertów powiązanych z danym użytkownikiem.
+## 5. Zadania
 
-#### Przykładowa odpowiedź serwera:
+### 5.1. Zadania
 
-- **STATUS 200 OK**
+[↩️ Powrót do spisu treści](#spis-treści)
 
-```json
-{
-  "data": [
-    {
-      "code": "9u187g4y2fcq",
-      "content": "alert testowy api",
-      "type": "task",
-      "status": "new",
-      "partyCode": null,
-      "transactionCode": null
-    }
-  ]
-}
-```
-
-### GET /alerts/{code}
-
-Pobranie szczegółów alertu wskazanego kodem.
-
-#### Przykładowa odpowiedź serwera:
-
-- **STATUS 200 OK**
-
-```json
-{
-  "data": {
-    "code": "9u187g4y2fcq",
-    "content": "alert testowy api",
-    "type": "task",
-    "status": "new",
-    "taskDone": false,
-    "partyCode": null,
-    "transactionCode": null,
-    "createdAt": "2022-07-18T13:22:42.000000Z"
-  }
-}
-```
-
-### DELETE /alerts/{code}
-
-Usunięcie alertu wskazanego kodem identyfikującym.
-
-### POST /tasks
+#### 5.1.1. POST /tasks
 
 Tworzenie nowego zadania w systemie. Parametry żądania:
 
 | Parametr            | Wymagane | Opis                                             |
-| ------------------- | -------- | ------------------------------------------------ |
+|:-------------------:|:--------:|:------------------------------------------------:|
 | **content**         | TAK      | Treść zadania                                    |
 | **expirationDate**  | NIE      | Data przed którą zadanie powinno zostać wykonane |
 | **alert**           | NIE      | Obiekt zawierający kod powiązanego alertu        |
@@ -1758,21 +2688,21 @@ Tworzenie nowego zadania w systemie. Parametry żądania:
 Struktura obiektu party:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanego podmiotu          |
 
 
 Struktura obiektu transaction:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
+|:---------------:|:--------:|:---------------------------------:|
 | **code**        | NIE      | Kod powiązanej transakcji         |
 
 Struktura obiektu alert:
 
 | Parametr        | Wymagane | Opis                              |
-| --------------- | -------- | --------------------------------- |
-| **code**        | NIE      | Kod powiązanej transakcji         |
+|:---------------:|:--------:|:---------------------------------:|
+| **code**        | NIE      | Kod powiązanego alertu            |
 
 
 #### Przykładowe dane do utworzenia zadania:
@@ -1780,7 +2710,7 @@ Struktura obiektu alert:
 ```json
 {
   "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
-  "expirationDate": "2025-11-06",
+  "expirationDate": "2025-11-06"
 }
 ```
 
@@ -1799,7 +2729,6 @@ Struktura obiektu alert:
     "party": null,
     "kycApplicant": null,
     "transaction": null,
-    "alert": null,
     "expirationDate": "2025-11-06",
     "createdAt": "2025-11-05T09:34:56.000000Z",
     "type": null,
@@ -1811,7 +2740,8 @@ Struktura obiektu alert:
 }
 ```
 
-### GET /tasks
+#### 5.1.2. GET /tasks
+
 Pobranie zadań powiązanych z danym użytkownikiem.
 
 #### Przykładowa odpowiedź serwera:
@@ -1819,8 +2749,11 @@ Pobranie zadań powiązanych z danym użytkownikiem.
 - **STATUS 200 OK**
 
 ```json
-  {
+{
+  "data": [
+    {
       "code": "94dwpaxk5rzy",
+      "identifier": "Z-15",
       "content": "Wymagane manualne ustawienie oceny ryzyka w podmiocie",
       "status": "new",
       "alert": {
@@ -1829,8 +2762,8 @@ Pobranie zadań powiązanych z danym użytkownikiem.
       },
       "party": {
         "code": "pum7n95fbwqk",
-        "firstName": "234",
-        "lastName": "234"
+        "name": "234 234",
+        "status": "active"
       },
       "transaction": {
         "code": "wjnkx4dr2ag9",
@@ -1840,21 +2773,27 @@ Pobranie zadań powiązanych z danym użytkownikiem.
     },
     {
       "code": "svxpezabyg9h",
+      "identifier": "Z-8",
       "content": "Przeprowadź środki bezpieczeństwa finansowego - do 2022-06-05 (Od zarejestrowania podmiotu minęło 870 dni)",
       "status": "done",
       "alert": null,
       "party": {
         "code": "s1vcm5ew9fd4",
-        "firstName": "Jan",
-        "lastName": "Kowalski",
+        "name": "Jan Kowalski",
+        "status": "active"
       },
       "transaction": null,
       "expirationDate": null
-    },
+    }
+  ]
+}
 ```
 
-### GET /tasks/{code}
+#### 5.1.3. GET /tasks/{code}
+
 Pobranie szczegółów zadania wskazanego kodem.
+
+#### Przykładowa odpowiedź serwera:
 
 - **STATUS 200 OK**
 
@@ -1862,38 +2801,50 @@ Pobranie szczegółów zadania wskazanego kodem.
 {
   "data": {
     "code": "dcsur627nf3w",
+    "identifier": "Z-1",
     "content": "Utworzyć przykładowe zadanie do celów reprezentacyjnych w dokumentacji",
     "status": "new",
-    "alert": null,
     "party": null,
+    "kycApplicant": null,
     "transaction": null,
+    "alert": null,
     "expirationDate": null,
-    "createdAt": "2023-11-14T15:57:32.000000Z"
+    "createdAt": "2023-11-14T15:57:32.000000Z",
+    "type": null,
+    "canEdit": true,
+    "createdByName": null,
+    "redirectTarget": null,
+    "commentsCount": 0
   }
 }
 ```
 
-### DELETE /tasks/{code}
+#### 5.1.4. DELETE /tasks/{code}
 
 Usunięcie zadania wskazanego kodem identyfikującym.
 
-### POST /tasks/{code}/comments
+---
+
+### 5.2. Komentarze do zadań
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 5.2.1. POST /tasks/{code}/comments
 
 Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **content**   | TAK      | Treść komentarza                                               |
-| **occurredAt**  | TAK      | Data wystąpienia komentarza                                    |
+| **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
 
 #### Przykładowe dane do utworzenia komentarza:
 
 ```json
 {
   "content": "testowy komentarz",
-  "occurredAt": "2025-11-03 15:52:40",
- }
-
+  "occurredAt": "2025-11-03 15:52:40"
+}
 ```
 
 #### Przykładowa odpowiedź serwera:
@@ -1914,36 +2865,35 @@ Tworzenie nowego komentarza do zadania w systemie. Parametry żądania:
 }
 ```
 
-### GET /tasks/{code}/comments
+#### 5.2.2. GET /tasks/{code}/comments
 
 Zwraca komentarze przypisane do zadania.
 
-### DELETE /task/{code}/comments/{commentsCode}
+#### 5.2.3. DELETE /tasks/{code}/comments/{commentsCode}
 
-Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie
+Usunięcie komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
-### PATCH /task/{code}/comments/{commentsCode}
+#### 5.2.4. PATCH /tasks/{code}/comments/{commentsCode}
 
-Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie
+Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikującym zadanie.
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **content**   | TAK      | Treść komentarza                                               |
 | **occurredAt**| TAK      | Data wystąpienia komentarza                                    |
 
-#### Przykładowe dane do utworzenia komentarza:
+#### Przykładowe dane do aktualizacji komentarza:
 
 ```json
 {
   "content": "aktualizacja komentarza",
-  "occurredAt": "2025-11-04 15:24:10",
- }
-
+  "occurredAt": "2025-11-04 15:24:10"
+}
 ```
 
 #### Przykładowa odpowiedź serwera:
 
-- **STATUS 201 CREATED**
+- **STATUS 200 OK**
 
 ```json
 {
@@ -1958,27 +2908,124 @@ Aktualizacja komentarza wskazanego kodem identyfikującym oraz kodem identyfikuj
 }
 ```
 
-### POST /sanctions-lists/search
+---
 
-Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
+## 6. Alerty
 
-| Parametr            | Wymagane | Opis                                                                         |
-| ------------------- | -------- | ---------------------------------------------------------------------------- |
-| **entityType**      | TAK      | Rodzaj przesyłanych danych. Aktualnie akceptowane: individual, company, any, crypto_address, email, pesel, nip, regon, krs  |
-| **name**            | NIE *    | Imię, nazwisko lub nazwa firmy (* Wymagane gdy entityType === any)           |
-| **firstName**       | NIE *    | Imię (* Wymagane gdy entityType === individual)                              |
-| **middleName**      | NIE      | Drugie oraz kolejne imiona                                                   |
-| **lastName**        | NIE *    | Nazwisko (* Wymagane gdy entityType === individual)                          |
-| **companyName**     | NIE *    | Nazwa firmy (* Wymagane gdy entityType === company)                          |
-| **email**           | NIE *    | Adres email (* Wymagane gdy entityType === email)                            |
-| **cryptoAddress**   | NIE *    | Adres portfela waluty wirtualnej (* Wymagane gdy entityType === crypto_address) |
-| **pesel**           | NIE *    | Pesel (* Wymagane gdy entityType === pesel)                                  |
-| **nip**             | NIE *    | Nip (* Wymagane gdy entityType === nip)                                      |
-| **regon**           | NIE *    | Regon (* Wymagane gdy entityType === regon)                                  |
-| **krs**             | NIE *    | Krs (* Wymagane gdy entityType === krs)                                      |
+### 6.1. GET /alerts
 
-#### Przykładowe dane do wyszukania osoby fizycznej (entityType === 'individual'):
+[↩️ Powrót do spisu treści](#spis-treści)
 
+Pobranie alertów powiązanych z danym użytkownikiem.
+
+#### Przykładowa odpowiedź serwera:
+
+- **STATUS 200 OK**
+
+```json
+{
+  "data": [
+    {
+      "code": "9u187g4y2fcq",
+      "content": "alert testowy api",
+      "status": "new",
+      "partyCode": null,
+      "partyName": null,
+      "transactionCode": null,
+      "transactionTitle": null,
+      "createdAt": "2022-07-18"
+    }
+  ]
+}
+```
+
+### 6.2. GET /alerts/{code}
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+Pobranie szczegółów alertu wskazanego kodem.
+
+#### Przykładowa odpowiedź serwera:
+
+- **STATUS 200 OK**
+
+```json
+{
+  "data": {
+    "code": "9u187g4y2fcq",
+    "content": "alert testowy api",
+    "status": "new",
+    "party": null,
+    "kycApplicant": null,
+    "transaction": null,
+    "employee": null,
+    "createdAt": "2022-07-18T13:22:42.000000Z",
+    "canEdit": true,
+    "type": "task",
+    "redirectTarget": null
+  }
+}
+```
+
+### 6.3. DELETE /alerts/{code}
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+Usunięcie alertu wskazanego kodem identyfikującym.
+
+---
+
+## 7. Compliance i weryfikacja
+
+### 7.1. Listy sankcyjne
+
+[↩️ Powrót do spisu treści](#spis-treści)
+
+#### 7.1.1. POST /sanctions-lists/search
+
+Weryfikuje podane dane względem globalnych list sankcyjnych (UE, UK, ONZ, USA).
+
+#### Kiedy używać?
+
+- Przed nawiązaniem relacji biznesowej
+- Podczas weryfikacji KYC/AML
+- W procesie należytej staranności (due diligence)
+- Przy regularnych przeglądach bazy klientów
+
+#### Parametry żądania
+
+| Parametr | Typ | Wymagane | Opis |
+|:----------:|:-----:|:----------:|:------:|
+| **entityType** | string | TAK | Typ weryfikowanego obiektu. Aktualnie akceptowane: individual, company, any, crypto_address, email, pesel, nip, regon, krs |
+| **name** | string | WARUNKOWO | Pełna nazwa (wymagane gdy `entityType: "any"`) |
+| **firstName** | string | WARUNKOWO | Imię (wymagane gdy `entityType: "individual"`) |
+| **middleName** | string | NIE | Drugie i kolejne imiona |
+| **lastName** | string | WARUNKOWO | Nazwisko (wymagane gdy `entityType: "individual"`) |
+| **companyName** | string | WARUNKOWO | Nazwa firmy (wymagane gdy `entityType: "company"`) |
+| **email** | string | WARUNKOWO | Adres email (wymagane gdy `entityType: "email"`) |
+| **cryptoAddress** | string | WARUNKOWO | Adres portfela krypto (wymagane gdy `entityType: "crypto_address"`) |
+| **pesel** | string | WARUNKOWO | Pesel (wymagane gdy `entityType: "pesel"`) |
+| **nip** | string | WARUNKOWO | Nip (wymagane gdy `entityType: "nip"`) |
+| **regon** | string | WARUNKOWO | Regon (wymagane gdy `entityType: "regon"`) |
+| **krs** | string | WARUNKOWO | Krs (wymagane gdy `entityType: "krs"`) |
+
+#### Typy weryfikacji (entityType)
+
+| Wartość | Użycie | Wymagane pola |
+|:---------:|:--------:|:---------------:|
+| `individual` | Osoby fizyczne | `firstName`, `lastName` |
+| `company` | Firmy/organizacje | `companyName` |
+| `any` | Wyszukiwanie uniwersalne | `name` |
+| `email` | Adresy email | `email` |
+| `crypto_address` | Portfele kryptowalut | `cryptoAddress` |
+| `pesel` | Numer PESEL | `pesel` |
+| `nip` | Numer NIP | `nip` |
+| `regon` | Numer REGON | `regon` |
+| `krs` | Numer KRS | `krs` |
+
+#### Przykłady żądań
+
+**Osoba fizyczna:**
 ```json
 {
   "entityType": "individual",
@@ -1987,9 +3034,33 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 }
 ```
 
-#### Przykładowa odpowiedź serwera:
+**Firma:**
+```json
+{
+  "entityType": "company",
+  "companyName": "Gazprom"
+}
+```
 
-- **STATUS 200 OK**
+**Adres kryptowalutowy:**
+```json
+{
+  "entityType": "crypto_address",
+  "cryptoAddress": "1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa"
+}
+```
+
+**Wyszukiwanie uniwersalne:**
+```json
+{
+  "entityType": "any",
+  "name": "Vladimir Putin"
+}
+```
+
+#### Odpowiedź - Znaleziono dopasowanie
+
+**STATUS 200 OK**
 
 ```json
 {
@@ -2025,8 +3096,7 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
       "aliases": [
         "Влади́мир ПУ́ТИН",
         "Vladimir PUTIN",
-        "Vladimir POUTINE",
-        "Vladimir PUTIN"
+        "Vladimir POUTINE"
       ],
       "recordType": "individual",
       "sourceData": {
@@ -2045,23 +3115,77 @@ Sprawdzenie podanych danych na listach sankcyjnych. Parametry żądania:
 }
 ```
 
+#### Odpowiedź - Brak dopasowania
+
+**STATUS 200 OK**
+
+```json
+{
+  "isMatch": false,
+  "code": "abc123xyz789",
+  "matchedEntities": []
+}
+```
+
+#### Struktura odpowiedzi
+
+| Pole | Typ | Opis |
+|:------:|:-----:|:------:|
+| **isMatch** | boolean | `true` - znaleziono dopasowanie<br>`false` - brak dopasowania |
+| **code** | string | Unikalny identyfikator wyszukiwania (do pobrania raportu PDF) |
+| **matchedEntities** | array | Lista znalezionych dopasowań |
+
 Jeśli dane zostaną odnalezione zmienna **isMatch** przyjmuję wartość true (boolean) w przeciwnym wypadku przyjmuję wartość false (boolean)
 
-### GET /sanctions/{code}/pdf
+#### Struktura obiektu matchedEntity
 
-Pobranie raportu pdf zawierającego wynik wyszukiwania na listach sankcyjnych. Parametry żądania:
+| Pole | Typ | Opis |
+|:------:|:-----:|:------:|
+| **listName** | string | Nazwa listy sankcyjnej |
+| **name** | string | Główna nazwa wpisu |
+| **aliases** | array | Lista aliasów i alternatywnych nazw |
+| **recordType** | string | Typ wpisu (`individual`, `company`, `vessel`) |
+| **sourceData** | object | Oryginalne dane źródłowe z listy |
 
-| Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
-| **code**      | TAK      | Kod zapisany w wynikach wyszukiwania na listach sankcyjnych    |
+#### Listy sankcyjne objęte weryfikacją
+
+| Lista | Zakres | Aktualizacja |
+|:-------:|:--------:|:--------------:|
+| **EU Financial Sanctions** | Unia Europejska | Dzienna |
+| **UK OFSI** | Wielka Brytania | Dzienna |
+| **UN Consolidated List** | Organizacja Narodów Zjednoczonych | Dzienna |
+| **OFAC SDN** | USA (Treasury) | Dzienna |
+| **MSWiA** | Polska (Ministerstwo Spraw Wewnętrznych i Administracji) | Dzienna |
 
 
-### POST /parties/applicants
+
+#### 7.1.2. GET /sanctions/{code}/pdf
+
+Pobiera raport PDF z wynikami wyszukiwania na listach sankcyjnych.
+
+#### Parametry
+
+| Parametr | Typ | Wymagane | Opis |
+|:----------:|:-----:|:----------:|:------:|
+| **code** | string | TAK | Kod zwrócony przez endpoint `/sanctions-lists/search` |
+
+#### Zawartość raportu PDF
+
+Raport zawiera:
+
+- Datę i czas wyszukiwania
+- Przeszukane dane wejściowe
+- Listę znalezionych dopasowań
+- Szczegóły każdego dopasowania (lista, aliasy, dane źródłowe)
+
+### 7.2. Proces KYC
+
+#### 7.2.1. POST /parties/applicants
 
 Utworzenie nowego formualarza KYC.
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **companyName**      | NIE      | Nazwa firmy wyświetlana na formularzu                   |
 | **description**      | NIE      | Opis wyświetlany na formularzu                          |
 | **redirectUrl**      | NIE      | URL przekierowania po wypełnieniu formualarza           |
@@ -2102,12 +3226,12 @@ Utworzenie nowego formualarza KYC.
 }
 ```
 
-### GET /parties/{code}/applicants
+#### 7.2.2. GET /parties/{code}/applicants
 
 Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **code**      | TAK      | Kod podmiotu                                                   |
 
 #### Przykładowa odpowiedź serwera:
@@ -2170,12 +3294,12 @@ Pobranie listy aplikantów powiązanych z danym podmiotem. Parametry żądania:
 }
 ```
 
-### GET /parties/{code}/applicants/current
+#### 7.2.3. GET /parties/{code}/applicants/current
 
 Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces weryfikacji nie został zakończony. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **code**      | TAK      | Kod podmiotu                                                   |
 
 #### Przykładowa odpowiedź serwera:
@@ -2356,12 +3480,12 @@ Pobranie szczegółów aplikanta powiązanego z danym podmiotem, którego proces
 }
 ```
 
-### GET /applicants/{code}
+#### 7.2.4. GET /applicants/{code}
 
 Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 
 | Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
+|:-------------:|:--------:|:--------------------------------------------------------------:|
 | **code**      | TAK      | Kod aplikanta                                                  |
 
 #### Przykładowa odpowiedź serwera:
@@ -2417,22 +3541,27 @@ Pobranie szczegółów aplikanta wskazanego kodem. Parametry żądania:
 ```
 
 
-### DELETE /applicants/{code}
+#### 7.2.5. DELETE /applicants/{code}
 
 Usunięcie aplikanta wskazanego kodem.
 
-### POST /applicants/{code}/acceptance
+#### 7.2.6. POST /applicants/{code}/acceptance
 
 Akceptacja deklarowanych danych aplikanta wskazanego kodem.
 
+**Uwaga:** Endpoint obsługuje dwa scenariusze:
+- **Akceptacja** (`isAccepted: true`) - wymaga: `partyStatus`, `economicRelationStartDate`; opcjonalnie: `references`
+- **Odrzucenie** (`isAccepted: false`) - wymaga: `reason`
+
 Parametry żądania:
-| Parametr      | Wymagane | Opis                                                           |
-| ------------- | -------- | -------------------------------------------------------------- |
-| **isAccepted**      | TAK      | Status weryfikacji. Boolean                                                  |
-| **reason**      | TAK      | Powód odrzucenia weryfikacji. Argument obsługiwany tylko wtedy gdy odrzucana jest weryfikacja głównego aplikanta. Jest wymagany. String                                                  |
-| **partyStatus**      | NIE*      | Status podmiotu. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Jest wymagany. Aktualnie wspierane: draft, active, inactive, in_acceptance |
-| **economicRelationStartDate**      | NIE*      | Data rozpoczęcia stosunków gospodarczych. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Jest wymagany. Data YYYY-MM-DD |
-| **references**      | NIE      | Referencje własne podmiotu. Argument obsługiwany tylko wtedy gdy akceptowana jest weryfikacja głównego aplikanta. Nie jest wymagany. String |
+
+| Parametr                      | Typ     | Wymagane          | Opis                                                                               |
+|:-----------------------------:|:-------:|:-----------------:|:----------------------------------------------------------------------------------:|
+| **isAccepted**                | Boolean | TAK               | Decyzja o akceptacji weryfikacji                                                   |
+| **reason**                    | String  | Przy odrzuceniu   | Powód odrzucenia weryfikacji                                                       |
+| **partyStatus**               | String  | Przy akceptacji   | Status podmiotu: `draft`, `active`, `inactive`, `occasional`, `in_acceptance`                    |
+| **economicRelationStartDate** | Date    | Przy akceptacji   | Data rozpoczęcia stosunków gospodarczych (format: YYYY-MM-DD)                      |
+| **references**                | String  | NIE               | Referencje własne podmiotu (tylko przy akceptacji)                                 |
 
 #### Przykładowe dane do zaakceptowania weryfikacji:
 
