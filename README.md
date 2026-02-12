@@ -109,14 +109,22 @@ API przeznaczone jest dla instytucji zobowiązanych do prowadzenia ewidencji kli
 
 [↩️ Powrót do spisu treści](#spis-treści)
 
-| Środowisko | Funkcjonalność | Ścieżka bazowa |
-|:------------:|:----------------:|:----------------:|
-| **Produkcyjne** | API | `/1.0/` |
-| **Produkcyjne** | Panel aplikacji | `/` |
-| **Testowe** | API | `/1.0/` |
-| **Testowe** | Panel aplikacji | `/` |
+| Środowisko | Funkcjonalność | URL |
+|:---:|:---:|:---:|
+| **Produkcyjne** | Serwer API | https://api.systemaml.pl/1.0/ |
+| **Produkcyjne** | Panel aplikacji | https://systemaml.pl/ |
+| **Testowe** | Serwer API | http://apitest.systemaml.pl/1.0/ |
+| **Testowe** | Panel aplikacji | https://test.systemaml.pl/ |
 
-> 📧 **Aby uzyskać właściwe adresy URL:** Skontaktuj się z zespołem pod adresem kontakt@systemaml.pl
+### 🔐 Dostęp do środowiska testowego
+
+Aby rozpocząć pracę ze środowiskiem testowym:
+
+1. **Załóż konto** - Wejdź na [stronę główną środowiska testowego](https://test.systemaml.pl/) i zarejestruj się
+2. **Zaloguj się** - Po rejestracji zaloguj się do panelu testowego
+3. **Wygeneruj klucze API** - W panelu testowym wygeneruj parę kluczy API potrzebnych do integracji
+ 
+Jeśli napotkasz problemy z rejestracją lub dostępem, skontaktuj się z kontakt@systemaml.pl
 
 ### ⚠️ Ważne informacje o środowiskach
 
