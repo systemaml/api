@@ -3197,6 +3197,7 @@ Utworzenie nowego formualarza KYC.
 | **companyName**      | NIE      | Nazwa firmy wyświetlana na formularzu                   |
 | **description**      | NIE      | Opis wyświetlany na formularzu                          |
 | **redirectUrl**      | NIE      | URL przekierowania po wypełnieniu formualarza           |
+| **partyCode**        | NIE      | Kod podmiotu dla którego tworzymy ponowną weryfikację   |
 
 #### Przykładowe dane do utworzenia aplikanta kyc:
 
